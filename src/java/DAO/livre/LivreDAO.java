@@ -1,5 +1,5 @@
 
-package DAO;
+package DAO.livre;
 
 public class LivreDAO {
     

@@ -1,5 +1,5 @@
 
-package DAO;
+package DAO.utils;
 
 import java.io.Serializable;
 import java.sql.Connection;
