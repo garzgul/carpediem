@@ -1,9 +1,4 @@
-<%-- 
-    Document   : Panier
-    Created on : 3 sept. 2014, 09:41:37
-    Author     : cdi116
---%>
-
+<!-- main jsp pour le panier -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

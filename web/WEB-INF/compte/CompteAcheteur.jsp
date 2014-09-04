@@ -1,4 +1,5 @@
-<!-- Main page commande-->
+<!--Frame pour la vue complete du compte-->
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
