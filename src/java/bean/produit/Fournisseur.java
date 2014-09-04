@@ -1,18 +1,20 @@
 
 package bean.produit;
 
+import java.io.Serializable;
+
 /**
  *
  * @author user
  */
-public class Fournisseur {
+public class Fournisseur implements Serializable{
     private String nomSupplier;
     private String adresse1Supplier;
     private String adresse2Supplier;
     private String cpSupplier;
     private String villeSupplier;
     private boolean actifSupllier;
-    private int id_fournisseur; // ajout eddy
+    private int idfournisseur; // ajout eddy
 
     public Fournisseur() {
     }
@@ -24,7 +26,7 @@ public class Fournisseur {
 
     public Fournisseur(int id_fournisseur, String nomSupplier) { // ajout eddy pour faciliter gestions dans les combobox
         this.nomSupplier = nomSupplier;
-        this.id_fournisseur = id_fournisseur;
+        this.idfournisseur = id_fournisseur;
     }
 
     public String getNomSupplier() {
@@ -76,11 +78,11 @@ public class Fournisseur {
     }
 
     public int getId_fournisseur() { // ajout eddy
-        return id_fournisseur;
+        return idfournisseur;
     }
 
     public void setId_fournisseur(int id_fournisseur) { // ajout eddy
-        this.id_fournisseur = id_fournisseur;
+        this.idfournisseur = id_fournisseur;
     }
   
     @Override                        // ajout eddy
@@ -91,7 +93,7 @@ public class Fournisseur {
     @Override // ajout eddy
     public int hashCode() {
         int hash = 3;
-        hash = 67 * hash + this.id_fournisseur;
+        hash = 67 * hash + this.idfournisseur;
         return hash;
     }
 
@@ -104,7 +106,7 @@ public class Fournisseur {
             return false;
         }
         final Fournisseur other = (Fournisseur) obj;
-        if (this.id_fournisseur != other.id_fournisseur) {
+        if (this.idfournisseur != other.idfournisseur) {
             return false;
         }
         return true;

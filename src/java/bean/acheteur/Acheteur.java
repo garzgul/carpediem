@@ -2,13 +2,14 @@
 package bean.acheteur;
 
 import bean.commande.Commande;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author user
  */
-public class Acheteur {
+public class Acheteur implements Serializable{
     private String nomAcheteur;
     private String prenomAcheteur;
     private String pseudoAcheteur;

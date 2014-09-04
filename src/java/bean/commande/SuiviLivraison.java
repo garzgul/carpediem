@@ -1,12 +1,14 @@
 
 package bean.commande;
 
+import java.io.Serializable;
+
 /**
  * Enumeration pour le suivi de la livraison
  * cf regles de gestion
  * @author Gael
  */
-public class SuiviLivraison {
+public class SuiviLivraison implements Serializable{
     private livraison suiviL;
 
     public SuiviLivraison() {

@@ -3,13 +3,14 @@ package bean.commande;
 
 import bean.acheteur.Acheteur;
 import bean.acheteur.Adresse;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author user
  */
-public class Commande {
+public class Commande implements Serializable{
     private String numCde;
     private Date dateCde;
     private float htCde;

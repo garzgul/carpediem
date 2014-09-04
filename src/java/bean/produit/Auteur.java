@@ -1,13 +1,14 @@
 
 package bean.produit;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** @author Gael
  *
  * 
  */
-public class Auteur {
+public class Auteur implements Serializable{
     private String nomAuteur;
     private String prenomAuteur;
     private Date dateNAuteur;

@@ -2,6 +2,7 @@
 package bean.produit;
 
 import bean.commande.Taxe;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import java.util.Date;
  *
  * 
  */
-public class Livre {
+public class Livre implements Serializable{
     private Editeur ed;
     private ArrayList<Auteur> ListeAu;
     private Fournisseur fourn;

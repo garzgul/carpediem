@@ -1,13 +1,14 @@
 
 package bean.acheteur;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author Eddy
  */
-public class Commentaire {
+public class Commentaire implements Serializable{
     
     private int idAcheteur;
     private int idLivre;

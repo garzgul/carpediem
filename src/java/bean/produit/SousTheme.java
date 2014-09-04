@@ -2,12 +2,13 @@
 package bean.produit;
 
 import bean.produit.Theme;
+import java.io.Serializable;
 
 /**
  *
  * @author user
  */
-public class SousTheme {
+public class SousTheme implements Serializable{
     private String sousTheme;
     private Theme theme;
     private int idSousTheme;

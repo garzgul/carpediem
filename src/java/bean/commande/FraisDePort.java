@@ -1,11 +1,13 @@
 
 package bean.commande;
 
+import java.io.Serializable;
+
 /**
  *
  * @author user
  */
-public class FraisDePort {
+public class FraisDePort implements Serializable{
     private float fraisDePort;
     private int idfraisdeport; // ajout eddy
 

@@ -2,13 +2,14 @@
 package bean.commande;
 
 import bean.produit.Livre;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author user
  */
-public class DetailCommande {
+public class DetailCommande implements Serializable{
     // on devrait probablement faire un tableau 4d avec afin de pouvoir s'y retrouver
     // arraylist pour le moment pas au point a moins de modifier l'objet livre
     //

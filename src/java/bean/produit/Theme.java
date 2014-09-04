@@ -1,11 +1,13 @@
 
 package bean.produit;
 
+import java.io.Serializable;
+
 /**
  *
  * @author user
  */
-public class Theme {
+public class Theme implements Serializable{
     private String theme;
     private int id_theme;
 

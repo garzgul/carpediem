@@ -1,11 +1,13 @@
 
 package bean.acheteur;
 
+import java.io.Serializable;
+
 /**
  *
  * @author user
  */
-public class Adresse {
+public class Adresse implements Serializable{
     private String adresseAcheteur1;
     private String adresseAcheteur2;
     private String cpAcheteur;

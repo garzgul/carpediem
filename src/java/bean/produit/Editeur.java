@@ -1,11 +1,13 @@
 
 package bean.produit;
 
+import java.io.Serializable;
+
 /**
  *
  * @author user
  */
-public class Editeur {
+public class Editeur implements Serializable{
     private String nomEditeur;
     private String paysEditeur;
     private String adresseEditeur;

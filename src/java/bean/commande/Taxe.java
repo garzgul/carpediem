@@ -1,11 +1,13 @@
 
 package bean.commande;
 
+import java.io.Serializable;
+
 /**
  *
  * @author user
  */
-public class Taxe {
+public class Taxe implements Serializable{
     private float tva;
     private int idTva; // ajout eddy
 
