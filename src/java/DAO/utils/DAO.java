@@ -16,5 +16,7 @@ public abstract class DAO<T> {
     
     public abstract T find(int id) throws SQLException;
     
+    public abstract T find(String s) throws SQLException;
+    
     
 }

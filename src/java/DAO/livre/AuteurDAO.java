@@ -45,6 +45,11 @@ public class AuteurDAO extends DAO<Auteur> implements Serializable{
         
         return a;
     }
+
+    @Override
+    public Auteur find(String s) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }
