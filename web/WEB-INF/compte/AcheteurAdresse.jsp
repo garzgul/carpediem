@@ -1,4 +1,4 @@
-<!-- vue adresse a integrer dans compte/commande -->
+<!-- A detruire!! -->
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
