@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import javax.naming.NamingException;
 
 public class AcheteurDAO extends DAO<Acheteur> implements Serializable{
@@ -61,6 +62,11 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable{
 
     @Override
     public Acheteur find(String s) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Acheteur> findAll(String s) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

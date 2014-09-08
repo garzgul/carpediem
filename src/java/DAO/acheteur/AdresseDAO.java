@@ -5,6 +5,7 @@ import DAO.utils.FournirConnectionIt;
 import bean.acheteur.Adresse;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.List;
 
 public class AdresseDAO extends DAO<Adresse> implements Serializable{
     private FournirConnectionIt fc;
@@ -35,6 +36,11 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable{
 
     @Override
     public Adresse find(String s) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Adresse> findAll(String s) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
