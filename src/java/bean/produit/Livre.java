@@ -32,6 +32,7 @@ public class Livre implements Serializable{
     private ArrayList<MotClef> listmc;
     private SousTheme sousTheme;
     private Taxe tva;
+    private int id;
     
 
     public Livre() {
@@ -222,6 +223,38 @@ public class Livre implements Serializable{
     public void setTva(Taxe tva) {
         this.tva = tva;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Livre other = (Livre) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
      @Override
     public String toString() {
