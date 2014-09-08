@@ -30,8 +30,20 @@ public class Controleur extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
+        Boolean erreurGrave = false;
+        String section = request.getParameter("section");
+        String action = request.getParameter("action");
+        String pageJsp ="/WEB-INF/main/main.jsp";
+        
         // mettre les sections ici
         
+        if("panier".equalsIgnoreCase(section)){
+            pageJsp="/WEB-INF/panier/panier.jsf";
+        }
+        
+        
+        pageJsp = response.encodeURL(pageJsp);
+        getServletContext().getRequestDispatcher(pageJsp).include(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
