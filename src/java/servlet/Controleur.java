@@ -39,16 +39,13 @@ public class Controleur extends HttpServlet {
         HttpSession session = request.getSession();
         Boolean erreurGrave = false;
 
-
         String section = request.getParameter("section");
+        String action =request.getParameter("action");
 
-        String action = request.getParameter("action");
+
         String pageJsp ="/WEB-INF/main/Main.jsp";
-
        
         
-
-
         // mettre les sections ici
         
         if ("recherche".equalsIgnoreCase(section)){
