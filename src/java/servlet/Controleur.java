@@ -1,7 +1,12 @@
 
 package servlet;
 
+import bean.metier.LivreGestion;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,10 +37,25 @@ public class Controleur extends HttpServlet {
         HttpSession session = request.getSession();
         Boolean erreurGrave = false;
         
+        String section = request.getParameter("section");
+        String action =request.getParameter("action");
+
+        
         String pageJsp ="/WEB-INF/main/main.jsp";
         
-        // mettre les sections ici
         
+        
+        // mettre les sections ici
+        if ("recherche".equalsIgnoreCase(section)){
+            try {
+                    if(session.getAttribute("beanRecherche")==null){    
+                        session.setAttribute("beanRecherche",new LivreGestion());
+                    }
+                } catch (NamingException ex) {
+                    Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);            
+                }
+            pageJsp ="/WEB-INF/catalogue/recherche.jsp";
+        }
         
         pageJsp = response.encodeURL(pageJsp);
         getServletContext().getRequestDispatcher(pageJsp).include(request, response);
