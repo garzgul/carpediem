@@ -46,7 +46,7 @@
 
 <div class="clear"></div>
             
-            <!-- <%@include file="/WEB-INF/bordure/Pied.jsp" %> -->
+            <!-- <%@include file="/WEB-INF/bordure/Pied.jsp"%> -->
              <!-- <jsp:include page="/WEB-INF/bordure/Pied.jsp" /> -->
              <!-- <c:import url="/WEB-INF/bordure/Pied.jsp" /> -->
              <c:import url="/Controleur?section=Pied" />
