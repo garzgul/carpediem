@@ -4,6 +4,7 @@ package DAO.panier;
 import DAO.utils.DAO;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.List;
 
 public class PanierDAO extends DAO implements Serializable{
 
@@ -31,5 +32,10 @@ public class PanierDAO extends DAO implements Serializable{
     public Object find(String s) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Object> findAll(String s) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }    
     
 }
