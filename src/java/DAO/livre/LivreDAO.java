@@ -6,7 +6,12 @@ import DAO.utils.FournirConnectionIt;
 import DAO.utils.MaConnexionBDD;
 import bean.produit.Livre;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
 
 public class LivreDAO extends DAO<Livre> implements Serializable{
@@ -42,7 +47,30 @@ public class LivreDAO extends DAO<Livre> implements Serializable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
+    public List<Livre> findAll (String s) throws SQLException{
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        //recherche par (partie) du titre de livre
+        Livre l=null;
+        List<Livre> lL = new ArrayList<>();
+        String req = "select * from livre where livre_titre like '%?%'";
+        Connection cnn = fc.fournir();
+        PreparedStatement pStm = cnn.prepareStatement(req);
+        pStm.setString(1,s);
+        ResultSet rs = pStm.executeQuery(req);
+        while (rs.next()) {
+            //rs.getString("id_livre");
+            String titre = rs.getString("livre_titre");
+            
+            l=new Livre(null,null,titre,0,0,true);
+            lL.add(l);
+        }
+        rs.close();
+        pStm.close();
+        cnn.close();
+        
+        return lL;
+    }    
     
     
     
