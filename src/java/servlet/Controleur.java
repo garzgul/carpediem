@@ -38,7 +38,8 @@ public class Controleur extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         Boolean erreurGrave = false;
-        
+
+
         String section = request.getParameter("section");
 
         String action = request.getParameter("action");
@@ -46,6 +47,7 @@ public class Controleur extends HttpServlet {
 
        
         
+
 
         // mettre les sections ici
         
