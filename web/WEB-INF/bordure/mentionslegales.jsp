@@ -72,21 +72,21 @@
 								<p>L'accès au site <a href="/">www.carpediem.com</a> confère à l'internaute un droit  d'usage privé et non exclusif de ce site.<br />
 
 								Le présent site Web et l'ensemble de son contenu - les textes, images fixes ou animées, bases de données, programmes, etc., 
-								est la propriété de <b>Carpe Diem</b> et est protégé par le droit d'auteur.<br/>
+								est la propriété de <b>Carpe Diem</b> et est protégé par le droit d'auteur.<br />
 								Conformément à l'article L. 122-4 du Code de la propriété intellectuelle française, 
 								il est interdit de reproduire, copier, modifier, transmettre, diffuser de toute manière que ce soit, 
 								même partiellement, sur tout type de support, tout élément provenant de ce site (par exemple, mais non exclusivement : textes, logos, images, éléments sonores, vidéos, logiciels, icônes) 
-								sans l'autorisation explicite et préalable de Carpe Diem.<br/>
-								<br/>
+								sans l'autorisation explicite et préalable de Carpe Diem.<br />
+								<br />
 								L'utilisation frauduleuse de tout contenu du site Internet est totalement interdite.<br />
 								Vous êtes informé que nous userons largement de ses droits de propriété intellectuelle pour engager des poursuites, mêmes pénales, si nécessaires.</p>
 								<br />
 								<p>
 								Toute reproduction, représentation ou utilisation autorisée d'un élément constitutif du site Web doit mentionner la phrase suivante :
-								© 2014 Carpe Diem. Tous droits réservés.<br/><br/>
+								© 2014 Carpe Diem. Tous droits réservés.<br /><br />
 								Conformément à l'article L.122-5, alinéa premier, du Code de la propriété intellectuelle, 
 								la reproduction d'un élément du site à des fins personnelles et pour un usage privé est autorisée.
-								<br/>
+								<br />
 								</p>
 
 							<h2 class="titreh2">6 - Indisponibilité du site</h2>

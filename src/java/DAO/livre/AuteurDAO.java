@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import javax.naming.NamingException;
 
 public class AuteurDAO extends DAO<Auteur> implements Serializable{
@@ -48,6 +49,11 @@ public class AuteurDAO extends DAO<Auteur> implements Serializable{
 
     @Override
     public Auteur find(String s) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Auteur> findAll(String s) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
