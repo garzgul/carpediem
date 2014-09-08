@@ -49,7 +49,7 @@ public class Controleur extends HttpServlet {
 
         // mettre les sections ici
         
-        if ("recherche".equalsIgnoreCase(section)){
+        if ("recherche".equalsIgnoreCase(section)){ // Module Recherche (Eddy)
             try {
                     if(session.getAttribute("beanRecherche")==null){    
                         session.setAttribute("beanRecherche",new LivreGestion());
@@ -65,7 +65,7 @@ public class Controleur extends HttpServlet {
                         String champRecherche=request.getParameter("ChampRecherche");
                         List<Livre> lL=null;
                         lL=lg.findAll(champRecherche);
-                        session.setAttribute("rechercheListeLivre",lL);
+                        session.setAttribute("rechercheListeLivre",lL); // place la liste des livres trouvés
                     }
                 }
             }catch (SQLException ex){
