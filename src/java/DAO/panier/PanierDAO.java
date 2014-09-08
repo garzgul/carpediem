@@ -1,4 +1,4 @@
-
+// pas necessaire pour le moment !!! (on a pas d'equivalent en base)
 package DAO.panier;
 
 import DAO.utils.DAO;
