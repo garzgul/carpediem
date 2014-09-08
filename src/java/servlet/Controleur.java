@@ -33,7 +33,7 @@ public class Controleur extends HttpServlet {
         Boolean erreurGrave = false;
         String section = request.getParameter("section");
         String action = request.getParameter("action");
-        String pageJsp ="/WEB-INF/main/main.jsp";
+        String pageJsp ="/WEB-INF/main/Main.jsp";
         
         // mettre les sections ici
         
