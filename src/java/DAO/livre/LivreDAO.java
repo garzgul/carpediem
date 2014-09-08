@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 
+/**
+ *
+ * @author eddy
+ */
 public class LivreDAO extends DAO<Livre> implements Serializable{
     private FournirConnectionIt fc;
 
