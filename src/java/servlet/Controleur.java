@@ -2,8 +2,10 @@
 package servlet;
 
 import bean.metier.LivreGestion;
+import bean.produit.Livre;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -43,9 +45,9 @@ public class Controleur extends HttpServlet {
         
         String pageJsp ="/WEB-INF/main/main.jsp";
         
-        
-        
+
         // mettre les sections ici
+        
         if ("recherche".equalsIgnoreCase(section)){
             try {
                     if(session.getAttribute("beanRecherche")==null){    
@@ -54,6 +56,21 @@ public class Controleur extends HttpServlet {
                 } catch (NamingException ex) {
                     Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);            
                 }
+            
+            try {           
+                if(request.getParameter("action")!=null){
+                    if("rechercher".equalsIgnoreCase(request.getParameter("action"))){
+                        LivreGestion lg=(LivreGestion)session.getAttribute("beanRecherche");
+                        String champRecherche=request.getParameter("ChampRecherche");
+                        List<Livre> lL=null;
+                        lL=lg.findAll(champRecherche);
+                        session.setAttribute("rechercheListeLivre",lL);
+                    }
+                }
+            }catch (SQLException ex){
+                 Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);     
+            }
+            
             pageJsp ="/WEB-INF/catalogue/recherche.jsp";
         }
         
