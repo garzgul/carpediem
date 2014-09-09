@@ -89,7 +89,8 @@ public class Controleur extends HttpServlet {
                         List<Livre> lL=null;
                         lL=lg.findAll(champRecherche);
                         System.out.println("lL = " + lL);
-                        session.setAttribute("rechercheListeLivre",lL); // place la liste des livres trouvés
+                        //session.setAttribute("rechercheListeLivre",lL); // place la liste des livres trouvés
+                        //request.set
                     }
                 }
             }catch (SQLException ex){
