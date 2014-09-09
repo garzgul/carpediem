@@ -174,8 +174,7 @@ public class Controleur extends HttpServlet {
                 ach.setTelAcheteur(tel);
                 if (ach != null) {
                 session.setAttribute("acheteur", ach);
-                
-                    ag.ajoutAcheteur(ach);
+                ag.ajoutAcheteur(ach);
                 }
             } catch (MouradException ex) {
 
@@ -189,12 +188,13 @@ public class Controleur extends HttpServlet {
                 request.setAttribute("pseudoFourni", pseudo.trim());
                 request.setAttribute("telFourni", tel);
                 
-                request.setAttribute("pagevisee", "/WEB-INF/connexion/formulaireinscription.jsp");
+               request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
                 pageJsp = "/WEB-INF/main/Main.jsp";
                 System.out.println(">>>>>>>>>>>>>>>>>passage par le catch");
             } catch (SQLException ex) {
                 erreurGrave = true;
             }
+            
         }
         if(erreurGrave){
             pageJsp = "WEB-INF/erreurs/warning.jsp";

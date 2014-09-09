@@ -22,8 +22,9 @@ public class AcheteurGestion implements Serializable{
         Boolean erreur = false;
         HashMap<String, String> hm = new HashMap<>();
         
-        if(ach.getEmailAcheteur() == null || ach.getEmailAcheteur().isEmpty()
-                || ach.getEmailAcheteur().matches("[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})")){
+        if(ach.getEmailAcheteur() == null || ach.getEmailAcheteur().isEmpty()){
+           
+              //  || ach.getEmailAcheteur().matches("[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})")
             erreur = true;
             hm.put("errEmail", "Veuillez saisir un mail valide !");
         }
