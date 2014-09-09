@@ -12,7 +12,7 @@
                     <c:forEach items="${rechercheResultat}" var="l">
                         <tr>
                             <td>${l}</td>
-                            <td>${l. }</td>
+                            <td>${l}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
