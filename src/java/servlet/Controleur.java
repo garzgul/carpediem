@@ -1,6 +1,7 @@
 
 package servlet;
 
+import bean.commande.Panier;
 import bean.metier.LivreGestion;
 import bean.produit.Livre;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class Controleur extends HttpServlet {
 
         String section = request.getParameter("section");
         String action =request.getParameter("action");
-
+        Panier p = null;
         
         String pageJsp ="/WEB-INF/main/Main.jsp";
         
@@ -49,13 +50,29 @@ public class Controleur extends HttpServlet {
 
         // mettre les sections ici
         
+        if("panier".equalsIgnoreCase(section)){
+            int idLivre = Integer.valueOf(request.getParameter("ref"));
+            
+            if ("affichage".equalsIgnoreCase(action)) {
+                if (session.getAttribute("panier") == null) {
+                    session.setAttribute("panier", new Panier());
+                }
+                p = (Panier) session.getAttribute("panier");
+                session.setAttribute("maliste", p.getLignes().values());
+                pageJsp = "/WEB-INF/panier/panier.jsp";
+            }
+            if("add".equalsIgnoreCase(action)){
+                p=(Panier)session.getAttribute("panier");
+            }
+            
+        }
         if ("recherche".equalsIgnoreCase(section)){ // Module Recherche (Eddy)
             try {
                     if(session.getAttribute("beanRecherche")==null){    
                         session.setAttribute("beanRecherche",new LivreGestion());
                     }
                 } catch (NamingException ex) {
-                    Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);            
+                    erreurGrave=true;            
                 }
             
             try {           
@@ -69,7 +86,7 @@ public class Controleur extends HttpServlet {
                     }
                 }
             }catch (SQLException ex){
-                 Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);     
+                 erreurGrave=true;     
             }
             
             pageJsp ="/WEB-INF/catalogue/recherche.jsp";

@@ -7,6 +7,9 @@ import java.io.Serializable;
 public class LignePanier implements Serializable{
     private Livre l;
     private int qte;
+    private float prixTTC;
+    private float tva;
+    private float prixHT;
     private float prix;
 
     public LignePanier(Livre l) throws Exception {
@@ -14,6 +17,9 @@ public class LignePanier implements Serializable{
             throw new Exception("un livre ne peut etre null");
         }
         qte=1;
+        this.prixHT=l.getPrix();
+        this.tva=l.getPrix()*l.getTva().getTva();
+        this.prixTTC=prixHT+tva;
         this.l=l;
         
     }
@@ -27,11 +33,23 @@ public class LignePanier implements Serializable{
     }
 
     public float getPrix() {
-        return qte*l.getPrix();
+        return qte*prixTTC;
     }
 
     public void setQte(int qte) {
         this.qte = qte;
+    }
+
+    public float getPrixTTC() {
+        return prixTTC;
+    }
+
+    public float getTva() {
+        return tva;
+    }
+
+    public float getPrixHT() {
+        return prixHT;
     }
     
     

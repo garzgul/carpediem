@@ -12,6 +12,12 @@ public class Panier implements Serializable{
         lignes = new HashMap<>();
     }
 
+    public HashMap<Integer, LignePanier> getLignes() {
+        return lignes;
+    }
+    
+    
+    
     public void setLignes(HashMap<Integer, LignePanier> lignes) {
         this.lignes = lignes;
     }
