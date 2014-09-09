@@ -1,6 +1,7 @@
 
 package servlet;
 
+import bean.acheteur.Acheteur;
 import bean.metier.LivreGestion;
 import bean.produit.Livre;
 import java.io.IOException;
@@ -78,7 +79,20 @@ public class Controleur extends HttpServlet {
         //Tous ce qui concerne l'acheteur "Connection, inscription, déconnection
         
         if("inscription".equalsIgnoreCase(action)){
+            String nom = request.getParameter("nom");
+            String prenom = request.getParameter("prenom");
+            String pseudo = request.getParameter("pseudo");
+            String mdp = request.getParameter("mdp");
+            String email = request.getParameter("email");
+            String tel = request.getParameter("tel");
+            Boolean actif = true;
             
+            try {
+                Acheteur ach = new Acheteur(nom, prenom, pseudo, mdp, true);
+                session.setAttribute("acheteur", ach);
+            } catch (Exception e) {
+                
+            }
             
         }
         pageJsp = response.encodeURL(pageJsp);

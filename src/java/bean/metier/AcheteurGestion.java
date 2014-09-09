@@ -26,15 +26,15 @@ public class AcheteurGestion implements Serializable{
         }
         if(ach.getNomAcheteur()==null || ach.getNomAcheteur().isEmpty()){
             erreur = true;
-            hm.put("errNom", "Le champ Nom est obligatoir !");
+            hm.put("errNom", "Ces informations sont obligatoires !");
         }
         if(ach.getPrenomAcheteur()==null || ach.getPrenomAcheteur().isEmpty()){
             erreur = true;
-            hm.put("errPrenom", "Le champ Prenom est obligatoir !");
+            hm.put("errPrenom", "Ces informations sont obligatoires !");
         }
         if(ach.getPseudoAcheteur() == null || ach.getPseudoAcheteur().isEmpty()){
             erreur = true;
-            hm.put("errPseudo", "Veuillez saisir un pseudonyme");
+            hm.put("errPseudo", "Ces informations sont obligatoires !");
         }
         /* Le mot de passe contient les lettres magicule et miniscule, 
                au moins un chiffre, au moins un caractère spécial,
@@ -54,7 +54,7 @@ public class AcheteurGestion implements Serializable{
         if(ach.getTelAcheteur()== null || ach.getTelAcheteur().isEmpty()
                 || ach.getTelAcheteur().matches("[0]{1}[1-7|9]{1}([-/. ][0-9]{2}){4}")){
             erreur= true;
-            hm.put("errTel", "Votre numéro de téléphone n'est pas vlide !");
+            hm.put("errTel", "Ce numéro de téléphone n'est pas vlide !");
         }
             
        achDAO.create(ach);
