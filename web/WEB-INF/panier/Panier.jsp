@@ -30,7 +30,7 @@
                         <td><fmt:formatNumber maxFractionDigits="2" value="${p.tva}"/></td>
                         <td><fmt:formatNumber maxFractionDigits="2" value="${p.prixTTC}"/></td>
                         <td>${p.qte}</td>
-                        <td><fmt:formatNumber maxFractionDigits="2" value="${p.prixTotal}"/></td>
+                        <td><fmt:formatNumber maxFractionDigits="2" value="${p.prix}"/></td>
                         <td><a href="Controleur?section=panier&action=add&ref=${p.l.id}">+</a> <a href="#">-</a> <a href="#">sup</a></td>
                     </tr>
                 </c:forEach>

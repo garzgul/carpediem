@@ -111,7 +111,7 @@ public class Controleur extends HttpServlet {
             pageJsp ="/WEB-INF/catalogue/recherche.jsp";
         }
         
-        
+
         // formulaire de contact (Emma)
         if ("contactformulaire".equalsIgnoreCase(section)) {
             System.out.println("------------------------------------------>>>> contact !");
@@ -153,6 +153,14 @@ public class Controleur extends HttpServlet {
         
         
         
+
+        //Tous ce qui concerne l'acheteur "Connection, inscription, déconnection
+        
+        if("inscription".equalsIgnoreCase(action)){
+            
+            
+        }
+
         pageJsp = response.encodeURL(pageJsp);
         getServletContext().getRequestDispatcher(pageJsp).include(request, response);
     }

@@ -1,5 +1,6 @@
 package DAO.livre;
 
+import DAO.panier.TvaDAO;
 import DAO.utils.DAO;
 import DAO.utils.FournirConnectionIt;
 import DAO.utils.MaConnexionBDD;
@@ -59,6 +60,9 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
             l.setIsbn10(rs01.getString("livre_isbn10"));
             l.setPoids(Float.valueOf(rs01.getString("livre_poids")));
             l.setPrix(Float.valueOf(rs01.getString("livre_prix")));
+            TvaDAO tvaDao= new TvaDAO();
+            l.setTva(tvaDao.find(id));
+            
             // recherche des id auteur via la table index ecriture
             req = "Select * from ecriture where id_livre = ?";
             PreparedStatement pstmt = cnn.prepareStatement(req);

@@ -54,7 +54,7 @@ public class Panier implements Serializable{
             lignes.put(id, lp);
         }
     }
-    public void enleverFruit(Livre l) throws Exception{
+    public void enleverLivre(Livre l) throws Exception{
         if (l== null){
             return;
         }
