@@ -71,20 +71,28 @@ public class Controleur extends HttpServlet {
         
         if ("recherche".equalsIgnoreCase(section)){ // Module Recherche (Eddy)
             try {
+                
                     if(session.getAttribute("beanRecherche")==null){    
+                        System.out.println("att beanrecherche null");
                         session.setAttribute("beanRecherche",new LivreGestion());
                     }
                 } catch (NamingException ex) {
                     Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);            
                 }
             
-            try {           
+            try {   
+                
                 if(request.getParameter("action")!=null){
+                    System.out.println("action != null");
                     if("rechercher".equalsIgnoreCase(request.getParameter("action"))){
+                        System.out.println("action = rechercher");
                         LivreGestion lg=(LivreGestion)session.getAttribute("beanRecherche");
+                        System.out.println("lg = "+lg);
                         String champRecherche=request.getParameter("ChampRecherche");
+                        System.out.println("champrecherche = "+champRecherche);
                         List<Livre> lL=null;
                         lL=lg.findAll(champRecherche);
+                        System.out.println("lL = " + lL);
                         session.setAttribute("rechercheListeLivre",lL); // place la liste des livres trouvés
                     }
                 }
