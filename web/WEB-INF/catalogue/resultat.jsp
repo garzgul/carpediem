@@ -11,8 +11,9 @@
                 <tbody>
                     <c:forEach items="${rechercheResultat}" var="l">
                         <tr>
+                            <td>${l.image}</td>
                             <td>${l}</td>
-                            <td>${l}</td>
+                            <td>${l.resume}</td>
                         </tr>
                     </c:forEach>
                 </tbody>

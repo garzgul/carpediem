@@ -107,10 +107,15 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
         System.out.println("----------------------------->>> avant recherche");
         ResultSet rs = cs.executeQuery();
         while (rs.next()) {
-            //rs.getString("id_livre");
-            String titre = rs.getString("livre_titre");
-            System.out.println(titre);
-            l = new Livre(null, null, titre, 0, 0, true);
+            String id_livre = rs.getString("id_livre");
+            String livre_photo = rs.getString("livre_photo");
+            String livre_titre = rs.getString("livre_titre");
+            String livre_resume = rs.getString("livre_resume");
+            System.out.println(livre_titre);
+            l = new Livre(null, null, livre_titre, 0, 0, true);
+            l.setId(Integer.valueOf(id_livre));
+            l.setImage(livre_photo);
+            l.setResume(livre_resume);
             lL.add(l);
         }
         rs.close();
