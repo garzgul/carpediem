@@ -33,8 +33,8 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
         cstmt.setString(4, obj.getMdpAcheteur());
         cstmt.setString(5, obj.getEmailAcheteur());
         cstmt.setString(6, obj.getTelAcheteur());
-        cstmt.setBoolean(7, obj.getActifAcheteur());
-        cstmt.registerOutParameter(1, java.sql.Types.INTEGER);
+        cstmt.setInt(7, 1);
+        cstmt.registerOutParameter(8, java.sql.Types.INTEGER);
         int rs = cstmt.executeUpdate();
 
         if (1 == rs) {
