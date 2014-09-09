@@ -31,7 +31,10 @@
                         <td><fmt:formatNumber maxFractionDigits="2" value="${p.prixTTC}"/></td>
                         <td>${p.qte}</td>
                         <td><fmt:formatNumber maxFractionDigits="2" value="${p.prix}"/></td>
-                        <td><a href="Controleur?section=panier&action=add&ref=${p.l.id}">+</a> <a href="#">-</a> <a href="#">sup</a></td>
+                        <td>
+                            <c:url value="Controleur?section=panier&action=plus&ref=${p.l.id}">+</c:url> <c:url value="Controleur?section=panier&action=moins&ref=${p.l.id}">-</c:url> <c:url value="Controleur?section=panier&action=remove&ref=${p.l.id}">sup</c:url>
+                            
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>
