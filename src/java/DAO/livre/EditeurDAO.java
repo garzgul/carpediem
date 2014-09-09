@@ -23,10 +23,7 @@ public class EditeurDAO extends DAO<Editeur> implements Serializable{
     
     
 
-    @Override
-    public boolean create(Editeur obj) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public boolean update(Editeur obj) throws SQLException {
@@ -61,6 +58,11 @@ public class EditeurDAO extends DAO<Editeur> implements Serializable{
 
     @Override
     public List<Editeur> findAll(String s) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Editeur create(Editeur obj) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
