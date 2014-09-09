@@ -13,19 +13,5 @@
         <input type="text" name="ChampRecherche" />
         <input type="submit" name="BtnRecherche" />
     </form>
-    <!--mon objet liste livre se récupérera dans la session getattribute(rechercheListeLivre) -->
-    <c:if test="${not empty rechercheListeLivre}">
-        <table>
-            <tbody>
-                <c:forEach items="${rechercheListeLivre}" var="l">
-
-                    <tr><td>&{l}</td>
-                        
-                    </tr>
-
-                </c:forEach>
-            </tbody>
-        </table>
-    </c:if>
     
 </div>

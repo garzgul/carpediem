@@ -4,68 +4,64 @@ package DAO.livre;
 import DAO.utils.DAO;
 import DAO.utils.FournirConnectionIt;
 import DAO.utils.MaConnexionBDD;
-import bean.produit.Auteur;
+import bean.produit.Editeur;
 import java.io.Serializable;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
 
-public class AuteurDAO extends DAO<Auteur> implements Serializable{
+public class EditeurDAO extends DAO<Editeur> implements Serializable{
     private FournirConnectionIt fc;
 
-    public AuteurDAO() throws NamingException {
+    public EditeurDAO() throws NamingException {
         this.fc = new MaConnexionBDD();
     }
     
     
+    
 
     @Override
-    public boolean create(Auteur obj) throws SQLException {
+    public boolean create(Editeur obj) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Auteur obj) {
+    public boolean update(Editeur obj) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete(Auteur obj) {
+    public boolean delete(Editeur obj) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Auteur find(int id) throws SQLException, NamingException {
-       Connection cnn = fc.fournir();
-        Auteur a = null;
-        String req = "{call findAuteurParId(?)}";
+    public Editeur find(int id) throws SQLException, NamingException {
+        Connection cnn = fc.fournir();
+        Editeur e = null;
+        String req ="{call findEditeurParId(?)}";
         CallableStatement cstmt = cnn.prepareCall(req);
         cstmt.setInt(1, id);
         ResultSet rs = cstmt.executeQuery();
-        a =new Auteur(id, rs.getString("auteur_nom"));
-        if(!"inconnu".equalsIgnoreCase(a.getNomAuteur())){
-            a.setPrenomAuteur(rs.getString("auteur_prenom"));
-        }
+        e = new Editeur(id, rs.getString("editeur_nom"));
         rs.close();
         cstmt.close();
         cnn.close();
         
-        return a;
+        return e;
     }
 
     @Override
-    public Auteur find(String s) throws SQLException, NamingException {
+    public Editeur find(String s) throws SQLException, NamingException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Auteur> findAll(String s) throws SQLException {
+    public List<Editeur> findAll(String s) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
     
 }
