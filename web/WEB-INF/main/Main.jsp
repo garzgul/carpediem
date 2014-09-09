@@ -37,6 +37,16 @@
                     <h1 class="titreh1">>>titre de la page ou fil ariane interactif</h1>
 
 
+                    <c:if test="${not empty pagevisee}">            
+                     <c:import url="${pagevisee}" />
+                    </c:if> 
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 
 
 
