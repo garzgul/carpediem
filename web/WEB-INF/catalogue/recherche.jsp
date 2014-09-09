@@ -19,7 +19,9 @@
             <tbody>
                 <c:forEach items="${rechercheListeLivre}" var="l">
 
-                    
+                    <tr><td>&{l}</td>
+                        
+                    </tr>
 
                 </c:forEach>
             </tbody>

@@ -65,10 +65,7 @@ public class Controleur extends HttpServlet {
             pageJsp="/WEB-INF/bordure/Pied.jsp";
           }
         
-        
 
- 
-        
         if ("recherche".equalsIgnoreCase(section)){ // Module Recherche (Eddy)
             try {
                 
@@ -81,7 +78,6 @@ public class Controleur extends HttpServlet {
                 }
             
             try {   
-                
                 if(request.getParameter("action")!=null){
                     System.out.println("action != null");
                     if("rechercher".equalsIgnoreCase(request.getParameter("action"))){
@@ -100,6 +96,7 @@ public class Controleur extends HttpServlet {
                  Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);     
             }
             
+            //pageJsp ="/WEB-INF/main/Main.jsp";
             pageJsp ="/WEB-INF/catalogue/recherche.jsp";
         }
         
@@ -137,13 +134,7 @@ public class Controleur extends HttpServlet {
         
         
         
-        
-        
-        
-        
-        
-        
-        
+
         
         pageJsp = response.encodeURL(pageJsp);
         getServletContext().getRequestDispatcher(pageJsp).include(request, response);
