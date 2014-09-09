@@ -114,7 +114,8 @@ public class Controleur extends HttpServlet {
                 }
                 p = (Panier) session.getAttribute("panier");
                 session.setAttribute("maliste", p.getLignes().values());
-                pageJsp = "/WEB-INF/panier/panier.jsp";
+                
+                
             }
             
             //addtion d'un item au panier
@@ -133,7 +134,7 @@ public class Controleur extends HttpServlet {
                 } catch (Exception ex) {
                     erreurGrave=true;
                 }
-                pageJsp = "/WEB-INF/panier/panier.jsp";
+
             }
             
             // suppresion d'un item du panier
@@ -151,7 +152,7 @@ public class Controleur extends HttpServlet {
                 } catch (Exception ex) {
                     erreurGrave=true;
                 }
-                pageJsp = "/WEB-INF/panier/panier.jsp";
+
             }
             
             // diminution de la quantite commandee pour un item
@@ -167,7 +168,7 @@ public class Controleur extends HttpServlet {
                 } catch (NamingException ex) {
                     erreurGrave=null;
                 }
-                pageJsp = "/WEB-INF/panier/panier.jsp";
+
             }
             
             // augmentation de la quantite commandee pour un tiem
@@ -183,8 +184,9 @@ public class Controleur extends HttpServlet {
                 } catch (NamingException ex) {
                     erreurGrave=true;
                 }
-                pageJsp = "/WEB-INF/panier/panier.jsp";
+
             }
+            request.setAttribute("pagevisee", "/WEB-INF/panier/panier.jsp");
            
         }
         
