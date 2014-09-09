@@ -22,7 +22,7 @@ public class Panier implements Serializable{
         this.lignes = lignes;
     }
     
-    private boolean update(int id, int delta){
+    public boolean update(int id, int delta){
         boolean ok = false;
         if(lignes.containsKey(id)){
             LignePanier lp = lignes.get(id);
@@ -34,12 +34,9 @@ public class Panier implements Serializable{
                 if(lp.getQte()>lp.getL().getStock()){
                     lp.setQte(lp.getL().getStock());
                 }
-                
             }
-            
             ok = true;
         }
-        
         return ok;
     }
     

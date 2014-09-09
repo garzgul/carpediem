@@ -45,6 +45,8 @@ public class Controleur extends HttpServlet {
         String section = request.getParameter("section");
         String action =request.getParameter("action");
         Panier p = null;
+        Livre l = null;
+        LivreGestion lg = null;
         
         String pageJsp ="/WEB-INF/main/Main.jsp";
         
@@ -72,6 +74,7 @@ public class Controleur extends HttpServlet {
         if("panier".equalsIgnoreCase(section)){
             int idLivre = Integer.valueOf(request.getParameter("ref"));
             
+            // affichage du panier
             if ("affichage".equalsIgnoreCase(action)) {
                 if (session.getAttribute("panier") == null) {
                     session.setAttribute("panier", new Panier());
@@ -80,11 +83,75 @@ public class Controleur extends HttpServlet {
                 session.setAttribute("maliste", p.getLignes().values());
                 pageJsp = "/WEB-INF/panier/panier.jsp";
             }
+            
+            //addtion d'un item au panier
+            
             if("add".equalsIgnoreCase(action)){
                 p=(Panier)session.getAttribute("panier");
+                
+                try {
+                    l = lg.findLivre(idLivre);
+                    p.addlivre(l);
+                    session.setAttribute("panier", p.getLignes().values());
+                } catch (SQLException ex) {
+                    erreurGrave=true;
+                } catch (NamingException ex) {
+                    erreurGrave=true;
+                } catch (Exception ex) {
+                    erreurGrave=true;
+                }
+                
             }
             
+            // suppresion d'un item du panier
+            
+            if("remove".equalsIgnoreCase(action)){
+                p = (Panier)session.getAttribute("panier");
+                try {
+                    l =lg.findLivre(idLivre);
+                    p.enleverLivre(l);
+                    session.setAttribute("panier", p.getLignes().values());
+                } catch (SQLException ex) {
+                    erreurGrave=true;
+                } catch (NamingException ex) {
+                    erreurGrave=true;
+                } catch (Exception ex) {
+                    erreurGrave=true;
+                }
+                
+            }
+            
+            // diminution de la quantite commandee pour un item
+            
+            if("moins".equalsIgnoreCase(action)){
+                p =(Panier)session.getAttribute("panier");
+                
+                try {
+                    l =lg.findLivre(idLivre);
+                    p.update(idLivre, -1);
+                } catch (SQLException ex) {
+                    erreurGrave=null;
+                } catch (NamingException ex) {
+                    erreurGrave=null;
+                }
+            }
+            
+            // augmentation de la quantite commandee pour un tiem
+            
+            if("plus".equalsIgnoreCase(action)){
+                
+                    p = (Panier)session.getAttribute("panier");
+                try {   
+                    l = lg.findLivre(idLivre);
+                    p.update(idLivre, 1);
+                } catch (SQLException ex) {
+                    erreurGrave=true;
+                } catch (NamingException ex) {
+                    erreurGrave=true;
+                }
+            }
         }
+        
         if ("recherche".equalsIgnoreCase(section)){ // Module Recherche (Eddy)
             try {
                     if(session.getAttribute("beanRecherche")==null){    
@@ -97,7 +164,7 @@ public class Controleur extends HttpServlet {
             try {           
                 if(request.getParameter("action")!=null){
                     if("rechercher".equalsIgnoreCase(request.getParameter("action"))){
-                        LivreGestion lg=(LivreGestion)session.getAttribute("beanRecherche");
+                        lg=(LivreGestion)session.getAttribute("beanRecherche");
                         String champRecherche=request.getParameter("ChampRecherche");
                         List<Livre> lL=null;
                         lL=lg.findAll(champRecherche);
