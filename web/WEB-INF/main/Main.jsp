@@ -40,6 +40,11 @@
                     <c:if test="${not empty pagevisee}">  
                         <c:import url="${pagevisee}" />
                     </c:if> 
+                    
+                    <c:if test="${not empty panier}">
+                        <c:import url="${panierurl}" />
+                        
+                    </c:if>
 
 
 
