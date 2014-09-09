@@ -16,8 +16,8 @@
                 <label>Mot de passe :</label>
                 <input type="password" name="mdp" value="${mdpFourni}"/><label class="erreurs">${errMDP}</label><br/>
                 <label>Confirmer mot de passe :</label>
-                <input type="password" name="confirmdp" value="${confirmdpFourni}"/><label class="erreurs">${errConfMDP}</label>
-                <input type="submit" name="DoIt" value="Enregistrer"/>
+                <input type="password" name="confirmdp" value="${confirmdpFourni}"/><label class="erreurs">${errConfMDP}</label><br/>
+                <input type="submit" name="DoIt" value="Créer mon compte"/>
                 
             </from>            
         </div>

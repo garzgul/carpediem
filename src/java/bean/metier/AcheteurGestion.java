@@ -4,8 +4,11 @@ import DAO.acheteur.AcheteurDAO;
 import bean.acheteur.Acheteur;
 import java.io.Serializable;
 import java.sql.SQLException;
+import static java.time.Instant.now;
+import static java.time.OffsetTime.now;
 import java.util.HashMap;
 import javax.naming.NamingException;
+import utilitaire.MouradException;
 
 public class AcheteurGestion implements Serializable{
     
@@ -15,7 +18,7 @@ public class AcheteurGestion implements Serializable{
         achDAO = new AcheteurDAO();
     }
     // Ajout d'un acheteur tout en vérifiant les champs obligatoir
-    public Acheteur ajoutAcheteur(Acheteur ach, String confirMDP) throws SQLException{
+    public Acheteur ajoutAcheteur(Acheteur ach) throws SQLException, MouradException{
         Boolean erreur = false;
         HashMap<String, String> hm = new HashMap<>();
         
@@ -47,14 +50,17 @@ public class AcheteurGestion implements Serializable{
             hm.put("errMPD", "Vérifiez votre mot de passe !");
         }
         
-        if(!ach.getMdpAcheteur().equals(confirMDP)){
-            erreur = true;
-            hm.put("errConfMDP", "Veillez vérifier votre mot de passe !");
-        }
+//        if(!ach.getMdpAcheteur().equals(confirMDP)){
+//            erreur = true;
+//            hm.put("errConfMDP", "Veillez vérifier votre mot de passe !");
+//        }
         if(ach.getTelAcheteur()== null || ach.getTelAcheteur().isEmpty()
                 || ach.getTelAcheteur().matches("[0]{1}[1-7|9]{1}([-/. ][0-9]{2}){4}")){
             erreur= true;
-            hm.put("errTel", "Ce numéro de téléphone n'est pas vlide !");
+            hm.put("errTel", "Ce numéro de téléphone n'est pas valide !");
+        }
+        if(erreur){
+            throw new MouradException(hm, "Echec à la création du compte");
         }
             
        achDAO.create(ach);

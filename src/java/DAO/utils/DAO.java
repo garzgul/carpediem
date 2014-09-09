@@ -9,7 +9,7 @@ public abstract class DAO<T> {
     public DAO() {
     }
     
-    public abstract boolean create(T obj) throws SQLException;
+    public abstract T create(T obj) throws SQLException;
     
     public abstract boolean update(T obj) throws SQLException;
     
