@@ -20,14 +20,15 @@
         <input id="mail" type="text" name="votremail" value="${votremail}"><label class="erreur">${errMail}</label><br />
 
         <label for='objet'>Objet de votre message :</label>
-        <input id="objet" type="text" name="objet" value="${objet}"><br /> 
+        <input id="objet" type="text" name="objetcontact" value="${objetcontact}"><br /> 
 
         <label for="messagecontact">Votre message :</label>
         <textarea id="message" name="messagecontact">${messagecontact}</textarea><br />
 
         <div class="clear"></div> 
 
-
+        <div><input type="submit" name="previsualisercontactformulaire" value="Prévisualiser"/></div>';
+        <div><input type="submit" name="envoicontactformulaire" value="Envoyer"/></div>';
 
     </form>
 

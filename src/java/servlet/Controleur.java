@@ -6,6 +6,8 @@ import bean.metier.LivreGestion;
 import bean.produit.Livre;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,6 +49,23 @@ public class Controleur extends HttpServlet {
         String pageJsp ="/WEB-INF/main/Main.jsp";
         
 
+        // import entete de page
+         if("Entete".equalsIgnoreCase(section)){
+            request.setAttribute("today", new Date());
+            pageJsp="/WEB-INF/bordure/Entete.jsp";
+          }
+         
+         // import menu horizontal
+          if("Menu".equalsIgnoreCase(section)){
+            pageJsp="/WEB-INF/bordure/Menu.jsp";
+          }
+          
+          // import pied de page
+        if("Pied".equalsIgnoreCase(section)){
+            pageJsp="/WEB-INF/bordure/Pied.jsp";
+          }
+        
+        
 
         // mettre les sections ici
         
@@ -91,6 +110,48 @@ public class Controleur extends HttpServlet {
             
             pageJsp ="/WEB-INF/catalogue/recherche.jsp";
         }
+        
+        
+        // formulaire de contact (Emma)
+        if ("contactformulaire".equalsIgnoreCase(section)) {
+            System.out.println("------------------------------------------>>>> contact !");
+            String votremail = request.getParameter("votremail");
+            String objetcontact = request.getParameter("objetcontact");
+            String votrenom = request.getParameter("votrenom");
+            String votreprenom = request.getParameter("votreprenom");
+            String messagecontact = request.getParameter("messagecontact");
+//            try {
+//
+//                Membre m = gm.ajouterMembre(mail, mdp, nom, prenom);
+//                session.setAttribute("user", m);
+//            } catch (MonException ex) {
+//                System.out.println("----------------->>>> " + ex.getMessage());
+//
+//                HashMap<String, String> mp = ex.getMessages();
+//                for (String s : mp.keySet()) {
+//                    request.setAttribute(s, mp.get(s));
+//                }
+//                request.setAttribute("mailFourni", mail.trim());
+//                request.setAttribute("nomFourni", nom.trim());
+//                request.setAttribute("prenomFourni", prenom.trim());
+//                pageJsp = "/WEB-INF/connexion/formulaireinscription.jsp";
+//            } catch (SQLException ex) {
+//                erreurGrave = true;
+//                System.out.println("--------->>> " + ex.getMessage());
+//
+//            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         pageJsp = response.encodeURL(pageJsp);
         getServletContext().getRequestDispatcher(pageJsp).include(request, response);
