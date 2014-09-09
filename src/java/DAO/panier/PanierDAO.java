@@ -9,7 +9,7 @@ import java.util.List;
 public class PanierDAO extends DAO implements Serializable{
 
     @Override
-    public boolean create(Object obj) throws SQLException {
+    public Object create(Object obj) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

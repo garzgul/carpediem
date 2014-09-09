@@ -25,7 +25,7 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
     }
 
     @Override
-    public boolean create(Livre obj) throws SQLException {
+    public Livre create(Livre obj) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

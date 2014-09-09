@@ -21,12 +21,27 @@
 
 
 
+
+	
+	
+           
+
             <c:import url="/Controleur?section=Entete" />
 
+
+
+
+           
 
             <c:import url="/Controleur?section=Menu" />
 
 
+
+
+
+            
+            
+            
 
             <c:import url="/Controleur?section=recherche" />
 
@@ -52,6 +67,18 @@
 
 
 
+                    <c:if test="${not empty pagevisee}">            
+                     <c:import url="${pagevisee}" />
+                    </c:if> 
+                    <c:if test="${not empty versinscription}">
+                        <c:import url="${pagevisee}"/>
+                    </c:if>
+                    
+                    
+                    
+                    
+                    
+                    
 
 
 
@@ -59,11 +86,20 @@
                 </div><!-- fin div contentcontenu -->
             </div><!-- Fin contenu -->
 
+
             <div class="clear"></div>
 
 
             <c:import url="/Controleur?section=Pied" />
 
+
+
+<div class="clear"></div>
+            
+            
+             <c:import url="/Controleur?section=Pied" />
+        
+        
 
         </div><!-- fermeture balise div id="global"  -->
     </body><!-- fermeture balise body  -->

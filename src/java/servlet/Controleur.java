@@ -1,7 +1,11 @@
-
 package servlet;
 
+
 import bean.commande.Panier;
+
+import bean.acheteur.Acheteur;
+import bean.metier.AcheteurGestion;
+
 import bean.metier.LivreGestion;
 import bean.produit.Livre;
 import java.io.IOException;
@@ -18,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utilitaire.MouradException;
 
 /**
  *
@@ -43,6 +48,7 @@ public class Controleur extends HttpServlet {
         Boolean erreurGrave = false;
 
         String section = request.getParameter("section");
+
         String action =request.getParameter("action");
         Panier p = null;
         Livre l = null;
@@ -50,6 +56,19 @@ public class Controleur extends HttpServlet {
         
         String pageJsp ="/WEB-INF/main/Main.jsp";
         
+
+        action = request.getParameter("action");
+        AcheteurGestion ag = null;
+
+        pageJsp = "/WEB-INF/main/Main.jsp";
+        System.out.println("-------------------------------------->>>> passage controleur");
+        // import entete de page
+        if ("Entete".equalsIgnoreCase(section)) {
+            request.setAttribute("today", new Date());
+            pageJsp = "/WEB-INF/bordure/Entete.jsp";
+        }
+
+
 
         // import entete de page
          if("Entete".equalsIgnoreCase(section)){
@@ -102,7 +121,68 @@ public class Controleur extends HttpServlet {
         
         
 
+        // import menu horizontal
+        if ("Menu".equalsIgnoreCase(section)) {
+            pageJsp = "/WEB-INF/bordure/Menu.jsp";
+        }
+
+        // import pied de page
+        if ("Pied".equalsIgnoreCase(section)) {
+            pageJsp = "/WEB-INF/bordure/Pied.jsp";
+        }
+
+         if("Entete".equalsIgnoreCase(section)){
+            request.setAttribute("today", new Date());
+            pageJsp="/WEB-INF/bordure/Entete.jsp";
+          }
+         
+         // import menu horizontal
+          if("Menu".equalsIgnoreCase(section)){
+            pageJsp="/WEB-INF/bordure/Menu.jsp";
+          }
+          
+          // import pied de page
+        if("Pied".equalsIgnoreCase(section)){
+            pageJsp="/WEB-INF/bordure/Pied.jsp";
+          }
+        
+        // import liens pied de page
+        if(("bordure".equalsIgnoreCase(section)) && ("carpediempresentation".equalsIgnoreCase(action))){
+             request.setAttribute("pagevisee", "/WEB-INF/bordure/carpediempresentation.jsp");
+            pageJsp="/WEB-INF/main/Main.jsp";
+          }
+        
+         if(("bordure".equalsIgnoreCase(section)) && ("mentionslegales".equalsIgnoreCase(action))){
+            request.setAttribute("pagevisee", "/WEB-INF/bordure/mentionslegales.jsp");
+             pageJsp="/WEB-INF/main/Main.jsp";
+          }
+         
+          if(("bordure".equalsIgnoreCase(section)) && ("cgv".equalsIgnoreCase(action))){
+            request.setAttribute("pagevisee", "/WEB-INF/bordure/cgv.jsp");
+              pageJsp="/WEB-INF/main/Main.jsp";
+          }
+          
+           if(("bordure".equalsIgnoreCase(section)) && ("plansite".equalsIgnoreCase(action))){
+            request.setAttribute("pagevisee", "/WEB-INF/bordure/plansite.jsp");
+               pageJsp="/WEB-INF/main/Main.jsp";
+          }
+           
+            if(("bordure".equalsIgnoreCase(section)) && ("newsletter".equalsIgnoreCase(action))){
+             request.setAttribute("pagevisee", "/WEB-INF/bordure/newsletter.jsp");
+                pageJsp="/WEB-INF/main/Main.jsp";
+          }
+            
+          if(("bordure".equalsIgnoreCase(section)) && ("contact".equalsIgnoreCase(action))){
+             request.setAttribute("pagevisee", "/WEB-INF/bordure/contact.jsp");
+              pageJsp="/WEB-INF/main/Main.jsp";
+          }
+         
+         
+       
+
+
         // mettre les sections ici
+
         
         if("panier".equalsIgnoreCase(section)){
             int idLivre = Integer.valueOf(request.getParameter("ref"));
@@ -189,13 +269,48 @@ public class Controleur extends HttpServlet {
         }
         
         if ("recherche".equalsIgnoreCase(section)){ // Module Recherche (Eddy)
+
+        if ("recherche".equalsIgnoreCase(section)) { // Module Recherche (Eddy)
+
             try {
                     if(session.getAttribute("beanRecherche")==null){    
                         session.setAttribute("beanRecherche",new LivreGestion());
-                    }
-                } catch (NamingException ex) {
-                    erreurGrave=true;            
                 }
+            } catch (NamingException ex) {
+                Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                if (request.getParameter("action") != null) {
+                    if ("rechercher".equalsIgnoreCase(request.getParameter("action"))) {
+                        lg = (LivreGestion) session.getAttribute("beanRecherche");
+                        String champRecherche = request.getParameter("ChampRecherche");
+                        List<Livre> lL = null;
+                        lL = lg.findAll(champRecherche);
+                        session.setAttribute("rechercheListeLivre", lL); // place la liste des livres trouvés
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            pageJsp = "/WEB-INF/catalogue/recherche.jsp";
+        }
+
+        //Tous ce qui concerne l'acheteur "Connection, inscription, déconnection
+        if ("inscriptionacheteur".equalsIgnoreCase(section)) {
+            System.out.println(">>>>>>>>>>>>acheteur");
+            if(session.getAttribute("acheteurgestion")==null){
+                try {
+                    session.setAttribute("acheteurgestion", new AcheteurGestion());
+                } catch (NamingException ex) {
+
+                    erreurGrave=true;            
+
+                    erreurGrave=true;
+
+                }
+
             
             try {           
                 if(request.getParameter("action")!=null){
@@ -209,11 +324,121 @@ public class Controleur extends HttpServlet {
                 }
             }catch (SQLException ex){
                  erreurGrave=true;     
+
+
             }
             
-            pageJsp ="/WEB-INF/catalogue/recherche.jsp";
+            request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
+            pageJsp = "/WEB-INF/main/Main.jsp";
+
+        }
+
+        if ("inscription".equalsIgnoreCase(section)) {
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>inscription");
+            String nom = request.getParameter("nom");
+            String prenom = request.getParameter("prenom");
+            String pseudo = request.getParameter("pseudo");
+            String mdp = request.getParameter("mdp");
+            String email = request.getParameter("email");
+            String tel = request.getParameter("tel");
+            Boolean actif = true;
+            
+            ag = (AcheteurGestion)session.getAttribute("acheteurgestion");
+            
+            try {
+                Acheteur ach = new Acheteur(nom, prenom, pseudo, mdp, true);
+                ach.setTelAcheteur(tel);
+                if (ach != null) {
+                session.setAttribute("acheteur", ach);
+                
+                    ag.ajoutAcheteur(ach);
+                }
+            } catch (MouradException ex) {
+
+                HashMap<String, String> mp = ex.getMessages();
+                for (String s : mp.keySet()) {
+                    request.setAttribute(s, mp.get(s));
+                }
+                request.setAttribute("emailFourni", email.trim());
+                request.setAttribute("nomFourni", nom.trim());
+                request.setAttribute("prenomFourni", prenom.trim());
+                request.setAttribute("pseudoFourni", pseudo.trim());
+                request.setAttribute("telFourni", tel);
+                
+                request.setAttribute("pagevisee", "/WEB-INF/connexion/formulaireinscription.jsp");
+                pageJsp = "/WEB-INF/main/Main.jsp";
+                System.out.println(">>>>>>>>>>>>>>>>>passage par le catch");
+            } catch (SQLException ex) {
+                erreurGrave = true;
+            }
+        }
+        if(erreurGrave){
+            pageJsp = "WEB-INF/erreurs/warning.jsp";
+        }
+        // formulaire de contact (Emma)
+        if ("contactformulaire".equalsIgnoreCase(section)) {
+            System.out.println("------------------------------------------>>>> contact !");
+            String votremail = request.getParameter("votremail");
+            String objetcontact = request.getParameter("objetcontact");
+            String votrenom = request.getParameter("votrenom");
+            String votreprenom = request.getParameter("votreprenom");
+            String messagecontact = request.getParameter("messagecontact");
+//            try {
+//
+//                Membre m = gm.ajouterMembre(mail, mdp, nom, prenom);
+//                session.setAttribute("user", m);
+//            } catch (MonException ex) {
+//                System.out.println("----------------->>>> " + ex.getMessage());
+//
+//                HashMap<String, String> mp = ex.getMessages();
+//                for (String s : mp.keySet()) {
+//                    request.setAttribute(s, mp.get(s));
+//                }
+//                request.setAttribute("mailFourni", mail.trim());
+//                request.setAttribute("nomFourni", nom.trim());
+//                request.setAttribute("prenomFourni", prenom.trim());
+//                pageJsp = "/WEB-INF/connexion/formulaireinscription.jsp";
+//            } catch (SQLException ex) {
+//                erreurGrave = true;
+//                System.out.println("--------->>> " + ex.getMessage());
+//
+//            }
+        }
+
+
+        
+        
+        // formulaire de contact (Emma)
+        if ("contactformulaire".equalsIgnoreCase(section)) {
+            System.out.println("------------------------------------------>>>> contact !");
+            String votremail = request.getParameter("votremail");
+            String objetcontact = request.getParameter("objetcontact");
+            String votrenom = request.getParameter("votrenom");
+            String votreprenom = request.getParameter("votreprenom");
+            String messagecontact = request.getParameter("messagecontact");
+//            try {
+//
+//                Membre m = gm.ajouterMembre(mail, mdp, nom, prenom);
+//                session.setAttribute("user", m);
+//            } catch (MonException ex) {
+//                System.out.println("----------------->>>> " + ex.getMessage());
+//
+//                HashMap<String, String> mp = ex.getMessages();
+//                for (String s : mp.keySet()) {
+//                    request.setAttribute(s, mp.get(s));
+//                }
+//                request.setAttribute("mailFourni", mail.trim());
+//                request.setAttribute("nomFourni", nom.trim());
+//                request.setAttribute("prenomFourni", prenom.trim());
+//                pageJsp = "/WEB-INF/connexion/formulaireinscription.jsp";
+//            } catch (SQLException ex) {
+//                erreurGrave = true;
+//                System.out.println("--------->>> " + ex.getMessage());
+//
+//            }
         }
         
+
 
         // formulaire de contact (Emma)
         if ("contactformulaire".equalsIgnoreCase(section)) {
@@ -264,8 +489,23 @@ public class Controleur extends HttpServlet {
             
         }
 
-        pageJsp = response.encodeURL(pageJsp);
-        getServletContext().getRequestDispatcher(pageJsp).include(request, response);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+
+                pageJsp = response.encodeURL(pageJsp);
+                getServletContext().getRequestDispatcher(pageJsp).include(request, response);
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -307,4 +547,4 @@ public class Controleur extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-}
+} 
