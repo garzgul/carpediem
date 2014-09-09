@@ -11,6 +11,8 @@
                 <tbody>
                     <c:forEach items="${rechercheResultat}" var="l">
                         <tr>
+                            <td><img src="/WEB-INF/images/${l.image}" /></td>
+                            <td><img src="../images/${l.image}" /></td>
                             <td>${l.image}</td>
                             <td>${l}</td>
                             <td>${l.resume}</td>
