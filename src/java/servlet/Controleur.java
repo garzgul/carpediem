@@ -47,6 +47,7 @@ public class Controleur extends HttpServlet {
         
         String pageJsp ="/WEB-INF/main/Main.jsp";
         
+        // mettre les sections ici
 
         // import entete de page
          if("Entete".equalsIgnoreCase(section)){
@@ -66,7 +67,7 @@ public class Controleur extends HttpServlet {
         
         
 
-        // mettre les sections ici
+ 
         
         if ("recherche".equalsIgnoreCase(section)){ // Module Recherche (Eddy)
             try {
