@@ -96,48 +96,29 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
     }
 
     public List<Livre> findAll(String s) throws SQLException {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
         //recherche par (partie) du titre de livre
         Livre l = null;
         List<Livre> lL = new ArrayList<>();
-        //String req = "select * from livre where livre_titre like ?"; // remplacer par un appel a une PROCEDURE STOCKEE !!!!
         String req = "{call findAllLivres(?)}";
         Connection cnn = fc.fournir();
-        //PreparedStatement pStm = cnn.prepareStatement(req);
         CallableStatement cs=cnn.prepareCall(req);
         cs.setString(1,"%"+s+"%");
-        //pStm.setString(1,"%"+s+"%");
         System.out.println("----------------------------->>> avant recherche");
-        //ResultSet rs = pStm.executeQuery();
         ResultSet rs = cs.executeQuery();
-
-        PreparedStatement pStm = cnn.prepareStatement(req);
-        //CallableStatement cs=cnn.prepareCall(req);
-        //cs.setString(1,s);
-        pStm.setString(1, s);
-        rs = pStm.executeQuery();
-
         while (rs.next()) {
             //rs.getString("id_livre");
             String titre = rs.getString("livre_titre");
-
             System.out.println(titre);
-            l=new Livre(null,null,titre,0,0,true);
-
-
             l = new Livre(null, null, titre, 0, 0, true);
-
             lL.add(l);
         }
         rs.close();
-        //pStm.close();
         cs.close();
         cnn.close();
 
         return lL;
     }
 
-    
-    
+
 }

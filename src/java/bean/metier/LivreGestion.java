@@ -29,4 +29,7 @@ public class LivreGestion implements Serializable {
         return lDao.find(id);
     }
 
+
+
+
 }
