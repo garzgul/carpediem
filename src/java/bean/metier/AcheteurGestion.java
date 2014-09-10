@@ -18,7 +18,17 @@ public class AcheteurGestion implements Serializable{
         achDAO = new AcheteurDAO();
     }
     // Ajout d'un acheteur tout en vérifiant les champs obligatoir
+<<<<<<< HEAD
+
     public Acheteur ajoutAcheteur(Acheteur ach) throws SQLException, MouradException{
+
+=======
+<<<<<<< HEAD
+    public Acheteur ajoutAcheteur(Acheteur ach) throws SQLException, MouradException{
+=======
+    public Acheteur ajoutAcheteur(Acheteur ach, String confirMDP) throws SQLException{
+>>>>>>> master
+>>>>>>> master
         Boolean erreur = false;
         HashMap<String, String> hm = new HashMap<>();
         
@@ -51,10 +61,30 @@ public class AcheteurGestion implements Serializable{
             hm.put("errMPD", "Vérifiez votre mot de passe !");
         }
         
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+>>>>>>> master
 //        if(!ach.getMdpAcheteur().equals(confirMDP)){
 //            erreur = true;
 //            hm.put("errConfMDP", "Veillez vérifier votre mot de passe !");
 //        }
+<<<<<<< HEAD
+
+//        if(!ach.getMdpAcheteur().equals(confirMDP)){
+//            erreur = true;
+//            hm.put("errConfMDP", "Veillez vérifier votre mot de passe !");
+//        }
+
+=======
+=======
+        if(!ach.getMdpAcheteur().equals(confirMDP)){
+            erreur = true;
+            hm.put("errConfMDP", "Veillez vérifier votre mot de passe !");
+        }
+>>>>>>> master
+>>>>>>> master
         if(ach.getTelAcheteur()== null || ach.getTelAcheteur().isEmpty()
                 || ach.getTelAcheteur().matches("[0]{1}[1-7|9]{1}([-/. ][0-9]{2}){4}")){
             erreur= true;

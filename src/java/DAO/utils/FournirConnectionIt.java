@@ -6,5 +6,5 @@ import java.sql.SQLException;
 
 
 public interface FournirConnectionIt {
-    public Connection fournir()throws SQLException;
+    public Connection fournir() throws SQLException;
 }

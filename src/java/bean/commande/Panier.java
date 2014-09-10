@@ -12,11 +12,17 @@ public class Panier implements Serializable{
         lignes = new HashMap<>();
     }
 
+    public HashMap<Integer, LignePanier> getLignes() {
+        return lignes;
+    }
+    
+    
+    
     public void setLignes(HashMap<Integer, LignePanier> lignes) {
         this.lignes = lignes;
     }
     
-    private boolean update(int id, int delta){
+    public boolean update(int id, int delta){
         boolean ok = false;
         if(lignes.containsKey(id)){
             LignePanier lp = lignes.get(id);
@@ -28,12 +34,9 @@ public class Panier implements Serializable{
                 if(lp.getQte()>lp.getL().getStock()){
                     lp.setQte(lp.getL().getStock());
                 }
-                
             }
-            
             ok = true;
         }
-        
         return ok;
     }
     
@@ -48,7 +51,7 @@ public class Panier implements Serializable{
             lignes.put(id, lp);
         }
     }
-    public void enleverFruit(Livre l) throws Exception{
+    public void enleverLivre(Livre l) throws Exception{
         if (l== null){
             return;
         }
