@@ -275,7 +275,6 @@ public class Controleur extends HttpServlet {
 
 // module gestion de compte acheteur (Mourad)
         if ("inscriptionacheteur".equalsIgnoreCase(section)) {
-            System.out.println(">>>>>>>>>>>>acheteur");
             if (session.getAttribute("acheteurgestion") == null) {
                 try {
                     session.setAttribute("acheteurgestion", new AcheteurGestion());
@@ -303,7 +302,6 @@ public class Controleur extends HttpServlet {
         }
 
         if ("inscription".equalsIgnoreCase(section)) {
-            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>inscription");
             String nom = request.getParameter("nom");
             String prenom = request.getParameter("prenom");
             String pseudo = request.getParameter("pseudo");
@@ -312,7 +310,7 @@ public class Controleur extends HttpServlet {
             String email = request.getParameter("email");
             String tel = request.getParameter("tel");
             Boolean actif = true;
-
+            
             ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
 
             try {
@@ -343,9 +341,22 @@ public class Controleur extends HttpServlet {
             }
 
         }
-
-// fin module gestion de compte acheteur (Mourad)        
-        
+        if("connection".equalsIgnoreCase(section)){
+            
+        }
+        if("seconnecter".equalsIgnoreCase(section)){
+            
+            String mail = request.getParameter("mail");
+            String password = request.getParameter("mdp");
+            Acheteur ach = null;
+            try {
+                ach = ag.chercherAcheteur(mail, password);
+            } catch (SQLException ex) {
+                erreurGrave = true;
+            }
+            session.setAttribute("Acheteur", ach);
+            
+        }        
 
 // debut module emma
         // formulaire de contact (Emma)
