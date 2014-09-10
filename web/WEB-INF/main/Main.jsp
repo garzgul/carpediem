@@ -27,14 +27,17 @@
             <div id="contenu">
                 <div id="contentcontenu">
                     <h1 class="titreh1">>>titre de la page ou fil ariane interactif</h1>
+                    
 
 
                     <c:if test="${not empty pagevisee}">  
                         <c:import url="${pagevisee}" />
                     </c:if> 
+                    
+                    
+                    
                     <c:if test="${not empty panier}">
                         <c:import url="${panierurl}" />
-                        
                     </c:if>
                     <c:if test="${not empty versinscription}">
                         <c:import url="${pagevisee}"/>
