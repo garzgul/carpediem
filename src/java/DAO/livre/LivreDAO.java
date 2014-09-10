@@ -96,12 +96,17 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
     }
 
     public List<Livre> findAll(String s) throws SQLException {
+<<<<<<< HEAD
+=======
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> master
 
         //recherche par (partie) du titre de livre
         Livre l = null;
         List<Livre> lL = new ArrayList<>();
         String req = "{call findAllLivres(?)}";
         Connection cnn = fc.fournir();
+<<<<<<< HEAD
         CallableStatement cs=cnn.prepareCall(req);
         cs.setString(1,"%"+s+"%");
         System.out.println("----------------------------->>> avant recherche");
@@ -116,6 +121,18 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
             l.setId(Integer.valueOf(id_livre));
             l.setImage(livre_photo);
             l.setResume(livre_resume);
+=======
+        PreparedStatement pStm = cnn.prepareStatement(req);
+        //CallableStatement cs=cnn.prepareCall(req);
+        //cs.setString(1,s);
+        pStm.setString(1, s);
+        ResultSet rs = pStm.executeQuery(req);
+        while (rs.next()) {
+            //rs.getString("id_livre");
+            String titre = rs.getString("livre_titre");
+
+            l = new Livre(null, null, titre, 0, 0, true);
+>>>>>>> master
             lL.add(l);
         }
         rs.close();
@@ -125,5 +142,8 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
         return lL;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 }
