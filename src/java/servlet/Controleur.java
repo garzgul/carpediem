@@ -1,10 +1,19 @@
 package servlet;
 
 <<<<<<< HEAD
+
+import bean.commande.Panier;
+
+import bean.acheteur.Acheteur;
+import bean.metier.AcheteurGestion;
+
+=======
+<<<<<<< HEAD
 import bean.acheteur.Acheteur;
 import bean.metier.AcheteurGestion;
 =======
 import bean.commande.Panier;
+>>>>>>> master
 >>>>>>> master
 import bean.metier.LivreGestion;
 import bean.produit.Livre;
@@ -49,16 +58,92 @@ public class Controleur extends HttpServlet {
 
         String section = request.getParameter("section");
 <<<<<<< HEAD
+
+        String action =request.getParameter("action");
+        Panier p = null;
+        Livre l = null;
+        LivreGestion lg = null;
+        
+        String pageJsp ="/WEB-INF/main/Main.jsp";
+        
+
+        action = request.getParameter("action");
+=======
+<<<<<<< HEAD
         String action = request.getParameter("action");
+>>>>>>> master
         AcheteurGestion ag = null;
 
-        String pageJsp = "/WEB-INF/main/Main.jsp";
+        pageJsp = "/WEB-INF/main/Main.jsp";
         System.out.println("-------------------------------------->>>> passage controleur");
         // import entete de page
         if ("Entete".equalsIgnoreCase(section)) {
             request.setAttribute("today", new Date());
             pageJsp = "/WEB-INF/bordure/Entete.jsp";
         }
+
+
+
+        // import entete de page
+         if("Entete".equalsIgnoreCase(section)){
+            request.setAttribute("today", new Date());
+            pageJsp="/WEB-INF/bordure/Entete.jsp";
+          }
+         
+         // import menu horizontal
+          if("Menu".equalsIgnoreCase(section)){
+            pageJsp="/WEB-INF/bordure/Menu.jsp";
+          }
+          
+          // import pied de page
+        if("Pied".equalsIgnoreCase(section)){
+            pageJsp="/WEB-INF/bordure/Pied.jsp";
+          }
+<<<<<<< HEAD
+=======
+=======
+        String action =request.getParameter("action");
+        Panier p = null;
+        Livre l = null;
+        LivreGestion lg = null;
+>>>>>>> master
+>>>>>>> master
+        
+        // import liens pied de page
+        if(("bordure".equalsIgnoreCase(section)) && ("carpediempresentation".equalsIgnoreCase(action))){
+             request.setAttribute("pagevisee", "/WEB-INF/bordure/carpediempresentation.jsp");
+            pageJsp="/WEB-INF/main/Main.jsp";
+          }
+        
+<<<<<<< HEAD
+         if(("bordure".equalsIgnoreCase(section)) && ("mentionslegales".equalsIgnoreCase(action))){
+            request.setAttribute("pagevisee", "/WEB-INF/bordure/mentionslegales.jsp");
+             pageJsp="/WEB-INF/main/Main.jsp";
+          }
+         
+          if(("bordure".equalsIgnoreCase(section)) && ("cgv".equalsIgnoreCase(action))){
+            request.setAttribute("pagevisee", "/WEB-INF/bordure/cgv.jsp");
+              pageJsp="/WEB-INF/main/Main.jsp";
+          }
+          
+           if(("bordure".equalsIgnoreCase(section)) && ("plansite".equalsIgnoreCase(action))){
+            request.setAttribute("pagevisee", "/WEB-INF/bordure/plansite.jsp");
+               pageJsp="/WEB-INF/main/Main.jsp";
+          }
+           
+            if(("bordure".equalsIgnoreCase(section)) && ("newsletter".equalsIgnoreCase(action))){
+             request.setAttribute("pagevisee", "/WEB-INF/bordure/newsletter.jsp");
+                pageJsp="/WEB-INF/main/Main.jsp";
+          }
+            
+          if(("bordure".equalsIgnoreCase(section)) && ("contact".equalsIgnoreCase(action))){
+             request.setAttribute("pagevisee", "/WEB-INF/bordure/contact.jsp");
+              pageJsp="/WEB-INF/main/Main.jsp";
+          }
+         
+         
+        
+        
 
         // import menu horizontal
         if ("Menu".equalsIgnoreCase(section)) {
@@ -69,39 +154,12 @@ public class Controleur extends HttpServlet {
         if ("Pied".equalsIgnoreCase(section)) {
             pageJsp = "/WEB-INF/bordure/Pied.jsp";
         }
-
-         if("Entete".equalsIgnoreCase(section)){
-            request.setAttribute("today", new Date());
-            pageJsp="/WEB-INF/bordure/Entete.jsp";
-          }
-         
-         // import menu horizontal
-          if("Menu".equalsIgnoreCase(section)){
-            pageJsp="/WEB-INF/bordure/Menu.jsp";
-          }
-          
-          // import pied de page
-        if("Pied".equalsIgnoreCase(section)){
-            pageJsp="/WEB-INF/bordure/Pied.jsp";
-          }
 =======
-        String action =request.getParameter("action");
-        Panier p = null;
-        Livre l = null;
-        LivreGestion lg = null;
->>>>>>> master
-        
-        // import liens pied de page
-        if(("bordure".equalsIgnoreCase(section)) && ("carpediempresentation".equalsIgnoreCase(action))){
-             request.setAttribute("pagevisee", "/WEB-INF/bordure/carpediempresentation.jsp");
-            pageJsp="/WEB-INF/main/Main.jsp";
-          }
-        
 <<<<<<< HEAD
 =======
         // mettre les sections ici
+>>>>>>> master
 
-        // import entete de page
          if("Entete".equalsIgnoreCase(section)){
             request.setAttribute("today", new Date());
             pageJsp="/WEB-INF/bordure/Entete.jsp";
@@ -125,6 +183,9 @@ public class Controleur extends HttpServlet {
             pageJsp="/WEB-INF/main/Main.jsp";
           }
         
+<<<<<<< HEAD
+=======
+>>>>>>> master
 >>>>>>> master
          if(("bordure".equalsIgnoreCase(section)) && ("mentionslegales".equalsIgnoreCase(action))){
             request.setAttribute("pagevisee", "/WEB-INF/bordure/mentionslegales.jsp");
@@ -155,6 +216,13 @@ public class Controleur extends HttpServlet {
 <<<<<<< HEAD
        
 
+
+        // mettre les sections ici
+
+=======
+<<<<<<< HEAD
+       
+
         // mettre les sections ici
         if ("recherche".equalsIgnoreCase(section)) { // Module Recherche (Eddy)
             try {
@@ -167,6 +235,7 @@ public class Controleur extends HttpServlet {
 
 =======
         
+>>>>>>> master
         
 >>>>>>> master
 
@@ -261,6 +330,15 @@ public class Controleur extends HttpServlet {
           }
         
 <<<<<<< HEAD
+        if ("recherche".equalsIgnoreCase(section)){ // Module Recherche (Eddy)
+
+        if ("recherche".equalsIgnoreCase(section)) { // Module Recherche (Eddy)
+
+            try {
+                    if(session.getAttribute("beanRecherche")==null){    
+                        session.setAttribute("beanRecherche",new LivreGestion());
+=======
+<<<<<<< HEAD
          if(("bordure".equalsIgnoreCase(section)) && ("mentionslegales".equalsIgnoreCase(action))){
             request.setAttribute("pagevisee", "/WEB-INF/bordure/mentionslegales.jsp");
              pageJsp="/WEB-INF/main/Main.jsp";
@@ -345,6 +423,7 @@ public class Controleur extends HttpServlet {
                     erreurGrave=true;
                 } catch (Exception ex) {
                     erreurGrave=true;
+>>>>>>> master
                 }
 <<<<<<< HEAD
                 pageJsp = "/WEB-INF/panier/panier.jsp";
@@ -406,7 +485,7 @@ public class Controleur extends HttpServlet {
             try {
                 if (request.getParameter("action") != null) {
                     if ("rechercher".equalsIgnoreCase(request.getParameter("action"))) {
-                        LivreGestion lg = (LivreGestion) session.getAttribute("beanRecherche");
+                        lg = (LivreGestion) session.getAttribute("beanRecherche");
                         String champRecherche = request.getParameter("ChampRecherche");
                         List<Livre> lL = null;
                         lL = lg.findAll(champRecherche);
@@ -428,10 +507,37 @@ public class Controleur extends HttpServlet {
                     session.setAttribute("acheteurgestion", new AcheteurGestion());
                 } catch (NamingException ex) {
 <<<<<<< HEAD
+
+                    erreurGrave=true;            
+
                     erreurGrave=true;
+
+=======
+<<<<<<< HEAD
+                    erreurGrave=true;
+>>>>>>> master
                 }
+
+            
+<<<<<<< HEAD
+            try {           
+                if(request.getParameter("action")!=null){
+                    if("rechercher".equalsIgnoreCase(request.getParameter("action"))){
+                        lg=(LivreGestion)session.getAttribute("beanRecherche");
+                        String champRecherche=request.getParameter("ChampRecherche");
+                        List<Livre> lL=null;
+                        lL=lg.findAll(champRecherche);
+                        session.setAttribute("rechercheListeLivre",lL); // place la liste des livres trouvés
+                    }
+                }
+            }catch (SQLException ex){
+                 erreurGrave=true;     
+
+
             }
             
+=======
+>>>>>>> master
             request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
             pageJsp = "/WEB-INF/main/Main.jsp";
 
@@ -557,6 +663,10 @@ public class Controleur extends HttpServlet {
             }
         }
         
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
 
 >>>>>>> master
         // formulaire de contact (Emma)
@@ -629,8 +739,28 @@ public class Controleur extends HttpServlet {
         }
 >>>>>>> master
 
+<<<<<<< HEAD
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+
+                pageJsp = response.encodeURL(pageJsp);
+                getServletContext().getRequestDispatcher(pageJsp).include(request, response);
+            }
+        }
+=======
         pageJsp = response.encodeURL(pageJsp);
         getServletContext().getRequestDispatcher(pageJsp).include(request, response);
+>>>>>>> master
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -672,4 +802,4 @@ public class Controleur extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-}
+} 
