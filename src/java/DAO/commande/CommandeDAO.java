@@ -7,6 +7,8 @@ import DAO.utils.MaConnexionBDD;
 import bean.commande.Commande;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
@@ -59,8 +61,14 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
         String res = null;
         Connection cnn = fc.fournir();
         String req = "select * from commande where cde_date=(select max(c.cde_date) from commande c where c.id_commande=commande.id_commande)";
-        
-        
+        PreparedStatement pstmt = cnn.prepareStatement(req);
+        ResultSet rs = pstmt.executeQuery();
+        while(rs.next()){
+            res = rs.getString("cde_numcommande");
+        }
+        rs.close();
+        pstmt.close();
+        cnn.close();
         return res;
     }
 }
