@@ -24,7 +24,7 @@ public class AuteurDAO extends DAO<Auteur> implements Serializable{
     
 
     @Override
-    public boolean create(Auteur obj) throws SQLException {
+    public Auteur create(Auteur obj) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

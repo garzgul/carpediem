@@ -22,10 +22,7 @@ public class TvaDAO extends DAO<Taxe> implements Serializable{
     
     
 
-    @Override
-    public boolean create(Taxe obj) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public boolean update(Taxe obj) throws SQLException {
@@ -65,6 +62,11 @@ public class TvaDAO extends DAO<Taxe> implements Serializable{
 
     @Override
     public List<Taxe> findAll(String s) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Taxe create(Taxe obj) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
