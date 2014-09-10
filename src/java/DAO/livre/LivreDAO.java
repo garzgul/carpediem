@@ -97,40 +97,27 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
 
     public List<Livre> findAll(String s) throws SQLException {
 
-        //recherche par (partie) du titre de livre
-        Livre l = null;
+        //recherche par (partie) du titre de livre OU du nom de l'auteur
+        Livre l;// = null;
         List<Livre> lL = new ArrayList<>();
         String req = "{call findAllLivres(?)}";
         Connection cnn = fc.fournir();
-
         CallableStatement cs = cnn.prepareCall(req);
         cs.setString(1, "%" + s + "%");
-        System.out.println("----------------------------->>> avant recherche");
         ResultSet rs = cs.executeQuery();
         while (rs.next()) {
             String id_livre = rs.getString("id_livre");
             String livre_photo = rs.getString("livre_photo");
             String livre_titre = rs.getString("livre_titre");
             String livre_resume = rs.getString("livre_resume");
-            System.out.println(livre_titre);
+//            System.out.println(livre_titre);
             l = new Livre(null, null, livre_titre, 0, 0, true);
             l.setId(Integer.valueOf(id_livre));
             l.setImage(livre_photo);
             l.setResume(livre_resume);
-        }
-
-        PreparedStatement pStm = cnn.prepareStatement(req);
-        //CallableStatement cs=cnn.prepareCall(req);
-        //cs.setString(1,s);
-        pStm.setString(1, s);
-        rs = pStm.executeQuery(req);
-        while (rs.next()) {
-            //rs.getString("id_livre");
-            String titre = rs.getString("livre_titre");
-
-            l = new Livre(null, null, titre, 0, 0, true);
-
+//            System.out.println("----------------------------->>> avant ajout livre " + l);
             lL.add(l);
+//            System.out.println("----------------------------->>> apres ajout livre : liste l " + lL);
         }
         rs.close();
         cs.close();

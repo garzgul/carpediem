@@ -229,28 +229,46 @@ public class Controleur extends HttpServlet {
 
 // Module Recherche (Eddy)        
         if ("recherche".equalsIgnoreCase(section)) {
-            try {
-                if (request.getParameter("action") != null) {
-                    if ("rechercher".equalsIgnoreCase(request.getParameter("action"))) {
-                        lg = (LivreGestion) session.getAttribute("beanRecherche");
-
-                        String champRecherche = request.getParameter("ChampRecherche");
-                        System.out.println("champrecherche = " + champRecherche);
-                        List<Livre> lL = null;
-                        lL = lg.findAll(champRecherche);
-                        System.out.println("lL = " + lL);
-                        //session.setAttribute("rechercheListeLivre",lL); // place la liste des livres trouvés
-                        request.setAttribute("rechercheResultat", lL); // place la liste des livres trouvés
-                        request.setAttribute("pagevisee", "/WEB-INF/catalogue/resultat.jsp"); // definit le lien où le resultat doit s'afficher
-                        pageJsp = "/WEB-INF/catalogue/resultat.jsp"; //pk main deconne ?
-
-                    }
+            if (session.getAttribute("beanRecherche") == null){
+                try{
+                    session.setAttribute("beanRecherche", new LivreGestion());
+                } catch (NamingException ex) {
+                    erreurGrave=true;
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
             }
+            System.out.println(">>>>>>>>>>>>>>>>>>>passage dans recherche");
+            if (request.getParameter("action") != null) {
+                if ("rechercher".equalsIgnoreCase(action)) {
+                    System.out.println(">>>>>>>>>>>>>>>>>>>passage dans rechercher");
+                    lg = (LivreGestion) session.getAttribute("beanRecherche");
+                    String champRecherche = request.getParameter("ChampRecherche");
+                    //System.out.println("champrecherche = " + champRecherche);
+                    List<Livre> lL = null;
+                    try {
+                        lL = lg.findAll(champRecherche);
+                    } catch (SQLException ex) {
+                        erreurGrave=true;
+                    }
+                    System.out.println(">>>>>>>>>>>>>>>>>>> lL = " + lL);
+                    //session.setAttribute("rechercheListeLivre",lL); // place la liste des livres trouvés
+                    request.setAttribute("rechercheResultat", lL); // place la liste des livres trouvés
+                    //request.setAttribute("resultat", "/WEB-INF/catalogue/resultat.jsp");
+                    request.setAttribute("pagevisee", "/WEB-INF/catalogue/resultat.jsp"); // definit le lien où le resultat doit s'afficher
+                    
+                    //pageJsp = "/WEB-INF/catalogue/resultat.jsp";
+                    pageJsp = "/WEB-INF/main/Main.jsp";
+                    System.out.println("passage action rechercher => vers resultat.jsp");
+                  
+                }
+                
+                               
+            }  
 
-            pageJsp = "/WEB-INF/catalogue/recherche.jsp";
+            if (request.getParameter("action") == null) {
+                System.out.println("passage action null recherche.jsp");
+                pageJsp = "/WEB-INF/catalogue/recherche.jsp";
+            }
+        
         }
 
 // fin module recherche (Eddy)        
@@ -264,19 +282,19 @@ public class Controleur extends HttpServlet {
                 } catch (NamingException ex) {
                     erreurGrave = true;
                 }
-                if (request.getParameter("action") != null) {
-                    if ("rechercher".equalsIgnoreCase(request.getParameter("action"))) {
-                        lg = (LivreGestion) session.getAttribute("beanRecherche");
-                        String champRecherche = request.getParameter("ChampRecherche");
-                        List<Livre> lL = null;
-                        try {
-                            lL = lg.findAll(champRecherche);
-                        } catch (SQLException ex1) {
-                            erreurGrave = true;
-                        }
-                        session.setAttribute("rechercheListeLivre", lL); // place la liste des livres trouvés
-                    }
-                }
+//                if (request.getParameter("action") != null) {
+//                    if ("rechercher".equalsIgnoreCase(request.getParameter("action"))) {
+//                        lg = (LivreGestion) session.getAttribute("beanRecherche");
+//                        String champRecherche = request.getParameter("ChampRecherche");
+//                        List<Livre> lL = null;
+//                        try {
+//                            lL = lg.findAll(champRecherche);
+//                        } catch (SQLException ex1) {
+//                            erreurGrave = true;
+//                        }
+//                        session.setAttribute("rechercheListeLivre", lL); // place la liste des livres trouvés
+//                    }
+//                }
 
                 request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
                 pageJsp = "/WEB-INF/main/Main.jsp";
@@ -365,7 +383,8 @@ public class Controleur extends HttpServlet {
         if (erreurGrave) {
             pageJsp = "/WEB-INF/erreurs/warning.jsp";
         }
-
+        
+        System.out.println("00-------------------------------0>>>"+pageJsp);
         pageJsp = response.encodeURL(pageJsp);
         getServletContext().getRequestDispatcher(pageJsp).include(request, response);
 
