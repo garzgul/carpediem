@@ -16,9 +16,10 @@ public class Commande implements Serializable{
     private Date dateCde;
     private float htCde;
     private float tvaCde;
+    private float ttcCde;
     private boolean payementCde;
     private ModeLivraison modeLivraison;
-    private HashMap<Integer,DetailCommande> detailCde;
+    private HashMap<Integer,LignePanier> detailCde;
     private Acheteur acheteurCde;
     private SuiviLivraison suiviCde;
     private Adresse adresseCde;
@@ -28,7 +29,9 @@ public class Commande implements Serializable{
     public Commande() {
     }
 
-    public Commande(String numCde, HashMap<Integer, DetailCommande> detailCde, Acheteur acheteurCde, Adresse adresseCde) {
+    
+    
+    public Commande(String numCde, HashMap<Integer, LignePanier> detailCde, Acheteur acheteurCde, Adresse adresseCde) {
         this.numCde = numCde;
         this.detailCde = detailCde;
         this.acheteurCde = acheteurCde;
@@ -129,6 +132,22 @@ public class Commande implements Serializable{
 
     public void setFraisCde(FraisDePort fraisCde) {
         this.fraisCde = fraisCde;
+    }
+
+    public HashMap<Integer, LignePanier> getDetailCde() {
+        return detailCde;
+    }
+
+    public float getPoidsCde() {
+        return poidsCde;
+    }
+
+    public float getTtcCde() {
+        return ttcCde;
+    }
+
+    public void setTtcCde(float ttcCde) {
+        this.ttcCde = ttcCde;
     }
     
     
