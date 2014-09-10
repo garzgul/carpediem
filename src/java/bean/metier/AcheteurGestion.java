@@ -48,20 +48,17 @@ public class AcheteurGestion implements Serializable{
                au moins un chiffre, au moins un caractère spécial,
                au moins ne contient pas de '|'
                     */
+        if(!ach.getMdpAcheteur().equals(confirMDP)){
+            erreur = true;
+            hm.put("errConfMDP", "Veillez vérifier votre mot de passe !");
+        }
+
         if(ach.getMdpAcheteur()== null || ach.getMdpAcheteur().isEmpty()
                 || ach.getMdpAcheteur().matches("[a-zA-Z(?=(.*[0-9]){1,})(?=(.*\\\\W)+})(?!.*\\\\|)]")){
             
             erreur = true;
             hm.put("errMPD", "Vérifiez votre mot de passe !");
         }
-        
-
-//        if(!ach.getMdpAcheteur().equals(confirMDP)){
-//            erreur = true;
-//            hm.put("errConfMDP", "Veillez vérifier votre mot de passe !");
-//        }
-
-
         if(!ach.getMdpAcheteur().equals(confirMDP)){
             erreur = true;
             hm.put("errConfMDP", "Veillez vérifier votre mot de passe !");
