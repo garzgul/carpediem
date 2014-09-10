@@ -15,7 +15,7 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable{
     }
     
     @Override
-    public boolean create(Adresse obj) throws SQLException {
+    public Adresse create(Adresse obj) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
