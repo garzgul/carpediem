@@ -15,7 +15,7 @@ public class AcheteurGestion implements Serializable{
         achDAO = new AcheteurDAO();
     }
     // Ajout d'un acheteur tout en vérifiant les champs obligatoir
-    public Acheteur ajoutAcheteur(Acheteur ach) throws SQLException{
+    public Acheteur ajoutAcheteur(Acheteur ach, String confirMDP) throws SQLException{
         Boolean erreur = false;
         HashMap<String, String> hm = new HashMap<>();
         
@@ -36,14 +36,20 @@ public class AcheteurGestion implements Serializable{
             erreur = true;
             hm.put("errPseudo", "Veuillez saisir un pseudonyme");
         }
-        if(ach.getMdpAcheteur()== null || ach.getMdpAcheteur().isEmpty()
-                || ach.getMdpAcheteur().matches("[a-zA-Z(?=(.*[0-9]){1,})(?=(.*\\\\W)+})(?!.*\\\\|)]")){
-            /* Le mot de passe contient les lettres magicule et miniscule, 
+        /* Le mot de passe contient les lettres magicule et miniscule, 
                au moins un chiffre, au moins un caractère spécial,
                au moins ne contient pas de '|'
                     */
+        if(ach.getMdpAcheteur()== null || ach.getMdpAcheteur().isEmpty()
+                || ach.getMdpAcheteur().matches("[a-zA-Z(?=(.*[0-9]){1,})(?=(.*\\\\W)+})(?!.*\\\\|)]")){
+            
             erreur = true;
             hm.put("errMPD", "Vérifiez votre mot de passe !");
+        }
+        
+        if(!ach.getMdpAcheteur().equals(confirMDP)){
+            erreur = true;
+            hm.put("errConfMDP", "Veillez vérifier votre mot de passe !");
         }
         if(ach.getTelAcheteur()== null || ach.getTelAcheteur().isEmpty()
                 || ach.getTelAcheteur().matches("[0]{1}[1-7|9]{1}([-/. ][0-9]{2}){4}")){

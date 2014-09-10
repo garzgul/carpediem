@@ -1,40 +1,44 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- Header -->
 	<div id="header">
 	
 <!-- Header options panier log -->
 		<div id="header-options">
-	
+                    <div id="panier">
+                        
+                        <c:url value="controleur?section=panier&action=affichage" />
+                        
+                    </div>
 <!-- login -->		
 
-			if()//si utilisateur pas connecte
-			{
+			<!-- if()//si utilisateur pas connecte
+			{ -->
 
 			<div id="not-login">
-				<a id="not-login-signup" title="Devenir membre" href="inscription.jsp">Devenir membre <span class="gras">></span></a>
-				<a id="not-login-login" title="Se connecter" href="connexion.jsp">Se connecter</a>
+				<a id="not-login-signup" title="Inscription" href="Controleur?section=inscriptionacheteur">Devenir membre <span class="gras">></span></a>
+				<a id="not-login-login" title="Se connecter" href="Controleur?section=connexion">Se connecter</a>
 			</div><!-- fin de not-login -->	
 			
 <div class="clear"></div>
 
 
-			}
+			<!-- }
 			else
-			{
+			{ -->
 
 			<div id="login">
-				<a id="login-signup" title="Mon compte" href="profil.jsp">Mon compte <span class="gras">></span></a>
-				<a id="login-login" title="Se déconnecter" href="logout.jsp?action=logout" onclick="return(confirm(\'Etes-vous sûr de vouloir vous déconnecter?\'))">Se déconnecter</a>
+				<a id="login-signup" title="Mon compte" href="Controleur?section=moncompte">Mon compte <span class="gras">></span></a>
+				<a id="login-login" title="Se déconnecter" href="Controleur?section=deconnexion" onclick="return(confirm(\'Etes-vous sûr de vouloir vous déconnecter?\'))">Se déconnecter</a>
 			</div><!-- fin de login -->	
 
 <div class="clear"></div>			
 			
 
-			}
+			<!--}-->
 
 		
 			<div class="panier">

@@ -20,14 +20,14 @@
         <div id="global"><!-- ouverture balise div id="global"  -->
 	
 	
-            <!-- <%@include file="/WEB-INF/bordure/Entete.jsp" %> -->
+           
             <c:import url="/Controleur?section=Entete" />
 
-            <!-- <%@include file="/WEB-INF/bordure/Menu.jsp" %> -->
+           
             <c:import url="/Controleur?section=Menu" />
             
             
-            <!-- <%@include file="/WEB-INF/catalogue/recherche.jsp" %> -->
+            
             <c:import url="/Controleur?section=recherche" />
             
             
@@ -37,6 +37,16 @@
                     <h1 class="titreh1">>>titre de la page ou fil ariane interactif</h1>
 
 
+                    <c:if test="${not empty pagevisee}">            
+                     <c:import url="${pagevisee}" />
+                    </c:if> 
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 
 
 
@@ -46,9 +56,7 @@
 
 <div class="clear"></div>
             
-            <!-- <%@include file="/WEB-INF/bordure/Pied.jsp"%> -->
-             <!-- <jsp:include page="/WEB-INF/bordure/Pied.jsp" /> -->
-             <!-- <c:import url="/WEB-INF/bordure/Pied.jsp" /> -->
+            
              <c:import url="/Controleur?section=Pied" />
         
         
