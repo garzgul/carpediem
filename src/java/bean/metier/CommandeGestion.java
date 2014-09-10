@@ -3,9 +3,13 @@ package bean.metier;
 
 import DAO.commande.CommandeDAO;
 import bean.acheteur.Acheteur;
+import bean.acheteur.Adresse;
 import bean.commande.Commande;
-import bean.commande.DetailCommande;
+import bean.commande.FraisDePort;
 import bean.commande.LignePanier;
+import bean.commande.ModeLivraison;
+import bean.commande.SuiviLivraison;
+import bean.commande.livraison;
 import bean.produit.Livre;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -25,7 +29,7 @@ public class CommandeGestion {
         cDao=new CommandeDAO();
     }
     
-    public boolean createCommande(HashMap<Integer,LignePanier> maliste, Acheteur ach
+    public boolean createCommande(HashMap<Integer,LignePanier> maliste, Acheteur ach, Adresse ad
      ) throws SQLException, ParseException{
         boolean res = false;
         Commande cde = new Commande();
@@ -65,17 +69,43 @@ public class CommandeGestion {
         // gestion du nom d'acheteur
         cde.setAcheteurCde(ach);
         // gestion du mode de livraison
+        // pour le moment, il est unique
+        cde.setModeLivraison(ModeLivraison.poste);
+        // gestion du suivi
+        SuiviLivraison sl = new SuiviLivraison(livraison.enpreparation);
+        cde.setSuiviCde(sl);
+        //gestion de l'adresse
+        cde.setAdresseCde(ad);
+        //gestion des frais de port
+        FraisDePort fdp = new FraisDePort(10.0f);
+        cde.setFraisCde(fdp);
+        // calcul du prix HT et de la tva de la commande
+        float prixHTTotal =0.0f;
+        float tvaTotal =0.0f;
+        for (LignePanier lp :maliste.values()){
+            prixHTTotal += lp.getPrixHT()*lp.getQte();
+            tvaTotal += lp.getTva()*lp.getQte();
+        }
+        cde.setHtCde(prixHTTotal);
+        cde.setTvaCde(tvaTotal);
+        cde.setTtcCde(prixHTTotal+tvaTotal);
+        // paiement de la commande (simulé pour le moment)
+        cde.setPayementCde(true);
+        // fin du remplissage de l'objet commande (envoi a la DAO)
+        
+        res=cDao.createCde(cde);
         
         
         return res;
     }
     
     
+// methode non necessaire, il suffit d'importer le contenu du panier lors de la
+// validation de la commande.
 
-
-    private DetailCommande remplissageCde(HashMap<Integer, Livre> liste) {
-        DetailCommande dc = new DetailCommande();
+    private LignePanier remplissageCde(HashMap<Integer, Livre> liste) {
+        LignePanier lp = null;
         
-        return dc;
+        return lp;
     }
 }

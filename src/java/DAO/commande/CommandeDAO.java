@@ -6,6 +6,7 @@ import DAO.utils.FournirConnectionIt;
 import DAO.utils.MaConnexionBDD;
 import bean.commande.Commande;
 import java.io.Serializable;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,11 +21,6 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
     public CommandeDAO() throws NamingException {
         fc = new MaConnexionBDD();
     }
-    
-    
-    
-    
-    
 
     @Override
     public Commande create(Commande obj) throws SQLException {
@@ -69,6 +65,17 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
         rs.close();
         pstmt.close();
         cnn.close();
+        return res;
+    }
+    
+    public boolean createCde(Commande cde) throws SQLException{
+        boolean res = false;
+        Connection cnn = fc.fournir();
+        String proc ="{call createCDE(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        CallableStatement cstmt = cnn.prepareCall(proc);
+        
+        
+        
         return res;
     }
 }
