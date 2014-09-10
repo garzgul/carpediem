@@ -219,7 +219,7 @@ public class Controleur extends HttpServlet {
             }
         }
 
-// fin module panier        
+// fin module commande        
 
 // Module Recherche (Eddy)        
         if ("recherche".equalsIgnoreCase(section)) {
