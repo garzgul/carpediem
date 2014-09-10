@@ -1,14 +1,18 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- Header -->
 	<div id="header">
 	
 <!-- Header options panier log -->
 		<div id="header-options">
-	
+                    <div id="panier">
+                        
+                        <c:url value="controleur?section=panier&action=affichage" />
+                        
+                    </div>
 <!-- login -->		
 
 			<!-- if()//si utilisateur pas connecte

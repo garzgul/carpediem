@@ -23,8 +23,19 @@ public class LivreGestion implements Serializable {
     public List<Livre> findAll(String s) throws SQLException {
         return lDao.findAll(s);
     }
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
     
     public Livre findLivre(int id) throws SQLException, NamingException{
         return lDao.find(id);
     }
+<<<<<<< HEAD
+
+
+
+
+=======
+>>>>>>> master
 }
