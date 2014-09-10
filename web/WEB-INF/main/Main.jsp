@@ -18,50 +18,8 @@
 
     <body id="index"> <!-- ouverture balise body  -->
         <div id="global"><!-- ouverture balise div id="global"  -->
-<<<<<<< HEAD
-
-
-
-
-=======
-<<<<<<< HEAD
->>>>>>> master
-	
-	
-           
-
-            <c:import url="/Controleur?section=Entete" />
-
-
-
-
-           
-
-            <c:import url="/Controleur?section=Menu" />
-
-
-
-
-
-            
-            
-            
-<<<<<<< HEAD
-
-=======
-=======
-
-
-
-            <c:import url="/Controleur?section=Entete" />
-
-
-            <c:import url="/Controleur?section=Menu" />
-
-
-
->>>>>>> master
->>>>>>> master
+           <c:import url="/Controleur?section=Entete" />
+           <c:import url="/Controleur?section=Menu" />
             <c:import url="/Controleur?section=recherche" />
 
 
@@ -74,56 +32,21 @@
                     <c:if test="${not empty pagevisee}">  
                         <c:import url="${pagevisee}" />
                     </c:if> 
-                    
                     <c:if test="${not empty panier}">
                         <c:import url="${panierurl}" />
                         
                     </c:if>
-
-
-
-
-
-
-
-                    <c:if test="${not empty pagevisee}">            
-                     <c:import url="${pagevisee}" />
-                    </c:if> 
-<<<<<<< HEAD
                     <c:if test="${not empty versinscription}">
                         <c:import url="${pagevisee}"/>
                     </c:if>
-=======
-<<<<<<< HEAD
-                    <c:if test="${not empty versinscription}">
-                        <c:import url="${pagevisee}"/>
-                    </c:if>
-=======
-                    
->>>>>>> master
->>>>>>> master
-                    
-                    
-                    
-                    
-                    
-                    
 
-                    <c:if test="${not empty pagevisee}">  
-                        <c:import url="${pagevisee}" />
-                    </c:if> 
-                    
-                    <c:if test="${not empty panier}">
-                        <c:import url="${panierurl}" />
-                        
-                    </c:if>
 
 
 
                 </div><!-- fin div contentcontenu -->
             </div><!-- Fin contenu -->
 
-<<<<<<< HEAD
+
 
             <div class="clear"></div>
 
@@ -131,28 +54,6 @@
             <c:import url="/Controleur?section=Pied" />
 
 
-
-=======
-<<<<<<< HEAD
->>>>>>> master
-<div class="clear"></div>
-            
-            
-             <c:import url="/Controleur?section=Pied" />
-        
-        
-<<<<<<< HEAD
-
-=======
-=======
-            <div class="clear"></div>
-
-
-            <c:import url="/Controleur?section=Pied" />
-
-
->>>>>>> master
->>>>>>> master
         </div><!-- fermeture balise div id="global"  -->
     </body><!-- fermeture balise body  -->
 </html><!-- fermeture balise html  -->
