@@ -11,20 +11,21 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
 
-public class AcheteurDAO extends DAO<Acheteur> implements Serializable{
+public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
+
     private FournirConnectionIt fc;
 
     public AcheteurDAO() throws NamingException {
-        fc = new MaConnexionBDD(); 
+        fc = new MaConnexionBDD();
     }
 
     @Override
-    public boolean create(Acheteur obj) throws SQLException {
+    public Acheteur create(Acheteur obj) throws SQLException {
         Connection cnn = fc.fournir();
-        boolean test = false;
-        
+        obj.setActifAcheteur(true);
+
         //Preparation de la requete d'insertion d'un nouveau acheteur
-        String req = "{call insererAcheteur(?, ?, ?, ?, ?, ?, 1, ?)}";
+        String req = "{call insererAcheteur(?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement cstmt = cnn.prepareCall(req);
         cstmt.setString(1, obj.getNomAcheteur());
         cstmt.setString(2, obj.getPrenomAcheteur());
@@ -32,17 +33,17 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable{
         cstmt.setString(4, obj.getMdpAcheteur());
         cstmt.setString(5, obj.getEmailAcheteur());
         cstmt.setString(6, obj.getTelAcheteur());
-        cstmt.setBoolean(7, obj.getActifAcheteur());
-        cstmt.registerOutParameter(1, java.sql.Types.INTEGER);
+        cstmt.setInt(7, 1);
+        cstmt.registerOutParameter(8, java.sql.Types.INTEGER);
         int rs = cstmt.executeUpdate();
-        
-        if(1 == rs){
-            test = true;
+
+        if (1 == rs) {
+            int id = cstmt.getInt(8);
+            obj.setIdAcheteur(id);
+
+            return obj;
         }
-        
-        cstmt.close();
-        cnn.close();
-        return test;
+        return null;
     }
 
     @Override
@@ -69,5 +70,5 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable{
     public List<Acheteur> findAll(String s) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
