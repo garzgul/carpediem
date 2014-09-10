@@ -9,7 +9,7 @@
 <!-- Header options panier log -->
 		<div id="header-options">
                     <div id="panier">
-                        <c:url value="controleur?section=panier&action=affichage" var="url"/>
+                        <c:url value="Controleur?section=panier&action=affichage" var="url"/>
                         <a href="${url}">votre panier</a>
                         
                     </div>

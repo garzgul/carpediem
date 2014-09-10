@@ -5,6 +5,7 @@ import bean.acheteur.Acheteur;
 import bean.acheteur.Adresse;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
@@ -17,14 +18,27 @@ public class Commande implements Serializable{
     private float tvaCde;
     private boolean payementCde;
     private ModeLivraison modeLivraison;
-    private DetailCommande detailCde;
+    private HashMap<Integer,DetailCommande> detailCde;
     private Acheteur acheteurCde;
     private SuiviLivraison suiviCde;
     private Adresse adresseCde;
     private FraisDePort fraisCde;
+    private float poidsCde;
 
     public Commande() {
     }
+
+    public Commande(String numCde, HashMap<Integer, DetailCommande> detailCde, Acheteur acheteurCde, Adresse adresseCde) {
+        this.numCde = numCde;
+        this.detailCde = detailCde;
+        this.acheteurCde = acheteurCde;
+        this.adresseCde = adresseCde;
+        dateCde = new Date();
+    }
+
+    
+    
+    
 
     public Commande(String numCde, Date dateCde, float htCde, float tvaCde, Acheteur acheteurCde, Adresse adresseCde) {
         this.numCde = numCde;
@@ -83,13 +97,7 @@ public class Commande implements Serializable{
         this.modeLivraison = modeLivraison;
     }
 
-    public DetailCommande getDetailCde() {
-        return detailCde;
-    }
-
-    public void setDetailCde(DetailCommande detailCde) {
-        this.detailCde = detailCde;
-    }
+    
 
     public Acheteur getAcheteurCde() {
         return acheteurCde;

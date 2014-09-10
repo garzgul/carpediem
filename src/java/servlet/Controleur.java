@@ -7,7 +7,6 @@ import bean.metier.CommandeGestion;
 import bean.metier.LivreGestion;
 import bean.metier.PanierGestion;
 import bean.produit.Livre;
-import com.sun.xml.bind.v2.schemagen.Util;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
@@ -115,7 +114,7 @@ public class Controleur extends HttpServlet {
         
 //Module panier        
         if ("panier".equalsIgnoreCase(section)) {
-            int idLivre = Integer.valueOf(request.getParameter("ref"));
+            
 
             // affichage du panier
             if ("affichage".equalsIgnoreCase(action)) {
@@ -126,7 +125,16 @@ public class Controleur extends HttpServlet {
                 session.setAttribute("maliste", p.getLignes().values());
                 request.setAttribute("pagevisee", "/WEB-INF/panier/Panier.jsp");
             }
-
+            pageJsp="/WEB-INF/main/Main.jsp";
+            // affichage du contenu du panier
+            if("affichagepanier".equalsIgnoreCase(action)){
+                pageJsp="/WEB-INF/panier/DetailPanier.jsp";
+            }
+            
+            int idLivre = 0;
+            if(request.getParameter("ref")!=null){
+                idLivre = Integer.valueOf(request.getParameter("ref"));
+            }
             //addtion d'un item au panier
             if ("add".equalsIgnoreCase(action)) {
                 p = (Panier) session.getAttribute("panier");
@@ -207,13 +215,11 @@ public class Controleur extends HttpServlet {
             }
             p = (Panier)session.getAttribute("panier");
             
+            if("affichage".equalsIgnoreCase(action)){
+                pageJsp="/WEB-INF/panier/DetailPanier.jsp";
+            }
+            
             if ("validercommande".equalsIgnoreCase(action)) {
-                
-                
-                    
-                    
-                    
-                    
                 request.setAttribute("pagevisee", "/WEB-INF/commande/commande.jsp");
                 
             }
@@ -293,6 +299,7 @@ public class Controleur extends HttpServlet {
 
             try {
                 Acheteur ach = new Acheteur(nom, prenom, pseudo, mdp, true);
+                ach.setEmailAcheteur(email);
                 ach.setTelAcheteur(tel);
                 if (ach != null) {
                     session.setAttribute("acheteur", ach);
@@ -356,7 +363,7 @@ public class Controleur extends HttpServlet {
         
         // renvoi vers la jsp de gestion des erreurs
         if (erreurGrave) {
-            pageJsp = "WEB-INF/erreurs/warning.jsp";
+            pageJsp = "/WEB-INF/erreurs/warning.jsp";
         }
 
         pageJsp = response.encodeURL(pageJsp);
