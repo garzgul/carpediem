@@ -25,7 +25,7 @@
                 <c:forEach items="${maliste}" var ="p">
                     <tr>
                         <td ><img> </td>
-                        <td>${p.l.titre}</td>
+                        <td><c:url value="controleur?section=affichagelivre&action=affichage&ref=${p.l.id}">${p.l.titre}</c:url></td>
                         <td><fmt:formatNumber maxFractionDigits="2" value="${p.prixHT}"/></td>
                         <td><fmt:formatNumber maxFractionDigits="2" value="${p.tva}"/></td>
                         <td><fmt:formatNumber maxFractionDigits="2" value="${p.prixTTC}"/></td>
@@ -39,5 +39,6 @@
                 </c:forEach>
             </tbody>
         </table>
+        <p> <c:url value="controleur?section=commande&action=validercommande">Validez la commande</c:url></p>
     </c:if>
 </div>

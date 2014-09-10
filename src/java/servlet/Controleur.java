@@ -186,6 +186,9 @@ public class Controleur extends HttpServlet {
 
         }
 
+// module commande        
+        
+
 // Module Recherche (Eddy)        
         if ("recherche".equalsIgnoreCase(section)) {
             try {
