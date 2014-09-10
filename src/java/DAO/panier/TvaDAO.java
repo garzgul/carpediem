@@ -1,12 +1,11 @@
 
-package DAO.livre;
+package DAO.panier;
 
 import DAO.utils.DAO;
 import DAO.utils.FournirConnectionIt;
 import DAO.utils.MaConnexionBDD;
-import bean.produit.Auteur;
+import bean.commande.Taxe;
 import java.io.Serializable;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,58 +13,60 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
 
-public class AuteurDAO extends DAO<Auteur> implements Serializable{
+public class TvaDAO extends DAO<Taxe> implements Serializable{
     private FournirConnectionIt fc;
 
-    public AuteurDAO() throws NamingException {
+    public TvaDAO() throws NamingException {
         this.fc = new MaConnexionBDD();
     }
     
     
 
     @Override
-    public Auteur create(Auteur obj) throws SQLException {
+    public boolean create(Taxe obj) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Auteur obj) {
+    public boolean update(Taxe obj) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete(Auteur obj) {
+    public boolean delete(Taxe obj) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @param id id du livre 
+     * @return objet Taxe
+     * @throws SQLException
+     * @throws NamingException 
+     */    
     @Override
-    public Auteur find(int id) throws SQLException, NamingException {
-       Connection cnn = fc.fournir();
-        Auteur a = null;
-        String req = "{call findAuteurParId(?)}";
-        CallableStatement cstmt = cnn.prepareCall(req);
-        cstmt.setInt(1, id);
-        ResultSet rs = cstmt.executeQuery();
-        a =new Auteur(id, rs.getString("auteur_nom"));
-        if(!"inconnu".equalsIgnoreCase(a.getNomAuteur())){
-            a.setPrenomAuteur(rs.getString("auteur_prenom"));
+    public Taxe find(int id) throws SQLException, NamingException {
+        Taxe tva = null;
+        Connection cnn = fc.fournir();
+        String req = "Select * from tva Join on taxe where taxe.id_livre = ?";
+        PreparedStatement pstmt = cnn.prepareStatement(req);
+        pstmt.setInt(1, id);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()){
+            tva = new Taxe(Float.valueOf(rs.getString("tva_taux")));
         }
-        rs.close();
-        cstmt.close();
-        cnn.close();
-        
-        return a;
+        return tva;
     }
 
     @Override
-    public Auteur find(String s) throws SQLException, NamingException {
+    public Taxe find(String s) throws SQLException, NamingException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Auteur> findAll(String s) throws SQLException {
+    public List<Taxe> findAll(String s) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
+
 }
