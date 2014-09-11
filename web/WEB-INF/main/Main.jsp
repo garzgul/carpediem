@@ -31,6 +31,11 @@
                     <c:if test="${not empty recherche}">  
                         <c:import url="${recherche}" />
                     </c:if>
+                    
+                    <c:if test="${not empty affichageLivre}">
+                        <c:import url="${affichageLivre}" />
+                    </c:if>
+                    
                     <c:if test ="${not empty affichagecompte}">
                         <c:import url="${affichagecompte}"/>
                     </c:if>
