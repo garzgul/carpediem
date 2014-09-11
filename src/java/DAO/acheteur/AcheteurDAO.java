@@ -60,6 +60,7 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
 
     @Override
     public Acheteur find(int id) throws SQLException {
+        Connection cnn = fc.fournir();
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -81,7 +82,7 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
         cstmt.setString(2, mdp);
         rs = cstmt.executeQuery();
         if(rs.next()){
-            //int id = rs.getInt("id_acheteur");
+            int id = rs.getInt("id_acheteur");
             String nom = rs.getString("ach_nom");
             String prenom = rs.getString("ach_prenom");
             String pseudo = rs.getString("ach_pseudo");
@@ -92,6 +93,7 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
             ach.setTelAcheteur(tel);
             ach.setEmailAcheteur(email);
             ach.setMdpAcheteur(mdp);
+            ach.setIdAcheteur(id);
             
         }
         rs.close();
