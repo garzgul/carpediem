@@ -119,7 +119,15 @@ public class Acheteur implements Serializable{
         this.idAcheteur = idAcheteur;
     }
     
-    
+    public Adresse getAdfav(){
+        
+        for(Adresse a:listAdresseAcheteur){
+            if (a.getAdressefav()){
+                return a;
+            }
+        }
+        return null;
+    }
     
     /* fonction qui permet a la commande de se creer
     

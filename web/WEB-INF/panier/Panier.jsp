@@ -10,7 +10,7 @@
     </c:if>
     <c:if test="${not empty maliste}">
         
-        <c:import url="${panieraffichage}"/>
+        <!--c:import url="${panieraffichage}"/-->
         
         <p>
             <c:url value="controleur?section=commande&action=validercommande" var="url"/>
