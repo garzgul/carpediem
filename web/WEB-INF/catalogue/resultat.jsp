@@ -8,12 +8,22 @@
     <c:if test="${not empty rechercheResultat}">
 
             <table>
+                <thead>
+                    <tr>
+                        <th>Couverture</th>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>Prix (EUR)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
                 <tbody>
                     <c:forEach items="${rechercheResultat}" var="l">
                         <tr>
                             <td><img src="./images/${l.image}" width="100" height="100" /></td>
                             <td>${l}</td>
-                            <td>${l.ListeAu.get(1)}</td>
+                            <td>${l.getListeAu().get(0)}</td>
+                            <td>${l.prix}</td>
                             <td><a href="Controleur?section=panier,action=add,ref=${l.id}">Ajout panier</a></td>
                         </tr>
                     </c:forEach>
@@ -21,4 +31,4 @@
             </table>
 
     </c:if>
-</div>
+</div
