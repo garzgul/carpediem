@@ -38,6 +38,31 @@ public class Livre implements Serializable{
     public Livre() {
     }
 
+    public Livre(Editeur ed, ArrayList<Auteur> ListeAu, Fournisseur fourn, String titre, String soustitre, String isbn10, String isbn13, TypeFormatLivre format, int nbpage, Date parution, int edition, String dimension, float poids, String resume, String image, float prix, int stock, boolean actifLivre, ArrayList<MotClef> listmc, SousTheme sousTheme, Taxe tva, int id) {
+        this.ed = ed;
+        this.ListeAu = ListeAu;
+        this.fourn = fourn;
+        this.titre = titre;
+        this.soustitre = soustitre;
+        this.isbn10 = isbn10;
+        this.isbn13 = isbn13;
+        this.format = format;
+        this.nbpage = nbpage;
+        this.parution = parution;
+        this.edition = edition;
+        this.dimension = dimension;
+        this.poids = poids;
+        this.resume = resume;
+        this.image = image;
+        this.prix = prix;
+        this.stock = stock;
+        this.actifLivre = actifLivre;
+        this.listmc = listmc;
+        this.sousTheme = sousTheme;
+        this.tva = tva;
+        this.id = id;
+    }
+
     
 
     public Livre(Editeur ed, ArrayList<Auteur> ListeAu, String titre, float prix, int stock, boolean actifLivre) {
@@ -52,6 +77,7 @@ public class Livre implements Serializable{
     public Editeur getEd() {
         return ed;
     }
+    
 
     public void setEd(Editeur ed) {
         this.ed = ed;
