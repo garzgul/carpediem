@@ -139,5 +139,5 @@ public class Acheteur implements Serializable{
         return commande;
     }
     
-    
+       
 }
