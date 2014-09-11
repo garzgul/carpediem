@@ -199,12 +199,14 @@ public class Controleur extends HttpServlet {
             }
         }
 
-// fin module commande        
+// fin module commande   
+        
 // Module Recherche (Eddy)        
         if ("recherche".equalsIgnoreCase(section)) {
-            if (session.getAttribute("beanRecherche") == null) {
+            if (session.getAttribute("beanLivreGestion") == null) {
                 try {
-                    session.setAttribute("beanRecherche", new LivreGestion());
+                    session.setAttribute("beanLivreGestion", new LivreGestion());
+
                 } catch (NamingException ex) {
                     erreurGrave = true;
                 }
@@ -213,7 +215,7 @@ public class Controleur extends HttpServlet {
             if (request.getParameter("action") != null) {
                 if ("rechercher".equalsIgnoreCase(action)) {
                     System.out.println(">>>>>>>>>>>>>>>>>>>passage dans rechercher");
-                    lg = (LivreGestion) session.getAttribute("beanRecherche");
+                    lg = (LivreGestion) session.getAttribute("beanLivreGestion");
                     String champRecherche = request.getParameter("ChampRecherche");
                     //System.out.println("champrecherche = " + champRecherche);
                     List<Livre> lL = null;
@@ -243,7 +245,34 @@ public class Controleur extends HttpServlet {
 
         }
 
-// fin module recherche (Eddy)        
+// fin module recherche (Eddy)
+        
+// module gestion fiche livre  
+        if ("ficheLivre".equalsIgnoreCase(section)) {
+            if (session.getAttribute("beanLivreGestion") == null) {
+                try {
+                    session.setAttribute("beanLivreGestion", new LivreGestion());
+                } catch (NamingException ex) {
+                    erreurGrave = true;
+                }
+            }
+
+            if ("afficher".equalsIgnoreCase(action)) { // mise en mémoire / request objet livre 
+                lg = (LivreGestion) session.getAttribute("beanLivreGestion");
+                String id_livre = request.getParameter("ref");
+                try {
+                    l = lg.findLivre(Integer.valueOf(id_livre));
+                } catch (SQLException ex) {
+                    erreurGrave = true;
+                } catch (NamingException ex) {
+                    erreurGrave = true;
+                }
+                session.setAttribute("ficheLivreCourant", l); // place le livre courant
+                request.setAttribute("affichageLivre", "Controleur?section=livreaffichage&action=afficher");
+            }
+        }
+// fin module gestion fiche livre
+
 // module gestion de compte acheteur (Mourad)
         if ("connexion".equalsIgnoreCase(section)) {
             if ("inscriptionacheteur".equalsIgnoreCase(action)) {
@@ -498,6 +527,16 @@ public class Controleur extends HttpServlet {
                     break;
                 }
 
+            }
+        }
+
+        //redirection pour la fiche livre
+        if ("livreaffichage".equalsIgnoreCase(section)) {
+            switch (action) {
+                case ("afficher"): {
+                    pageJsp = "/WEB-INF/affichagelivre/AffichageLivre.jsp";
+                    break;
+                }
             }
         }
 
