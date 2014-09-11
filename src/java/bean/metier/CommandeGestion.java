@@ -91,10 +91,12 @@ public class CommandeGestion {
         cde.setTtcCde(prixHTTotal+tvaTotal);
         // paiement de la commande (simulé pour le moment)
         cde.setPayementCde(true);
+        // mise en place du mode de paiement (defini par defaut a CB
+        cde.setModePaiement("CB");
         // fin du remplissage de l'objet commande (envoi a la DAO)
         
-        res=cDao.createCde(cde);
-        
+        // creation de la commande
+        res =cDao.createCde(cde);
         
         return res;
     }

@@ -25,6 +25,7 @@ public class Commande implements Serializable{
     private Adresse adresseCde;
     private FraisDePort fraisCde;
     private float poidsCde;
+    private String modePaiement;
 
     public Commande() {
     }
@@ -149,10 +150,13 @@ public class Commande implements Serializable{
     public void setTtcCde(float ttcCde) {
         this.ttcCde = ttcCde;
     }
-    
-    
-    
-    
 
+    public String getModePaiement() {
+        return modePaiement;
+    }
+
+    public void setModePaiement(String modePaiement) {
+        this.modePaiement = modePaiement;
+    }
 
 }
