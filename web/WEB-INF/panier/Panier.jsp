@@ -9,7 +9,8 @@
         <p>Votre panier est vide !</p>
     </c:if>
     <c:if test="${not empty maliste}">
-        <c:import url="Controleur?section=panier&action=affichagepanier"/>
+        
+        <c:import url="${panieraffichage}"/>
         
         <p>
             <c:url value="controleur?section=commande&action=validercommande" var="url"/>
