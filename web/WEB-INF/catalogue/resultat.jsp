@@ -12,11 +12,8 @@
                     <c:forEach items="${rechercheResultat}" var="l">
                         <tr>
                             <td><img src="./images/${l.image}" width="100" height="100" /></td>
-                            <td><img src="images/${l.image}" width="100" height="100" /></td>
-                            <td><img src="/images/${l.image}" width="100" height="100" /></td>
-                            <td>${l.image}</td>
                             <td>${l}</td>
-                            <td>${l.resume}</td>
+                            <td>${l.ListeAu.get(1)}</td>
                             <td><a href="Controleur?section=panier,action=add,ref=${l.id}">Ajout panier</a></td>
                         </tr>
                     </c:forEach>

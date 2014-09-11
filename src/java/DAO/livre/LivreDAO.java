@@ -99,6 +99,7 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
 
         //recherche par (partie) du titre de livre OU du nom de l'auteur
         Livre l;// = null;
+        Auteur a;
         List<Livre> lL = new ArrayList<>();
         String req = "{call findAllLivres(?)}";
         Connection cnn = fc.fournir();
@@ -109,12 +110,16 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
             String id_livre = rs.getString("id_livre");
             String livre_photo = rs.getString("livre_photo");
             String livre_titre = rs.getString("livre_titre");
-            String livre_resume = rs.getString("livre_resume");
+            String id_auteur = rs.getString("id_auteur");
+            String auteur_nom = rs.getString("auteur_nom");
+            a = new Auteur(Integer.valueOf(id_auteur), auteur_nom);
+            ArrayList<Auteur> lA = new ArrayList<>();
+            lA.add(a);
 //            System.out.println(livre_titre);
-            l = new Livre(null, null, livre_titre, 0, 0, true);
+            l = new Livre(null, lA, livre_titre, 0, 0, true);
             l.setId(Integer.valueOf(id_livre));
             l.setImage(livre_photo);
-            l.setResume(livre_resume);
+            l.setResume(livre_titre);
 //            System.out.println("----------------------------->>> avant ajout livre " + l);
             lL.add(l);
 //            System.out.println("----------------------------->>> apres ajout livre : liste l " + lL);
