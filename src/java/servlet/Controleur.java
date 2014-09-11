@@ -1,6 +1,7 @@
 package servlet;
 
 import bean.acheteur.Acheteur;
+import bean.acheteur.Adresse;
 import bean.commande.Panier;
 import bean.metier.AcheteurGestion;
 import bean.metier.CommandeGestion;
@@ -9,6 +10,7 @@ import bean.metier.PanierGestion;
 import bean.produit.Livre;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -180,7 +182,15 @@ public class Controleur extends HttpServlet {
 
             if ("affichage".equalsIgnoreCase(action)) {
                 request.setAttribute("commande", "Controleur?section=affichagecommande&action=affichagedetail");
-                //pageJsp="/WEB-INF/panier/DetailPanier.jsp";
+                Acheteur ach = (Acheteur) session.getAttribute("acheteur");
+                Adresse ad = ach.getAdfav();
+                try {
+                    cg.createCommande(p.getLignes(), ach, ad);
+                } catch (SQLException ex) {
+                    erreurGrave = true;
+                } catch (ParseException ex) {
+                    erreurGrave = true;
+                }
             }
 
             if ("validercommande".equalsIgnoreCase(action)) {
@@ -228,7 +238,7 @@ public class Controleur extends HttpServlet {
 
             if (request.getParameter("action") == null) {
                 System.out.println("passage action null recherche.jsp");
-                pageJsp = "/WEB-INF/catalogue/recherche.jsp";
+                //pageJsp = "/WEB-INF/catalogue/recherche.jsp";
             }
 
         }
@@ -243,9 +253,26 @@ public class Controleur extends HttpServlet {
                     } catch (NamingException ex) {
                         erreurGrave = true;
                     }
+//                if (request.getParameter("action") != null) {
+//                    if ("rechercher".equalsIgnoreCase(request.getParameter("action"))) {
+//                        lg = (LivreGestion) session.getAttribute("beanRecherche");
+//                        String champRecherche = request.getParameter("ChampRecherche");
+//                        List<Livre> lL = null;
+//                        try {
+//                            lL = lg.findAll(champRecherche);
+//                        } catch (SQLException ex1) {
+//                            erreurGrave = true;
+//                        }
+//                        session.setAttribute("rechercheListeLivre", lL); // place la liste des livres trouvés
+//                    }
+//                }
 
                     request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageinscription");
-                //request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
+                    //request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
+                    // pageJsp = "/WEB-INF/main/Main.jsp";
+
+                    request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageinscription");
+                    //request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
                     // pageJsp = "/WEB-INF/main/Main.jsp";
 
                 }
@@ -284,7 +311,7 @@ public class Controleur extends HttpServlet {
                     request.setAttribute("telFourni", tel);
 
                     request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageinscription");
-                //request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
+                    //request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
                     //pageJsp = "/WEB-INF/main/Main.jsp";
                     System.out.println(">>>>>>>>>>>>>>>>>passage par le catch");
                 } catch (SQLException ex) {
@@ -292,30 +319,30 @@ public class Controleur extends HttpServlet {
                 }
 
             }
-            if ("seconnecter".equalsIgnoreCase(action)){
-                request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageconnection");
-                System.out.println("=========== i l est ici ====<<<");                
-            }
-            if ("connection".equalsIgnoreCase(action)) {
-                System.out.println("========== passage dans le if ====");
-
-                String mail = request.getParameter("email");
-                String mdp = request.getParameter("mdp");
-                System.out.println("============"+mail);
-                System.out.println("============"+mdp);
-                Acheteur ach = new Acheteur();
-                try {
-                     System.out.println("========== la on est dans le try =====");
-                    ach = ag.chercherAcheteur(mail, mdp);
-                   
-                } catch (SQLException ex) {
-                    erreurGrave = true;
-                }
-                session.setAttribute("Acheteur", ach);
-                
-
-            }
         }
+
+        if ("seconnecter".equalsIgnoreCase(action)) {
+            request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageconnection");
+            System.out.println("=========== i l est ici ====<<<");
+        }
+        if ("connection".equalsIgnoreCase(action)) {
+
+            String mail = request.getParameter("email");
+            String mdp = request.getParameter("mdp");
+            System.out.println("============" + mail);
+            System.out.println("============" + mdp);
+            Acheteur ach = new Acheteur();
+            try {
+                System.out.println("========== la on est dans le try =====");
+                ach = ag.chercherAcheteur(mail, mdp);
+
+            } catch (SQLException ex) {
+                erreurGrave = true;
+            }
+            session.setAttribute("Acheteur", ach);
+
+        }
+
 // debut module emma
         // formulaire de contact (Emma)
         if ("contactformulaire".equalsIgnoreCase(section)) {
@@ -466,7 +493,7 @@ public class Controleur extends HttpServlet {
                     pageJsp = "/WEB-INF/compte/inscriptionacheteur.jsp";
                     break;
                 }
-                case("affichageconnection"): {
+                case ("affichageconnection"): {
                     pageJsp = "/WEB-INF/compte/connectionacheteur.jsp";
                     break;
                 }
