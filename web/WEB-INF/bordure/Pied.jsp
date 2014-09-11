@@ -7,20 +7,20 @@
         <div id="footer-liens-wrap">
             <div id="footer-menu-wrap">
                 <ul>
-                    <li><c:url var="url" value="Controleur?section=bordure&action=carpediempresentation" />
+                    <li><c:url var="url" value="Controleur?section=fragement&action=carpediem" />
                         <a title="Présentation de Carpe Diem" href="${url}">Carpe Diem</a>
 
                     </li>
                     <li>
-                        <c:url var="url" value="Controleur?section=bordure&action=mentionslegales" />
+                        <c:url var="url" value="Controleur?section=fragement&action=mentionslegales" />
                         <span id="sansseparateur"><a class="footer-menu-a" href="${url}">Mentions légales</a></span>
                     </li>
                     <li>
-                        <c:url var="url" value="Controleur?section=bordure&action=cgv" />
+                        <c:url var="url" value="Controleur?section=fragement&action=cgv" />
                         <a class="footer-menu-a" href="${url}">C.G.V.</a>
                     </li>
                     <li>
-                        <c:url var="url" value="Controleur?section=bordure&action=plansite" />
+                        <c:url var="url" value="Controleur?section=fragement&action=plansite" />
                         <a class="footer-menu-a" href="${url}">Plan du site</a>
                     </li>
                     <li>
@@ -29,11 +29,11 @@
                                 return false;">Imprimer la page</a>
                     </li>
                     <li>
-                        <c:url var="url" value="Controleur?section=bordure&action=newsletter" />
+                        <c:url var="url" value="Controleur?section=fragement&action=newsletter" />
                         <a class="footer-menu-a" href="${url}">Newsletter</a>
                     </li>
                     <li>
-                        <c:url var="url" value="Controleur?section=bordure&action=contact" />
+                        <c:url var="url" value="Controleur?section=fragement&action=contact" />
                         <a class="footer-menu-a" href="${url}">Contact</a>
                     </li>
                 </ul>
@@ -52,7 +52,7 @@
     </div><!-- fin div footer-wrap -->
 
     <div id="copyright">
-        <c:url var="url" value="Controleur?section=bordure&action=carpediempresentation" />
+        <c:url var="url" value="Controleur?section=fragement&action=carpediem" />
         <p>                         
             &copy; 2014 - <fmt:formatDate value="${today}" pattern="yyyy" /> Tous droits réservés | <a href="${url}">Carpe Diem</a>
         </p>

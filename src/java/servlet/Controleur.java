@@ -62,57 +62,22 @@ public class Controleur extends HttpServlet {
 
         System.out.println("-------------------------------------->>>> passage controleur");
 
-// import des elements de la page main hors section principale        
+// partie traitement de la servlet
+        // redirection pour les bordures/elements de menu...
+        request.setAttribute("entete", "Controleur?section=fragement&action=entete");
+        request.setAttribute("pied", "Controleur?section=fragement&action=pied");
+        request.setAttribute("menu", "Controleur?section=fragement&action=menu");
+        request.setAttribute("cgv", "Controleur?section=fragement&action=cgv");
+        request.setAttribute("plansite", "Controleur?section=fragement&action=plansite");
+        request.setAttribute("mentionslegales", "Controleur?section=fragement&action=mentionslegales");
+        request.setAttribute("carpediem", "Controleur?section=fragement&action=carpediem");
+        request.setAttribute("contact", "Controleur?section=fragement&action=contact");
+//        request.setAttribute("recherchevide", "Controleur?section=rechercheaffichagevide&action=affichageboite");
+
+        // fin redirection pour les bordures
         
-        // import entete de page
-        if ("Entete".equalsIgnoreCase(section)) {
-            request.setAttribute("today", new Date());
-            pageJsp = "/WEB-INF/bordure/Entete.jsp";
-        }
-
-        // import menu horizontal
-        if ("Menu".equalsIgnoreCase(section)) {
-            pageJsp = "/WEB-INF/bordure/Menu.jsp";
-        }
-
-        // import pied de page
-        if ("Pied".equalsIgnoreCase(section)) {
-            pageJsp = "/WEB-INF/bordure/Pied.jsp";
-        }
-        // import liens pied de page
-        if (("bordure".equalsIgnoreCase(section)) && ("carpediempresentation".equalsIgnoreCase(action))) {
-            request.setAttribute("pagevisee", "/WEB-INF/bordure/carpediempresentation.jsp");
-            pageJsp = "/WEB-INF/main/Main.jsp";
-        }
-
-        if (("bordure".equalsIgnoreCase(section)) && ("mentionslegales".equalsIgnoreCase(action))) {
-            request.setAttribute("pagevisee", "/WEB-INF/bordure/mentionslegales.jsp");
-            pageJsp = "/WEB-INF/main/Main.jsp";
-        }
-
-        if (("bordure".equalsIgnoreCase(section)) && ("cgv".equalsIgnoreCase(action))) {
-            request.setAttribute("pagevisee", "/WEB-INF/bordure/cgv.jsp");
-            pageJsp = "/WEB-INF/main/Main.jsp";
-        }
-
-        if (("bordure".equalsIgnoreCase(section)) && ("plansite".equalsIgnoreCase(action))) {
-            request.setAttribute("pagevisee", "/WEB-INF/bordure/plansite.jsp");
-            pageJsp = "/WEB-INF/main/Main.jsp";
-        }
-
-        if (("bordure".equalsIgnoreCase(section)) && ("newsletter".equalsIgnoreCase(action))) {
-            request.setAttribute("pagevisee", "/WEB-INF/bordure/newsletter.jsp");
-            pageJsp = "/WEB-INF/main/Main.jsp";
-        }
-
-        if (("bordure".equalsIgnoreCase(section)) && ("contact".equalsIgnoreCase(action))) {
-            request.setAttribute("pagevisee", "/WEB-INF/bordure/contact.jsp");
-            pageJsp = "/WEB-INF/main/Main.jsp";
-        }
-
-// fin import des elements de la page main hors section principale
+//Module panier
         
-//Module panier        
         if ("panier".equalsIgnoreCase(section)) {
             
 
@@ -123,12 +88,13 @@ public class Controleur extends HttpServlet {
                 }
                 p = (Panier) session.getAttribute("panier");
                 session.setAttribute("maliste", p.getLignes().values());
-                request.setAttribute("pagevisee", "/WEB-INF/panier/Panier.jsp");
+                request.setAttribute("panier", "Controleur?section=affichagepanier&action=affichage");
+                 
             }
-            pageJsp="/WEB-INF/main/Main.jsp";
+            
             // affichage du contenu du panier
             if("affichagepanier".equalsIgnoreCase(action)){
-                pageJsp="/WEB-INF/panier/DetailPanier.jsp";
+                request.setAttribute("panier", "Controleur?section=affichagepanier&action=affichagedetail");
             }
             
             int idLivre = 0;
@@ -150,7 +116,7 @@ public class Controleur extends HttpServlet {
                 } catch (Exception ex) {
                     erreurGrave = true;
                 }
-                 request.setAttribute("pagevisee", "/WEB-INF/panier/Panier.jsp");
+                request.setAttribute("panier", "Controleur?section=panieraffichage&action=affichage");
             }
 
             // suppresion d'un item du panier
@@ -167,7 +133,7 @@ public class Controleur extends HttpServlet {
                 } catch (Exception ex) {
                     erreurGrave = true;
                 }
-                 request.setAttribute("pagevisee", "/WEB-INF/panier/Panier.jsp");
+                request.setAttribute("panier", "Controleur?section=panieraffichage&action=affichage");
             }
 
             // diminution de la quantite commandee pour un item
@@ -182,7 +148,7 @@ public class Controleur extends HttpServlet {
                 } catch (NamingException ex) {
                     erreurGrave = null;
                 }
-                 request.setAttribute("pagevisee", "/WEB-INF/panier/Panier.jsp");
+                request.setAttribute("panier", "Controleur?section=panieraffichage&action=affichage");
             }
 
             // augmentation de la quantite commandee pour un tiem
@@ -197,7 +163,7 @@ public class Controleur extends HttpServlet {
                 } catch (NamingException ex) {
                     erreurGrave = true;
                 }
-                request.setAttribute("pagevisee", "/WEB-INF/panier/Panier.jsp");
+                request.setAttribute("panier", "Controleur?section=panieraffichage&action=affichage");
             }
 
         }
@@ -206,21 +172,22 @@ public class Controleur extends HttpServlet {
 // module commande        
         if ("commande".equalsIgnoreCase(section)) {
             if (session.getAttribute("maliste")==null){
-                    request.setAttribute("pagevisee", "/WEB-INF/panier/Panier.jsp");
-                    getServletContext().getRequestDispatcher(pageJsp).forward(request, response);
+                    request.setAttribute("panier", "Controleur?section=panieraffichage&action=affichage");
+                    // getServletContext().getRequestDispatcher(pageJsp).forward(request, response);
                 }
             if (session.getAttribute("panier")==null){
-                request.setAttribute("pagevisee", "/WEB-INF/panier/Panier.jsp");
-                getServletContext().getRequestDispatcher(pageJsp).forward(request, response);
+                request.setAttribute("panier", "Controleur?section=panieraffichage&action=affichage");
+                // getServletContext().getRequestDispatcher(pageJsp).forward(request, response);
             }
             p = (Panier)session.getAttribute("panier");
             
             if("affichage".equalsIgnoreCase(action)){
-                pageJsp="/WEB-INF/panier/DetailPanier.jsp";
+                request.setAttribute("commande", "Controleur?section=affichagecommande&action=affichagedetail");
+                //pageJsp="/WEB-INF/panier/DetailPanier.jsp";
             }
             
             if ("validercommande".equalsIgnoreCase(action)) {
-                request.setAttribute("pagevisee", "/WEB-INF/commande/commande.jsp");
+                request.setAttribute("commande", "Controleur?section=affichagecommande&action=affichage");
                 
             }
         }
@@ -253,10 +220,10 @@ public class Controleur extends HttpServlet {
                     //session.setAttribute("rechercheListeLivre",lL); // place la liste des livres trouvés
                     request.setAttribute("rechercheResultat", lL); // place la liste des livres trouvés
                     //request.setAttribute("resultat", "/WEB-INF/catalogue/resultat.jsp");
-                    request.setAttribute("pagevisee", "/WEB-INF/catalogue/resultat.jsp"); // definit le lien où le resultat doit s'afficher
-                    
+                    //request.setAttribute("pagevisee", "/WEB-INF/catalogue/resultat.jsp"); // definit le lien où le resultat doit s'afficher
+                    request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage");
                     //pageJsp = "/WEB-INF/catalogue/resultat.jsp";
-                    pageJsp = "/WEB-INF/main/Main.jsp";
+                    // pageJsp = "/WEB-INF/main/Main.jsp";
                     System.out.println("passage action rechercher => vers resultat.jsp");
                   
                 }
@@ -394,6 +361,123 @@ public class Controleur extends HttpServlet {
         if (erreurGrave) {
             pageJsp = "/WEB-INF/erreurs/warning.jsp";
         }
+// fin traitement        
+        
+// debut affichage via urls dynamiques
+        
+        if ("defaut".equalsIgnoreCase(section)){
+            pageJsp = "/WEB-INF/main/Main.jsp";
+        }
+        //redirection pour les bordures
+        if("fragement".equalsIgnoreCase(section)){
+            switch(action){
+                case "entete":
+                {
+                    request.setAttribute("today", new Date());
+                    pageJsp ="/WEB-INF/bordure/Entete.jsp";
+                    break;
+                }
+                case "pied" :{
+                    pageJsp="/WEB-INF/bordure/Pied.jsp";
+                    break;
+                }
+                case "menu":{
+                    pageJsp="/WEB-INF/bordure/Menu.jsp";
+                    break;
+                    
+                }
+                case "cgv":{
+                    pageJsp="/WEB-INF/bordure/cgv.jsp";
+                    break;
+                }
+                case "plansite":{
+                    pageJsp="/WEB-INF/bordure/plansite.jsp";
+                    break;
+                }
+                case "mentionslegales":{
+                    pageJsp ="/WEB-INF/bordure/mentionslegales.jsp";
+                    break;
+                }
+                case "carpediem":{
+                    pageJsp="/WEB-INF/bordure/carpediempresentation.jsp";
+                    break;
+                }
+                case "contact":{
+                    pageJsp="/WEB-INF/bordure/contact.jsp";
+                    break;
+                }
+                case "newsletter":{
+                    pageJsp="/WEB-INF/bordure/newsletter.jsp";
+                    break;
+                }
+//                case "rubrique":{
+//                    pageJsp="/WEB-INF/catalogue/Rubrique.jsp";
+//                    break;
+//                }
+            }
+        }
+        //redirection pour le panier
+        if("panieraffichage".equalsIgnoreCase(section)){
+            switch (action){
+                case "affichage":{
+                    pageJsp="/WEB-INF/panier/Panier.jsp";
+                    break;
+                }
+                case"affichagedetail":{
+                    pageJsp="/WEB-INF/panier/DetailPanier.jsp";
+                    break;
+                }
+            }
+        }
+        //redirection pour la commande
+        if("commandeaffichage".equalsIgnoreCase(section)){
+            switch(action){
+                case "affichage":{
+                    pageJsp="/WEB-INF/commande/Commande.jsp";
+                    break;
+                }
+                case "affichagedetail":{
+                    pageJsp="/WEB-INF/panier/DetailPanier.jsp";
+                    break;
+                }
+                case "affichagevalidationAcheteur":{
+                    pageJsp="/WEB-INF/commande/validationAcheteur.jsp";
+                    break;
+                }
+                case "affichagevalidationcommande":{
+                    pageJsp="/WEB-INF/commande/Commande.jsp";
+                    break;
+                }
+                case "affichagepaiement":{
+                    pageJsp="/WEB-INF/commande/paiement.jsp";
+                    break;
+                }
+            }
+        }
+//        //redirection pour la recherche vide (dans l'entete)
+//        if("rechercheaffichagevide".equalsIgnoreCase(section)){
+//            if("affichage".equalsIgnoreCase(action)){
+//                pageJsp="/WEB-INF/catalogue/recherche.jsp";
+//            }
+//        }
+        
+        //redirection pour la recherche
+        if("rechercheaffichage".equalsIgnoreCase(section)){
+            if ("affichage".equalsIgnoreCase(action)){
+                pageJsp="/WEB-INF/catalogue/resultat.jsp";
+            }
+            if("affichageboite".equalsIgnoreCase(action)){
+                pageJsp="/WEB-INF/catalogue/recherche.jsp";
+            }
+        }
+        //redirection pour la gestion de compte
+        if("compteaffichage".equalsIgnoreCase(section)){
+            
+        }
+        
+        
+        
+// fin affichage via urls dynamiques        
         
         System.out.println("00-------------------------------0>>>"+pageJsp);
         pageJsp = response.encodeURL(pageJsp);

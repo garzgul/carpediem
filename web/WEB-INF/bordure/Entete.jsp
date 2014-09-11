@@ -64,8 +64,7 @@
 <div class="clear"></div>
 
 <div>
-    <p>Bienvenue, nous sommes le <!-- ${today} on enleve le today ici attention de laisser un espace ou de retourner a la ligne -->
-    <fmt:formatDate value="${today}" pattern="EEEE dd MMMM yyyy" /></p>
+    <p>Bienvenue, nous sommes le <fmt:formatDate value="${today}" pattern="EEEE dd MMMM yyyy" /></p>
     <hr />
 </div>
 

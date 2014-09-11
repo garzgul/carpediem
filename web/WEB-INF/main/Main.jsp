@@ -18,9 +18,9 @@
 
     <body id="index"> <!-- ouverture balise body  -->
         <div id="global"><!-- ouverture balise div id="global"  -->
-           <c:import url="/Controleur?section=Entete" />
-           <c:import url="/Controleur?section=Menu" />
-            <c:import url="/Controleur?section=recherche" />
+           <c:import url="${entete}" />
+           <c:import url="${menu}" />
+            <c:import url="/WEB-INF/catalogue/recherche.jsp" />
 
 
             <!-- Contenu titre --> 
@@ -30,8 +30,8 @@
                     
 
 
-                    <c:if test="${not empty pagevisee}">  
-                        <c:import url="${pagevisee}" />
+                    <c:if test="${not empty recherche}">  
+                        <c:import url="${recherche}" />
                     </c:if> 
                     
                     
@@ -54,7 +54,7 @@
             <div class="clear"></div>
 
 
-            <c:import url="/Controleur?section=Pied" />
+            <c:import url="${pied}" />
 
 
         </div><!-- fermeture balise div id="global"  -->
