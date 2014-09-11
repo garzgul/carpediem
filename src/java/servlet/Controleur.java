@@ -241,7 +241,8 @@ public class Controleur extends HttpServlet {
 // fin module recherche (Eddy)        
 
 // module gestion de compte acheteur (Mourad)
-        if ("inscriptionacheteur".equalsIgnoreCase(section)) {
+        if ("connexion".equalsIgnoreCase(section)){
+        if ("inscriptionacheteur".equalsIgnoreCase(action)) {
             if (session.getAttribute("acheteurgestion") == null) {
                 try {
                     session.setAttribute("acheteurgestion", new AcheteurGestion());
@@ -262,13 +263,14 @@ public class Controleur extends HttpServlet {
 //                    }
 //                }
 
-                request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
-                pageJsp = "/WEB-INF/main/Main.jsp";
+                request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageinscription");
+                //request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
+                // pageJsp = "/WEB-INF/main/Main.jsp";
 
             }
         }
 
-        if ("inscription".equalsIgnoreCase(section)) {
+        if ("inscription".equalsIgnoreCase(action)) {
             String nom = request.getParameter("nom");
             String prenom = request.getParameter("prenom");
             String pseudo = request.getParameter("pseudo");
@@ -300,18 +302,19 @@ public class Controleur extends HttpServlet {
                 request.setAttribute("pseudoFourni", pseudo.trim());
                 request.setAttribute("telFourni", tel);
 
-                request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
-                pageJsp = "/WEB-INF/main/Main.jsp";
+                request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageinscription");
+                //request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
+                //pageJsp = "/WEB-INF/main/Main.jsp";
                 System.out.println(">>>>>>>>>>>>>>>>>passage par le catch");
             } catch (SQLException ex) {
                 erreurGrave = true;
             }
 
         }
-        if("connection".equalsIgnoreCase(section)){
+        if("connection".equalsIgnoreCase(action)){
             
         }
-        if("seconnecter".equalsIgnoreCase(section)){
+        if("seconnecter".equalsIgnoreCase(action)){
             
             String mail = request.getParameter("mail");
             String password = request.getParameter("mdp");
@@ -324,7 +327,7 @@ public class Controleur extends HttpServlet {
             session.setAttribute("Acheteur", ach);
             
         }        
-
+        }
 // debut module emma
         // formulaire de contact (Emma)
         if ("contactformulaire".equalsIgnoreCase(section)) {
@@ -471,8 +474,14 @@ public class Controleur extends HttpServlet {
             }
         }
         //redirection pour la gestion de compte
-        if("compteaffichage".equalsIgnoreCase(section)){
-            
+        if("affichagecompte".equalsIgnoreCase(section)){
+            switch (action){
+                case ("affichageinscription"):{
+                    pageJsp="/WEB-INF/compte/inscriptionacheteur.jsp";
+                    break;
+                }
+                
+            }
         }
         
         
