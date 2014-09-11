@@ -21,7 +21,7 @@
 			<div id="not-login">
                             <c:url value="Controleur?section=connexion&action=inscriptionacheteur" var="url2"/>
 				<a id="not-login-signup" title="Inscription" href="${url2}">Devenir membre <span class="gras">></span></a>
-                                <c:url value="Controleur?section=connexion" var="url3"/>
+                                <c:url value="Controleur?section=connexion&action=seconnecter" var="url3"/>
                                 <a id="not-login-login" title="Se connecter" href="${url3}">Se connecter</a>
 			</div><!-- fin de not-login -->	
 			
