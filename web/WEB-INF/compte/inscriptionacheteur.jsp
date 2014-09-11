@@ -3,6 +3,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
         <div>
             <h1>Formulaire d'inscription</h1>
+            <p>${errCompte}</p>
             <form action ="Controleur" method="POST">
                 <input type="hidden" name="section" value="connexion"/>
                 <input type="hidden" name="action" value="inscription"/>

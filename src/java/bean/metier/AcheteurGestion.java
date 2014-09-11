@@ -25,6 +25,12 @@ public class AcheteurGestion implements Serializable{
 
         Boolean erreur = false;
         HashMap<String, String> hm = new HashMap<>();
+        Acheteur acheteur = achDAO.find(ach.getEmailAcheteur(), ach.getMdpAcheteur());
+        
+        if(acheteur != null){
+            erreur = true;
+            hm.put("errCompte", "Ce compte existe déjà");
+        }
         
         if(ach.getEmailAcheteur() == null || ach.getEmailAcheteur().isEmpty()){
            
@@ -83,6 +89,7 @@ public class AcheteurGestion implements Serializable{
             return null;
         }else{
            ach = achDAO.find(mail.trim(), mdp);
+           
         }
         if(ach != null){
             return ach;
