@@ -12,7 +12,7 @@
         <input type="text" name="email" value="${emailFourni}"/><label class="erreur">${errEmail}</label><br/>
         <label>Mot de passe :</label>
         <input type="password" name="mdp" value="${mdpFourni}"/><label class="erreur">${errMDP}</label><b/>
-        <input type="submit" name="connexion" value="connection"/>
+        <input type="submit" name="connection" value="connection"/>
         
         
     </form> 
