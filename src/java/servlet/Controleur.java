@@ -200,7 +200,6 @@ public class Controleur extends HttpServlet {
         }
 
 // fin module commande   
-        
 // Module Recherche (Eddy)        
         if ("recherche".equalsIgnoreCase(section)) {
             if (session.getAttribute("beanLivreGestion") == null) {
@@ -246,7 +245,6 @@ public class Controleur extends HttpServlet {
         }
 
 // fin module recherche (Eddy)
-        
 // module gestion fiche livre  
         if ("ficheLivre".equalsIgnoreCase(section)) {
             if (session.getAttribute("beanLivreGestion") == null) {
@@ -275,37 +273,20 @@ public class Controleur extends HttpServlet {
 
 // module gestion de compte acheteur (Mourad)
         if ("connexion".equalsIgnoreCase(section)) {
-            if ("inscriptionacheteur".equalsIgnoreCase(action)) {
-                if (session.getAttribute("acheteurgestion") == null) {
-                    try {
-                        session.setAttribute("acheteurgestion", new AcheteurGestion());
-                    } catch (NamingException ex) {
-                        erreurGrave = true;
-                    }
-//                if (request.getParameter("action") != null) {
-//                    if ("rechercher".equalsIgnoreCase(request.getParameter("action"))) {
-//                        lg = (LivreGestion) session.getAttribute("beanRecherche");
-//                        String champRecherche = request.getParameter("ChampRecherche");
-//                        List<Livre> lL = null;
-//                        try {
-//                            lL = lg.findAll(champRecherche);
-//                        } catch (SQLException ex1) {
-//                            erreurGrave = true;
-//                        }
-//                        session.setAttribute("rechercheListeLivre", lL); // place la liste des livres trouvés
-//                    }
-//                }
-
-                    request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageinscription");
-                    //request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
-                    // pageJsp = "/WEB-INF/main/Main.jsp";
-
-                    request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageinscription");
-                    //request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
-                    // pageJsp = "/WEB-INF/main/Main.jsp";
-
+            
+            if (session.getAttribute("acheteurgestion") == null) {
+                try {
+                    session.setAttribute("acheteurgestion", new AcheteurGestion());
+                } catch (NamingException ex) {
+                    erreurGrave = true;
                 }
+                //request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageinscription");
             }
+            
+            if ("inscriptionacheteur".equalsIgnoreCase(action)) {
+                 request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageinscription");
+            }
+
 
             if ("inscription".equalsIgnoreCase(action)) {
                 String nom = request.getParameter("nom");
@@ -346,30 +327,35 @@ public class Controleur extends HttpServlet {
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 }
+                request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
+            }
+
+            if ("seconnecter".equalsIgnoreCase(action)) {
+                request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageconnection");
+                System.out.println("=========== i l est ici ====<<<");
+            }
+            if ("connection".equalsIgnoreCase(action)) {
+
+                String mail = request.getParameter("email");
+                String mdp = request.getParameter("mdp");
+
+                Acheteur ach = null;
+                try {
+                    ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
+                    System.out.println("========== la on est dans le try =====");
+                    ach = ag.chercherAcheteur(mail, mdp);
+                    request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
+
+                } catch (SQLException ex) {
+                    erreurGrave = true;
+                }
+                session.setAttribute("Acheteur", ach);
 
             }
-        }
+            if ("voircompte".equalsIgnoreCase(action)) {
+                request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
 
-        if ("seconnecter".equalsIgnoreCase(action)) {
-            request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageconnection");
-            System.out.println("=========== i l est ici ====<<<");
-        }
-        if ("connection".equalsIgnoreCase(action)) {
-
-            String mail = request.getParameter("email");
-            String mdp = request.getParameter("mdp");
-            System.out.println("============" + mail);
-            System.out.println("============" + mdp);
-            Acheteur ach = new Acheteur();
-            try {
-                System.out.println("========== la on est dans le try =====");
-                ach = ag.chercherAcheteur(mail, mdp);
-
-            } catch (SQLException ex) {
-                erreurGrave = true;
             }
-            session.setAttribute("Acheteur", ach);
-
         }
 
 // debut module emma
@@ -522,9 +508,15 @@ public class Controleur extends HttpServlet {
                     pageJsp = "/WEB-INF/compte/inscriptionacheteur.jsp";
                     break;
                 }
+                case ("connection"): {
+                    pageJsp = "/WEB-INF/compte/VueCompte.jsp";
+                }
                 case ("affichageconnection"): {
                     pageJsp = "/WEB-INF/compte/connectionacheteur.jsp";
                     break;
+                }
+                case ("voircompte"): {
+                    pageJsp = "/WEB-INF/compte/VueCompte.jsp";
                 }
 
             }
