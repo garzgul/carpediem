@@ -43,7 +43,9 @@ public class EditeurDAO extends DAO<Editeur> implements Serializable{
         CallableStatement cstmt = cnn.prepareCall(req);
         cstmt.setInt(1, id);
         ResultSet rs = cstmt.executeQuery();
-        e = new Editeur(id, rs.getString("editeur_nom"));
+        while (rs.next()) {
+            e = new Editeur(id, rs.getString("editeur_nom"));
+        }
         rs.close();
         cstmt.close();
         cnn.close();

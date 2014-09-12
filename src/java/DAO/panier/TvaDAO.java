@@ -45,7 +45,7 @@ public class TvaDAO extends DAO<Taxe> implements Serializable{
     public Taxe find(int id) throws SQLException, NamingException {
         Taxe tva = null;
         Connection cnn = fc.fournir();
-        String req = "Select * from tva Join on taxe where taxe.id_livre = ?";
+        String req = "Select * from tva join taxe on taxe.id_tva=tva.id_tva where taxe.id_livre=?";
         PreparedStatement pstmt = cnn.prepareStatement(req);
         pstmt.setInt(1, id);
         ResultSet rs = pstmt.executeQuery();
