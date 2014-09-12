@@ -96,9 +96,8 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
     }
 
     public List<Livre> findAll(String s) throws SQLException {
-
-        //recherche par (partie) du titre de livre OU du nom de l'auteur
-        Livre l;// = null;
+        // recherche par (partie) du titre de livre AUSSI BIEN que le nom de l'auteur
+        Livre l;
         Auteur a;
         List<Livre> lL = new ArrayList<>();
         String req = "{call findAllLivres(?)}";
@@ -115,22 +114,17 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
             a = new Auteur(Integer.valueOf(id_auteur), auteur_nom);
             ArrayList<Auteur> lA = new ArrayList<>();
             lA.add(a);
-//            System.out.println(livre_titre);
             l = new Livre(null, lA, livre_titre, 0, 0, true);
             l.setId(Integer.valueOf(id_livre));
             l.setImage(livre_photo);
             l.setPrix(Float.valueOf(rs.getString("livre_prix")));
             //TvaDAO tvaDao = new TvaDAO();
             //l.setTva(tvaDao.find(Integer.valueOf(id_livre)));
-            //l.setResume(livre_titre);
-//            System.out.println("----------------------------->>> avant ajout livre " + l);
             lL.add(l);
-//            System.out.println("----------------------------->>> apres ajout livre : liste l " + lL);
         }
         rs.close();
         cs.close();
         cnn.close();
-
         return lL;
     }
 }

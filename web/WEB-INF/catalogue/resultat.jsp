@@ -1,19 +1,17 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <div>
-    <h1>Resultat</h1>
-    <!--mon objet liste livre se récupérera dans la session ou request getattribute(rechercheResultat) -->
+    <h2>RESULTAT :</h2>
+    <!-- Objet liste livres se récupère depuis le scope -->
+    <!-- (placé précédemment avec le setAttribute(rechercheResultat) -->
     <c:if test="${not empty rechercheResultat}">
-
-            <table>
+            <table border="1">
                 <thead>
                     <tr>
                         <th>Couverture</th>
                         <th>Titre</th>
                         <th>Auteur</th>
-                        <th>Prix (EUR)</th>
+                        <th>Prix (eur)</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -29,6 +27,5 @@
                     </c:forEach>
                 </tbody>
             </table>
-
     </c:if>
 </div
