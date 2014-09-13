@@ -8,7 +8,7 @@
 
 <div class="proddethaut">
     <div class="proddetprod">
-        <div class="proddethautimg"><img src="${}" alt="" title="" width="200" height="200" /></div>
+        <div class="proddethautimg"><img src="$//{}" alt="" title="" width="200" height="200" /></div>
         <div class="proddet">
             <div class="proddethauttitre">$//{}</div>
             <div class="proddethautref">$//{}</div>
