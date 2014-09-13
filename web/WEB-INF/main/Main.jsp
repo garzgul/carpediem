@@ -40,9 +40,15 @@
                         <c:import url="${affichagecompte}"/>
                     </c:if>
                     
+                    <c:if test="${not empty voircompte}">
+                        <c:import url="${voircompte}"/>
+                    </c:if>
+                    
                     <c:if test="${not empty panier}">
                         <c:import url="${panier}" />
                     </c:if>
+                    
+                   
                     
 
 

@@ -8,6 +8,7 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import java.io.Serializable;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -50,12 +51,50 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
 
     @Override
     public boolean update(Acheteur obj) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Connection cnn = fc.fournir();
+        
+        int rs = 0;
+        boolean test = false;
+        
+        String pReq = "UPDATE acheteur"
+                + "SET ach_nom = '?', ach_prenom = '?', ach_pseudo = '?',"
+                + "ach_mdp = '?', ach_email = '?', ach_tel = '?',"
+                + "WHERE id_acheteur = '?' AND ach_actif = 1";
+        
+        PreparedStatement pStmt = cnn.prepareCall(pReq);
+        pStmt.setString(1, obj.getNomAcheteur());
+        pStmt.setString(2, obj.getPrenomAcheteur());
+        pStmt.setString(3, obj.getPseudoAcheteur());
+        pStmt.setString(4, obj.getMdpAcheteur());
+        pStmt.setString(5, obj.getEmailAcheteur());
+        pStmt.setString(6, obj.getTelAcheteur());
+        pStmt.setInt(7, obj.getIdAcheteur());
+        rs = pStmt.executeUpdate();
+        if(0 != rs){
+            test = true;
+        }
+        return test;
+        
     }
 
     @Override
     public boolean delete(Acheteur obj) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection cnn = fc.fournir();
+        String pReq = "UPDATE acheteur"
+                + "SET ach_actif = 0"
+                + "WHERE id_acheteur = '?'";
+        PreparedStatement pStmt = cnn.prepareCall(pReq);
+        pStmt.setInt(1, obj.getIdAcheteur());
+        
+        int rs = pStmt.executeUpdate();
+        pStmt.close();
+        cnn.close();
+        
+        if(0 != rs ){
+            return true;
+        }
+         return false; 
     }
 
     @Override
