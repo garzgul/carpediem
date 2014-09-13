@@ -8,19 +8,27 @@
     <c:if test="${not empty rechercheResultat}">
 
             <table>
+                <thead>
+                    <tr>
+                        <th>Couverture</th>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>Prix (EUR)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
                 <tbody>
                     <c:forEach items="${rechercheResultat}" var="l">
                         <tr>
-                            <td><img src="./images/${l.image}" alt="titi" title="egsh" width="200" height="100" /></td>
-                            <td><img src="images/${l.image}" alt="titi" title="egsh" width="200" height="100" /></td>
-                            <td><img src="/images/${l.image}" alt="titi" title="egsh" width="200" height="100" /></td>
-                            <td>${l.image}</td>
-                            <td>${l}</td>
-                            <td>${l.resume}</td>
+                            <td><img src="./images/${l.image}" width="100" height="100" /></td>
+                            <td><a href="Controleur?section=ficheLivre&action=afficher&ref=${l.id}">${l}</a></td>
+                            <td>${l.getListeAu().get(0)}</td>
+                            <td>${l.prix}</td>
+                            <td><a href="Controleur?section=panier&action=add&ref=${l.id}">Ajout panier</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
 
     </c:if>
-</div>
+</div

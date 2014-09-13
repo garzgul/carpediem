@@ -5,6 +5,7 @@ import bean.acheteur.Acheteur;
 import bean.acheteur.Adresse;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
@@ -15,16 +16,33 @@ public class Commande implements Serializable{
     private Date dateCde;
     private float htCde;
     private float tvaCde;
+    private float ttcCde;
     private boolean payementCde;
     private ModeLivraison modeLivraison;
-    private DetailCommande detailCde;
+    private HashMap<Integer,LignePanier> detailCde;
     private Acheteur acheteurCde;
     private SuiviLivraison suiviCde;
     private Adresse adresseCde;
     private FraisDePort fraisCde;
+    private float poidsCde;
+    private String modePaiement;
 
     public Commande() {
     }
+
+    
+    
+    public Commande(String numCde, HashMap<Integer, LignePanier> detailCde, Acheteur acheteurCde, Adresse adresseCde) {
+        this.numCde = numCde;
+        this.detailCde = detailCde;
+        this.acheteurCde = acheteurCde;
+        this.adresseCde = adresseCde;
+        dateCde = new Date();
+    }
+
+    
+    
+    
 
     public Commande(String numCde, Date dateCde, float htCde, float tvaCde, Acheteur acheteurCde, Adresse adresseCde) {
         this.numCde = numCde;
@@ -83,13 +101,7 @@ public class Commande implements Serializable{
         this.modeLivraison = modeLivraison;
     }
 
-    public DetailCommande getDetailCde() {
-        return detailCde;
-    }
-
-    public void setDetailCde(DetailCommande detailCde) {
-        this.detailCde = detailCde;
-    }
+    
 
     public Acheteur getAcheteurCde() {
         return acheteurCde;
@@ -122,10 +134,29 @@ public class Commande implements Serializable{
     public void setFraisCde(FraisDePort fraisCde) {
         this.fraisCde = fraisCde;
     }
-    
-    
-    
-    
 
+    public HashMap<Integer, LignePanier> getDetailCde() {
+        return detailCde;
+    }
+
+    public float getPoidsCde() {
+        return poidsCde;
+    }
+
+    public float getTtcCde() {
+        return ttcCde;
+    }
+
+    public void setTtcCde(float ttcCde) {
+        this.ttcCde = ttcCde;
+    }
+
+    public String getModePaiement() {
+        return modePaiement;
+    }
+
+    public void setModePaiement(String modePaiement) {
+        this.modePaiement = modePaiement;
+    }
 
 }

@@ -18,9 +18,9 @@
 
     <body id="index"> <!-- ouverture balise body  -->
         <div id="global"><!-- ouverture balise div id="global"  -->
-           <c:import url="/Controleur?section=Entete" />
-           <c:import url="/Controleur?section=Menu" />
-            <c:import url="/Controleur?section=recherche" />
+           <c:import url="${entete}" />
+           <c:import url="${menu}" />
+            <c:import url="/WEB-INF/catalogue/recherche.jsp" />
 
 
             <!-- Contenu titre --> 
@@ -28,17 +28,22 @@
                 <div id="contentcontenu">
                     <h1 class="titreh1">>>titre de la page ou fil ariane interactif</h1>
 
-
-                    <c:if test="${not empty pagevisee}">  
-                        <c:import url="${pagevisee}" />
-                    </c:if> 
+                    <c:if test="${not empty recherche}">  
+                        <c:import url="${recherche}" />
+                    </c:if>
+                    
+                    <c:if test="${not empty affichageLivre}">
+                        <c:import url="${affichageLivre}" />
+                    </c:if>
+                    
+                    <c:if test ="${not empty affichagecompte}">
+                        <c:import url="${affichagecompte}"/>
+                    </c:if>
+                    
                     <c:if test="${not empty panier}">
-                        <c:import url="${panierurl}" />
-                        
+                        <c:import url="${panier}" />
                     </c:if>
-                    <c:if test="${not empty versinscription}">
-                        <c:import url="${pagevisee}"/>
-                    </c:if>
+                    
 
 
 
@@ -51,7 +56,7 @@
             <div class="clear"></div>
 
 
-            <c:import url="/Controleur?section=Pied" />
+            <c:import url="${pied}" />
 
 
         </div><!-- fermeture balise div id="global"  -->

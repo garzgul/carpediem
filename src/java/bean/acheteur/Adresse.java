@@ -15,6 +15,7 @@ public class Adresse implements Serializable{
     private String paysAcheteur;
     private boolean actifAcheteur;
     private int idadresse;
+    private boolean adressefav;
 
     public Adresse() {
     }
@@ -75,12 +76,20 @@ public class Adresse implements Serializable{
         this.paysAcheteur = paysAcheteur;
     }
 
-    public boolean isActifAcheteur() {
+    public boolean getActifAcheteur() {
         return actifAcheteur;
     }
 
     public void setActifAcheteur(boolean actifAcheteur) {
         this.actifAcheteur = actifAcheteur;
+    }
+
+    public boolean getAdressefav() {
+        return adressefav;
+    }
+
+    public void setAdressefav(boolean adressefav) {
+        this.adressefav = adressefav;
     }
     
     

@@ -1,11 +1,20 @@
 <%-- 
     Document   : AffichageLivre
-    Created on : 3 sept. 2014, 09:40:51
-    Author     : cdi116
+
+    Author     : eddy
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<div>
+    <h1>Resultat</h1>
+    <c:if test="${not empty ficheLivreCourant}">
+        <p>${ficheLivreCourant}</p>
+    </c:if>
+</div>
+    
+<%--
 <div class="proddethaut">
     <div class="proddetprod">
         <div class="proddethautimg"><img src="$//{}" alt="" title="" width="200" height="200" /></div>
@@ -36,5 +45,5 @@
         <div class="proddethautpoids"><span class="gras">Poids : </span>$//{}</div>
         <p class="pproddetinfocompl">*Ce prix est T.T.C.</p>
     </div>
-
+--%>
 

@@ -10,55 +10,86 @@ import java.util.ArrayList;
  * @author user
  */
 public class DetailCommande implements Serializable{
-    // on devrait probablement faire un tableau 4d avec afin de pouvoir s'y retrouver
-    // arraylist pour le moment pas au point a moins de modifier l'objet livre
-    //
-    private ArrayList<Livre> detailCde;
-    private int qteLivreCde;
-    private float htLivreCde;
-    private float tvaLivreCde;
+    private Livre l;
+    private int qte;
+    private float prixHT;
+    private float tva;
+    private float prixTTC;
+    private float poids;
+    private float poidsTotal;
+    private float prix;
+    
 
     public DetailCommande() {
     }
 
-    public DetailCommande(ArrayList<Livre> detailCde, int qteLivreCde, float htLivreCde, float tvaLivreCde) {
-        this.detailCde = detailCde;
-        this.qteLivreCde = qteLivreCde;
-        this.htLivreCde = htLivreCde;
-        this.tvaLivreCde = tvaLivreCde;
+    public DetailCommande(Livre l) throws Exception {
+        if (l==null){
+            throw new Exception("un livre ne peut etre null");
+        }
+        this.l=l;
+        
+        this.prixHT=l.getPrix();
+        this.tva=l.getPrix()*l.getTva().getTva();
+        this.prixTTC=prixHT+tva;
+        this.poids = l.getPoids();
     }
 
-    public ArrayList<Livre> getDetailCde() {
-        return detailCde;
+    public Livre getL() {
+        return l;
     }
 
-    public void setDetailCde(ArrayList<Livre> detailCde) {
-        this.detailCde = detailCde;
+    public int getQte() {
+        return qte;
     }
 
-    public int getQteLivreCde() {
-        return qteLivreCde;
+    public float getPrixHT() {
+        return prixHT;
     }
 
-    public void setQteLivreCde(int qteLivreCde) {
-        this.qteLivreCde = qteLivreCde;
+    public float getTva() {
+        return tva;
     }
 
-    public float getHtLivreCde() {
-        return htLivreCde;
+    public float getPrixTTC() {
+        return prixTTC;
     }
 
-    public void setHtLivreCde(float htLivreCde) {
-        this.htLivreCde = htLivreCde;
+    public float getPoids() {
+        return poids;
     }
 
-    public float getTvaLivreCde() {
-        return tvaLivreCde;
+    public void setL(Livre l) {
+        this.l = l;
     }
 
-    public void setTvaLivreCde(float tvaLivreCde) {
-        this.tvaLivreCde = tvaLivreCde;
+    public void setQte(int qte) {
+        this.qte = qte;
     }
+
+    public void setPrixHT(float prixHT) {
+        this.prixHT = prixHT;
+    }
+
+    public void setTva(float tva) {
+        this.tva = tva;
+    }
+
+    public void setPrixTTC(float prixTTC) {
+        this.prixTTC = prixTTC;
+    }
+
+    public void setPoids(float poids) {
+        this.poids = poids;
+    }
+    
+    
+
+    
+
+    
+
+    
 
     
     

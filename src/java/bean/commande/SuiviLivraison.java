@@ -26,8 +26,13 @@ public class SuiviLivraison implements Serializable{
         this.suiviL = suiviL;
     }
 
-    
+    @Override
+    public String toString() {
+        return suiviL.toString();
+    }
 
+    
+    
     
     
     

@@ -1,12 +1,20 @@
 <!-- Main page commande-->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:if test="${not empty maliste}">
+<div class="detailcommande">
+    
+    <c:import url="Controleur?section=commande?action=affichage"/>
+    
+    
+    
+    
+</div>
+</c:if>
+<div class="totalcommande">
+    <c:url value="Controleur?section=commande&action=confirmer" var="url"/>
+    <a href="${url}">Confirmer la commande</a>
+</div>
+

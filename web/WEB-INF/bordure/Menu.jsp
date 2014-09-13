@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 	<!-- Menu horizontal -->
@@ -7,7 +8,8 @@
 			<div id="primarylinks">
 				<ul>
 					<li>
-						<a title="Accueil" href="index.html">Accueil</a>
+                                            <c:url value="Controleur?section=defaut" var ="url"/> 
+                                            <a title="Accueil" href="${url}">Accueil</a>
 					</li>
 					<li>
 						<a title="" href=""></a>

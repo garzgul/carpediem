@@ -25,6 +25,12 @@ public class AcheteurGestion implements Serializable{
 
         Boolean erreur = false;
         HashMap<String, String> hm = new HashMap<>();
+        Acheteur acheteur = achDAO.find(ach.getEmailAcheteur(), ach.getMdpAcheteur());
+        
+        if(acheteur != null){
+            erreur = true;
+            hm.put("errCompte", "Ce compte existe déjà");
+        }
         
         if(ach.getEmailAcheteur() == null || ach.getEmailAcheteur().isEmpty()){
            
@@ -48,27 +54,21 @@ public class AcheteurGestion implements Serializable{
                au moins un chiffre, au moins un caractère spécial,
                au moins ne contient pas de '|'
                     */
-        if(ach.getMdpAcheteur()== null || ach.getMdpAcheteur().isEmpty()
-                || ach.getMdpAcheteur().matches("[a-zA-Z(?=(.*[0-9]){1,})(?=(.*\\\\W)+})(?!.*\\\\|)]")){
-            
+        
+        if(!ach.getMdpAcheteur().equals(confirMDP)){
             erreur = true;
-            hm.put("errMPD", "Vérifiez votre mot de passe !");
+            hm.put("errConfMDP", "Veuillez vérifier votre mot de passe !");
+        }
+
+        if(ach.getMdpAcheteur()== null || ach.getMdpAcheteur().isEmpty()){
+            //|| ach.getMdpAcheteur().matches("[a-zA-Z(?=(.*[0-9]){1,})(?=(.*\\\\W)+})(?!.*\\\\|)]")
+            erreur = true;
+            hm.put("errMDP", "Vérifiez entrer un mot de passe !");
         }
         
 
-//        if(!ach.getMdpAcheteur().equals(confirMDP)){
-//            erreur = true;
-//            hm.put("errConfMDP", "Veillez vérifier votre mot de passe !");
-//        }
-
-
-        if(!ach.getMdpAcheteur().equals(confirMDP)){
-            erreur = true;
-            hm.put("errConfMDP", "Veillez vérifier votre mot de passe !");
-        }
-
         if(ach.getTelAcheteur()== null || ach.getTelAcheteur().isEmpty()
-                || ach.getTelAcheteur().matches("[0]{1}[1-7|9]{1}([-/. ][0-9]{2}){4}")){
+                || ach.getTelAcheteur().matches("[0]{1}[1-7]{1}([-/. ][0-9]{2}){4}")){
             erreur= true;
             hm.put("errTel", "Ce numéro de téléphone n'est pas valide !");
         }
@@ -80,5 +80,24 @@ public class AcheteurGestion implements Serializable{
         return ach;
         
     }
+    
+     //Connection d'un acheteur
+    public Acheteur chercherAcheteur(String mail, String mdp) throws SQLException{
+         Acheteur ach = null;
+        if(mail.isEmpty() || mail == null
+                || mdp == null || mdp.isEmpty()){
+            return null;
+        }else{
+           ach = achDAO.find(mail.trim(), mdp);
+           
+        }
+        if(ach != null){
+            return ach;
+        }
+        return null;
+    }
+    
+   
+   
     
 }

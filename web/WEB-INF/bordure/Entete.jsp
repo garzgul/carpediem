@@ -9,8 +9,8 @@
 <!-- Header options panier log -->
 		<div id="header-options">
                     <div id="panier">
-                        
-                        <c:url value="controleur?section=panier&action=affichage" />
+                        <c:url value="Controleur?section=panier&action=affichage" var="url"/>
+                        <a href="${url}">votre panier</a>
                         
                     </div>
 <!-- login -->		
@@ -19,8 +19,10 @@
 			{ -->
 
 			<div id="not-login">
-				<a id="not-login-signup" title="Inscription" href="Controleur?section=inscriptionacheteur">Devenir membre <span class="gras">></span></a>
-				<a id="not-login-login" title="Se connecter" href="Controleur?section=connexion">Se connecter</a>
+                            <c:url value="Controleur?section=connexion&action=inscriptionacheteur" var="url2"/>
+				<a id="not-login-signup" title="Inscription" href="${url2}">Devenir membre <span class="gras">></span></a>
+                                <c:url value="Controleur?section=connexion&action=seconnecter" var="url3"/>
+                                <a id="not-login-login" title="Se connecter" href="${url3}">Se connecter</a>
 			</div><!-- fin de not-login -->	
 			
 <div class="clear"></div>
@@ -64,8 +66,7 @@
 <div class="clear"></div>
 
 <div>
-    <p>Bienvenue, nous sommes le <!-- ${today} on enleve le today ici attention de laisser un espace ou de retourner a la ligne -->
-    <fmt:formatDate value="${today}" pattern="EEEE dd MMMM yyyy" /></p>
+    <p>Bienvenue, nous sommes le <fmt:formatDate value="${today}" pattern="EEEE dd MMMM yyyy" /></p>
     <hr />
 </div>
 
