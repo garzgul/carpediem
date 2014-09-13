@@ -444,6 +444,8 @@ public class Controleur extends HttpServlet {
         if (erreurGrave) {
             pageJsp = "/WEB-INF/erreurs/warning.jsp";
         }
+        
+        
 // fin traitement        
 
 // debut affichage via urls dynamiques
