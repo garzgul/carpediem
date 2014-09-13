@@ -357,15 +357,15 @@ public class Controleur extends HttpServlet {
             }
         }
 
-// debut module emma
-        // formulaire de contact (Emma)
-        if ("contactformulaire".equalsIgnoreCase(section)) {
-            System.out.println("------------------------------------------>>>> contact !");
-            String votremail = request.getParameter("votremail");
-            String objetcontact = request.getParameter("objetcontact");
-            String votrenom = request.getParameter("votrenom");
-            String votreprenom = request.getParameter("votreprenom");
-            String messagecontact = request.getParameter("messagecontact");
+
+// formulaire de contact (Emma)
+        //if ("contactformulaire".equalsIgnoreCase(section)) {
+       //    System.out.println("------------------------------------------>>>> contact !");
+        //    String votremail = request.getParameter("votremail");
+        //    String objetcontact = request.getParameter("objetcontact");
+          //  String votrenom = request.getParameter("votrenom");
+         //   String votreprenom = request.getParameter("votreprenom");
+           // String messagecontact = request.getParameter("messagecontact");
 //            try {
 //
 //                Membre m = gm.ajouterMembre(mail, mdp, nom, prenom);
@@ -386,8 +386,59 @@ public class Controleur extends HttpServlet {
 //                System.out.println("--------->>> " + ex.getMessage());
 //
 //            }
-        }
+      //  }
+        
+        
+        // Consultation d'un livre - fiche produit (Emma)
+//        if(action.equalsIgnoreCase("consulter"))
+        {
+            // récupération de l'id du livre (id) sur lequel le client a cliqué, au travers de la requête
+//           String id_articlelivre = (String)request.getParameter("id_articlelivre");
+//            if(id_articlelivre != null && !id_articlelivre.equalsIgnoreCase("")){
+                // récupération de toutes les informations sur le livre sélectionné à partir de la bdd
+                //Livre articlelivre = Livre.get(id);
+                // on stocke le livre dans la requête
+               // request.setAttribute("articlelivre", articlelivre);
+                // puis on va sur la page du livre passé en requête et la jsp pourra le récupérer avec request.gatAttribute("articlelivre")
+//                getServletContext().getRequestDispatcher("/WEB-INF/affichagelivre/AffichageLivre.jsp").forward(request, response);
+
+// debut module emma
+        // formulaire de contact (Emma)
+      //  if ("contactformulaire".equalsIgnoreCase(section)) {
+         //   System.out.println("------------------------------------------>>>> contact !");
+         //   String votremail = request.getParameter("votremail");
+         //   String objetcontact = request.getParameter("objetcontact");
+         //   String votrenom = request.getParameter("votrenom");
+         //   String votreprenom = request.getParameter("votreprenom");
+         //   String messagecontact = request.getParameter("messagecontact");
+//            try {
+//
+//                Membre m = gm.ajouterMembre(mail, mdp, nom, prenom);
+//                session.setAttribute("user", m);
+//            } catch (MonException ex) {
+//                System.out.println("----------------->>>> " + ex.getMessage());
+//
+//                HashMap<String, String> mp = ex.getMessages();
+//                for (String s : mp.keySet()) {
+//                    request.setAttribute(s, mp.get(s));
+//                }
+//                request.setAttribute("mailFourni", mail.trim());
+//                request.setAttribute("nomFourni", nom.trim());
+//                request.setAttribute("prenomFourni", prenom.trim());
+//                pageJsp = "/WEB-INF/connexion/formulaireinscription.jsp";
+//            } catch (SQLException ex) {
+//                erreurGrave = true;
+//                System.out.println("--------->>> " + ex.getMessage());
+//
+//            }
+
+   //     }
+
+       // }}
+       
+
 // fin module emma
+
 
         // renvoi vers la jsp de gestion des erreurs
         if (erreurGrave) {
@@ -538,6 +589,7 @@ public class Controleur extends HttpServlet {
         getServletContext().getRequestDispatcher(pageJsp).include(request, response);
 
     }
+    }        
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

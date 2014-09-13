@@ -14,11 +14,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 
 public class LivreDAO extends DAO<Livre> implements Serializable {
 
     private FournirConnectionIt fc;
+
+    // liste de livres
+    ArrayList<Livre> listelivre = new ArrayList();
 
     public LivreDAO() throws NamingException {
         fc = new MaConnexionBDD();
@@ -132,6 +137,151 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
         cnn.close();
         return lL;
     }
+
+    
+    // récupération du nom du sous-theme du livre
+  //  public String getNomSousThemeIdTheme(String id_soustheme)
+  //  {
+    //    String nomsoustheme = null;
+        //int theme = ;
+        
+        
+        
+   // }
+    
+    
+    // liste totale des livres
+    public ArrayList ListeLivre() throws SQLException, NamingException {
+        try {
+            PreparedStatement stmtrequete = null;
+
+            // ouverture de la connexion
+            Connection cnn = fc.fournir();
+            // requête
+            stmtrequete = cnn.prepareStatement("SELECT *FROM livre WHERE livre_actif = 1 ORDER BY livre.livre_titre");
+            ResultSet rs = stmtrequete.executeQuery();
+            // exécution de la requête
+            if (rs != null) {
+                // on va stocker les livres dans une liste
+                //ArrayList<Livre> listelivre = new ArrayList(); mis en haut avec variables
+                while (rs.next()) {
+                    // on crée un objet livre
+                    Livre livre = new Livre();
+
+                    // on rempli l'objet livre avec ses accesseurs
+                    if (rs.getString("id") == null) {
+                        livre.setId(Integer.valueOf(""));// pas sure!
+                    } else {
+                        livre.setId(Integer.valueOf((rs.getString("id"))));
+                    }
+                    if (rs.getString("nbpage") == null) {
+                        livre.setNbpage(Integer.valueOf(""));// pas sure!
+                    } else {
+                        livre.setNbpage(Integer.valueOf((rs.getString("nbpage"))));
+                    }
+                    if (rs.getString("edition") == null) {
+                        livre.setEdition(Integer.valueOf(""));// pas sure!
+                    } else {
+                        livre.setEdition(Integer.valueOf((rs.getString("edition"))));
+                    }
+                    if (rs.getString("stock") == null) {
+                        livre.setStock(Integer.valueOf(""));// pas sure!
+                    } else {
+                        livre.setStock(Integer.valueOf((rs.getString("stock"))));
+                    }
+                    if (rs.getString("titre") == null) {
+                        livre.setTitre("");
+                    } else {
+                        livre.setTitre(rs.getString("titre"));
+                    }
+                    if (rs.getString("titre") == null) {
+                        livre.setTitre("");
+                    } else {
+                        livre.setTitre(rs.getString("titre"));
+                    }
+                    if (rs.getString("soustitre") == null) {
+                        livre.setSoustitre("");
+                    } else {
+                        livre.setSoustitre(rs.getString("soustitre"));
+                    }
+                    if (rs.getString("isbn10") == null) {
+                        livre.setIsbn10("");
+                    } else {
+                        livre.setIsbn10(rs.getString("isbn10"));
+                    }
+                    if (rs.getString("isbn13") == null) {
+                        livre.setIsbn13("");
+                    } else {
+                        livre.setIsbn13(rs.getString("isbn13"));
+                    }
+                    if (rs.getString("dimension") == null) {
+                        livre.setDimension("");
+                    } else {
+                        livre.setDimension(rs.getString("dimension"));
+                    }
+                    if (rs.getString("resume") == null) {
+                        livre.setResume("");
+                    } else {
+                        livre.setResume(rs.getString("resume"));
+                    }
+                    if (rs.getString("image") == null) {
+                        livre.setImage("");
+                    } else {
+                        livre.setImage(rs.getString("image"));
+                    }
+                    if (rs.getString("livre_poids") == null) {
+                        livre.setPoids(Float.valueOf(""));
+                    } else {
+                        livre.setPoids((Float.valueOf(rs.getString("livre_poids"))));
+                    }
+                    if (rs.getString("prix") == null) {
+                        livre.setPrix(Float.valueOf(""));
+                    } else {
+                        livre.setPrix(Float.valueOf(rs.getString("livre_prix")));
+                    }
+                    if ("1".equalsIgnoreCase(rs.getString("livre_actif"))) {
+                        livre.setActifLivre(true);
+                    } else {
+                        livre.setActifLivre(false);
+                    }
+
+                    //TvaDAO tvaDao = new TvaDAO();
+                    //livre.setTva(tvaDao.find(id));
+                    
+                    //ed
+                    
+                    //ListeAu
+                    
+                    // fourn
+                    
+                    //format
+                    
+                    //listmc
+                    
+                    //soustheme
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    // on stocke l'objet livre dans la liste des livres
+                    listelivre.add((Livre) livre);
+                    
+                    // on envoie l'objet livre en request (scope)
+                    //request.setAttribute("listelivre", listelivre);// on ne peut pas faire cela?
+                }
+            }
+
+            rs.close();
+            cnn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(LivreDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return listelivre;
+    }
+
 }
-
-
