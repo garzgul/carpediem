@@ -141,14 +141,14 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
 
     
     // récupération du nom du sous-theme du livre
-    public String getNomSousThemeIdTheme(String id_soustheme)
-    {
-        String nomsoustheme = null;
-        int theme = ;
+  //  public String getNomSousThemeIdTheme(String id_soustheme)
+  //  {
+    //    String nomsoustheme = null;
+        //int theme = ;
         
         
         
-    }
+   // }
     
     
     // liste totale des livres
