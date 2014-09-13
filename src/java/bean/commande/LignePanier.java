@@ -8,7 +8,7 @@ public class LignePanier implements Serializable{
     private Livre l;
     private int qte;
     private float prixTTC;
-    private float tva;
+    private float tva; // montant de la tva
     private float prixHT;
     private float prix;
     private float poids;
@@ -21,7 +21,7 @@ public class LignePanier implements Serializable{
         this.l=l;
         qte=1;
         this.prixHT=l.getPrix();
-        this.tva=l.getPrix()*l.getTva().getTva();
+        this.tva=l.getPrix()*(l.getTva().getTva()/100);
         this.prixTTC=prixHT+tva;
         this.poids = l.getPoids();
         

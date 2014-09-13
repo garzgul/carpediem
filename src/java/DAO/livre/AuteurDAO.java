@@ -8,7 +8,6 @@ import bean.produit.Auteur;
 import java.io.Serializable;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -44,11 +43,14 @@ public class AuteurDAO extends DAO<Auteur> implements Serializable{
         Auteur a = null;
         String req = "{call findAuteurParId(?)}";
         CallableStatement cstmt = cnn.prepareCall(req);
+        System.out.println(">>>>>>>>>auteur id = "+id);
         cstmt.setInt(1, id);
         ResultSet rs = cstmt.executeQuery();
-        a =new Auteur(id, rs.getString("auteur_nom"));
-        if(!"inconnu".equalsIgnoreCase(a.getNomAuteur())){
-            a.setPrenomAuteur(rs.getString("auteur_prenom"));
+        while (rs.next()) {
+            a = new Auteur(id, rs.getString("auteur_nom"));
+            if (!"inconnu".equalsIgnoreCase(a.getNomAuteur())) {
+                a.setPrenomAuteur(rs.getString("auteur_prenom"));
+            }
         }
         rs.close();
         cstmt.close();

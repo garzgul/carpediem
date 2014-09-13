@@ -26,6 +26,7 @@ public class LivreGestion implements Serializable {
 
     
     public Livre findLivre(int id) throws SQLException, NamingException{
+        System.out.println("dans findlivre livre Gestion");
         return lDao.find(id);
     }
 
