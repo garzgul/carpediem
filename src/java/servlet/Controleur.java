@@ -201,49 +201,30 @@ public class Controleur extends HttpServlet {
 
 // fin module commande   
 // Module Recherche (Eddy)        
-        if ("recherche".equalsIgnoreCase(section)) {
+        if ("recherche".equalsIgnoreCase(section)) { // section recherche concernée
             if (session.getAttribute("beanLivreGestion") == null) {
                 try {
-                    session.setAttribute("beanLivreGestion", new LivreGestion());
-
+                    session.setAttribute("beanLivreGestion", new LivreGestion()); // instanciation bean métier
                 } catch (NamingException ex) {
-                    erreurGrave = true;
+                    erreurGrave = true; // flag boolean pour signaler qu'une erreur s'est produite
                 }
             }
-            System.out.println(">>>>>>>>>>>>>>>>>>>passage dans recherche");
             if (request.getParameter("action") != null) {
-                if ("rechercher".equalsIgnoreCase(action)) {
-                    System.out.println(">>>>>>>>>>>>>>>>>>>passage dans rechercher");
+                if ("rechercher".equalsIgnoreCase(action)) { // action rechercher provoquée par le formulaire user
                     lg = (LivreGestion) session.getAttribute("beanLivreGestion");
-                    String champRecherche = request.getParameter("ChampRecherche");
-                    //System.out.println("champrecherche = " + champRecherche);
+                    String champRecherche = request.getParameter("ChampRecherche"); // récup de la saisie à rechercher
                     List<Livre> lL = null;
                     try {
-                        lL = lg.findAll(champRecherche);
+                        lL = lg.findAll(champRecherche); // appel de la méthode métier de recherche
                     } catch (SQLException ex) {
-                        erreurGrave = true;
+                        erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
                     }
-                    System.out.println(">>>>>>>>>>>>>>>>>>> lL = " + lL);
-                    //session.setAttribute("rechercheListeLivre",lL); // place la liste des livres trouvés
-                    request.setAttribute("rechercheResultat", lL); // place la liste des livres trouvés
-                    //request.setAttribute("resultat", "/WEB-INF/catalogue/resultat.jsp");
-                    //request.setAttribute("pagevisee", "/WEB-INF/catalogue/resultat.jsp"); // definit le lien où le resultat doit s'afficher
-                    request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage");
-                    //pageJsp = "/WEB-INF/catalogue/resultat.jsp";
-                    // pageJsp = "/WEB-INF/main/Main.jsp";
-                    System.out.println("passage action rechercher => vers resultat.jsp");
-
-                }
-
+                    request.setAttribute("rechercheResultat", lL); // place la liste des livres trouvés dans le scope request
+                    request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage"); // signalement
+                                             // qu'une liste de livres sera à afficher dynamiquement en résultat
+              }
             }
-
-            if (request.getParameter("action") == null) {
-                System.out.println("passage action null recherche.jsp");
-                //pageJsp = "/WEB-INF/catalogue/recherche.jsp";
-            }
-
         }
-
 // fin module recherche (Eddy)
 // module gestion fiche livre  
         if ("ficheLivre".equalsIgnoreCase(section)) {
