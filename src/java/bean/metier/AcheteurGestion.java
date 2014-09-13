@@ -97,7 +97,23 @@ public class AcheteurGestion implements Serializable{
         return null;
     }
     
+    // Modifier les données d'un acheteur.
+    public Acheteur modifierAcheteur(Acheteur ach) throws SQLException{
+        boolean test = achDAO.update(ach);
+        if(true == test){
+            return ach;
+        }
+        return null;
+    }
    
-   
-    
+    public String supprimerAcheteur(Acheteur ach) throws SQLException{
+        String reponse = "Votre compte n'a pas été supprimer";
+        if(achDAO.find(ach.getEmailAcheteur(), ach.getMdpAcheteur()) != null){
+            boolean test = achDAO.delete(ach);
+            if(test){
+                reponse ="Votre compte a été supprimé avec succé !";
+            }
+        }
+            return reponse;
+    }
 }

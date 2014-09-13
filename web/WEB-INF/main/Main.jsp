@@ -40,14 +40,18 @@
                         <c:import url="${affichagecompte}"/>
                     </c:if>
                     
+
                     <c:if test="${not empty affichagepanier}">
                         <c:import url="${affichagepanier}" />
+
+                    <c:if test="${not empty voircompte}">
+                        <c:import url="${voircompte}"/>
                     </c:if>
                     
-
-
-
-
+                    
+                    
+                   
+                    
                 </div><!-- fin div contentcontenu -->
             </div><!-- Fin contenu -->
 
