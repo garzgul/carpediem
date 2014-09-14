@@ -42,7 +42,9 @@
 
 
                     <c:if test="${not empty affichagepanier}">
-                        <c:import url="${affichagepanier}" />
+
+                        <c:import url="${affichagepanier}"/> 
+
                     </c:if>
 
                     <c:if test="${not empty voircompte}">

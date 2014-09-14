@@ -443,7 +443,6 @@ public class Controleur extends HttpServlet {
             //        request.setAttribute("messagecontactFourni", messagecontact.trim());//faut il enlever les espaces?
 //                pageJsp = "/WEB-INF/bordure/contact.jsp";
 //   
-//
 //            }
         // Consultation d'un livre - fiche produit (Emma)
 //        if(action.equalsIgnoreCase("consulter"))
@@ -460,6 +459,7 @@ public class Controleur extends HttpServlet {
 // debut module emma
             // }}
 // fin module emma
+
             
             
             
@@ -467,6 +467,7 @@ public class Controleur extends HttpServlet {
             if (erreurGrave) {
                 pageJsp = "/WEB-INF/erreurs/warning.jsp";
             }
+
 // fin traitement        
 
 // debut affichage via urls dynamiques
