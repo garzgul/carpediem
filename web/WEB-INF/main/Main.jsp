@@ -18,8 +18,8 @@
 
     <body id="index"> <!-- ouverture balise body  -->
         <div id="global"><!-- ouverture balise div id="global"  -->
-           <c:import url="${entete}" />
-           <c:import url="${menu}" />
+            <c:import url="${entete}" />
+            <c:import url="${menu}" />
             <c:import url="/WEB-INF/catalogue/recherche.jsp" />
 
 
@@ -31,28 +31,30 @@
                     <c:if test="${not empty recherche}">  
                         <c:import url="${recherche}" />
                     </c:if>
-                    
+
                     <c:if test="${not empty affichageLivre}">
                         <c:import url="${affichageLivre}" />
                     </c:if>
-                    
+
                     <c:if test ="${not empty affichagecompte}">
                         <c:import url="${affichagecompte}"/>
                     </c:if>
-                    
+
 
                     <c:if test="${not empty affichagepanier}">
+
                         <c:import url="${affichagepanier}"/> 
+
                     </c:if>
 
                     <c:if test="${not empty voircompte}">
                         <c:import url="${voircompte}"/>
                     </c:if>
-                    
-                    
-                    
-                   
-                    
+
+
+
+
+
                 </div><!-- fin div contentcontenu -->
             </div><!-- Fin contenu -->
 
