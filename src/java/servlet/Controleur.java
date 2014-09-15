@@ -180,6 +180,8 @@ public class Controleur extends HttpServlet {
                     erreurGrave = null;
                 } catch (NamingException ex) {
                     erreurGrave = null;
+                } catch (ParseException ex) {
+                    erreurGrave = null;
                 }
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
                 response.sendRedirect("Controleur?section=panier&action=affichage");
@@ -197,6 +199,8 @@ public class Controleur extends HttpServlet {
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 } catch (NamingException ex) {
+                    erreurGrave = true;
+                } catch (ParseException ex) {
                     erreurGrave = true;
                 }
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
@@ -249,7 +253,8 @@ public class Controleur extends HttpServlet {
             }
         }
 
-// fin module commande   
+// fin module commande  
+        
 // Module Recherche (Eddy)        
         if ("recherche".equalsIgnoreCase(section)) { // section recherche concernée
             if (session.getAttribute("beanLivreGestion") == null) {
@@ -277,7 +282,7 @@ public class Controleur extends HttpServlet {
         }
 // fin module recherche (Eddy)
         
-// module gestion fiche livre  
+// Module gestion fiche livre (Eddy)
         if ("ficheLivre".equalsIgnoreCase(section)) {
             if (session.getAttribute("beanLivreGestion") == null) {
                 try {
@@ -295,6 +300,8 @@ public class Controleur extends HttpServlet {
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 } catch (NamingException ex) {
+                    erreurGrave = true;
+                } catch (ParseException ex) {
                     erreurGrave = true;
                 }
                 session.setAttribute("ficheLivreCourant", l); // place le livre courant en session
