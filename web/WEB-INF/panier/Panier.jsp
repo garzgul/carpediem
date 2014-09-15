@@ -13,7 +13,7 @@
         <c:import url="${affichagedetailpanier}"/>
         
         <p>
-            <c:url value="controleur?section=commande&action=validercommande" var="url"/>
+            <c:url value="Controleur?section=commande&action=validercommande" var="url"/>
             <a href="${url}">Validez la commande</a>
         </p>
         

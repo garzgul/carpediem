@@ -46,6 +46,8 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
 
             return obj;
         }
+        cstmt.close();
+        cnn.close();
         return null;
     }
 
@@ -74,6 +76,8 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
         if(0 != rs){
             test = true;
         }
+        pStmt.close();
+        cnn.close();
         return test;
         
     }
@@ -100,6 +104,7 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
     @Override
     public Acheteur find(int id) throws SQLException {
         Connection cnn = fc.fournir();
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

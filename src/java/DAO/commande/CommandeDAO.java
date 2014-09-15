@@ -106,6 +106,8 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
             cstmt.execute();
         }
         res =true;
+        cstmt.close();
+        cnn.close();
         
         return res;
     }

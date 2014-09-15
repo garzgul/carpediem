@@ -60,5 +60,10 @@ public class LignePanier implements Serializable{
     public float getPoidsTotal(){
         return poids*qte;
     }
+
+    @Override
+    public String toString() {
+        return l+" -> "+qte;
+    }
     
 }

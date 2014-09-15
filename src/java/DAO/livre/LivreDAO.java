@@ -6,6 +6,7 @@ import DAO.utils.FournirConnectionIt;
 import DAO.utils.MaConnexionBDD;
 import bean.produit.Auteur;
 import bean.produit.Livre;
+import bean.produit.TypeFormatLivre;
 import java.io.Serializable;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -46,19 +47,16 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
 
     @Override
     public Livre find(int id) throws SQLException, NamingException {
-        System.out.println("dans la DAO");
         Livre l = null;
         Connection cnn = fc.fournir();
         String req = "{call findLivreParId(?)}";
         CallableStatement cstmt = cnn.prepareCall(req);
         cstmt.setInt(1, id);
         ResultSet rs01 = cstmt.executeQuery();
-        System.out.println(">>>>>>>>>dans find livre");
         l = new Livre();
         while (rs01.next()) {
             l.setTitre(rs01.getString("livre_titre"));
             l.setId(id);
-            System.out.println("dans le while apres le titre");
             if ("1".equalsIgnoreCase(rs01.getString("livre_actif"))) {
                 l.setActifLivre(true);
             } else {
@@ -68,10 +66,9 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
             l.setIsbn10(rs01.getString("livre_isbn10"));
             l.setPoids(Float.valueOf(rs01.getString("livre_poids")));
             l.setPrix(Float.valueOf(rs01.getString("livre_prix")));
-            System.out.println(">>>>>>>>>avant TVA");
             TvaDAO tvaDao = new TvaDAO();
             l.setTva(tvaDao.find(id));
-            System.out.println(">>>>>>>>>>>>>>>apres TVA");
+            l.setImage(rs01.getString("livre_photo"));
             // recherche des id auteur via la table index ecriture
             req = "Select * from ecriture where id_livre = ?";
             PreparedStatement pstmt = cnn.prepareStatement(req);
@@ -83,12 +80,10 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
                 listeAuteur.add(aDAO.find(Integer.valueOf(rs02.getString("id_auteur"))));
             }
             l.setListeAu(listeAuteur);
-            System.out.println(">>>>>>>>>>>>>apres auteur");
             //recherche de l'editeur via la cle etrangere dans la table livre
             int idEditeur = Integer.valueOf(rs01.getString("id_editeur"));
             EditeurDAO eDAO = new EditeurDAO();
             l.setEd(eDAO.find(idEditeur));
-            System.out.println(">>>>>>>>>>>>>apres Editeur");
             rs02.close();
             pstmt.close();
         }

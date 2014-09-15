@@ -1,12 +1,13 @@
 <!-- Main page commande-->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:if test="${not empty maliste}">
 <div class="detailcommande">
+    <h1 class ="commandetitre">Votre commande</h1>
     
-    <c:import url="Controleur?section=commande?action=affichage"/>
+    <c:import url="${affichagecommande}"/>
     
     
     
