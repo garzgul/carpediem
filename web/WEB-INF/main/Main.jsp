@@ -54,9 +54,11 @@
                         <c:import url="${voircompte}"/>
                     </c:if>
 
+                    <c:if test="${not empty fragement}">
+                        <c:import url="${fragement}"/>
+                    </c:if>
 
-
-
+                    
 
                 </div><!-- fin div contentcontenu -->
             </div><!-- Fin contenu -->

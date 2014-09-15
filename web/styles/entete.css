@@ -1,4 +1,3 @@
-
 /* 
     Created on : 15 sept. 2014, 10:07:02
     Author     : cdi108
@@ -8,279 +7,216 @@
 
 .clear
 {
-	clear: both;
+    clear: both;
 }
 
 #header 
 {
-	/*position: relative;/*relative par rapport au positionnement normal - permet dans un flux de lecture normal haut vers bas de faire se chavaucher des elements, de les deplacer*/
-	/*z-index: 99999;/*ordre affichage - plus le chiffre est grand et plus l element sera affiché au dessus des autres*/
-	margin-top: 10px;
-        width: 960px;
-	border: solid 4px violet;
+    /*position: relative;/*relative par rapport au positionnement normal - permet dans un flux de lecture normal haut vers bas de faire se chavaucher des elements, de les deplacer*/
+    /*z-index: 99999;/*ordre affichage - plus le chiffre est grand et plus l element sera affiché au dessus des autres*/
+    margin-top: 10px;
+    width: 960px;
+    /*border: solid 4px violet;*/
 }
 
 a, a:link, a:visited, a :hover, a:active
 {
     cursor: pointer;/*forme de main*/
     text-decoration: none;/*pas de decoration - soulignement ou autre*/
-	color: black;
+    color: black;
 }
 
 #header-options
 {
-	color: black;/*couleur texte*/
-	font-weight: bold;/*aspect de la police de caracteres gras*/
-	height: auto;/*hauteur*/
-	margin: 5px auto;/*marge exterieure pour haut et bas à 0 et gauche et droite auto*/
-	padding: auto;/*marge interieure pour haut et bas à 5 et gauche et droite 0*/
-	/*position: relative;/*relative par rapport au positionnement normal - permet dans un flux de lecture normal haut vers bas de faire se chavaucher des elements, de les deplacer*/
-	width: 960px;/*largeur*/
-	/*z-index: 99;/*ordre affichage - plus le chiffre est grand et plus l element sera affiché au dessus des autres*/
-	border: solid 4px pink;
+    float: left;
+    color: black;/*couleur texte*/
+    font-weight: bold;/*aspect de la police de caracteres gras*/
+    height: auto;/*hauteur*/
+    margin-left: 160px;/*marge exterieure pour haut et bas à 0 et gauche et droite auto*/
+    padding: auto;/*marge interieure pour haut et bas à 5 et gauche et droite 0*/
+    /*position: relative;/*relative par rapport au positionnement normal - permet dans un flux de lecture normal haut vers bas de faire se chavaucher des elements, de les deplacer*/
+    width: 500px;/*largeur*/
+    /*z-index: 99;/*ordre affichage - plus le chiffre est grand et plus l element sera affiché au dessus des autres*/
+    /*border: solid 4px pink;*/
 }
 
 #not-login
 {
-	/*float: left;/*positionnement flottant à gauche*/
-	width: auto;
-	height: auto;
-	position: relative;
-	border: solid 3px orange;
+    /*float: left;/*positionnement flottant à gauche*/
+    width: auto;
+    height: auto;
+    //margin-left: 150px;
+    //position: relative;
+    /*border: solid 3px orange;*/
 }
 
 #not-login-signup
 {
-	display: block;	
-	width: auto;
-	height: auto;
-	float: left;
-	position: relative;
-	left: 550px;
-	background-color: silver;
-	text-align: center;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left: 5px;
-	margin-right: 5px;
-	padding: 5px 30px 5px 30px;/*haut droite bas gauche*/
-	border: solid 1px grey;
-	/*border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
-	/*-moz-border-radius: 4px 4px 4px 4px;
-	/*-webkit-border-radius: 4px 4px 4px 4px;*/
+    display: block;	
+    width: auto;
+    height: auto;
+    float: left;
+    //position: relative;
+    left: 150px;
+    background-color: silver;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px 30px 5px 30px;/*haut droite bas gauche*/
+    border: solid 1px grey;
+    border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
 }
 
 #not-login-signup a
 {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 #not-login-login
 {
-	display: block;	
-	width: auto;
-	height: auto;
-	float: left;
-	position: relative;
-	left: 550px;
-	background-color: silver;
-	text-align: center;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left: 5px;
-	margin-right: 5px;
-	padding: 5px 30px 5px 30px;/*haut droite bas gauche*/
-	border: solid 1px grey;
-	/*border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
-	/*-moz-border-radius: 4px 4px 4px 4px;
-	/*-webkit-border-radius: 4px 4px 4px 4px;*/
+    display: block;	
+    width: auto;
+    height: auto;
+    float: left;
+    //position: relative;
+    //left: 550px;
+    background-color: silver;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px 30px 5px 30px;/*haut droite bas gauche*/
+    border: solid 1px grey;
+    border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
 }
 
 #not-login-login a
 {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 #login
 {
-	/*float: left;/*positionnement flottant à gauche*/
-	width: auto;
-	height: auto;
-	position: relative;
-	/*border: solid 3px orange;*/
+    /*float: left;/*positionnement flottant à gauche*/
+    width: auto;
+    height: auto;
+    position: relative;
+    /*border: solid 3px orange;*/
 }
 
 #login-signup
 {
-	display: block;	
-	width: auto;
-	height: auto;
-	float: left;
-	position: relative;
-	left: 550px;
-	background-color: silver;
-	text-align: center;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left: 5px;
-	margin-right: 5px;
-	padding: 5px 30px 5px 30px;/*haut droite bas gauche*/
-	border: solid 1px grey;
-	/*border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
-	/*-moz-border-radius: 4px 4px 4px 4px;
-	/*-webkit-border-radius: 4px 4px 4px 4px;*/
+    display: block;	
+    width: auto;
+    height: auto;
+    float: left;
+    //position: relative;
+    //left: 550px;
+    background-color: silver;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px 30px 5px 30px;/*haut droite bas gauche*/
+    border: solid 1px grey;
+    border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
 }
 
 #login-signup a
 {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 #login-login
 {
-	display: block;	
-	width: auto;
-	height: auto;
-	float: left;
-	position: relative;
-	left: 550px;
-	background-color: silver;
-	text-align: center;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left: 5px;
-	margin-right: 5px;
-	padding: 5px 30px 5px 30px;/*haut droite bas gauche*/
-	border: solid 1px grey;
-	/*border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
-	/*-moz-border-radius: 4px 4px 4px 4px;
-	/*-webkit-border-radius: 4px 4px 4px 4px;*/
+    display: block;	
+    width: auto;
+    height: auto;
+    float: left;
+    //position: relative;
+    //left: 550px;
+    background-color: silver;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px 30px 5px 30px;/*haut droite bas gauche*/
+    border: solid 1px grey;
+    border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
 }
 
 #login-login a
 {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 #header-options li 
 {
-	display: inline;/*affichage, element devient de type inline*/
-	float: left;/*positionnement flottant à gauche*/
-	/*position: relative;/*relative par rapport au positionnement normal - permet dans un flux de lecture normal haut vers bas de faire se chavaucher des elements, de les deplacer*/
-	border: solid 1px grey;
+    display: inline;/*affichage, element devient de type inline*/
+    float: left;/*positionnement flottant à gauche*/
+    /*position: relative;/*relative par rapport au positionnement normal - permet dans un flux de lecture normal haut vers bas de faire se chavaucher des elements, de les deplacer*/
+    border: solid 1px grey;
 }
 
 #header-options a, a:link, a:visited, a :hover, a:active
 {
-	color: #333;/*gris fonce presque noir*/
-}
-
-/*Publicité flash*/
-#publicite-flash
-{
-	/*background-position: 0 -9px;/*0px a droite, -9px en bas en partant du coin haut gauche*/
-	background-color: silver;/*couleur fond*/
-	background-image:linear-gradient(silver, grey); /* Norme W3C */
-	background-image:-moz-linear-gradient(silver, grey); /* Firefox */
-	background-image:-webkit-gradient(linear, silver, grey); /* Chrome, Safari */
-	background-image:-o-linear-gradient(silver, grey); /* Opera */
-	background-image:-ms-linear-gradient(silver, grey); /* IE */
-	height: 65px;
-	width: 960px;
-	margin: 5px auto;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
-	padding: auto;/*marge interieure pour haut et bas à 5 et gauche et droite 0*/
-	/*position: relative;*/
-	border: solid 1px E7E7E7;
-	border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
-	-moz-border-radius: 4px 4px 4px 4px;
-	-webkit-border-radius: 4px 4px 4px 4px;
-	box-shadow: 2px 2px 4px black;/*ombre decalage vertical, horizontal, adoucissement et couleur*/
-}
-
-#publicite-flash-lien
-{
-	float: left;
-	height: 55px;
-	width: 120px;
-	margin-left: 3px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	//background-image: url("http://.jpg") no repeat scroll 0 0;/*image de fond, pas de repetition du fond, le fond defile avec le texte, position à 0px du coin haut gauche (0px à droite et 0px en bas)*/
-	background-size: contain;/*redimensionne l'image*/
-	/*opacity: 0.5%;/*transparence de 50% - 0 transparent et 1 opaque*/
-	/*border: solid 1px white;*/
-	border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
-	-moz-border-radius: 4px 4px 4px 4px;
-	-webkit-border-radius: 4px 4px 4px 4px;
-}
-
-#pub 
-{
-	float: left;
-	height: 50px;
-	width: 820px;
-	margin-top: 7px;
-	margin-bottom: 5px;
-	margin-right: 5px;
-	margin-left: 5px;
-	background-color: black;
-	/*opacity: 0.5;/*transparence de 50%*/
-	border: solid 1px black;
-	border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
-	-moz-border-radius: 4px 4px 4px 4px;
-	-webkit-border-radius: 4px 4px 4px 4px;
+    color: #333;/*gris fonce presque noir*/
 }
 
 /*gros logo*/
 #gros-logo-div
 {
-	border: solid 3px black;
-	height: 246px;
-	width: 960px;	
-	/*position: relative;*/
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left: auto;
-	margin-right: auto;
-	padding: auto;/*marge interieure pour haut et bas à 5 et gauche et droite 0*/
+    border: solid 3px black;
+    height: 246px;
+    width: 250px;	
+    /*position: relative;*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: auto;
+    padding: auto;/*marge interieure pour haut et bas à 5 et gauche et droite 0*/
+    float : left;
 }
 
-#groslogocentre
+#logocarpediem
 {
-	font-weight: bold;
-	height: 236px;
-	width: auto;
-	/*background: url("../images/logos/soleillogo9.jpeg") no repeat scroll 0 0 transparent;*/
-	/*opacity:.01;
-	-moz-opacity:.01;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";
-	filter: alpha(opacity=1);
-	/*visibility: visible;/*affichage*/
-	/*position: absolute;/*on peut placer où on veut dans le dernier conteneur*/
-	/*left: auto;
-	right: auto;*/
-	text-align: center;
-	margin-top: 10px;
-	margin-bottom: 5px;
-	margin-left: auto;
-	margin-right: auto;
-	border: solid 4px pink;
+    width: 220px;
+    height: 150px;
+    margin: auto;
+    /*border: solid 4px orange;*/
 }
 
-#logomanehousiteheader
+#panier
 {
-	width: auto;
-	height: 236px;
-	margin: auto;
-	border: solid 4px orange;
+    float: left;
+    width: 220px;
+    height: 150px;
+    margin-top: 70px;
+    margin-left: 450px;
+    /*border: solid 4px red;*/
 }
 
-#manehousitebanniere1
-{
-	z-index: 99;/*ordre affichage - plus le chiffre est grand et plus l element sera affiché au dessus des autres*/
-}
+
 
 #datejour
 {
-    
+    margin: 0;
+    //padding-right: 20px;
+    width: 960px;
+    height : 20px;
+    text-align: right;/*alignement texte droite*/
+    /*border: solid 1px purple;*/
 }
