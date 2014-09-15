@@ -43,7 +43,6 @@ public class AuteurDAO extends DAO<Auteur> implements Serializable{
         Auteur a = null;
         String req = "{call findAuteurParId(?)}";
         CallableStatement cstmt = cnn.prepareCall(req);
-        System.out.println(">>>>>>>>>auteur id = "+id);
         cstmt.setInt(1, id);
         ResultSet rs = cstmt.executeQuery();
         while (rs.next()) {

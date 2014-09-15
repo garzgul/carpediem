@@ -52,6 +52,9 @@ public class TvaDAO extends DAO<Taxe> implements Serializable{
         while (rs.next()){
             tva = new Taxe(Float.valueOf(rs.getString("tva_taux")));
         }
+        rs.close();
+        pstmt.close();
+        cnn.close();
         return tva;
     }
 

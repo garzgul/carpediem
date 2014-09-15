@@ -32,7 +32,7 @@ public class Panier implements Serializable{
                 lignes.remove(id);
             }else{
                 if(lp.getQte()>lp.getL().getStock()){
-                    lp.setQte(lp.getL().getStock());
+                    lp.setQte(lp.getQte());
                 }
             }
             ok = true;
@@ -57,9 +57,9 @@ public class Panier implements Serializable{
         }
         int id = l.getId();
         boolean existeDeja = update(id, 1);
-        if (!existeDeja){
-            LignePanier lp = new LignePanier(l);
-            lignes.remove(id, lp);
+        if (existeDeja){
+            
+            lignes.remove(id);
         }
     }
     
