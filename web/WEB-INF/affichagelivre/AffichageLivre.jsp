@@ -1,6 +1,5 @@
 <%-- 
     Document   : AffichageLivre
-
     Author     : eddy
 --%>
 
@@ -8,9 +7,23 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div>
-    <h1>Resultat</h1>
+    <h2>Fiche</h2>
     <c:if test="${not empty ficheLivreCourant}">
-        <p>${ficheLivreCourant}</p>
+        <div>Livre : ${ficheLivreCourant}</div>
+        <div>Couverture : <img src="./images/${ficheLivreCourant.image}" width="200" height="200" /></div>
+        <div>Sous-titre : ${ficheLivreCourant.soustitre}</div>
+        <div>ISBN10 : ${ficheLivreCourant.isbn10}</div>
+        <div>ISBN13 : ${ficheLivreCourant.isbn13}</div>
+        <div>Format : ${ficheLivreCourant.format}</div>
+        <div>Nombre de pages : ${ficheLivreCourant.nbpage}</div>
+        <div>Parution : ${ficheLivreCourant.parution}</div>
+        <div>Numéro d'édition : ${ficheLivreCourant.edition}</div>
+        <div>Dimensions : ${ficheLivreCourant.dimension}</div>
+        <div>Poids : ${ficheLivreCourant.poids}</div>
+        <div>Résumé : ${ficheLivreCourant.resume}</div>
+        <div>Prix : ${ficheLivreCourant.prix}</div>
+        <div>Stock disponible : ${ficheLivreCourant.stock}</div>
+        
     </c:if>
 </div>
     
