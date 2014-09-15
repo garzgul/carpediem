@@ -20,16 +20,6 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
     background: transparent;
 }
 
-body
-{
-    line-height: 1;
-}
-
-ol,ul
-{
-    list-style: none;
-}
-
 blockquote,q
 {
     quotes: none;
@@ -55,14 +45,14 @@ body
 a 
 {
     cursor: pointer;/*forme de main*/
-    text-decoration: none;/*pas de decoration - soulignement ou autre*/
+    //text-decoration: none;/*pas de decoration - soulignement ou autre*/
     color: black;
 }
 
 a:link, a:visited, a :hover, a:active
 {
     cursor: pointer;/*forme de main*/
-    text-decoration: none;/*pas de decoration - soulignement ou autre*/
+    //text-decoration: none;/*pas de decoration - soulignement ou autre*/
     color: black;
 }
 

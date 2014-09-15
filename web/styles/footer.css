@@ -16,7 +16,7 @@
 	/*position: relative;/*relative par rapport au positionnement normal - permet dans un flux de lecture normal haut vers bas de faire se chavaucher des elements, de les deplacer*/
 	/*z-index: 99999;/*ordre affichage - plus le chiffre est grand et plus l element sera affiché au dessus des autres*/
 	/*margin-bottom: 40px;*/
-	border: solid 4px red;
+	/*border: solid 4px red;*/
 }
 
 #footersite a, a:link, a:visited, a :hover, a:active
@@ -103,7 +103,7 @@
 	margin-top: 15px;
 	margin-right: 12px;
 	list-style: none outside none;
-	/*border: solid 2px red;*/
+	/*border: solid 2px black;*/
 }
 
 #footer-menu-wrap a 
@@ -131,7 +131,7 @@
 	height: 30px;
 	width: auto;
 	float: right;
-	margin-right: 5px;
+       	margin-right: 5px;
 	/*border: solid 2px blue;*/
 }
 
@@ -161,4 +161,7 @@
 }
 
 
-
+#copyright
+{
+    /*border: solid 1px yellow;*/
+}
