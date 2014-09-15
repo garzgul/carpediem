@@ -9,9 +9,9 @@
         <input type="hidden" name="section" value="connexion"/>
         <input type="hidden" name="action" value="connection"/>
         <label>Email :</label>
-        <input type="text" name="email" value="${emailFourni}"/><label class="erreur">${errEmail}</label><br/>
+        <input type="text" name="email" value="${mailFourni}"/><label class="erreur">${errConnection}</label><br/>
         <label>Mot de passe :</label>
-        <input type="password" name="mdp" value="${mdpFourni}"/><label class="erreur">${errMDP}</label><b/>
+        <input type="password" name="mdp"/><label class="erreur">${errDeMDP}</label><br/>
         <input type="submit" name="connection" value="connection"/>
         
         

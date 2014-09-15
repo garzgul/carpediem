@@ -2,20 +2,20 @@ package utilitaire;
 
 import java.util.HashMap;
 
-public class MouradException extends Exception{
+public class MonException extends Exception{
     
     private HashMap <String, String> messages;
     
-    public MouradException() {
+    public MonException() {
         super();        
     }
 
-    public MouradException(HashMap<String, String> messages) {
+    public MonException(HashMap<String, String> messages) {
         this();
         this.messages = messages;
     }
 
-    public MouradException(HashMap<String, String> messages, String msg) {
+    public MonException(HashMap<String, String> messages, String msg) {
         super(msg);
         this.messages = messages;
     }
