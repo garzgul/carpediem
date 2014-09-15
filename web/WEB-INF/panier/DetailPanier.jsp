@@ -16,7 +16,7 @@
                 <c:forEach items="${maliste}" var ="p">
                     <tr>
                         <td ><img> </td>
-                        <c:url value="controleur?section=affichagelivre&action=affichage&ref=${p.l.id}" var="url"/>
+                        <c:url value="controleur?section=fichelivre&action=afficher&ref=${p.l.id}" var="url"/>
                         <td><a href="${url}">${p.l.titre}</a></td>
                         <td><fmt:formatNumber maxFractionDigits="2" value="${p.prixHT}"/></td>
                         <td><fmt:formatNumber maxFractionDigits="2" value="${p.tva}"/></td>
