@@ -552,14 +552,12 @@ public class Controleur extends HttpServlet {
                     pageJsp = "/WEB-INF/bordure/plansite.jsp";
                     break;
                 }
-                case "mentionslegales": {
-=======
+
 //                case "mentionslegales": {
 //                    pageJsp = "/WEB-INF/bordure/mentionslegales.jsp";
 //                    break;
 //                }
                 case "affichagementionslegales": {
->>>>>>> origin/Emmanuelle
                     pageJsp = "/WEB-INF/bordure/mentionslegales.jsp";
                     break;
                 }
