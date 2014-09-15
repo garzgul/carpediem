@@ -11,6 +11,7 @@
                         <th>Couverture</th>
                         <th>Titre</th>
                         <th>Auteur</th>
+                        <th>ISBN</th>
                         <th>Prix (eur)</th>
                         <th>Action</th>
                     </tr>
@@ -21,6 +22,7 @@
                             <td><img src="./images/${l.image}" width="100" height="100" /></td>
                             <td><a href="Controleur?section=ficheLivre&action=afficher&ref=${l.id}">${l}</a></td>
                             <td>${l.getListeAu().get(0)}</td>
+                            <td>${l.isbn13}</td>
                             <td>${l.prix}</td>
                             <td><a href="Controleur?section=panier&action=add&ref=${l.id}">Ajout panier</a></td>
                         </tr>

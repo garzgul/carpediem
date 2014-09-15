@@ -119,6 +119,7 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
             String id_livre = rs.getString("id_livre");
             String livre_photo = rs.getString("livre_photo");
             String livre_titre = rs.getString("livre_titre");
+            String livre_isbn13 = rs.getString("livre_isbn13");
             String id_auteur = rs.getString("id_auteur");
             String auteur_nom = rs.getString("auteur_nom");
             a = new Auteur(Integer.valueOf(id_auteur), auteur_nom);
@@ -127,6 +128,7 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
             l = new Livre(null, lA, livre_titre, 0, 0, true);
             l.setId(Integer.valueOf(id_livre));
             l.setImage(livre_photo);
+            l.setIsbn13(livre_isbn13);
             l.setPrix(Float.valueOf(rs.getString("livre_prix")));
             //TvaDAO tvaDao = new TvaDAO();
             //l.setTva(tvaDao.find(Integer.valueOf(id_livre)));
