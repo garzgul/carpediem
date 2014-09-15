@@ -37,7 +37,10 @@
                     </li>
                 </ul>
             </div><!-- fin div footer-menu-wrap -->
-            <div id="footer-wrap-social">
+           
+        </div><!-- fin div footer-liens-wrap -->
+        
+         <div id="footer-wrap-social">
                 <ul>
                     <li>
                         <img id="twitter" title="Twitter" alt="logo twitter" src="" />
@@ -47,7 +50,8 @@
                     </li>
                 </ul>
             </div><!-- fin div footer-wrap-social -->
-        </div><!-- fin div footer-liens-wrap -->	
+        
+        
     </div><!-- fin div footer-wrap -->
 
     <div id="copyright">

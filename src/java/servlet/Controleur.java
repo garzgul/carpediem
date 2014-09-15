@@ -85,11 +85,11 @@ public class Controleur extends HttpServlet {
         request.setAttribute("entete", "Controleur?section=fragement&action=entete");
         request.setAttribute("pied", "Controleur?section=fragement&action=pied");
         request.setAttribute("menu", "Controleur?section=fragement&action=menu");
-        request.setAttribute("cgv", "Controleur?section=fragement&action=cgv");
-        request.setAttribute("plansite", "Controleur?section=fragement&action=plansite");
-        request.setAttribute("mentionslegales", "Controleur?section=fragement&action=mentionslegales");
-        request.setAttribute("carpediem", "Controleur?section=fragement&action=carpediem");
-        request.setAttribute("contact", "Controleur?section=fragement&action=contact");
+//        request.setAttribute("cgv", "Controleur?section=fragement&action=cgv");
+//        request.setAttribute("plansite", "Controleur?section=fragement&action=plansite");
+//        request.setAttribute("mentionslegales", "Controleur?section=fragement&action=mentionslegales");
+//        request.setAttribute("carpediem", "Controleur?section=fragement&action=carpediem");
+//        request.setAttribute("contact", "Controleur?section=fragement&action=contact");
 //        request.setAttribute("recherchevide", "Controleur?section=rechercheaffichagevide&action=affichageboite");
 
         // fin redirection pour les bordures
@@ -420,6 +420,14 @@ public class Controleur extends HttpServlet {
 
             }
         }
+// affichage mentions legales (Emma)
+        if ("fragement".equalsIgnoreCase(section)) {
+            if ("mentionslegales".equalsIgnoreCase(action)) {
+                request.setAttribute("fragement", "Controleur?section=fragement&action=affichagementionslegales");
+            }
+            // rajout de if pour chaque action
+        }
+        
 
 // formulaire de contact (Emma)
         if ("contactformulaire".equalsIgnoreCase(section)) {
@@ -544,7 +552,12 @@ public class Controleur extends HttpServlet {
                     pageJsp = "/WEB-INF/bordure/plansite.jsp";
                     break;
                 }
-                case "mentionslegales": {
+
+//                case "mentionslegales": {
+//                    pageJsp = "/WEB-INF/bordure/mentionslegales.jsp";
+//                    break;
+//                }
+                case "affichagementionslegales": {
                     pageJsp = "/WEB-INF/bordure/mentionslegales.jsp";
                     break;
                 }
