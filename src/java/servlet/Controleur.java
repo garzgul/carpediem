@@ -39,7 +39,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import utilitaire.MouradException;
+import utilitaire.MonException;
 
 /**
  *
@@ -123,7 +123,6 @@ public class Controleur extends HttpServlet {
 //                System.out.println(">>>>>>>>>>>>dans affichage panier");
 //                request.setAttribute("affichagedetailpanier", "Controleur?section=affichagepanier&action=affichagedetail");
 //            }
-
             int idLivre = 0;
             if (request.getParameter("ref") != null) {
                 idLivre = Integer.valueOf(request.getParameter("ref"));
@@ -261,7 +260,7 @@ public class Controleur extends HttpServlet {
             }
         }
 // fin module recherche (Eddy)
-        
+
 // module gestion fiche livre  
         if ("ficheLivre".equalsIgnoreCase(section)) {
             if (session.getAttribute("beanLivreGestion") == null) {
@@ -327,9 +326,8 @@ public class Controleur extends HttpServlet {
                         session.setAttribute("Acheteur", ach);
                         ag.ajoutAcheteur(ach, confirmmdp);
                     }
-                    System.out.println(">>>>>>>>>>>>>>>>>>> passage par inscription");
                     request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
-                } catch (MouradException ex) {
+                } catch (MonException ex) {
 
                     HashMap<String, String> mp = ex.getMessages();
                     for (String s : mp.keySet()) {
@@ -348,39 +346,62 @@ public class Controleur extends HttpServlet {
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 }
-                
+
             }
 
             if ("seconnecter".equalsIgnoreCase(action)) {
                 request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageconnection");
             }
-            
+
             if ("connection".equalsIgnoreCase(action)) {
 
                 String mail = request.getParameter("email");
                 String mdp = request.getParameter("mdp");
-
                 Acheteur ach = null;
                 try {
                     ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
-                    System.out.println("========== la on est dans le try =====");
                     ach = ag.chercherAcheteur(mail, mdp);
-                    if(ach != null){
-                    session.setAttribute("Acheteur", ach);
-                    request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
+                    if (ach != null) {
+                        session.setAttribute("Acheteur", ach);
+                        request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
+                    } else {
+//                        ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
+                        ach = ag.chercherAcheteur(mail);
+                        if (ach != null) {
+                            session.setAttribute("Acheteur", ach);
+                            request.setAttribute("mailFourni", mail.trim());
+                            request.setAttribute("errDeMDP", "Mot de passe incorrect");
+                            request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=erreurConnection");
+                        } else {
+                            request.setAttribute("errConnection", "Veuillez saisir l'email et le mot de passe svp !");
+                            request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=erreurConnection");
+                        }
                     }
+
+                } catch (MonException ex) {
+                    HashMap<String, String> mp = ex.getMessages();
+                    for (String s : mp.keySet()) {
+                        request.setAttribute(s, mp.get(s));
+                    }
+                    request.setAttribute("emailFourni", mail.trim());
+                    request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=erreurConnection");
 
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 }
-               // session.setAttribute("Acheteur", ach);
+                if (mail.isEmpty() || mail == null
+                        && mdp.isEmpty() || mdp == null) {
+                    request.setAttribute("errConnection", "Veuillez saisir l'email et le mot de passe svp !");
+                    request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=erreurConnection");
+
+                }
 
             }
             if ("voircompte".equalsIgnoreCase(action)) {
-                if(session.getAttribute("Acheteur")!= null){
-                Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
+                if (session.getAttribute("Acheteur") != null) {
+                    Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
                 }
-                
+
                 request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
 
             }
@@ -404,7 +425,7 @@ public class Controleur extends HttpServlet {
 
             // proprietes du systeme
             Properties properties = System.getProperties();
-           // initialisation mail server
+            // initialisation mail server
             properties.setProperty("mail.smtp.host", host);
             // Mise en session
             Session mailSession = Session.getDefaultInstance(properties);
@@ -455,127 +476,122 @@ public class Controleur extends HttpServlet {
 //                request.setAttribute("mailFourni", mail.trim());
 //                request.setAttribute("nomFourni", nom.trim());
 //                request.setAttribute("prenomFourni", prenom.trim());
-            //        request.setAttribute("messagecontactFourni", messagecontact.trim());//faut il enlever les espaces?
+        //        request.setAttribute("messagecontactFourni", messagecontact.trim());//faut il enlever les espaces?
 //                pageJsp = "/WEB-INF/bordure/contact.jsp";
 //   
 //            }
         // Consultation d'un livre - fiche produit (Emma)
 //        if(action.equalsIgnoreCase("consulter"))
-            //    {
-            // récupération de l'id du livre (id) sur lequel le client a cliqué, au travers de la requête
+        //    {
+        // récupération de l'id du livre (id) sur lequel le client a cliqué, au travers de la requête
 //           String id_articlelivre = (String)request.getParameter("id_articlelivre");
 //            if(id_articlelivre != null && !id_articlelivre.equalsIgnoreCase("")){
-            // récupération de toutes les informations sur le livre sélectionné à partir de la bdd
-            //Livre articlelivre = Livre.get(id);
-            // on stocke le livre dans la requête
-            // request.setAttribute("articlelivre", articlelivre);
-            // puis on va sur la page du livre passé en requête et la jsp pourra le récupérer avec request.gatAttribute("articlelivre")
+        // récupération de toutes les informations sur le livre sélectionné à partir de la bdd
+        //Livre articlelivre = Livre.get(id);
+        // on stocke le livre dans la requête
+        // request.setAttribute("articlelivre", articlelivre);
+        // puis on va sur la page du livre passé en requête et la jsp pourra le récupérer avec request.gatAttribute("articlelivre")
 //                getServletContext().getRequestDispatcher("/WEB-INF/affichagelivre/AffichageLivre.jsp").forward(request, response);
 // debut module emma
-            // }}
+        // }}
 // fin module emma
-
-            
-            
-            
-            // renvoi vers la jsp de gestion des erreurs
-            if (erreurGrave) {
-                pageJsp = "/WEB-INF/erreurs/warning.jsp";
-            }
+        // renvoi vers la jsp de gestion des erreurs
+        if (erreurGrave) {
+            pageJsp = "/WEB-INF/erreurs/warning.jsp";
+        }
 
 // fin traitement        
-
 // debut affichage via urls dynamiques
-            if ("defaut".equalsIgnoreCase(section)) {
-                pageJsp = "/WEB-INF/main/Main.jsp";
-            }
-            //redirection pour les bordures
-            if ("fragement".equalsIgnoreCase(section)) {
-                System.out.println(">>>>>>>>>>>dans fragement");
-                switch (action) {
-                    case "entete": {
-                        request.setAttribute("today", new Date());
-                        pageJsp = "/WEB-INF/bordure/Entete.jsp";
-                        break;
-                    }
-                    case "pied": {
-                        pageJsp = "/WEB-INF/bordure/Pied.jsp";
-                        break;
-                    }
-                    case "menu": {
-                        pageJsp = "/WEB-INF/bordure/Menu.jsp";
-                        break;
+        if ("defaut".equalsIgnoreCase(section)) {
+            pageJsp = "/WEB-INF/main/Main.jsp";
+        }
+        //redirection pour les bordures
+        if ("fragement".equalsIgnoreCase(section)) {
+            System.out.println(">>>>>>>>>>>dans fragement");
+            switch (action) {
+                case "entete": {
+                    request.setAttribute("today", new Date());
+                    pageJsp = "/WEB-INF/bordure/Entete.jsp";
+                    break;
+                }
+                case "pied": {
+                    pageJsp = "/WEB-INF/bordure/Pied.jsp";
+                    break;
+                }
+                case "menu": {
+                    pageJsp = "/WEB-INF/bordure/Menu.jsp";
+                    break;
 
-                    }
-                    case "cgv": {
-                        pageJsp = "/WEB-INF/bordure/cgv.jsp";
-                        break;
-                    }
-                    case "plansite": {
-                        pageJsp = "/WEB-INF/bordure/plansite.jsp";
-                        break;
-                    }
-                    case "mentionslegales": {
-                        pageJsp = "/WEB-INF/bordure/mentionslegales.jsp";
-                        break;
-                    }
-                    case "carpediem": {
-                        pageJsp = "/WEB-INF/bordure/carpediempresentation.jsp";
-                        break;
-                    }
-                    case "contact": {
-                        pageJsp = "/WEB-INF/bordure/contact.jsp";
-                        break;
-                    }
-                    case "newsletter": {
-                        pageJsp = "/WEB-INF/bordure/newsletter.jsp";
-                        break;
-                    }
+                }
+                case "cgv": {
+                    pageJsp = "/WEB-INF/bordure/cgv.jsp";
+                    break;
+                }
+                case "plansite": {
+                    pageJsp = "/WEB-INF/bordure/plansite.jsp";
+                    break;
+                }
+                case "mentionslegales": {
+                    pageJsp = "/WEB-INF/bordure/mentionslegales.jsp";
+                    break;
+                }
+                case "carpediem": {
+                    pageJsp = "/WEB-INF/bordure/carpediempresentation.jsp";
+                    break;
+                }
+                case "contact": {
+                    pageJsp = "/WEB-INF/bordure/contact.jsp";
+                    break;
+                }
+                case "newsletter": {
+                    pageJsp = "/WEB-INF/bordure/newsletter.jsp";
+                    break;
+                }
 //                case "rubrique":{
 //                    pageJsp="/WEB-INF/catalogue/Rubrique.jsp";
 //                    break;
 //                }
                 }
-            }
-            //redirection pour le panier
-            if ("affichagepanier".equalsIgnoreCase(section)) {
-                System.out.println(">>>>>>>>passage dans la redirection");
-                switch (action) {
-                    case "affichage": {
-                        pageJsp = "/WEB-INF/panier/Panier.jsp";
-                        break;
-                    }
-                    case "affichagedetail": {
-                        pageJsp = "/WEB-INF/panier/DetailPanier.jsp";
-                        break;
-                    }
+        }
+        //redirection pour le panier
+        if ("affichagepanier".equalsIgnoreCase(section)) {
+            System.out.println(">>>>>>>>passage dans la redirection");
+            switch (action) {
+                case "affichage": {
+                    pageJsp = "/WEB-INF/panier/Panier.jsp";
+                    break;
+                }
+                case "affichagedetail": {
+                    pageJsp = "/WEB-INF/panier/DetailPanier.jsp";
+                    break;
                 }
             }
-            //redirection pour la commande
-            if ("commandeaffichage".equalsIgnoreCase(section)) {
-                switch (action) {
-                    case "affichage": {
-                        pageJsp = "/WEB-INF/commande/Commande.jsp";
-                        break;
-                    }
-                    case "affichagedetail": {
-                        pageJsp = "/WEB-INF/panier/DetailPanier.jsp";
-                        break;
-                    }
-                    case "affichagevalidationAcheteur": {
-                        pageJsp = "/WEB-INF/commande/validationAcheteur.jsp";
-                        break;
-                    }
-                    case "affichagevalidationcommande": {
-                        pageJsp = "/WEB-INF/commande/Commande.jsp";
-                        break;
-                    }
-                    case "affichagepaiement": {
-                        pageJsp = "/WEB-INF/commande/paiement.jsp";
-                        break;
-                    }
+        }
+        //redirection pour la commande
+        if ("commandeaffichage".equalsIgnoreCase(section)) {
+            switch (action) {
+                case "affichage": {
+                    pageJsp = "/WEB-INF/commande/Commande.jsp";
+                    break;
+                }
+                case "affichagedetail": {
+                    pageJsp = "/WEB-INF/panier/DetailPanier.jsp";
+                    break;
+                }
+                case "affichagevalidationAcheteur": {
+                    pageJsp = "/WEB-INF/commande/validationAcheteur.jsp";
+                    break;
+                }
+                case "affichagevalidationcommande": {
+                    pageJsp = "/WEB-INF/commande/Commande.jsp";
+                    break;
+                }
+                case "affichagepaiement": {
+                    pageJsp = "/WEB-INF/commande/paiement.jsp";
+                    break;
                 }
             }
+        }
 //        //redirection pour la recherche vide (dans l'entete)
 //        if("rechercheaffichagevide".equalsIgnoreCase(section)){
 //            if("affichage".equalsIgnoreCase(action)){
@@ -583,55 +599,58 @@ public class Controleur extends HttpServlet {
 //            }
 //        }
 
-            //redirection pour la recherche
-            if ("rechercheaffichage".equalsIgnoreCase(section)) {
-                if ("affichage".equalsIgnoreCase(action)) {
-                    pageJsp = "/WEB-INF/catalogue/resultat.jsp";
-                }
-                if ("affichageboite".equalsIgnoreCase(action)) {
-                    pageJsp = "/WEB-INF/catalogue/recherche.jsp";
-                }
+        //redirection pour la recherche
+        if ("rechercheaffichage".equalsIgnoreCase(section)) {
+            if ("affichage".equalsIgnoreCase(action)) {
+                pageJsp = "/WEB-INF/catalogue/resultat.jsp";
             }
-            //redirection pour la gestion de compte
-            if ("affichagecompte".equalsIgnoreCase(section)) {
-                switch (action) {
-                    case ("affichageinscription"): {
-                        pageJsp = "/WEB-INF/compte/inscriptionacheteur.jsp";
-                        break;
-                    }
-                    case ("connection"): {
-                        pageJsp = "/WEB-INF/compte/VueCompte.jsp";
-                    }
-                    case ("affichageconnection"): {
-                        pageJsp = "/WEB-INF/compte/connectionacheteur.jsp";
-                        break;
-                    }
-                    case ("voircompte"): {
-                        pageJsp = "/WEB-INF/compte/VueCompte.jsp";
-                        break;
-                    }
+            if ("affichageboite".equalsIgnoreCase(action)) {
+                pageJsp = "/WEB-INF/catalogue/recherche.jsp";
+            }
+        }
+        //redirection pour la gestion de compte
+        if ("affichagecompte".equalsIgnoreCase(section)) {
+            switch (action) {
+                case ("affichageinscription"): {
+                    pageJsp = "/WEB-INF/compte/inscriptionacheteur.jsp";
+                    break;
+                }
+                case ("connection"): {
+                    pageJsp = "/WEB-INF/compte/VueCompte.jsp";
+                }
+                case ("affichageconnection"): {
+                    pageJsp = "/WEB-INF/compte/connectionacheteur.jsp";
+                    break;
+                }
+                case ("voircompte"): {
+                    pageJsp = "/WEB-INF/compte/VueCompte.jsp";
+                    break;
+                }
+                case ("erreurConnection"): {
+                    pageJsp = "/WEB-INF/compte/connectionacheteur.jsp";
+                    break;
+                }
 
-                }
             }
+        }
 
-            //redirection pour la fiche livre
-            if ("livreaffichage".equalsIgnoreCase(section)) {
-                switch (action) {
-                    case ("afficher"): {
-                        pageJsp = "/WEB-INF/affichagelivre/AffichageLivre.jsp";
-                        break;
-                    }
+        //redirection pour la fiche livre
+        if ("livreaffichage".equalsIgnoreCase(section)) {
+            switch (action) {
+                case ("afficher"): {
+                    pageJsp = "/WEB-INF/affichagelivre/AffichageLivre.jsp";
+                    break;
                 }
             }
+        }
 
 // fin affichage via urls dynamiques        
-            System.out.println("00-------------------------------0>>>" + pageJsp);
-            pageJsp = response.encodeURL(pageJsp);
-            getServletContext().getRequestDispatcher(pageJsp).include(request, response);
+        System.out.println("00-------------------------------0>>>" + pageJsp);
+        pageJsp = response.encodeURL(pageJsp);
+        getServletContext().getRequestDispatcher(pageJsp).include(request, response);
 
-        
     }
-    
+
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

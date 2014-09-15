@@ -8,6 +8,7 @@ import java.io.Serializable;
  * @author user
  */
 public class Adresse implements Serializable{
+    private int idAcheteur;
     private String adresseAcheteur1;
     private String adresseAcheteur2;
     private String cpAcheteur;
@@ -27,6 +28,14 @@ public class Adresse implements Serializable{
         this.villeAcheteur = villeAcheteur;
         this.paysAcheteur = paysAcheteur;
         this.actifAcheteur = actifAcheteur;
+    }
+
+    public int getIdAcheteur() {
+        return idAcheteur;
+    }
+
+    public void setIdAcheteur(int idAcheteur) {
+        this.idAcheteur = idAcheteur;
     }
     
     public int getIdadresse() {
