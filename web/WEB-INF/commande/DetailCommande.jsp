@@ -35,16 +35,16 @@
     
     <p>
     <!--detail acheteur -->
-    Nom : ${prenomAcheteur} ${nomAcheteur}<br/>
+    Nom : ${Acheteur.prenomAcheteur} ${acheteur.nomAcheteur}<br/>
     
     <!--choix de l'adresse -->
     Choix de l'adresse:
         adresse par defaut :
-        ${AdresseAcheteur1}
-        ${AdresseAcheteur2}
-        ${cpAcheteur}
-        ${villeAcheteur}
-        ${patsAcheteur}
+        ${Acheteur.adresseAcheteur1}
+        ${Acheteur.adresseAcheteur2}
+        ${Acheteur.cpAcheteur}
+        ${Acheteur.villeAcheteur}
+        ${Acheteur.paysAcheteur}
     
     Si vous souhaitez l'envoyer a une autre adresse, veuillez selectionner l'adresse ci dessous :
     

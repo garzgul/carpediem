@@ -211,11 +211,11 @@ public class Controleur extends HttpServlet {
             System.out.println(">>>>>>>>>>>>>>>>>>>>> dans commande");
             if (session.getAttribute("maliste") == null) {
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
-                // getServletContext().getRequestDispatcher(pageJsp).forward(request, response);
+                
             }
             if (session.getAttribute("panier") == null) {
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
-                // getServletContext().getRequestDispatcher(pageJsp).forward(request, response);
+                
             }
             p = (Panier) session.getAttribute("panier");
 
