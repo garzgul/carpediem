@@ -10,11 +10,15 @@ import bean.produit.TypeFormatLivre;
 import java.io.Serializable;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -86,6 +90,20 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
             l.setEd(eDAO.find(idEditeur));
             rs02.close();
             pstmt.close();
+            
+            l.setImage(rs01.getString("livre_photo"));
+            l.setSoustitre(rs01.getString("livre_soustitre"));
+            l.setFormat(TypeFormatLivre.valueOf(rs01.getString("livre_format")));
+            String livre_nbpages = rs01.getString("livre_nbpages");
+            if(livre_nbpages!=null){
+                l.setNbpage(Integer.valueOf(livre_nbpages));
+            }
+            l.setParution(rs01.getDate("livre_parution"));
+            l.setEdition(Integer.valueOf(rs01.getString("livre_edition")));
+            l.setDimension(rs01.getString("livre_dimension"));
+            l.setResume(rs01.getString("livre_resume"));
+            l.setStock(Integer.valueOf(rs01.getString("livre_stock")));
+            
         }
 
         rs01.close();
@@ -114,6 +132,7 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
             String id_livre = rs.getString("id_livre");
             String livre_photo = rs.getString("livre_photo");
             String livre_titre = rs.getString("livre_titre");
+            String livre_isbn13 = rs.getString("livre_isbn13");
             String id_auteur = rs.getString("id_auteur");
             String auteur_nom = rs.getString("auteur_nom");
             a = new Auteur(Integer.valueOf(id_auteur), auteur_nom);
@@ -122,6 +141,7 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
             l = new Livre(null, lA, livre_titre, 0, 0, true);
             l.setId(Integer.valueOf(id_livre));
             l.setImage(livre_photo);
+            l.setIsbn13(livre_isbn13);
             l.setPrix(Float.valueOf(rs.getString("livre_prix")));
             //TvaDAO tvaDao = new TvaDAO();
             //l.setTva(tvaDao.find(Integer.valueOf(id_livre)));

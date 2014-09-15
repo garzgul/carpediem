@@ -180,7 +180,7 @@ public class Controleur extends HttpServlet {
                     erreurGrave = null;
                 } catch (NamingException ex) {
                     erreurGrave = null;
-                }
+                } 
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
                 response.sendRedirect("Controleur?section=panier&action=affichage");
                 return;
@@ -198,7 +198,7 @@ public class Controleur extends HttpServlet {
                     erreurGrave = true;
                 } catch (NamingException ex) {
                     erreurGrave = true;
-                }
+                } 
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
                 response.sendRedirect("Controleur?section=panier&action=affichage");
                 return;
@@ -249,7 +249,8 @@ public class Controleur extends HttpServlet {
             }
         }
 
-// fin module commande   
+// fin module commande  
+        
 // Module Recherche (Eddy)        
         if ("recherche".equalsIgnoreCase(section)) { // section recherche concernée
             if (session.getAttribute("beanLivreGestion") == null) {
@@ -277,7 +278,7 @@ public class Controleur extends HttpServlet {
         }
 // fin module recherche (Eddy)
         
-// module gestion fiche livre  
+// Module gestion fiche livre (Eddy)
         if ("ficheLivre".equalsIgnoreCase(section)) {
             if (session.getAttribute("beanLivreGestion") == null) {
                 try {
@@ -296,7 +297,7 @@ public class Controleur extends HttpServlet {
                     erreurGrave = true;
                 } catch (NamingException ex) {
                     erreurGrave = true;
-                }
+                } 
                 session.setAttribute("ficheLivreCourant", l); // place le livre courant en session
                 request.setAttribute("affichageLivre", "Controleur?section=livreaffichage&action=afficher");
             }
