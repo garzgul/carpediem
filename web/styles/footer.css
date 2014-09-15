@@ -1,0 +1,164 @@
+
+/* 
+    Created on : 15 sept. 2014, 10:12:36
+    Author     : cdi108
+*/
+
+/* Footer */
+
+.clear
+{
+	clear: both;
+}
+
+#footersite
+{
+	/*position: relative;/*relative par rapport au positionnement normal - permet dans un flux de lecture normal haut vers bas de faire se chavaucher des elements, de les deplacer*/
+	/*z-index: 99999;/*ordre affichage - plus le chiffre est grand et plus l element sera affiché au dessus des autres*/
+	/*margin-bottom: 40px;*/
+	border: solid 4px red;
+}
+
+#footersite a, a:link, a:visited, a :hover, a:active
+{
+	color: #333;/*gris fonce presque noir*/
+}
+
+#footer-wrap 
+{
+	/*background-position: 0 -9px;/*0px a droite, -9px en bas en partant du coin haut gauche*/
+	background-color: silver;/*couleur fond*/
+	background-image:linear-gradient(silver, grey); /* Norme W3C */
+	background-image:-moz-linear-gradient(silver, grey); /* Firefox */
+	background-image:-webkit-gradient(linear, silver, grey); /* Chrome, Safari */
+	background-image:-o-linear-gradient(silver, grey); /* Opera */
+	background-image:-ms-linear-gradient(silver, grey); /* IE */
+	height: 65px;
+	width: 960px;
+	margin: 5px auto;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
+	padding: auto;/*marge interieure pour haut et bas à 5 et gauche et droite 0*/
+	/*position: relative;*/
+	border: solid 1px E7E7E7;
+	border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
+	-moz-border-radius: 4px 4px 4px 4px;
+	-webkit-border-radius: 4px 4px 4px 4px;
+	box-shadow: 2px 2px 4px black;/*ombre decalage vertical, horizontal, adoucissement et couleur*/
+}
+
+#footer-liens-wrap
+{
+	float: left;
+	height: 50px;
+	width: 820px;
+	margin-top: 7px;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	margin-left: 5px;
+	background-color: black;
+	/*opacity: 0.5;/*transparence de 50%*/
+	border: solid 1px black;
+	border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
+	-moz-border-radius: 4px 4px 4px 4px;
+	-webkit-border-radius: 4px 4px 4px 4px;
+}
+
+.footer-menu-a 
+{
+	border-left: 1px solid #e7e7e7;
+	padding-top: 0;
+	padding-left: 10px;
+	padding-right: 0;
+	padding-bottom: 10px;
+	/*border: solid 1px blue;*/
+}
+
+#sansseparateur
+{
+	border-left: none;
+}
+
+#footer-menu-wrap
+{
+	height: 30px;
+	width: auto;
+	float: left;
+	/*border: solid 2px yellow;*/
+}
+
+#footer-menu-wrap ul
+{
+	float: left;
+	width: auto;
+	height: auto;
+	margin-right: 5px;
+	list-style: none outside none;
+	/*border: solid 2px green;*/
+}
+
+#footer-menu-wrap li
+{
+	float: left;
+	width: auto;
+	height: auto;
+	margin-top: 15px;
+	margin-right: 12px;
+	list-style: none outside none;
+	/*border: solid 2px red;*/
+}
+
+#footer-menu-wrap a 
+{
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 20px;
+	width: auto;
+	height: auto;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 0;
+	margin-bottom: 10px;
+	padding-top: 0;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	text-decoration: none;
+	color: #e7e7e7 !important;
+	/*border: solid 2px pink;*/
+}
+
+#footer-wrap-social 
+{
+	height: 30px;
+	width: auto;
+	float: right;
+	margin-right: 5px;
+	/*border: solid 2px blue;*/
+}
+
+#footer-wrap-social li
+{
+	display: inline;
+}
+
+#footer-wrap-social img
+{
+	float: left;
+	margin-right: 5px;
+	margin-top: 15px;
+	width: auto;
+	height: auto;
+	/*border: solid 1px red;*/
+}
+
+#footersite p 
+{
+	color: #4c4444;/*gris fonce*/
+	font-size: 11px;
+	padding: 13px 0;
+	text-align: center;
+	text-shadow: white 0 1px 1px;
+	/*border: solid 1px yellow;*/
+}
+
+
+
