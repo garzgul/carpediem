@@ -105,6 +105,7 @@ public class Controleur extends HttpServlet {
                 }
             }
             lg = (LivreGestion) session.getAttribute("beanLivreGestion");
+            request.setAttribute("affichagedetailpanier", "Controleur?section=affichagepanier&action=affichagedetail");
             if (session.getAttribute("panier") == null) {
                 session.setAttribute("panier", new Panier());
             }
@@ -118,10 +119,10 @@ public class Controleur extends HttpServlet {
             }
 
             // affichage du contenu du panier
-            if ("affichagepanier".equalsIgnoreCase(action)) {
-                System.out.println(">>>>>>>>>>>>dans affichage panier");
-                request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichagedetail");
-            }
+//            if ("affichagedetailpanier".equalsIgnoreCase(action)) {
+//                System.out.println(">>>>>>>>>>>>dans affichage panier");
+//                request.setAttribute("affichagedetailpanier", "Controleur?section=affichagepanier&action=affichagedetail");
+//            }
 
             int idLivre = 0;
             if (request.getParameter("ref") != null) {
@@ -280,7 +281,9 @@ public class Controleur extends HttpServlet {
                 } catch (NamingException ex) {
                     erreurGrave = true;
                 }
-                session.setAttribute("ficheLivreCourant", l); // place le livre courant
+                session.setAttribute("ficheLivreCourant", l); // place le livre courant en session
+                System.out.println(l.toString());
+                System.out.println(">>>>>>>>>>>>>>>>> dans affichage livre");
                 request.setAttribute("affichageLivre", "Controleur?section=livreaffichage&action=afficher");
             }
         }
@@ -322,6 +325,8 @@ public class Controleur extends HttpServlet {
                         session.setAttribute("acheteur", ach);
                         ag.ajoutAcheteur(ach, confirmmdp);
                     }
+                    System.out.println(">>>>>>>>>>>>>>>>>>> passage par inscription");
+                    request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
                 } catch (MouradException ex) {
 
                     HashMap<String, String> mp = ex.getMessages();
@@ -341,7 +346,7 @@ public class Controleur extends HttpServlet {
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 }
-                request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
+                
             }
 
             if ("seconnecter".equalsIgnoreCase(action)) {
@@ -429,6 +434,7 @@ public class Controleur extends HttpServlet {
                 mex.printStackTrace();
                 result = "Une erreur est survenue lors de l'envoi du message!";
             }
+        }
 
 //
 //               session.setAttribute("user", m);
@@ -476,6 +482,7 @@ public class Controleur extends HttpServlet {
             }
             //redirection pour les bordures
             if ("fragement".equalsIgnoreCase(section)) {
+                System.out.println(">>>>>>>>>>>dans fragement");
                 switch (action) {
                     case "entete": {
                         request.setAttribute("today", new Date());
@@ -612,7 +619,7 @@ public class Controleur extends HttpServlet {
             pageJsp = response.encodeURL(pageJsp);
             getServletContext().getRequestDispatcher(pageJsp).include(request, response);
 
-        }
+        
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
