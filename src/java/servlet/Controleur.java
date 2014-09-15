@@ -429,7 +429,7 @@ public class Controleur extends HttpServlet {
                 mex.printStackTrace();
                 result = "Une erreur est survenue lors de l'envoi du message!";
             }
-
+        }
 //
 //               session.setAttribute("user", m);
 //          
@@ -613,7 +613,7 @@ public class Controleur extends HttpServlet {
             getServletContext().getRequestDispatcher(pageJsp).include(request, response);
 
         }
-    }
+    
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

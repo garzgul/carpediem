@@ -1,0 +1,793 @@
+
+/* 
+    Created on : 15 sept. 2014, 09:44:26
+    Author     : cdi108
+*/
+
+
+/*CSS reset Eric Meyer*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+body
+{
+    line-height: 1;
+}
+
+ol,ul
+{
+    list-style: none;
+}
+
+blockquote,q
+{
+    quotes: none;
+}
+
+/*html et body*/
+.clear
+{
+    clear: both;
+}
+
+body
+{
+    min-height: 500px;
+    background: none repeat scroll 0 0 transparent;
+    color: #3c3a35;/*gris fonce presque noir*/
+    font: 12px 'Lucida Sans','Lucida Grande',sans-serif;/*police de windows et mac par exellence*/
+    line-height: 1;
+    //width: 960px;
+     border: 1px solid yellow;
+}
+
+a 
+{
+    cursor: pointer;/*forme de main*/
+    text-decoration: none;/*pas de decoration - soulignement ou autre*/
+    color: black;
+}
+
+a:link, a:visited, a :hover, a:active
+{
+    cursor: pointer;/*forme de main*/
+    text-decoration: none;/*pas de decoration - soulignement ou autre*/
+    color: black;
+}
+
+ol, ul 
+{
+    list-style: none outside none;/*aucune puce, avec retrait, sans image url*/
+}
+
+table 
+{
+    border-collapse: separate;/*bordures tableau et cellules separes*/
+    border-spacing: 0;/*espacement entre chaque cellules*/
+}
+
+caption, th, td
+{
+    font-weight: normal;/*texte normal*/
+    text-align: left;/*alignement texte gauche*/
+}
+
+blockquote:before, blockquote:after, q:before, q:after
+{
+    content: "";
+}
+
+blockquote, q 
+{
+    quotes: "" "";
+}
+
+/*global*/
+#global
+{
+    text-align: left;
+    min-height: 100%;/*hauteur minimum du container*/
+    position: relative;/*relative par rapport au positionnement normal - permet dans un flux de lecture normal haut vers bas de faire se chavaucher des elements, de les deplacer*/
+    width: 960px;
+    
+}
+
+.messageerreur
+{
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    color: #D8000C;
+    background-color: #FFBABA;
+    background-image: url('erreur.png');
+    width: auto;
+    height: auto;
+    font-size: 28px;
+}
+
+.messagereussite
+{
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    background-image:url('reussite.png');
+    width: auto;
+    height: auto;
+    font-size: 28px;
+}
+
+.messagealerte
+{
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    color: #9F6000;
+    background-color: #FEEFB3;
+    background-image: url('alerte.png');
+    width: auto;
+    height: auto;
+    font-size: 28px;
+}
+
+.messageinfo
+{
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    color: #00529B;
+    background-color: #BDE5F8;
+    background-image: url('info.png');
+    width: auto;
+    height: auto;
+    font-size: 28px;
+}
+
+.messagediscret
+{
+    /*border: solid 1px grey;*/
+    background-color: silver;
+    width: auto;
+    height: auto;
+    margin-left: 40px;
+    margin-right: 40px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.gras
+{
+    font-weight: bold;
+}
+
+/*Mentions legales*/
+#fondmentions
+{
+    width: 720px;
+    min-height: 500px;
+    margin-top: -15px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    border: solid 1px grey;
+    background-color: white;
+    /*box-shadow: 8px 8px 0px #aaa;/*decalage horizontal vers droite, decalage vertical vers bas,force du degrade et couleur */ 
+    box-shadow: 8px 8px 12px #aaa/*1px 1px 12px #555;*/
+        //-moz-box-shadow : 8px 8px 12px #aaa; 
+        //-webkit-box-shadow: 8px 8px 12px #aaa; 
+        //box-shadow: 8px 8px 12px #555; 
+        /*[if lte IE 8]*/
+        // filter:progid:DXImageTransform.Microsoft.Shadow(color='#aaaaaa', Direction=135, Strength=12);
+        // zoom: 1;
+}
+
+#toutes_les_mentions
+{
+    min-height: 600px;
+    padding: 0 12px 20px;
+    /*border: solid 4px yellow;*/
+}
+
+#toutes_les_mentionsh2
+{
+    height: auto;
+    padding: 15px;
+    color: #000000;
+    font: bold 28px Arial,Helvetica !important;
+    letter-spacing: -0.025em;
+    text-shadow: 1px 1px 0 #FFFFFF;
+    text-transform: none;
+    line-height: 20px;
+    /*border: solid 4px blue;*/
+}
+
+.artcontenu
+{
+    /*border: solid 4px blue;*/
+    margin-left: 15px;
+    margin-top: 15px;
+
+}
+
+/*cgv*/
+#fondcgv
+{
+    width: 720px;
+    min-height: 500px;
+    margin-top: -15px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    border: solid 1px grey;
+    background-color: white;
+    /*box-shadow: 8px 8px 0px #aaa;/*decalage horizontal vers droite, decalage vertical vers bas,force du degrade et couleur */ 
+    box-shadow: 8px 8px 12px #aaa/*1px 1px 12px #555;*/
+        //-moz-box-shadow: 8px 8px 12px #aaa; 
+        //-webkit-box-shadow: 8px 8px 12px #aaa; 
+        //box-shadow: 8px 8px 12px #555; 
+        /*[if lte IE 8]*/
+        //filter:progid:DXImageTransform.Microsoft.Shadow(color='#aaaaaa', Direction=135, Strength=12);
+        // zoom: 1;
+}
+
+#toutes_les_cgv
+{
+    min-height: 600px;
+    padding: 0 12px 20px;
+    /*border: solid 4px yellow;*/
+}
+
+#toutes_les_cgvh2
+{
+    height: auto;
+    padding: 15px;
+    color: #000000;
+    font: bold 28px Arial,Helvetica !important;
+    letter-spacing: -0.025em;
+    text-shadow: 1px 1px 0 #FFFFFF;
+    text-transform: none;
+    line-height: 20px;
+    /*border: solid 4px blue;*/
+}
+
+#centrer_datemajcgv
+{
+    text-align: center;
+}
+
+/*plansite*/
+#fondplansite
+{
+    width: 720px;
+    min-height: 500px;
+    margin-top: -15px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    border: solid 1px grey;
+    background-color: white;
+    /*box-shadow: 8px 8px 0px #aaa;/*decalage horizontal vers droite, decalage vertical vers bas,force du degrade et couleur */ 
+    box-shadow: 8px 8px 12px #aaa/*1px 1px 12px #555;*/
+        //-moz-box-shadow: 8px 8px 12px #aaa; 
+        //-webkit-box-shadow: 8px 8px 12px #aaa; 
+        //box-shadow: 8px 8px 12px #555; 
+        /*[if lte IE 8]*/
+        // filter:progid:DXImageTransform.Microsoft.Shadow(color='#aaaaaa', Direction=135, Strength=12);
+        // zoom: 1;
+}
+
+#toutes_les_rubriques
+{
+    min-height: 600px;
+    padding: 0 12px 20px;
+    /*border: solid 4px yellow;*/
+}
+
+.menu_nav
+{
+    margin-left: 20px;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    font-size: 28px;
+    padding: 20px;
+}
+
+
+#dejamembre, #pasmembre/*formulaire idem connexion*/
+{
+    text-decoration: underline;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+#introformconnexion/*connexion*/
+{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+#formconnexion /*formulaire idem connexion membres*/
+{
+    width: 90%;/*taille max du formulaire*/
+    /*float:left;*/
+    height: auto;
+    margin-left: 40px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+#formconnexion p
+{
+    margin: 2px o;/*on ecarte un peu les champs*/
+}
+
+#formconnexion form
+{
+    margin-bottom: 10px;/*marge du bas*/
+    border: #ccc 2px inset;/*gris 3d enfonce*/
+    padding: 10px;
+}
+
+#formconnexion label
+{
+    background-color: #292929;/*couleur de fond pour séparer les labels des champs*/
+    color: white;/*couleur texte labels*/
+    font-size: 14px;
+    display: block;/*si on veut mettre une taille aux labels*/
+    width: 35%;
+    float: left;/*pour aligner les champs de texte avec le label*/
+    padding-right: 1%;
+    text-align: right;/*on aligne le texte à droite*/
+    letter-spacing: 1px;/*pour mieux voir*/
+    height: 20px;
+}
+
+#formconnexion label:hover
+{
+    font-weight: bold;
+}
+
+#formconnexion input/*on modifie la taille des champs pour les avoir tous de la mm longueur*/
+{
+    margin-left: 2%;
+    height: 20px;
+    width: 50%;
+    font-size: 14px;
+    border: #ccc 1px inset;/*gris clair*/
+}
+
+#formconnexion input:hover, #formconnexion input:focus/*on met en couleur le fond des champs au survol et on garde ce fond qd on est dans le champs par le focus*/
+{
+    border: #999 1px solid;/*gris*/
+    background-color: #cccccc;/*gris*/
+}
+
+#formconnexion input[type="submit"]
+{
+    border: #D7ff83 1px solid;/*vert*/
+    width: 35%;
+    margin-top: 10px;
+    margin-left: 50%;
+    margin-bottom: 30px;
+}
+
+#formconnexion input[type="submit"]:hover
+{
+    background-color: #D7ff83;/*vert*/
+    cursor: pointer;/*on change le curseur*/
+}
+
+#sinscriredeconnexion a
+{
+    font-size: 20px;
+}
+
+#lieninscription /*formulaire idem connexion membres*/
+{
+    width: 40%;/*taille max du formulaire*/
+    float:left;
+    margin-left: 70px;
+    text-align : center;
+}
+#lieninscription p
+{
+    margin: 2px o;/*on ecarte un peu les champs*/
+}
+
+#inscrivezvous 
+{
+    text-align : center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top : 50px;
+}
+
+/*formulaire inscription*/
+#introforminscription 
+{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+#forminscription /*formulaire idem connexion membres*/
+{
+    width: 90%;/*taille max du formulaire*/
+    /*float:left;*/
+    height: auto;
+    margin-left: 40px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+#forminscription p
+{
+    margin: 2px o;/*on ecarte un peu les champs*/
+}
+
+#forminscription form
+{
+    margin-bottom: 10px;/*marge du bas*/
+    border: #ccc 2px inset;/*gris 3d enfonce*/
+    padding: 10px;
+}
+
+#forminscription label
+{
+    background-color: #292929;/*couleur de fond pour séparer les labels des champs*/
+    color: white;/*couleur texte labels*/
+    font-size: 14px;
+    display: block;/*si on veut mettre une taille aux labels*/
+    width: 35%;
+    float: left;/*pour aligner les champs de texte avec le label*/
+    padding-right: 1%;
+    text-align: right;/*on aligne le texte à droite*/
+    letter-spacing: 1px;/*pour mieux voir*/
+    height: 20px;
+}
+
+#forminscription label:hover
+{
+    font-weight: bold;
+}
+
+#forminscription input/*on modifie la taille des champs pour les avoir tous de la mm longueur*/
+{
+    margin-left: 2%;
+    width: 50%;
+    font-size: 14px;
+    border: #ccc 1px inset;/*gris clair*/
+    height: 20px;
+}
+
+#forminscription input:hover, #forminscription input:focus/*on met en couleur le fond des champs au survol et on garde ce fond qd on est dans le champs par le focus*/
+{
+    border: #999 1px solid;/*gris*/
+    background-color: #cccccc;/*gris*/
+}
+
+#forminscription input[type="submit"]
+{
+    border: #D7ff83 1px solid;/*vert*/
+    width: 35%;
+    margin-top: 10px;
+    margin-left: 50%;
+    margin-bottom: 30px;
+
+}
+
+#forminscription input[type="submit"]:hover
+{
+    background-color: #D7ff83;/*vert*/
+    cursor: pointer;/*on change le curseur*/
+}
+
+/*formulaire de contact*/
+#presentationform
+{
+    margin-left: 70px;
+    margin-bottom: 20px;
+}
+
+#aperçuresultat p
+{
+    font-weight: bold;
+    Margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.erreur p
+{
+    color: red;
+    font-size: 28px;
+    margin: 20px;
+}
+
+#formcontact /*formulaire contact pour envoyer un mail*/
+{
+    width: 70%;/*taille max du formulaire*/
+    height: auto;
+    margin-left: 70px;
+    margin-top: 20px;
+}
+
+#formcontact p
+{
+    margin: 5px o;/*on ecarte un peu les champs*/
+}
+
+#formcontact form
+{
+    margin-bottom: 10px;/*marge du bas*/
+    border: #ccc 2px inset;/*gris 3d enfonce*/
+}
+
+#formcontact label
+{
+    background-color: #292929;/*couleur de fond pour séparer les labels des champs*/
+    color: white;/*couleur texte labels*/
+    display: block;/*si on veut mettre une taille aux labels*/
+    width: 39%;
+    float: left;/*pour aligner les champs de texte avec le label input/labels*/
+    padding-right: 1%;
+    text-align: right;/*on aligne le texte à droite*/
+    letter-spacing: 1px;/*pour mieux voir*/
+}
+
+#formcontact label:hover
+{
+    font-weight: bold;
+}
+
+#formcontact input, #formcontact textarea/*on modifie la taille des champs pour les avoir tous de la mm longueur*/
+{
+    margin-left: 2%;
+    width: 50%;
+    border: #ccc 1px inset;/*gris clair*/
+}
+
+#formcontact input:hover, #formcontact input:focus/*on met en couleur le fond des champs au survol et on garde ce fond qd on est dans le champs par le focus*/
+{
+    border: #999 1px solid;/*gris*/
+    background-color: #cccccc;/*gris*/
+}
+
+#formcontact input[type="submit"]
+{
+    border: #D7ff83 1px solid;/*vert*/
+    width: 20%;
+    margin-top: 10px;
+    margin-left: 50%;
+    margin-bottom: 10px;
+}
+
+#formcontact input[type="submit"]:hover
+{
+    background-color: #D7ff83;/*rouge*/
+    cursor: pointer;/*on change le curseur*/
+}
+
+#contact
+{
+    padding-top: 30px;
+}
+
+/*formulaire recherche*/
+#formrecherche
+{
+    width: 70%;/*taille max du formulaire*/
+    height: auto;
+    margin-left: 70px;
+    margin-top: 20px;
+}
+
+#formrecherche p
+{
+    /*margin: 5px o;/*on ecarte un peu les champs*/
+    margin-left: 2%;
+    font-size: 20px;
+}
+
+#formrecherche form
+{
+    margin-bottom: 10px;/*marge du bas*/
+    border: #ccc 2px inset;/*gris 3d enfonce*/
+}
+
+#formrecherche input/*on modifie la taille des champs pour les avoir tous de la mm longueur*/
+{
+    margin-left: 2%;
+    width: 50%;
+    border: #ccc 1px inset;/*gris clair*/
+}
+
+#formrecherche input:hover, #formrecherche input:focus/*on met en couleur le fond des champs au survol et on garde ce fond qd on est dans le champs par le focus*/
+{
+    border: #999 1px solid;/*gris*/
+    background-color: #cccccc;/*gris*/
+}
+
+#formrecherche input[type="submit"]
+{
+    border: #D7ff83 1px solid;/*vert*/
+    width: 20%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+
+#formrecherche input[type="submit"]:hover
+{
+    background-color: #D7ff83;/*rouge*/
+    cursor: pointer;/*on change le curseur*/
+}
+
+.titreh2recherche
+{
+    margin-left: 2%;
+    font-size: 20px;
+}
+
+.titreh2
+{
+    font-size: 20px;
+    margin: 20px;
+    padding: 5px;
+}
+
+#introformmdpperdu/*mdpperdu*/
+{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+#mdpperduformulaire /*formulaire idem connexion membres*/
+{
+    width: 90%;/*taille max du formulaire*/
+    /*float:left;*/
+    height: auto;
+    margin-left: 40px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+#mdpperduformulaire p
+{
+    margin: 2px o;/*on ecarte un peu les champs*/
+}
+
+#mdpperduformulaire form
+{
+    margin-bottom: 10px;/*marge du bas*/
+    border: #ccc 2px inset;/*gris 3d enfonce*/
+    padding: 10px;
+}
+
+#mdpperduformulaire label
+{
+    background-color: #292929;/*couleur de fond pour séparer les labels des champs*/
+    color: white;/*couleur texte labels*/
+    font-size: 14px;
+    display: block;/*si on veut mettre une taille aux labels*/
+    width: 35%;
+    float: left;/*pour aligner les champs de texte avec le label*/
+    padding-right: 1%;
+    text-align: right;/*on aligne le texte à droite*/
+    letter-spacing: 1px;/*pour mieux voir*/
+    height: 20px;
+}
+
+#mdpperduformulaire label:hover
+{
+    font-weight: bold;
+}
+
+#mdpperduformulaire input/*on modifie la taille des champs pour les avoir tous de la mm longueur*/
+{
+    margin-left: 2%;
+    height: 20px;
+    width: 50%;
+    font-size: 14px;
+    border: #ccc 1px inset;/*gris clair*/
+}
+
+#mdpperduformulaire input:hover, #mdpperduformulaire input:focus/*on met en couleur le fond des champs au survol et on garde ce fond qd on est dans le champs par le focus*/
+{
+    border: #999 1px solid;/*gris*/
+    background-color: #cccccc;/*gris*/
+}
+
+#mdpperduformulaire input[type="submit"]
+{
+    border: #D7ff83 1px solid;/*vert*/
+    width: 35%;
+    margin-top: 10px;
+    margin-left: 50%;
+    margin-bottom: 30px;
+}
+
+#mdpperduformulaire input[type="submit"]:hover
+{
+    background-color: #D7ff83;/*vert*/
+    cursor: pointer;/*on change le curseur*/
+}
+
+
+#mdpperduformulaire
+{
+    width: 70%;/*taille max du formulaire*/
+    height: auto;
+    margin-left: 70px;
+    margin-top: 20px;
+}
+
+#mdpperduformulaire form
+{
+    margin-bottom: 10px;/*marge du bas*/
+    border: #ccc 2px inset;/*gris 3d enfonce*/
+}
+
+#mdpperduformulaire input/*on modifie la taille des champs pour les avoir tous de la mm longueur*/
+{
+    margin-left: 2%;
+    width: 50%;
+    border: #ccc 1px inset;/*gris clair*/
+}
+
+#mdpperduformulaire input:hover, #mdpperduformulaire input:focus/*on met en couleur le fond des champs au survol et on garde ce fond qd on est dans le champs par le focus*/
+{
+    border: #999 1px solid;/*gris*/
+    background-color: #cccccc;/*gris*/
+}
+
+#mdpperduformulaire input[type="submit"]
+{
+    border: #D7ff83 1px solid;/*vert*/
+    width: 20%;
+    margin-top: 10px;
+    margin-left: 40%;
+    margin-bottom: 10px;
+}
+
+#mdpperduformulaire input[type="submit"]:hover
+{
+    background-color: #D7ff83;/*rouge*/
+    cursor: pointer;/*on change le curseur*/
+}
+
+#introformmdpperdu
+{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+#mdpperduconnexion a
+{
+    font-size: 20px;
+    margin-left: 60px;
+}
+

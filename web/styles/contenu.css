@@ -1,0 +1,50 @@
+
+/* 
+    Created on : 15 sept. 2014, 10:15:18
+    Author     : cdi108
+*/
+
+/* contenu */
+
+.clear
+{
+	clear: both;
+}
+
+a, a:link, a:visited, a :hover, a:active
+{
+    cursor: pointer;/*forme de main*/
+    text-decoration: none;/*pas de decoration - soulignement ou autre*/
+	color: black;
+}
+#contentcontenu
+{
+	min-height: 600px;
+	width: 960px;
+	margin-left: auto;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
+	margin-right: auto;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
+	margin-top: 0;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
+	margin-bottom: 35px;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
+	/*padding: auto;/*marge interieure pour haut et bas à 5 et gauche et droite 0*/
+    /*padding: 20px 10px 0 !important;*/
+	padding-top: auto;
+	padding-left: auto;
+	padding-right: auto;
+	padding-bottom: 30px;
+	border-top: #E7E7E7 6px solid;
+	border-left: #E7E7E7 6px solid;
+	border-right: #E7E7E7 6px solid;
+	border-bottom: #E7E7E7 6px solid;
+	background-color: #c0c0c0;
+  overflow:hidden;
+}
+
+.titreh1
+{
+	font-weight: bold;
+	font-size: 18px;
+	margin-top: 10px;
+	margin-bottom: 40px;
+}
+#index-haut,#bloc-infos,#bloc-news,#bloc-dossiers,#bloc-forum{overflow:hidden;}
+
