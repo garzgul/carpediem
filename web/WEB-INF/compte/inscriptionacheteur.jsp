@@ -20,7 +20,7 @@
                 <label>Mot de passe :</label>
                 <input type="password" name="mdp" value="${mdpFourni}"/><label class="erreur">${errMDP}</label><br/>
                 <label>Confirmer mot de passe :</label>
-                <input type="password" name="confirmdp" value="${confirmdpFourni}"/><label class="erreur">${errConfMDP}</label>
+                <input type="password" name="confirmdp" value="${confirmdpFourni}"/><label class="erreur">${errConfMDP}</label><br/>
                 <input type="submit" name="DoIt" value="Créer compte"/>
             </form>            
         </div>
