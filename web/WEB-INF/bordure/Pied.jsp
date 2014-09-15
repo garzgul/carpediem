@@ -3,8 +3,7 @@
 <%@taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="footersite">      
     <div id="footer-wrap">
-        <div id="footer-wrap-home"></div>   
-        <div id="footer-liens-wrap">
+         <div id="footer-liens-wrap">
             <div id="footer-menu-wrap">
                 <ul>
                     <li><c:url var="url" value="Controleur?section=fragement&action=carpediem" />

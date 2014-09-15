@@ -10,7 +10,10 @@
         <meta lang="fr" content="Carpe Diem promeut les livres. Les livres que vous achetez en ligne sont disponibles et livrables rapidement." name="description">
         <meta content="livres, livre, livres neufs, livre neuf, littérature, roman policier, science-fiction, fantasy, vie pratique, architecture, urbanisme, histoire, philosophie, essai, dictionnaire, scolaire, BD, manga, jeunesse, livraison gratuite, avis, conseils, critiques, coups de coeur, nouveautés, meilleures ventes" name="keywords">
         <meta content="ALL,INDEX,FOLLOW,NOODP" name="robots">
-        <link type="text/css" rel="stylesheet" href="styles/global.css" />
+        <link type="text/css" rel="stylesheet" href="styles/carpediemcss.css" />
+        <link type="text/css" rel="stylesheet" href="styles/entete.css" />
+        <link type="text/css" rel="stylesheet" href="styles/footer.css" />
+        <link type="text/css" rel="stylesheet" href="styles/contenu.css" />
         <!-- <script type="text/javascript" src="inc/jquery-1.11.0.min.js"></script>
          <script type="text/javascript" src="inc/jquery.cycle.all.js"></script>
          <script type="text/javascript" src="inc/manehou.js"></script> -->
