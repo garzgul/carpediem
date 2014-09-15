@@ -4,6 +4,7 @@ import DAO.livre.LivreDAO;
 import bean.produit.Livre;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
@@ -25,7 +26,7 @@ public class LivreGestion implements Serializable {
     }
 
     
-    public Livre findLivre(int id) throws SQLException, NamingException{
+    public Livre findLivre(int id) throws SQLException, NamingException, ParseException {
         System.out.println("dans findlivre livre Gestion");
         return lDao.find(id);
     }

@@ -6,14 +6,19 @@ import DAO.utils.FournirConnectionIt;
 import DAO.utils.MaConnexionBDD;
 import bean.produit.Auteur;
 import bean.produit.Livre;
+import bean.produit.TypeFormatLivre;
 import java.io.Serializable;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -45,7 +50,7 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
     }
 
     @Override
-    public Livre find(int id) throws SQLException, NamingException {
+    public Livre find(int id) throws SQLException, NamingException, ParseException {
         System.out.println("dans la DAO");
         Livre l = null;
         Connection cnn = fc.fournir();
@@ -91,6 +96,20 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
             System.out.println(">>>>>>>>>>>>>apres Editeur");
             rs02.close();
             pstmt.close();
+            
+            l.setImage(rs01.getString("livre_photo"));
+            l.setSoustitre(rs01.getString("livre_soustitre"));
+            l.setFormat(TypeFormatLivre.valueOf(rs01.getString("livre_format")));
+            String livre_nbpages = rs01.getString("livre_nbpages");
+            if(livre_nbpages!=null){
+                l.setNbpage(Integer.valueOf(livre_nbpages));
+            }
+            l.setParution(rs01.getDate("livre_parution"));
+            l.setEdition(Integer.valueOf(rs01.getString("livre_edition")));
+            l.setDimension(rs01.getString("livre_dimension"));
+            l.setResume(rs01.getString("livre_resume"));
+            l.setStock(Integer.valueOf(rs01.getString("livre_stock")));
+            
         }
 
         rs01.close();

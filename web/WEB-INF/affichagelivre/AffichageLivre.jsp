@@ -5,6 +5,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div>
     <h2>Fiche</h2>
@@ -16,14 +17,13 @@
         <div>ISBN13 : ${ficheLivreCourant.isbn13}</div>
         <div>Format : ${ficheLivreCourant.format}</div>
         <div>Nombre de pages : ${ficheLivreCourant.nbpage}</div>
-        <div>Parution : ${ficheLivreCourant.parution}</div>
+        <div>Parution : <fmt:formatDate pattern="dd/MM/yyyy" value="${ficheLivreCourant.parution}" /></div>
         <div>Numéro d'édition : ${ficheLivreCourant.edition}</div>
         <div>Dimensions : ${ficheLivreCourant.dimension}</div>
         <div>Poids : ${ficheLivreCourant.poids}</div>
         <div>Résumé : ${ficheLivreCourant.resume}</div>
-        <div>Prix : ${ficheLivreCourant.prix}</div>
+        <div>Prix (eur) : ${ficheLivreCourant.prix}</div>
         <div>Stock disponible : ${ficheLivreCourant.stock}</div>
-        
     </c:if>
 </div>
     

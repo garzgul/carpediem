@@ -181,6 +181,8 @@ public class Controleur extends HttpServlet {
                     erreurGrave = null;
                 } catch (NamingException ex) {
                     erreurGrave = null;
+                } catch (ParseException ex) {
+                    erreurGrave = null;
                 }
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
             }
@@ -195,6 +197,8 @@ public class Controleur extends HttpServlet {
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 } catch (NamingException ex) {
+                    erreurGrave = true;
+                } catch (ParseException ex) {
                     erreurGrave = true;
                 }
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
@@ -281,6 +285,8 @@ public class Controleur extends HttpServlet {
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 } catch (NamingException ex) {
+                    erreurGrave = true;
+                } catch (ParseException ex) {
                     erreurGrave = true;
                 }
                 session.setAttribute("ficheLivreCourant", l); // place le livre courant en session
