@@ -322,8 +322,9 @@ public class Controleur extends HttpServlet {
                     Acheteur ach = new Acheteur(nom, prenom, pseudo, mdp, true);
                     ach.setEmailAcheteur(email);
                     ach.setTelAcheteur(tel);
+                    request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
                     if (ach != null) {
-                        session.setAttribute("acheteur", ach);
+                        session.setAttribute("Acheteur", ach);
                         ag.ajoutAcheteur(ach, confirmmdp);
                     }
                     System.out.println(">>>>>>>>>>>>>>>>>>> passage par inscription");
@@ -352,8 +353,8 @@ public class Controleur extends HttpServlet {
 
             if ("seconnecter".equalsIgnoreCase(action)) {
                 request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageconnection");
-                System.out.println("=========== i l est ici ====<<<");
             }
+            
             if ("connection".equalsIgnoreCase(action)) {
 
                 String mail = request.getParameter("email");
@@ -364,15 +365,22 @@ public class Controleur extends HttpServlet {
                     ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
                     System.out.println("========== la on est dans le try =====");
                     ach = ag.chercherAcheteur(mail, mdp);
+                    if(ach != null){
+                    session.setAttribute("Acheteur", ach);
                     request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
+                    }
 
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 }
-                session.setAttribute("Acheteur", ach);
+               // session.setAttribute("Acheteur", ach);
 
             }
             if ("voircompte".equalsIgnoreCase(action)) {
+                if(session.getAttribute("Acheteur")!= null){
+                Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
+                }
+                
                 request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
 
             }
@@ -600,6 +608,7 @@ public class Controleur extends HttpServlet {
                     }
                     case ("voircompte"): {
                         pageJsp = "/WEB-INF/compte/VueCompte.jsp";
+                        break;
                     }
 
                 }

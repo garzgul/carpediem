@@ -8,20 +8,21 @@
     <form action="Controleur" method="POST">
         <input type="hidden" name="section" value="connexion"/>
         <input type="hidden" name="action" value="voircompte"/>
+        <input type="hidden" name="action" value="inscription"/>
         
-        <c:if test="${!empty ach}">
+        <c:if test="${not empty Acheteur}">
             <label>Nom :</label>
-            <input type="text" name="nom" value="${ach.nomAcheteur}"/><br/>
+            <input type="text" name="nom" value="${Acheteur.nomAcheteur}"/><br/>
             <label>Prenom :</label>
-            <input type="text" name="prenom" value="${ach.prenomAcheteur}"/><br/>
+            <input type="text" name="prenom" value="${Acheteur.prenomAcheteur}"/><br/>
             <label>Pseudo :</label>
-            <input type="text" name="pseudo" value="${ach.pseudoAcheteur}"/><br/>
+            <input type="text" name="pseudo" value="${Acheteur.pseudoAcheteur}"/><br/>
             <label>Mot de passe :</label>
-            <input type="password" name="mdp" value="${ach.mdpAcheteur}"/><br/>
+            <input type="password" name="mdp" value="${Acheteur.mdpAcheteur}"/><br/>
             <label>Email :</label>
-            <input type="text" name="mail" value="${ach.emailAcheteur}"/><br/>
+            <input type="text" name="mail" value="${Acheteur.emailAcheteur}"/><br/>
             <label>Téléphone :</label>
-            <input type="text" name="tel" value="${ach.telAcheteur}"/><br/>
+            <input type="text" name="tel" value="${Acheteur.telAcheteur}"/><br/>
             <input type="submit" name="voiradresse" value="Voir adresse"/>
             <input type="submit" name="modifiercompte" value="Modifier compte"/>
             <input type="submit" name="supprimercompte" value="Supprimer compte"/>
