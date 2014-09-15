@@ -261,6 +261,7 @@ public class Controleur extends HttpServlet {
             }
         }
 // fin module recherche (Eddy)
+        
 // module gestion fiche livre  
         if ("ficheLivre".equalsIgnoreCase(section)) {
             if (session.getAttribute("beanLivreGestion") == null) {

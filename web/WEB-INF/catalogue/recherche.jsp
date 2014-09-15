@@ -6,7 +6,7 @@
 
 
 <div>
-    <h2>RECHERCHE (par titre/auteur) :</h2>
+    <h2>RECHERCHE :</h2>
     <form action="Controleur" method="POST">
         <input type="hidden" name="section" value="recherche" />
         <input type="hidden" name="action" value="rechercher" />
