@@ -16,7 +16,8 @@
     /*z-index: 99999;/*ordre affichage - plus le chiffre est grand et plus l element sera affiché au dessus des autres*/
     margin-top: 10px;
     width: 960px;
-    /*border: solid 4px violet;*/
+    height: auto;
+    border: solid 4px violet;
 }
 
 a, a:link, a:visited, a :hover, a:active
@@ -32,12 +33,12 @@ a, a:link, a:visited, a :hover, a:active
     color: black;/*couleur texte*/
     font-weight: bold;/*aspect de la police de caracteres gras*/
     height: auto;/*hauteur*/
-    margin-left: 160px;/*marge exterieure pour haut et bas à 0 et gauche et droite auto*/
+    margin-left: 190px;/*marge exterieure pour haut et bas à 0 et gauche et droite auto*/
     padding: auto;/*marge interieure pour haut et bas à 5 et gauche et droite 0*/
     /*position: relative;/*relative par rapport au positionnement normal - permet dans un flux de lecture normal haut vers bas de faire se chavaucher des elements, de les deplacer*/
     width: 500px;/*largeur*/
     /*z-index: 99;/*ordre affichage - plus le chiffre est grand et plus l element sera affiché au dessus des autres*/
-    /*border: solid 4px pink;*/
+    border: solid 4px pink;
 }
 
 #not-login
@@ -47,7 +48,7 @@ a, a:link, a:visited, a :hover, a:active
     height: auto;
     //margin-left: 150px;
     //position: relative;
-    /*border: solid 3px orange;*/
+   border: solid 3px red;
 }
 
 #not-login-signup
@@ -123,7 +124,7 @@ a, a:link, a:visited, a :hover, a:active
     text-align: center;
     margin-top: 5px;
     margin-bottom: 5px;
-    margin-left: 5px;
+    margin-left: 170px;
     margin-right: 5px;
     padding: 5px 30px 5px 30px;/*haut droite bas gauche*/
     border: solid 1px grey;
@@ -180,8 +181,8 @@ a, a:link, a:visited, a :hover, a:active
 #gros-logo-div
 {
     border: solid 3px black;
-    height: 246px;
-    width: 250px;	
+    height: auto;
+    width: auto;	
     /*position: relative;*/
     margin-top: 5px;
     margin-bottom: 5px;
@@ -196,17 +197,17 @@ a, a:link, a:visited, a :hover, a:active
     width: 220px;
     height: 150px;
     margin: auto;
-    /*border: solid 4px orange;*/
+    border: solid 4px orange;
 }
 
 #panier
 {
     float: left;
     width: 220px;
-    height: 150px;
-    margin-top: 70px;
+    height: 70px;
+    margin-top: 25px;
     margin-left: 450px;
-    /*border: solid 4px red;*/
+    border: solid 4px red;
 }
 
 
