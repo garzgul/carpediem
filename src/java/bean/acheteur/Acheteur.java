@@ -129,15 +129,7 @@ public class Acheteur implements Serializable{
         return null;
     }
     
-    /* fonction qui permet a la commande de se creer
-    
-    */
-    
-    public Commande passerCommande(){
-        Commande commande = null;
-        
-        return commande;
-    }
+ 
     
        
 }
