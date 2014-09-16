@@ -76,39 +76,42 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
         
         // creation de la commande en table commande
         Connection cnn = fc.fournir();
-        String proc ="{call createCDE(?,?,?,?,?,?,?,?)}";
-        CallableStatement cstmt = cnn.prepareCall(proc);
-        cstmt.setString(1, cde.getNumCde());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        cstmt.setString(2, sdf.format(cde.getDateCde()));
-        cstmt.setFloat(3, cde.getHtCde());
-        cstmt.setFloat(4, cde.getTvaCde());
-        // parametre de paiement toujours a true (simulation de paiement)
-        cstmt.setInt(5, 1);
-        cstmt.setString(6, cde.getModeLivraison().toString());
-        cstmt.setString(7, cde.getModePaiement());
-        cstmt.registerOutParameter(8, java.sql.Types.BIGINT);
-        cstmt.execute();
-        Long idCde = cstmt.getLong(8);
-        
-        // remplissage des lignes de commandes dans la table detailcommande
-        proc ="{call createDetailCDE(?,?,?,?,?)}";
-        cstmt= cnn.prepareCall(proc);
-        HashMap<Integer,LignePanier> listeCde = cde.getDetailCde();
-        for (LignePanier lp : listeCde.values()){
-            //stockage des valeurs de la ligne dans les parametres
-            cstmt.setLong(1, idCde);
-            cstmt.setInt(2, lp.getL().getId());
-            cstmt.setInt(3, lp.getQte());
-            cstmt.setFloat(4,lp.getPrixHT());
-            cstmt.setFloat(5, lp.getTva());
-            //appel de la procedure stockée pour la creation de chaque ligne
+        CallableStatement cstmt =null;
+        try {
+            String proc = "{call createCDE(?,?,?,?,?,?,?,?)}";
+            cstmt = cnn.prepareCall(proc);
+            cstmt.setString(1, cde.getNumCde());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            cstmt.setString(2, sdf.format(cde.getDateCde()));
+            cstmt.setFloat(3, cde.getHtCde());
+            cstmt.setFloat(4, cde.getTvaCde());
+            // parametre de paiement toujours a true (simulation de paiement)
+            cstmt.setInt(5, 1);
+            cstmt.setString(6, cde.getModeLivraison().toString());
+            cstmt.setString(7, cde.getModePaiement());
+            cstmt.registerOutParameter(8, java.sql.Types.BIGINT);
             cstmt.execute();
+            Long idCde = cstmt.getLong(8);
+
+            // remplissage des lignes de commandes dans la table detailcommande
+            proc = "{call createDetailCDE(?,?,?,?,?)}";
+            cstmt = cnn.prepareCall(proc);
+            HashMap<Integer, LignePanier> listeCde = cde.getDetailCde();
+            for (LignePanier lp : listeCde.values()) {
+                //stockage des valeurs de la ligne dans les parametres
+                cstmt.setLong(1, idCde);
+                cstmt.setInt(2, lp.getL().getId());
+                cstmt.setInt(3, lp.getQte());
+                cstmt.setFloat(4, lp.getPrixHT());
+                cstmt.setFloat(5, lp.getTva());
+                //appel de la procedure stockée pour la creation de chaque ligne
+                cstmt.execute();
+            }
+            res = true;
+        } finally {
+            cstmt.close();
+            cnn.close();
         }
-        res =true;
-        cstmt.close();
-        cnn.close();
-        
         return res;
     }
 }

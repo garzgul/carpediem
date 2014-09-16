@@ -12,6 +12,7 @@ import java.io.IOException;
 import static java.lang.ProcessBuilder.Redirect.to;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import static java.util.Date.from;
 import java.util.HashMap;
@@ -66,6 +67,7 @@ public class Controleur extends HttpServlet {
 
         String section = request.getParameter("section");
         String action = request.getParameter("action");
+
 
         // declaration des variables de gestion
         Panier p = null;
@@ -211,11 +213,11 @@ public class Controleur extends HttpServlet {
             System.out.println(">>>>>>>>>>>>>>>>>>>>> dans commande");
             if (session.getAttribute("maliste") == null) {
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
-                // getServletContext().getRequestDispatcher(pageJsp).forward(request, response);
+                
             }
             if (session.getAttribute("panier") == null) {
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
-                // getServletContext().getRequestDispatcher(pageJsp).forward(request, response);
+                
             }
             p = (Panier) session.getAttribute("panier");
 
@@ -246,6 +248,24 @@ public class Controleur extends HttpServlet {
                 request.setAttribute("commande","Controleur?section=affichagecommande&action=affichage");
 
             }
+            if("confirmer".equalsIgnoreCase(action)){
+                p = (Panier) session.getAttribute("panier");
+                if(session.getAttribute("commande")==null){
+                    try {
+                        session.setAttribute("commande", new CommandeGestion());
+                    } catch (NamingException ex) {
+                        erreurGrave=true;
+                    }
+                }
+                cg = (CommandeGestion) session.getAttribute("commande");
+                Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
+                ArrayList<Adresse> listead = ach.getListAdresseAcheteur();
+                
+                
+                
+            }
+            
+            
         }
 
 // fin module commande  

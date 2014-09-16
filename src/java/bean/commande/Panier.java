@@ -7,13 +7,20 @@ import java.util.HashMap;
 
 public class Panier implements Serializable{
     private HashMap<Integer,LignePanier> lignes;
+    private float prixHTTotal;
+    private float tvaTotal;
+    private float prixTTCTotal;
 
     public Panier() {
         lignes = new HashMap<>();
+        prixHTTotal=0.0f;
+        tvaTotal=0.0f;
+        prixTTCTotal=0.0f;
     }
 
     public HashMap<Integer, LignePanier> getLignes() {
         return lignes;
+        
     }
     
     
@@ -63,6 +70,27 @@ public class Panier implements Serializable{
         }
     }
     
+    public float getPrixHTTotal(){
+        float prixHT = 0.0f;
+        for (LignePanier l:lignes.values()){
+            prixHT+= l.getPrixHT()*l.getQte();
+        }
+        return prixHT;
+    }
     
+    public float getTvaTotal(){
+        float tva = 0.0f;
+        for (LignePanier l:lignes.values()){
+            tva+= l.getTva()*l.getQte();
+        }
+        return tva;
+    }
     
+    public float getPrixTTCTotal(){
+        float prixTTC = 0.0f;
+        for (LignePanier l:lignes.values()){
+            prixTTC+= l.getPrix();
+        }
+        return prixTTC;
+    }
 }

@@ -14,7 +14,7 @@
     <div id="header-options">
         <!-- login -->		
 
-        <c:if test="${not empty Acheteur}">
+        <c:if test="${empty Acheteur}">
             <div id="not-login">
                 <c:url value="Controleur?section=connexion&action=inscriptionacheteur" var="url2"/>
                 <a id="not-login-signup" title="Inscription" href="${url2}">Devenir membre <span class="gras">></span></a>
@@ -24,7 +24,7 @@
             <div class="clear"></div>
         </c:if>
 
-        <c:if test="${empty Acheteur}">
+        <c:if test="${not empty Acheteur}">
             <div id="login">
                 <a id="login-signup" title="Mon compte" href="Controleur?section=moncompte">Mon compte <span class="gras">></span></a>
                 <a id="login-login" title="Se déconnecter" href="Controleur?section=deconnexion" onclick="return(confirm(\'Etes-vous sûr de vouloir vous déconnecter?\'))">Se déconnecter</a>

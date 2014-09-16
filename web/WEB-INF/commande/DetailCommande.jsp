@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class ="detailcommande">
     
@@ -29,24 +31,56 @@
                         
                     </tr>
                 </c:forEach>
+                    <tr>
+                        <td colspan="6">Total commande HT </td>
+                        <td><fmt:formatNumber maxFractionDigits="2" value="${panier.prixHTTotal}"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">Total tva commande  </td>
+                        <td><fmt:formatNumber maxFractionDigits="2" value="${panier.tvaTotal}"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">Total commande TTC </td>
+                        <td><fmt:formatNumber maxFractionDigits="2" value="${panier.prixTTCTotal}"/></td>
+                    </tr>
             </tbody>
         </table>
     
     
     <p>
+        <br/>
     <!--detail acheteur -->
-    Nom : ${prenomAcheteur} ${nomAcheteur}<br/>
+    Nom : ${Acheteur.prenomAcheteur} ${acheteur.nomAcheteur}<br/>
     
     <!--choix de l'adresse -->
-    Choix de l'adresse:
-        adresse par defaut :
-        ${AdresseAcheteur1}
-        ${AdresseAcheteur2}
-        ${cpAcheteur}
-        ${villeAcheteur}
-        ${patsAcheteur}
-    
-    Si vous souhaitez l'envoyer a une autre adresse, veuillez selectionner l'adresse ci dessous :
+    Choix de l'adresse:</p>
+    <br/>
+    <form action="Controleur" method="POST">
+        <input type="hidden" name="section" value="commande"/>
+        <input type="hidden" name="action" value="confirmeradresse"/>
+        <select name="adresse" class="adressecommande">   
+            <c:forEach items="${Acheteur.listAdresseAcheteur}" var="adresse">
+                <option value="ref=${adresse.idadresse}" <c:if test="${adresse.adressefav}">
+                    selected
+                </c:if>/> >
+                    ${adresse.adresseAcheteur1} ${adresse.adresseAcheteur2} ${adresse.cpAcheteur} ${adresse.villeAcheteur} ${adresse.paysAcheteur}
+                </option> 
+            </c:forEach>
+        </select>
+        <input type="submit" name="doit" value="confirmer"/>       
+       
+                <c:url value="Controleur?section=commande&action=confirmer" var="url"/>
+                <a href="${url}">Confirmer la commande</a>
+</form>        
+                <c:if test="${not empty adressecommandechoisie}">
+                ${adressecommande.adresseAcheteur1}
+                ${adressecommande.adresseAcheteur2}
+                ${adressecommande.cpAcheteur}
+                ${adressecommande.villeAcheteur}
+                ${adressecommande.paysAcheteur}
+                    
+                </c:if>
+    <p>
     
         
     <!--choix du mode de livraison -->

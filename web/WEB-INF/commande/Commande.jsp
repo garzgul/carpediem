@@ -6,16 +6,13 @@
 <c:if test="${not empty maliste}">
 <div class="detailcommande">
     <h1 class ="commandetitre">Votre commande</h1>
+    <br/>
+    <br/>
     
     <c:import url="${affichagecommande}"/>
     
     
     
-    
-</div>
-</c:if>
-<div class="totalcommande">
-    <c:url value="Controleur?section=commande&action=confirmer" var="url"/>
-    <a href="${url}">Confirmer la commande</a>
+</c:if>    
 </div>
 

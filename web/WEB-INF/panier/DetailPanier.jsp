@@ -34,5 +34,17 @@
                         </td>
                     </tr>
                 </c:forEach>
+                    <tr>
+                        <td colspan="6">Total commande HT </td>
+                        <td><fmt:formatNumber maxFractionDigits="2" value="${panier.prixHTTotal}"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">Total tva commande  </td>
+                        <td><fmt:formatNumber maxFractionDigits="2" value="${panier.tvaTotal}"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">Total commande TTC </td>
+                        <td><fmt:formatNumber maxFractionDigits="2" value="${panier.prixTTCTotal}"/></td>
+                    </tr>
             </tbody>
         </table>
