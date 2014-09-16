@@ -14,6 +14,8 @@
         <link type="text/css" rel="stylesheet" href="styles/entete.css" />
         <link type="text/css" rel="stylesheet" href="styles/footer.css" />
         <link type="text/css" rel="stylesheet" href="styles/contenu.css" />
+        <link type="text/css" rel="stylesheet" href="styles/menuhorizontal.css" />
+        <link type="text/css" rel="stylesheet" href="styles/menuvertical.css" />
         <!-- <script type="text/javascript" src="inc/jquery-1.11.0.min.js"></script>
          <script type="text/javascript" src="inc/jquery.cycle.all.js"></script>
          <script type="text/javascript" src="inc/manehou.js"></script> -->
