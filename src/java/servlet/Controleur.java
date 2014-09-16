@@ -7,7 +7,9 @@ import bean.metier.AcheteurGestion;
 import bean.metier.CommandeGestion;
 import bean.metier.LivreGestion;
 import bean.metier.PanierGestion;
+import bean.metier.ThemesGestion;
 import bean.produit.Livre;
+import bean.produit.Theme;
 import java.io.IOException;
 import static java.lang.ProcessBuilder.Redirect.to;
 import java.sql.SQLException;
@@ -76,6 +78,7 @@ public class Controleur extends HttpServlet {
         PanierGestion pg = null;
         CommandeGestion cg = null;
         AcheteurGestion ag = null;
+        ThemesGestion tg = null;
 
         // declaration du string home
         String pageJsp = "/WEB-INF/main/Main.jsp";
@@ -87,14 +90,17 @@ public class Controleur extends HttpServlet {
         request.setAttribute("entete", "Controleur?section=fragement&action=entete");
         request.setAttribute("pied", "Controleur?section=fragement&action=pied");
         request.setAttribute("menu", "Controleur?section=fragement&action=menu");
+        
+        //request.setAttribute("themes", "Controleur?section=themes&action=traitementthemes"); // sup eddy temporaire
+
 //        request.setAttribute("cgv", "Controleur?section=fragement&action=cgv");
 //        request.setAttribute("plansite", "Controleur?section=fragement&action=plansite");
 //        request.setAttribute("mentionslegales", "Controleur?section=fragement&action=mentionslegales");
 //        request.setAttribute("carpediem", "Controleur?section=fragement&action=carpediem");
 //        request.setAttribute("contact", "Controleur?section=fragement&action=contact");
 //        request.setAttribute("recherchevide", "Controleur?section=rechercheaffichagevide&action=affichageboite");
-
         // fin redirection pour les bordures
+
 //Module panier
         if ("panier".equalsIgnoreCase(section)) {
             System.out.println(">>>>>>>>>>>>>>>>passage dans panier 0");
@@ -269,6 +275,37 @@ public class Controleur extends HttpServlet {
         }
 
 // fin module commande  
+
+// Module de traitement des Themes (Eddy)
+
+        if ("themes".equalsIgnoreCase(section)) { // section themes concernée
+            if (session.getAttribute("beanThemesGestion") == null) {
+                try {
+                    session.setAttribute("beanThemesGestion", new ThemesGestion()); // instanciation bean métier
+                } catch (NamingException ex) {
+                    erreurGrave = true; // flag boolean pour signaler qu'une erreur s'est produite
+                }
+            }
+            if (request.getParameter("action") != null) {
+                if ("traitementthemes".equalsIgnoreCase(action)) {
+                    tg = (ThemesGestion) session.getAttribute("beanThemesGestion");
+                    //String champRecherche = request.getParameter("ChampRecherche"); // récup de la saisie à rechercher
+                    List<Theme> lT = null;
+                    try {
+                        lT = tg.listeThemes(); // appel de la méthode métier de récupération
+                    } catch (SQLException ex) {
+                        erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
+                    } catch (NamingException ex) {
+                        erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
+                    }
+                    session.setAttribute("themesResultat", lT); // place la liste des themes trouvés dans le scope session
+                    request.setAttribute("themes", "Controleur?section=themesaffichage&action=affichage"); // signalement
+                }
+            }
+        }
+        
+// Fin module de traitement Themes (Eddy)
+        
         
 // Module Recherche (Eddy)        
         if ("recherche".equalsIgnoreCase(section)) { // section recherche concernée
@@ -562,7 +599,6 @@ public class Controleur extends HttpServlet {
                 case "menu": {
                     pageJsp = "/WEB-INF/bordure/Menu.jsp";
                     break;
-
                 }
                 case "cgv": {
                     pageJsp = "/WEB-INF/bordure/cgv.jsp";
@@ -648,6 +684,13 @@ public class Controleur extends HttpServlet {
 //            }
 //        }
 
+        //redirection pour les themes
+        if ("themesaffichage".equalsIgnoreCase(section)) {
+            if ("affichage".equalsIgnoreCase(action)) {
+                pageJsp = "/WEB-INF/bordure/AffichageTheme.jsp";
+            }
+        }
+        
         //redirection pour la recherche
         if ("rechercheaffichage".equalsIgnoreCase(section)) {
             if ("affichage".equalsIgnoreCase(action)) {
