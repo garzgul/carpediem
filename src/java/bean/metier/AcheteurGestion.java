@@ -1,7 +1,9 @@
 package bean.metier;
 
 import DAO.acheteur.AcheteurDAO;
+import DAO.acheteur.AdresseDAO;
 import bean.acheteur.Acheteur;
+import bean.acheteur.Adresse;
 import java.io.Serializable;
 import java.sql.SQLException;
 import static java.time.Instant.now;
@@ -13,9 +15,11 @@ import utilitaire.MonException;
 public class AcheteurGestion implements Serializable {
 
     private AcheteurDAO achDAO;
+    private AdresseDAO adrDAO;
 
     public AcheteurGestion() throws NamingException {
         achDAO = new AcheteurDAO();
+        adrDAO = new AdresseDAO();
     }
     // Ajout d'un acheteur tout en vérifiant les champs obligatoir
 
@@ -138,5 +142,15 @@ public class AcheteurGestion implements Serializable {
             }
         }
         return reponse;
+    }
+    
+    //=========== Ajout d'une adresse pour un acheteur
+    public Adresse addAdresse (Acheteur ach, Adresse adr) throws SQLException{
+        Adresse adresse = null;
+        if(adr != null && ach != null){
+            adr.setIdAcheteur(ach.getIdAcheteur());
+            adresse = adrDAO.create(adr);
+        }
+        return adresse;        
     }
 }
