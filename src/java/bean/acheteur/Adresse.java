@@ -15,8 +15,8 @@ public class Adresse implements Serializable{
     private String villeAcheteur;
     private String paysAcheteur;
     private boolean actifAcheteur;
-    private int idadresse;
-    private boolean adressefav;
+    private int idAdresse;
+    private boolean adresseFav;
 
     public Adresse() {
     }
@@ -39,11 +39,11 @@ public class Adresse implements Serializable{
     }
     
     public int getIdadresse() {
-        return idadresse;
+        return idAdresse;
     }
 
     public void setIdadresse(int idadresse) {
-        this.idadresse = idadresse;
+        this.idAdresse = idadresse;
     }
     public String getAdresseAcheteur1() {
         return adresseAcheteur1;
@@ -94,11 +94,11 @@ public class Adresse implements Serializable{
     }
 
     public boolean getAdressefav() {
-        return adressefav;
+        return adresseFav;
     }
 
     public void setAdressefav(boolean adressefav) {
-        this.adressefav = adressefav;
+        this.adresseFav = adressefav;
     }
     
     
