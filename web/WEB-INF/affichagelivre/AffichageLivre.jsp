@@ -24,6 +24,7 @@
         <div>Résumé : ${ficheLivreCourant.resume}</div>
         <div>Prix (eur) : ${ficheLivreCourant.prix}</div>
         <div>Stock disponible : ${ficheLivreCourant.stock}</div>
+        <div><a href="Controleur?section=panier&action=add&ref=${ficheLivreCourant.id}">Ajout panier</a></div>
     </c:if>
 </div>
     
