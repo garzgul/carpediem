@@ -1,0 +1,82 @@
+/* 
+    Created on : 16 sept. 2014, 05:21:03
+    Author     : admin
+*/
+
+/* Menu */
+
+.clear
+{
+    clear: both;
+}
+
+a, a:link, a:visited, a :hover, a:active
+{
+    cursor: pointer;/*forme de main*/
+    text-decoration: none;/*pas de decoration - soulignement ou autre*/
+    color: black;
+}
+
+#menu{
+    height: 72px;
+    width: 960px;
+    /*position: relative;
+    z-index: 9999;*/
+    margin-top: 10px;
+    margin-bottom: 5px;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
+    margin-left: auto;
+    margin-right: auto;
+    padding: auto;/*marge interieure pour haut et bas à 5 et gauche et droite 0*/
+    /*border: solid 2px green;*/
+}
+
+#primarylinks
+{
+    width: 720px;
+    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #4e4b45;/*#353535;*/
+    border-width: 6px;
+    border-color: #E7E7E7;/*silver*/
+    border-style: solid;/*ligne pleine*/
+    box-shadow: 2px 2px 4px silver;
+    float: left;
+}
+
+#primarylinks li
+{
+    list-style-type: none;/*pas de puce*/
+    list-style-position: inside;/*sans retrait*/
+    /*display: inline-block;*/
+    float: left;
+    height: 35px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px 5px;
+    /*border: solid 2px red;*/
+}
+
+#primarylinks a
+{
+    height: 30px;
+    float: left;
+    /*line-height: 30px;*/
+    color: #ffffff;
+    font-size: 18px;
+    letter-spacing: 0;
+    margin-top: 15px;
+    margin-left:auto;
+    margin-right: auto;
+    padding: 5px;
+    text-shadow: 0 -1px 0 #000000;
+    text-transform: uppercase;
+    text-align: left;
+    /*border: solid 2px blue;*/
+}
+
+
+
+
+

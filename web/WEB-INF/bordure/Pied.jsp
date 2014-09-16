@@ -43,10 +43,10 @@
          <div id="footer-wrap-social">
                 <ul>
                     <li>
-                        <img id="twitter" title="Twitter" alt="logo twitter" src="" />
+                        <img id="twitter" title="Twitter" alt="logo twitter" src="/images/twitterlogo.png" widht="50" height="50" />
                     </li>
                     <li>
-                        <img id="facebook" title="Facebook" alt="logo facebook" src="" />
+                        <img id="facebook" title="Facebook" alt="logo facebook" src="/images/facebooklogo.png" widht="50" height="50" />
                     </li>
                 </ul>
             </div><!-- fin div footer-wrap-social -->

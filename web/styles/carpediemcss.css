@@ -39,7 +39,7 @@ body
     font: 12px 'Lucida Sans','Lucida Grande',sans-serif;/*police de windows et mac par exellence*/
     line-height: 1;
     //width: 960px;
-     border: 1px solid yellow;
+    border: 1px solid yellow;
 }
 
 a 
@@ -90,7 +90,7 @@ blockquote, q
     min-height: 100%;/*hauteur minimum du container*/
     position: relative;/*relative par rapport au positionnement normal - permet dans un flux de lecture normal haut vers bas de faire se chavaucher des elements, de les deplacer*/
     width: 960px;
-    
+
 }
 
 .messageerreur
@@ -781,3 +781,79 @@ blockquote, q
     margin-left: 60px;
 }
 
+
+#formrechercheg /*formulaire recherche*/
+{
+    width: auto;/*taille max du formulaire*/
+    height: auto;
+    // margin-left: 70px;
+    margin-top: 10px;
+}
+
+#formrechercheg p
+{
+    margin: 5px 0;/*on ecarte un peu les champs*/
+}
+
+#formrechercheg form
+{
+    margin-bottom: 10px;/*marge du bas*/
+    border: #ccc 2px inset;/*gris 3d enfonce*/
+}
+
+//#formrechercheg label
+//{
+//   background-color: #292929;/*couleur de fond pour séparer les labels des champs*/
+//   color: white;/*couleur texte labels*/
+//   display: block;/*si on veut mettre une taille aux labels*/
+//  width: 39%;
+//  float: left;/*pour aligner les champs de texte avec le label input/labels*/
+//  padding-right: 1%;
+//  text-align: right;/*on aligne le texte à droite*/
+//  letter-spacing: 1px;/*pour mieux voir*/
+//}
+
+//#formrechercheg label:hover
+//{
+//    font-weight: bold;
+//}
+
+#formrechercheg input:hover, #formrechercheg input:focus/*on met en couleur le fond des champs au survol et on garde ce fond qd on est dans le champs par le focus*/
+{
+    border: #999 1px solid;/*gris*/
+    background-color: #cccccc;/*gris*/
+}
+
+#formrechercheg input[type="submit"]
+{
+    border: #D7ff83 1px solid;/*vert*/
+    width: 60%;
+    height: 35px;
+    margin-top: 10px;
+    margin-left: 20%;
+    margin-bottom: 10px;
+}
+
+#formrechercheg input[type="submit"]:hover
+{
+    background-color: #D7ff83;/*rouge*/
+    cursor: pointer;/*on change le curseur*/
+}
+
+#formrechercheg input, #rech-rapide input
+{
+    width : 800px;
+    line-height: 35px;
+    height: 60px;
+    margin: auto;
+    margin-top: 5px;
+    margin-left: 7%;
+    padding-left: 10px;
+    font-weight: bold;
+    border: #ccc 1px inset;/*gris clair*/
+}
+
+#formrecherchegdiv
+{
+    /*border: solid 1px red;*/
+}

@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<h2 id="toutes_les_mentionsh2">Contact</h2>
 <div id="formcontact">
 
     <form id="contact" method="post" action="Controleur" enctype="multipart/form-data">
@@ -14,7 +14,7 @@
         <input id="nomcontact" type="text" name="votrenom" value="${votrenom}"><label class="erreur">${errNom}</label><br />
 
         <label for="mail">Votre Prénom :</label><!--expediteur-->
-        <input id="prenomcontact" type="text" name="votreprenom" value="${votreprenom}>"><label class="erreur">${errPrenom}</label><br />
+        <input id="prenomcontact" type="text" name="votreprenom" value="${votreprenom}"><label class="erreur">${errPrenom}</label><br />
 
         <label for="mail">Votre Adresse E-mail :</label><!--expediteur-->
         <input id="mail" type="text" name="votremail" value="${votremail}"><label class="erreur">${errMail}</label><br />
@@ -27,8 +27,8 @@
 
         <div class="clear"></div> 
 
-        <div><input type="submit" name="previsualisercontactformulaire" value="Prévisualiser"/></div>';
-        <div><input type="submit" name="envoicontactformulaire" value="Envoyer"/></div>';
+        <div><input type="submit" name="previsualisercontactformulaire" value="Prévisualiser"/></div>
+        <div><input type="submit" name="envoicontactformulaire" value="Envoyer"/></div>
 
     </form>
 

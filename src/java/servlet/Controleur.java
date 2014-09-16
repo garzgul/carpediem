@@ -479,10 +479,24 @@ public class Controleur extends HttpServlet {
         }
 // affichage mentions legales (Emma)
         if ("fragement".equalsIgnoreCase(section)) {
+             if ("carpediem".equalsIgnoreCase(action)) {
+                request.setAttribute("fragement", "Controleur?section=fragement&action=affichagecarpediem");
+            }
             if ("mentionslegales".equalsIgnoreCase(action)) {
                 request.setAttribute("fragement", "Controleur?section=fragement&action=affichagementionslegales");
             }
-            // rajout de if pour chaque action
+            if ("cgv".equalsIgnoreCase(action)) {
+                request.setAttribute("fragement", "Controleur?section=fragement&action=affichagecgv");
+            }
+             if ("plansite".equalsIgnoreCase(action)) {
+                request.setAttribute("fragement", "Controleur?section=fragement&action=affichageplansite");
+            }
+             if ("newsletter".equalsIgnoreCase(action)) {
+                request.setAttribute("fragement", "Controleur?section=fragement&action=affichagenewsletter");
+            }
+             if ("contact".equalsIgnoreCase(action)) {
+                request.setAttribute("fragement", "Controleur?section=fragement&action=affichagecontact");
+            }
         }
         
 
@@ -600,15 +614,23 @@ public class Controleur extends HttpServlet {
                     pageJsp = "/WEB-INF/bordure/Menu.jsp";
                     break;
                 }
-                case "cgv": {
+                
+                 //  case "cgv": {
+                //    pageJsp = "/WEB-INF/bordure/cgv.jsp";
+                //    break;
+               // }
+                   case "affichagecgv": {
                     pageJsp = "/WEB-INF/bordure/cgv.jsp";
                     break;
                 }
-                case "plansite": {
+                //case "plansite": {
+                //    pageJsp = "/WEB-INF/bordure/plansite.jsp";
+               //     break;
+               // }
+                 case "affichageplansite": {
                     pageJsp = "/WEB-INF/bordure/plansite.jsp";
                     break;
                 }
-
 //                case "mentionslegales": {
 //                    pageJsp = "/WEB-INF/bordure/mentionslegales.jsp";
 //                    break;
@@ -617,18 +639,31 @@ public class Controleur extends HttpServlet {
                     pageJsp = "/WEB-INF/bordure/mentionslegales.jsp";
                     break;
                 }
-                case "carpediem": {
+               // case "carpediem": {
+                //    pageJsp = "/WEB-INF/bordure/carpediempresentation.jsp";
+                //    break;
+               // }
+                case "affichagecarpediem": {
                     pageJsp = "/WEB-INF/bordure/carpediempresentation.jsp";
                     break;
                 }
-                case "contact": {
+                //case "contact": {
+                //    pageJsp = "/WEB-INF/bordure/contact.jsp";
+                //    break;
+               // }
+                case "affichagecontact": {
                     pageJsp = "/WEB-INF/bordure/contact.jsp";
                     break;
                 }
-                case "newsletter": {
+                //case "newsletter": {
+                //    pageJsp = "/WEB-INF/bordure/newsletter.jsp";
+                //    break;
+               // }
+                case "afficahgenewsletter": {
                     pageJsp = "/WEB-INF/bordure/newsletter.jsp";
                     break;
                 }
+                
 //                case "rubrique":{
 //                    pageJsp="/WEB-INF/catalogue/Rubrique.jsp";
 //                    break;
