@@ -180,7 +180,7 @@ a, a:link, a:visited, a :hover, a:active
 /*gros logo*/
 #gros-logo-div
 {
-    border: solid 3px black;
+    /*border: solid 3px black;*/
     height: auto;
     width: auto;	
     /*position: relative;*/
@@ -197,7 +197,7 @@ a, a:link, a:visited, a :hover, a:active
     width: 220px;
     height: 150px;
     margin: auto;
-    border: solid 4px orange;
+    /*border: solid 4px orange;*/
 }
 
 #panier

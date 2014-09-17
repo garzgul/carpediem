@@ -7,7 +7,7 @@
 <div id="header">
     <!-- Gros logo -->		
     <div id="gros-logo-div">
-        <img id="logocarpediem" src="/../../images/carpediemlogofinal24.jpg" title="logo du site Carpe Diem" max-width="200" max-height="150" />
+        <img id="logocarpediem" src="./images/carpediemlogofinal24.jpg" title="logo du site Carpe Diem" width="200" height="150" />
     </div><!-- fin de Gros logo -->	
 
     <!-- Header options  -->
