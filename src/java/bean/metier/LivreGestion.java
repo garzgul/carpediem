@@ -26,12 +26,16 @@ public class LivreGestion implements Serializable {
         return lDao.findAll(s);
     }
     
+    public List<Livre> findAllByTheme(int i) throws SQLException {
+        return lDao.findAllByTheme(i);
+    }
+    
     public Livre findLivre(int id) throws SQLException, NamingException{
         return lDao.find(id);
     }
     
     public List<Livre> filtrer(List<Livre> lL, int id_soustheme) {
-        List<Livre> lLfiltree=null;
+        List<Livre> lLfiltree=new ArrayList();
         SousTheme st=null;
         for (Livre l:lL){
             st=l.getSousTheme();
