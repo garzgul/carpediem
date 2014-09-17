@@ -366,8 +366,15 @@ public class Controleur extends HttpServlet {
                     } catch (SQLException ex) {
                         erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
                     }
+                    if (session.getAttribute("filtrageapplique")!=null){ // s'il y a déjà eut un filtre soustheme appliqué
+                        String id_soustheme = (String)session.getAttribute("filtrageapplique");
+                        lL = lg.filtrer(lL,Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage en fonction des livres trouvés
+                    } else { // pas de jeux de résultats précédemment affichés
+                        // rien a restreindre
+                    }
                     //request.setAttribute("rechercheResultat", lL); // place la liste des livres trouvés dans le scope
                     session.setAttribute("rechercheResultat", lL); // place la liste des livres trouvés dans le scope
+                    session.setAttribute("rechercheappliquee", "oui"); // flag pour se souvenir qu'un résultat de recherche a été appliqué
                     request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage"); // signalement
                     // qu'une liste de livres sera à afficher dynamiquement en résultat
                 }
@@ -375,14 +382,23 @@ public class Controleur extends HttpServlet {
                     lg = (LivreGestion) session.getAttribute("beanLivreGestion");
                     String id_soustheme = request.getParameter("ref"); // récup de l'id_soustheme à filtrer
                     List<Livre> lLfiltree = null;
-                    //try {
-                        lLfiltree = lg.filtrer((List<Livre>)session.getAttribute("rechercheResultat"),Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage
-//                    } catch (SQLException ex) {
-//                        erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
-                    //}
+                    if ((session.getAttribute("rechercheResultat")!=null) && (session.getAttribute("rechercheappliquee")!=null)) { // s'il y a déjà eut une recherche de résultats
+                        List<Livre> lL = (List<Livre>)session.getAttribute("rechercheResultat");
+                        lLfiltree = lg.filtrer(lL,Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage en fonction des resultats préalables des livres
+                    } else { // pas de résultats en cours, clic sur sous theme la première fois par exp...
+                        try {
+                            lLfiltree = lg.findAllByTheme(Integer.valueOf(id_soustheme));
+                        } catch (SQLException ex) {
+                            erreurGrave = true;
+                        }
+                    }
                     session.setAttribute("rechercheResultat", lLfiltree); // place la liste filtrée des livres trouvés dans le scope
+                    session.setAttribute("filtrageapplique", id_soustheme); // flag pour se souvenir qu'un filtre a été appliqué
                     request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage"); // signalement
                     // qu'une liste de livres sera à afficher dynamiquement en résultat
+                }
+                if ("annulerfiltre".equalsIgnoreCase(action)) { // clic sur entete des themes pour annuler tout filtre de theme
+                    session.removeAttribute("filtrageapplique");
                 }
             }
         }

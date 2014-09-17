@@ -158,6 +158,47 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
         return lL;
     }
 
+        public List<Livre> findAllByTheme(int id_soustheme) throws SQLException {
+        // recherche des livres en fonction du sous theme cliqué
+        Livre l;
+        Auteur a;
+        SousTheme st;
+        List<Livre> lL = new ArrayList<>();
+        String req = "select * from livre l join ecriture e on e.id_livre=l.id_livre join auteur a on a.id_auteur=e.id_auteur where l.livre_actif=1 and l.id_soustheme=?";
+        Connection cnn = fc.fournir();
+        PreparedStatement ps = cnn.prepareStatement(req);
+        ps.setString(1, String.valueOf(id_soustheme));
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            String id_livre = rs.getString("id_livre");
+            //String id_soustheme = rs.getString("id_soustheme");
+            String livre_photo = rs.getString("livre_photo");
+            String livre_titre = rs.getString("livre_titre");
+            String livre_isbn13 = rs.getString("livre_isbn13");
+            String id_auteur = rs.getString("id_auteur");
+            String auteur_nom = rs.getString("auteur_nom");
+            a = new Auteur(Integer.valueOf(id_auteur), auteur_nom);
+            a = new Auteur(Integer.valueOf(id_auteur), null);
+            ArrayList<Auteur> lA = new ArrayList<>();
+            lA.add(a);
+            l = new Livre(null, lA, livre_titre, 0, 0, true);
+            l.setId(Integer.valueOf(id_livre));
+            st=new SousTheme(Integer.valueOf(id_soustheme),"");
+            l.setSousTheme(st);
+            l.setImage(livre_photo);
+            l.setIsbn13(livre_isbn13);
+            l.setPrix(Float.valueOf(rs.getString("livre_prix")));
+            //TvaDAO tvaDao = new TvaDAO();
+            //l.setTva(tvaDao.find(Integer.valueOf(id_livre)));
+            lL.add(l);
+        }
+        rs.close();
+        ps.close();
+        cnn.close();
+        return lL;
+    }
+
+    
     
     // récupération du nom du sous-theme du livre
   //  public String getNomSousThemeIdTheme(String id_soustheme)
