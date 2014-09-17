@@ -288,12 +288,17 @@ public class Controleur extends HttpServlet {
             if ("validercommande".equalsIgnoreCase(action)) {
                 System.out.println(request.getAttribute("affichagecommande"));
                 System.out.println(">>>>>>>>>>>>> dans valider commande");
+
+                request.setAttribute("commande", "Controleur?section=affichagecommande&action=affichage");
+
+            }
+            if ("confirmer".equalsIgnoreCase(action)) {
                 p = (Panier) session.getAttribute("panier");
-                if(session.getAttribute("commande")==null){
+                if (session.getAttribute("commande") == null) {
                     try {
                         session.setAttribute("commande", new CommandeGestion());
                     } catch (NamingException ex) {
-                        erreurGrave=true;
+                        erreurGrave = true;
                     }
                 }
                 cg = (CommandeGestion) session.getAttribute("commande");
