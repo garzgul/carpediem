@@ -62,10 +62,13 @@
                         <c:if test="${not empty voircompte}">
                             <c:import url="${voircompte}"/>
                         </c:if>
+                    
+                    <c:if test="${not empty commande}">
+                        <c:import url="${commande}"/>
+                    </c:if>
+                    
 
-                        <c:if test="${not empty commande}">
-                            <c:import url="${commande}"/>
-                        </c:if>
+                        
 
 
                         <c:if test="${not empty fragement}">

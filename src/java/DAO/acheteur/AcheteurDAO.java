@@ -4,6 +4,7 @@ import DAO.utils.DAO;
 import DAO.utils.FournirConnectionIt;
 import DAO.utils.MaConnexionBDD;
 import bean.acheteur.Acheteur;
+import bean.acheteur.Adresse;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import java.io.Serializable;
 import java.sql.CallableStatement;
@@ -11,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 
@@ -185,24 +187,28 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
     }
 
     /*Rechercher un acheteur avec son mot de passe ainsi que son email*/
-    public Acheteur find(String mail, String mdp) throws SQLException {
+    public Acheteur find(String mail, String mdp) throws SQLException, NamingException {
 
         ResultSet rs = null;
         CallableStatement cstmt = null;
         Connection cnn = null;
         Acheteur ach = null;
+        AdresseDAO adr = new AdresseDAO();
+        int id = 0;
         try {
             cnn = fc.fournir();
             ach = null;
             rs = null;
+           
+            
 
             String req = "{call chercherAcheteur(?, ?)}";
             cstmt = cnn.prepareCall(req);
             cstmt.setString(1, mail);
             cstmt.setString(2, mdp);
             rs = cstmt.executeQuery();
-            if (rs.next()) {
-                int id = rs.getInt("id_acheteur");
+            while (rs.next()) {
+                id = rs.getInt("id_acheteur");
                 String nom = rs.getString("ach_nom");
                 String prenom = rs.getString("ach_prenom");
                 String pseudo = rs.getString("ach_pseudo");
@@ -214,8 +220,8 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
                 ach.setEmailAcheteur(email);
                 ach.setMdpAcheteur(mdp);
                 ach.setIdAcheteur(id);
-
             }
+            
         } finally {
             if(rs != null){
             rs.close();
@@ -227,6 +233,10 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
             cnn.close();
             }
         }
+        List<Adresse> adrAcheuteur = adr.findAll(id);
+            if(!adrAcheuteur.isEmpty() || adrAcheuteur!= null){
+                ach.setListAdresseAcheteur((ArrayList<Adresse>) adr.findAll(id));
+            }
 
         return ach;
     }
