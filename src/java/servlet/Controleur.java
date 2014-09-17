@@ -90,10 +90,9 @@ public class Controleur extends HttpServlet {
         String pageJsp = "/WEB-INF/main/Main.jsp";
 
 // Module de traitement des données en scope application        
-
 // Module de traitement des themes/sousthemes (Eddy) 
 // la liste doit aller dans le contexte de la servlet (scope application et non scope session vu qu'il est le meme pour tous
-         if (session.getAttribute("beanThemesGestion") == null) {
+        if (session.getAttribute("beanThemesGestion") == null) {
             try {
                 session.setAttribute("beanThemesGestion", new ThemesGestion()); // instanciation bean métier
             } catch (NamingException ex) {
@@ -110,21 +109,20 @@ public class Controleur extends HttpServlet {
         } catch (NamingException ex) {
             erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
         }
-        
+
         context.setAttribute("sousthemesListe", lsT); // place la liste des sous themes trouvés dans le scope
         // request.setAttribute("themes", "Controleur?section=themesaffichage&action=affichage"); non necessaire (la liste de theme sera mise en scope appli au demarage de l'appli
 
 // Fin module de traitement Themes (Eddy)
 // creation de la liste de type de livraison
-        if (context.getAttribute("livraisongestion")==null){
+        if (context.getAttribute("livraisongestion") == null) {
             context.setAttribute("livraisongestion", new LivraisonGestion());
         }
         if (context.getAttribute("typelivraison") == null) {
             livraisong = (LivraisonGestion) context.getAttribute("livraisongestion");
             context.setAttribute("typelivraison", livraisong.getListeLivraison());
         }
-            
-        
+
 // partie traitement de la servlet
         // redirection pour les bordures/elements de menu...
         request.setAttribute("entete", "Controleur?section=fragement&action=entete");
@@ -273,7 +271,7 @@ public class Controleur extends HttpServlet {
                 Acheteur ach = (Acheteur) session.getAttribute("acheteur");
                 Adresse ad = ach.getAdfav();
                 try {
-                    session.setAttribute("Commande",cg.createCommande(p.getLignes(), ach));
+                    session.setAttribute("Commande", cg.createCommande(p.getLignes(), ach));
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 } catch (ParseException ex) {
@@ -306,11 +304,11 @@ public class Controleur extends HttpServlet {
                 // ArrayList<Adresse> listead = ach.getListAdresseAcheteur();
                 try {
                     //creation de l'objet commande et mise en session
-                    session.setAttribute("Commande",cg.createCommande(p.getLignes(), ach));
+                    session.setAttribute("Commande", cg.createCommande(p.getLignes(), ach));
                 } catch (SQLException ex) {
-                    erreurGrave=true;
+                    erreurGrave = true;
                 } catch (ParseException ex) {
-                    erreurGrave=true;
+                    erreurGrave = true;
                 }
 
                 request.setAttribute("commande", "Controleur?section=affichagecommande&action=affichage");
@@ -326,22 +324,22 @@ public class Controleur extends HttpServlet {
                     }
                 }
                 cg = (CommandeGestion) session.getAttribute("commande");
-                if (session.getAttribute("commande")== null){
-                    erreurGrave=true;
+                if (session.getAttribute("commande") == null) {
+                    erreurGrave = true;
                     return;
                 }
                 Commande cde = (Commande) session.getAttribute("commande");
-                cde =cg.setDate(cde);
+                cde = cg.setDate(cde);
                 Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
                 ArrayList<Adresse> listead = ach.getListAdresseAcheteur();
                 //creation de l'objet commande
-                
+
             }
-            
-            if("confirmertypelivraison".equalsIgnoreCase(action)){
-                
+
+            if ("confirmertypelivraison".equalsIgnoreCase(action)) {
+
             }
-            
+
         }
 
 // fin module commande  
@@ -374,7 +372,7 @@ public class Controleur extends HttpServlet {
                     String id_soustheme = request.getParameter("ref"); // récup de l'id_soustheme à filtrer
                     List<Livre> lLfiltree = null;
                     //try {
-                        lLfiltree = lg.filtrer((List<Livre>)session.getAttribute("rechercheResultat"),Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage
+                    lLfiltree = lg.filtrer((List<Livre>) session.getAttribute("rechercheResultat"), Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage
 //                    } catch (SQLException ex) {
 //                        erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
                     //}
@@ -468,6 +466,8 @@ public class Controleur extends HttpServlet {
                     System.out.println(">>>>>>>>>>>>>>>>>passage par le catch");
                 } catch (SQLException ex) {
                     erreurGrave = true;
+                } catch (NamingException ex) {
+                    erreurGrave = true;
                 }
 
             }
@@ -510,6 +510,8 @@ public class Controleur extends HttpServlet {
                     request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=erreurConnection");
 
                 } catch (SQLException ex) {
+                    erreurGrave = true;
+                } catch (NamingException ex) {
                     erreurGrave = true;
                 }
                 if (mail.isEmpty() || mail == null
@@ -566,14 +568,54 @@ public class Controleur extends HttpServlet {
         if ("contactformulaire".equalsIgnoreCase(section)) {
             System.out.println("------------------------------------------>>>> contact !");
             try {
-                SendMail.sendMail("phamduca@gmail.com", "test", "message du mail");
+
+                String adrMail = request.getParameter("votremail");
+                // subject, sujet du mail
+                String subject = request.getParameter("objetcontact");
+                String votrenom = request.getParameter("votrenom");
+                String votreprenom = request.getParameter("votreprenom");
+                String texte = request.getParameter("messagecontact");
+
+                // test en dur
+                //SendMail.sendMail("phamduca@gmail.com", "test", "message du mail", request);
+                SendMail.sendMail(adrMail, subject, texte, request);
             } catch (MessagingException ex) {
-                System.out.println("erreur mail : "+ex.getLocalizedMessage());
-                 erreurGrave = true;
+                System.out.println("erreur mail : " + ex.getLocalizedMessage());
+                erreurGrave = true;
             }
-            
+
             System.out.println("------------------------------------------>>>> fin envoi mail");
-        }        
+        }
+        
+        // formulaire de contact piece jointe (Emma)
+        if ("contactformulairepj".equalsIgnoreCase(section)) {
+            System.out.println("------------------------------------------>>>> contact !");
+            try {
+
+                String adrMailpj = request.getParameter("votremailpj");
+                // subject, sujet du mail
+                String subjectpj = request.getParameter("objetcontactpj");
+                String votrenompj = request.getParameter("votrenompj");
+                String votreprenompj = request.getParameter("votreprenompj");
+                String fichierpj = request.getParameter("fichierpj");
+                String textepj = request.getParameter("messagecontactpj");
+
+                // test en dur
+                //SendMail.sendMail("phamduca@gmail.com", "test", "message du mail", request);
+                SendMail.sendMailPJ(adrMailpj, subjectpj, textepj, fichierpj, request);
+            } catch (MessagingException ex) {
+                System.out.println("erreur mail : " + ex.getLocalizedMessage());
+                erreurGrave = true;
+            }
+
+            System.out.println("------------------------------------------>>>> fin envoi mail");
+        }
+
+        
+        
+        
+        
+        
         
         
         // Consultation d'un livre - fiche produit (Emma)
@@ -618,7 +660,7 @@ public class Controleur extends HttpServlet {
                     break;
                 }
 
-                 //  case "cgv": {
+                //  case "cgv": {
                 //    pageJsp = "/WEB-INF/bordure/cgv.jsp";
                 //    break;
                 // }
@@ -642,7 +684,7 @@ public class Controleur extends HttpServlet {
                     pageJsp = "/WEB-INF/bordure/mentionslegales.jsp";
                     break;
                 }
-               // case "carpediem": {
+                // case "carpediem": {
                 //    pageJsp = "/WEB-INF/bordure/carpediempresentation.jsp";
                 //    break;
                 // }
