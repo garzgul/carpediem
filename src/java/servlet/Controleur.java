@@ -115,6 +115,7 @@ public class Controleur extends HttpServlet {
         // request.setAttribute("themes", "Controleur?section=themesaffichage&action=affichage"); non necessaire (la liste de theme sera mise en scope appli au demarage de l'appli
 
 // Fin module de traitement Themes (Eddy)
+        
 // creation de la liste de type de livraison
         if (context.getAttribute("livraisongestion")==null){
             context.setAttribute("livraisongestion", new LivraisonGestion());
@@ -345,6 +346,7 @@ public class Controleur extends HttpServlet {
         }
 
 // fin module commande  
+        
 // Module Recherche (Eddy)        
         if ("recherche".equalsIgnoreCase(section)) { // section recherche concernée
             if (session.getAttribute("beanLivreGestion") == null) {
@@ -447,7 +449,11 @@ public class Controleur extends HttpServlet {
                     request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
                     if (ach != null) {
                         session.setAttribute("Acheteur", ach);
-                        ag.ajoutAcheteur(ach, confirmmdp);
+                        try {
+                            ag.ajoutAcheteur(ach, confirmmdp);
+                        } catch (NamingException ex) {
+                            erreurGrave = true;
+                        }
                     }
                     request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
                 } catch (MonException ex) {
@@ -483,7 +489,11 @@ public class Controleur extends HttpServlet {
                 Acheteur ach = null;
                 try {
                     ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
-                    ach = ag.chercherAcheteur(mail, mdp);
+                    try {
+                        ach = ag.chercherAcheteur(mail, mdp);
+                    } catch (NamingException ex) {
+                        erreurGrave = true;
+                    }
                     if (ach != null) {
                         session.setAttribute("Acheteur", ach);
                         request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");

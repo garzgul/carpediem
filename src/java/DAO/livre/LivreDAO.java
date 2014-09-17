@@ -6,6 +6,7 @@ import DAO.utils.FournirConnectionIt;
 import DAO.utils.MaConnexionBDD;
 import bean.produit.Auteur;
 import bean.produit.Livre;
+import bean.produit.SousTheme;
 import bean.produit.TypeFormatLivre;
 import java.io.Serializable;
 import java.sql.CallableStatement;
@@ -122,6 +123,7 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
         // recherche par (partie) du titre de livre AUSSI BIEN que le nom de l'auteur
         Livre l;
         Auteur a;
+        SousTheme st;
         List<Livre> lL = new ArrayList<>();
         String req = "{call findAllLivres(?)}";
         Connection cnn = fc.fournir();
@@ -130,6 +132,7 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
         ResultSet rs = cs.executeQuery();
         while (rs.next()) {
             String id_livre = rs.getString("id_livre");
+            String id_soustheme = rs.getString("id_soustheme");
             String livre_photo = rs.getString("livre_photo");
             String livre_titre = rs.getString("livre_titre");
             String livre_isbn13 = rs.getString("livre_isbn13");
@@ -140,6 +143,8 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
             lA.add(a);
             l = new Livre(null, lA, livre_titre, 0, 0, true);
             l.setId(Integer.valueOf(id_livre));
+            st=new SousTheme(Integer.valueOf(id_soustheme),"");
+            l.setSousTheme(st);
             l.setImage(livre_photo);
             l.setIsbn13(livre_isbn13);
             l.setPrix(Float.valueOf(rs.getString("livre_prix")));
