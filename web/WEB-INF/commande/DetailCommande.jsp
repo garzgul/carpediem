@@ -65,7 +65,7 @@
         <input type="hidden" name="action" value="confirmeradresse"/>
         <select name="adresse" class="adressecommande">   
             <c:forEach items="${Acheteur.listAdresseAcheteur}" var="adresse">
-                <option value="ref=${adresse.idadresse}" <c:if test="${adresse.adressefav}">
+                <option value="${adresse.idadresse}" <c:if test="${adresse.adressefav}">
                     selected
                 </c:if>/> >
                     ${adresse.adresseAcheteur1} ${adresse.adresseAcheteur2} ${adresse.cpAcheteur} ${adresse.villeAcheteur} ${adresse.paysAcheteur}
