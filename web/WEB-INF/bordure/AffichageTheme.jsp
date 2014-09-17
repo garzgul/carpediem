@@ -8,11 +8,11 @@
     <h2>Thémes</h2>
     <div>
     <ul>
-       <c:forEach var="theme" begin="0" items="${themes.rows}">
-        <li>
+       <c:forEach var="theme" begin="0" items="${themesListe}">
+           <li>
             <a href="">
                 <img src="" alt="puce spéciale navigation" title="puce spéciale navigation" />
-                <c:out value="${theme.nomtheme}" />
+                <c:out value="${theme.theme}" />
             </a>
         </li>
        </c:forEach>
