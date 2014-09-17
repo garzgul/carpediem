@@ -4,7 +4,7 @@
 <div class ="detailcommande">
     
     <!-- affichage du panier-->
-    <table border="2" cellpadding="2">
+    <table border="1" cellpadding="4">
             <thead>
                 <tr>
                     <th>Couverture</th>
@@ -34,8 +34,11 @@
                     <!-- necessite de mettre en session l'objet commande et de demander le choix de l'adresse et du port-->
                 </c:forEach>
                     <tr>
+                        <td colspan="7"/>
+                    </tr>
+                    <tr>
                         <td colspan="6">Total commande HT </td>
-                        <td><fmt:formatNumber maxFractionDigits="2" value="${panier.prixHTTotal}"/></td>
+                        <td><fmt:formatNumber maxFractionDigits="2" value="${commande.htCde}"/></td>
                     </tr>
                     <tr>
                         <td colspan="6">Total tva commande  </td>
@@ -69,7 +72,7 @@
                 </option> 
             </c:forEach>
         </select>
-        <input type="submit" name="doit" value="confirmer"/>       
+        <input type="submit" name="doit" value="confirmer l'adresse de livraison"/>       
        <% //
             //    <c:url value="Controleur?section=commande&action=confirmer" var="url"/>
              //   <a href="${url}">Confirmer la commande</a> %>
@@ -85,7 +88,8 @@
     <p>
    <!--choix du mode de livraison -->  
         Choissisez le type de livraison : <br/>
-        
+    </p>
+
     <form action="Controleur" method="POST">
         <input type="hidden" name="section" value="commande"/>
         <input type="hidden" name="action" value="confirmertypelivraison"/>
@@ -94,17 +98,14 @@
                 <option value="ref?${tl}">${tl}</option>
             </c:forEach>
         </select>
-        <input type="submit" name="doit" value="confirmerlivraison"/>
+        <input type="submit" name="doit" value="confirmer la livraison"/>
     </form>
+    
+    <p>
+        <br/>
+        <br/>
+        <c:url value="Controleur?section=commande&action=confirmer" var="url"/>
+        <a href="${url}"> Confirmer la commande</a>
         
-   
-    
-    
-    
-    <!--calcul du cout de la livraison-->
-    
-    
-    
     </p>
-    
 </div>

@@ -10,10 +10,10 @@ import bean.commande.LignePanier;
 import bean.commande.ModeLivraison;
 import bean.commande.SuiviLivraison;
 import bean.commande.livraison;
-import bean.produit.Livre;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import javax.naming.NamingException;
@@ -29,7 +29,7 @@ public class CommandeGestion {
         cDao=new CommandeDAO();
     }
     
-    public boolean createCommande(HashMap<Integer,LignePanier> maliste, Acheteur ach, Adresse ad
+    public boolean createCommande(HashMap<Integer,LignePanier> maliste, Acheteur ach
      ) throws SQLException, ParseException{
         boolean res = false;
         Commande cde = new Commande();
@@ -74,8 +74,9 @@ public class CommandeGestion {
         // gestion du suivi
         SuiviLivraison sl = new SuiviLivraison(livraison.enpreparation);
         cde.setSuiviCde(sl);
-        //gestion de l'adresse
-        cde.setAdresseCde(ad);
+        //gestion de l'adresse 
+        // l'adresse incluse par defaut est l'adresse de livraison par defaut
+        cde.setAdresseCde(ach.getAdfav());
         //gestion des frais de port
         FraisDePort fdp = new FraisDePort(10.0f);
         cde.setFraisCde(fdp);
@@ -101,6 +102,24 @@ public class CommandeGestion {
         return res;
     }
     
+    public Commande setAdresse(Commande c, int idAdresse){
+        Acheteur ach = c.getAcheteurCde();
+        ArrayList<Adresse> listeAd = ach.getListAdresseAcheteur();
+        Adresse adchoisi= new Adresse();
+        for (Adresse a:listeAd){
+            if(a.getIdadresse()==idAdresse){
+                adchoisi=a;
+            }
+        }
+        c.setAdresseCde(adchoisi);
+        
+        return c;
+    }
+    
+    public Commande setDate(Commande c){
+        c.setDateCde(new Date());
+        return c;
+    }
     
 
 }
