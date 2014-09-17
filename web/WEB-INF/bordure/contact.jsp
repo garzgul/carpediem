@@ -8,7 +8,7 @@
 <h2 id="toutes_les_mentionsh2">Contact</h2>
 <div id="formcontact">
 
-    <form id="contact" method="post" action="Controleur" enctype="multipart/form-data">
+    <form id="contact" method="GET" action="Controleur">
         <input type="hidden" name="section" value="contactformulaire" />
         <label for="mail">Votre Nom :</label><!--expediteur-->
         <input id="nomcontact" type="text" name="votrenom" value="${votrenom}"><label class="erreur">${errNom}</label><br />
@@ -27,7 +27,6 @@
 
         <div class="clear"></div> 
 
-        <div><input type="submit" name="previsualisercontactformulaire" value="Prévisualiser"/></div>
         <div><input type="submit" name="envoicontactformulaire" value="Envoyer"/></div>
 
     </form>
