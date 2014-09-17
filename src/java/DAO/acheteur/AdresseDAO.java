@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 
@@ -23,7 +24,6 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable {
     public AdresseDAO() throws NamingException {
         fc = new MaConnexionBDD();
     }
-    
 
     @Override
     public Adresse create(Adresse obj) throws SQLException {
@@ -137,33 +137,27 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable {
 
     @Override
     public List<Adresse> findAll(String s) throws SQLException {
-        
-        
-        
-        
-        
-        
-          return null;
+
+        return null;
     }
-    
+
     public List<Adresse> findAll(int id) throws SQLException {
-        
+
         Connection cnn = null;
         PreparedStatement pStmt = null;
         ResultSet rs = null;
-        List<Adresse> toutAdresse = null;
+        List<Adresse> toutAdresse = new ArrayList<Adresse>();
         boolean adresseActif = false;
         boolean adresseFav = false;
-        
-        
-        try{
+
+        try {
             cnn = fc.fournir();
             String pReq = "SELECT * FROM adresse"
-                    +"WHERE id-acheteur = ?";
+                    + " WHERE id_acheteur = ?";
             pStmt = cnn.prepareCall(pReq);
             pStmt.setInt(1, id);
             rs = pStmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int idAdresse = rs.getInt("id_adresse");
                 String adresse1 = rs.getString("adresse_chp1");
                 String adresse2 = rs.getString("adresse_chap2");
@@ -172,10 +166,10 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable {
                 String pays = rs.getString("adresse_pays");
                 int actif = rs.getInt("adresse_actif");
                 int fav = rs.getInt("adresse_fav");
-                if(1 == actif){
+                if (1 == actif) {
                     adresseActif = true;
                 }
-                if(1 == fav){
+                if (1 == fav) {
                     adresseFav = true;
                 }
                 Adresse adresse = new Adresse(adresse1, adresse2, cp, ville, pays, adresseFav);
@@ -184,19 +178,19 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable {
                 adresse.setAdressefav(adresseFav);
                 toutAdresse.add(adresse);
             }
-            
-        }finally{
-            if(rs != null){
+
+        } finally {
+            if (rs != null) {
                 rs.close();
             }
-            if(pStmt != null){
+            if (pStmt != null) {
                 pStmt.close();
             }
-            if(cnn != null){
+            if (cnn != null) {
                 cnn.close();
             }
         }
-      
+
         return toutAdresse;
     }
 

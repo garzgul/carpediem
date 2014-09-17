@@ -28,6 +28,13 @@
             <input type="submit" name="supprimercompte" value="Supprimer compte"/>
             
         </c:if>
+            <c:if test="${not empty Acheteur.listAdresseAcheteur}">
+                <c:import url="${vueadresse}"/>
+                
+            </c:if>
+            <c:if test="${empty Acheteur.listAdresseAcheteur}">
+            <c:import url="${ajouteradresse}"/>
+            </c:if>
         
         
         

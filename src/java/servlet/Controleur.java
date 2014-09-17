@@ -73,7 +73,6 @@ public class Controleur extends HttpServlet {
         String section = request.getParameter("section");
         String action = request.getParameter("action");
 
-
         // declaration des variables de gestion
         Panier p = null;
         Livre l = null;
@@ -87,12 +86,10 @@ public class Controleur extends HttpServlet {
         // declaration du string home
         String pageJsp = "/WEB-INF/main/Main.jsp";
 
-
 // Module de traitement des données en scope application        
-
 // module de traitement des themes Eddy 
 // la liste de theme doit aller dans le contexte de la servlet (scope application et non scope session vu qu'il est le meme pour tous
-         if (session.getAttribute("beanThemesGestion") == null) {
+        if (session.getAttribute("beanThemesGestion") == null) {
             try {
                 session.setAttribute("beanThemesGestion", new ThemesGestion()); // instanciation bean métier
             } catch (NamingException ex) {
@@ -109,26 +106,20 @@ public class Controleur extends HttpServlet {
         } catch (NamingException ex) {
             erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
         }
-        
+
         context.setAttribute("themesListe", lT); // place la liste des themes trouvés dans le scope application
         // request.setAttribute("themes", "Controleur?section=themesaffichage&action=affichage"); non necessaire (la liste de theme sera mise en scope appli au demarage de l'appli
 
-        
 // Fin module de traitement Themes (Eddy)
-        
 // creation de la liste de type de livraison
-        context.setAttribute("typelivraison", livraisong.getListeLivraison());
-            
-        
-
+        //  context.setAttribute("typelivraison", livraisong.getListeLivraison());
 // partie traitement de la servlet
         // redirection pour les bordures/elements de menu...
         request.setAttribute("entete", "Controleur?section=fragement&action=entete");
         request.setAttribute("pied", "Controleur?section=fragement&action=pied");
         request.setAttribute("menu", "Controleur?section=fragement&action=menu");
-        
-        //request.setAttribute("themes", "Controleur?section=themes&action=traitementthemes"); // sup eddy temporaire
 
+        //request.setAttribute("themes", "Controleur?section=themes&action=traitementthemes"); // sup eddy temporaire
 //        request.setAttribute("cgv", "Controleur?section=fragement&action=cgv");
 //        request.setAttribute("plansite", "Controleur?section=fragement&action=plansite");
 //        request.setAttribute("mentionslegales", "Controleur?section=fragement&action=mentionslegales");
@@ -136,7 +127,6 @@ public class Controleur extends HttpServlet {
 //        request.setAttribute("contact", "Controleur?section=fragement&action=contact");
 //        request.setAttribute("recherchevide", "Controleur?section=rechercheaffichagevide&action=affichageboite");
         // fin redirection pour les bordures
-
 //Module panier
         if ("panier".equalsIgnoreCase(section)) {
             System.out.println(">>>>>>>>>>>>>>>>passage dans panier 0");
@@ -196,7 +186,7 @@ public class Controleur extends HttpServlet {
                 p = (Panier) session.getAttribute("panier");
                 try {
                     l = lg.findLivre(idLivre);
-                    System.out.println(">>>>>>>>>>>>>> livre a enlever"+l);
+                    System.out.println(">>>>>>>>>>>>>> livre a enlever" + l);
                     p.enleverLivre(l);
                     session.setAttribute("maliste", p.getLignes().values());
                 } catch (SQLException ex) {
@@ -255,15 +245,15 @@ public class Controleur extends HttpServlet {
             System.out.println(">>>>>>>>>>>>>>>>>>>>> dans commande");
             if (session.getAttribute("maliste") == null) {
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
-                
+
             }
             if (session.getAttribute("panier") == null) {
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
-                
+
             }
             p = (Panier) session.getAttribute("panier");
 
-            request.setAttribute("affichagecommande","Controleur?section=affichagecommande&action=affichagedetail");
+            request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagedetail");
 
             if ("affichage".equalsIgnoreCase(action)) {
                 System.out.println(">>>>>>>>>>>>>>>dans controleur affichage commande");
@@ -279,42 +269,35 @@ public class Controleur extends HttpServlet {
                 }
             }
 
-            if("detailcommande".equalsIgnoreCase(action)){
-                request.setAttribute("commande","Controleur?section=affichagecommande&action=affichage");
+            if ("detailcommande".equalsIgnoreCase(action)) {
+                request.setAttribute("commande", "Controleur?section=affichagecommande&action=affichage");
             }
 
             if ("validercommande".equalsIgnoreCase(action)) {
                 System.out.println(request.getAttribute("affichagecommande"));
                 System.out.println(">>>>>>>>>>>>> dans valider commande");
 
-                request.setAttribute("commande","Controleur?section=affichagecommande&action=affichage");
+                request.setAttribute("commande", "Controleur?section=affichagecommande&action=affichage");
 
             }
-            if("confirmer".equalsIgnoreCase(action)){
+            if ("confirmer".equalsIgnoreCase(action)) {
                 p = (Panier) session.getAttribute("panier");
-                if(session.getAttribute("commande")==null){
+                if (session.getAttribute("commande") == null) {
                     try {
                         session.setAttribute("commande", new CommandeGestion());
                     } catch (NamingException ex) {
-                        erreurGrave=true;
+                        erreurGrave = true;
                     }
                 }
                 cg = (CommandeGestion) session.getAttribute("commande");
                 Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
                 ArrayList<Adresse> listead = ach.getListAdresseAcheteur();
-                
-                
-                
+
             }
-            
-            
+
         }
 
 // fin module commande  
-
-
-        
-        
 // Module Recherche (Eddy)        
         if ("recherche".equalsIgnoreCase(section)) { // section recherche concernée
             if (session.getAttribute("beanLivreGestion") == null) {
@@ -484,10 +467,21 @@ public class Controleur extends HttpServlet {
                 request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
 
             }
+
+            //Ajouter une adresse
+            if ("voiradresse".equalsIgnoreCase(action)) {
+                Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
+                if (ach.getListAdresseAcheteur().isEmpty()) {
+                    request.setAttribute("ajouterAdresse", "Controleur?section=affichagecompte&action=ajouteradresse");
+                } else {
+                    request.setAttribute("vueadresse", "Contoleur?section=affichagecompte&action=vueadresse");
+                }
+
+            }
         }
 // affichage mentions legales (Emma)
         if ("fragement".equalsIgnoreCase(section)) {
-             if ("carpediem".equalsIgnoreCase(action)) {
+            if ("carpediem".equalsIgnoreCase(action)) {
                 request.setAttribute("fragement", "Controleur?section=fragement&action=affichagecarpediem");
             }
             if ("mentionslegales".equalsIgnoreCase(action)) {
@@ -496,17 +490,16 @@ public class Controleur extends HttpServlet {
             if ("cgv".equalsIgnoreCase(action)) {
                 request.setAttribute("fragement", "Controleur?section=fragement&action=affichagecgv");
             }
-             if ("plansite".equalsIgnoreCase(action)) {
+            if ("plansite".equalsIgnoreCase(action)) {
                 request.setAttribute("fragement", "Controleur?section=fragement&action=affichageplansite");
             }
-             if ("newsletter".equalsIgnoreCase(action)) {
+            if ("newsletter".equalsIgnoreCase(action)) {
                 request.setAttribute("fragement", "Controleur?section=fragement&action=affichagenewsletter");
             }
-             if ("contact".equalsIgnoreCase(action)) {
+            if ("contact".equalsIgnoreCase(action)) {
                 request.setAttribute("fragement", "Controleur?section=fragement&action=affichagecontact");
             }
         }
-        
 
 // formulaire de contact (Emma)
         if ("contactformulaire".equalsIgnoreCase(section)) {
@@ -622,20 +615,20 @@ public class Controleur extends HttpServlet {
                     pageJsp = "/WEB-INF/bordure/Menu.jsp";
                     break;
                 }
-                
+
                  //  case "cgv": {
                 //    pageJsp = "/WEB-INF/bordure/cgv.jsp";
                 //    break;
-               // }
-                   case "affichagecgv": {
+                // }
+                case "affichagecgv": {
                     pageJsp = "/WEB-INF/bordure/cgv.jsp";
                     break;
                 }
                 //case "plansite": {
                 //    pageJsp = "/WEB-INF/bordure/plansite.jsp";
-               //     break;
-               // }
-                 case "affichageplansite": {
+                //     break;
+                // }
+                case "affichageplansite": {
                     pageJsp = "/WEB-INF/bordure/plansite.jsp";
                     break;
                 }
@@ -650,7 +643,7 @@ public class Controleur extends HttpServlet {
                // case "carpediem": {
                 //    pageJsp = "/WEB-INF/bordure/carpediempresentation.jsp";
                 //    break;
-               // }
+                // }
                 case "affichagecarpediem": {
                     pageJsp = "/WEB-INF/bordure/carpediempresentation.jsp";
                     break;
@@ -658,7 +651,7 @@ public class Controleur extends HttpServlet {
                 //case "contact": {
                 //    pageJsp = "/WEB-INF/bordure/contact.jsp";
                 //    break;
-               // }
+                // }
                 case "affichagecontact": {
                     pageJsp = "/WEB-INF/bordure/contact.jsp";
                     break;
@@ -666,12 +659,12 @@ public class Controleur extends HttpServlet {
                 //case "newsletter": {
                 //    pageJsp = "/WEB-INF/bordure/newsletter.jsp";
                 //    break;
-               // }
+                // }
                 case "afficahgenewsletter": {
                     pageJsp = "/WEB-INF/bordure/newsletter.jsp";
                     break;
                 }
-                
+
 //                case "rubrique":{
 //                    pageJsp="/WEB-INF/catalogue/Rubrique.jsp";
 //                    break;
@@ -733,7 +726,7 @@ public class Controleur extends HttpServlet {
                 pageJsp = "/WEB-INF/bordure/AffichageTheme.jsp";
             }
         }
-        
+
         //redirection pour la recherche
         if ("rechercheaffichage".equalsIgnoreCase(section)) {
             if ("affichage".equalsIgnoreCase(action)) {
@@ -763,6 +756,18 @@ public class Controleur extends HttpServlet {
                 }
                 case ("erreurConnection"): {
                     pageJsp = "/WEB-INF/compte/connectionacheteur.jsp";
+                    break;
+                }
+                case ("ajouteradresse"): {
+                    pageJsp = "/WEB-INF/compte/AdresseAcheteur.jsp";
+                    break;
+                }
+                case ("afficheradresse"): {
+                    pageJsp = "/WEB-INF/compte/vueadresse.jsp";
+                    break;
+                }
+                case ("modifieradresse"): {
+                    pageJsp = "/WEB-INF/compte/AdresseAcheteur.jsp";
                     break;
                 }
 
