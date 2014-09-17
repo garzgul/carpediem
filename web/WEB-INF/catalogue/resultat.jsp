@@ -8,12 +8,12 @@
             <table border="1">
                 <thead>
                     <tr>
-                        <th>Couverture</th>
-                        <th>Titre</th>
-                        <th>Auteur</th>
+                        <th>COUVERTURE</th>
+                        <th>TITRE</th>
+                        <th>AUTEUR</th>
                         <th>ISBN</th>
-                        <th>Prix (eur)</th>
-                        <th>Action</th>
+                        <th>PRIX (EUR)</th>
+                        <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,7 +24,8 @@
                             <td>${l.getListeAu().get(0)}</td>
                             <td>${l.isbn13}</td>
                             <td>${l.prix}</td>
-                            <td><a href="Controleur?section=panier&action=add&ref=${l.id}">Ajout panier</a></td>
+                            <!--<td><a href="Controleur?section=panier&action=add&ref=${l.id}">Ajout panier</a></td>-->
+                            <td><a href="Controleur?section=panier&action=add&ref=${l.id}"><img src="./images/ajouterpaniervert.png" width="40" height="40" /></a></td>
                         </tr>
                     </c:forEach>
                 </tbody>

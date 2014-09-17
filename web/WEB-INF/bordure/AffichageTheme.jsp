@@ -3,7 +3,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div>
-    <h2>THEMES</h2>
+    <h2><a href="Controleur?section=recherche&action=annulerfiltre">THEMES</a></h2>
     <div>
         <ul>
            <c:forEach var="st" items="${sousthemesListe}">
