@@ -77,35 +77,27 @@
             //    <c:url value="Controleur?section=commande&action=confirmer" var="url"/>
              //   <a href="${url}">Confirmer la commande</a> %>
 </form>        
-                <c:if test="${not empty adressecommandechoisie}">
-                ${adressecommande.adresseAcheteur1}
-                ${adressecommande.adresseAcheteur2}
-                ${adressecommande.cpAcheteur}
-                ${adressecommande.villeAcheteur}
-                ${adressecommande.paysAcheteur}
-                    
-                </c:if>
-    <p>
-   <!--choix du mode de livraison -->  
-        Choissisez le type de livraison : <br/>
-    </p>
-
-    <form action="Controleur" method="POST">
-        <input type="hidden" name="section" value="commande"/>
-        <input type="hidden" name="action" value="confirmertypelivraison"/>
-        <select name="typelivraison">
-            <c:forEach items="${typelivraison}" var = "tl">
-                <option  value="${tl}">${tl}</option>
-            </c:forEach>
-        </select>
-        <input type="submit" name="doit" value="confirmer la livraison"/>
-    </form>
+             <c:if test="${not empty Acheteur.listAdresseAcheteur}">
+                 <c:forEach items ="${listAdresseAcheteur}" var="adresse">
+                     ${adresse.adresseAcheteur1}
+                     ${adresse.adresseAcheteur2}
+                     ${adresse.cpAcheteur}
+                     ${adresse.villeAcheteur}
+                     ${adresse.paysAcheteur}
+                 </c:forEach>
+             </c:if>
     
-    <p>
-        <br/>
-        <br/>
-        <c:url value="Controleur?section=commande&action=confirmer" var="url"/>
+<p>
+    <br/>
+    <br/>
+    <c:url value="Controleur?section=commande&action=choixlivraison" var="urllivraison"/>
+    <a href="${urllivraison}">Choisir le mode de livraison</a>
+    
+    <br/>
+    <br/>
+    <br/>
+    <c:url value="Controleur?section=commande&action=confirmer" var="url"/>
         <a href="${url}"> Confirmer la commande</a>
-        
-    </p>
+</p>
+             
 </div>

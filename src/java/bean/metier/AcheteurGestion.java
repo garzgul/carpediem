@@ -138,7 +138,7 @@ public class AcheteurGestion implements Serializable {
         if (achDAO.find(ach.getEmailAcheteur(), ach.getMdpAcheteur()) != null) {
             boolean test = achDAO.delete(ach);
             if (test) {
-                reponse = "Votre compte a été supprimé avec succé !";
+                reponse = "Votre compte a été supprimé avec succés !";
             }
         }
         return reponse;
