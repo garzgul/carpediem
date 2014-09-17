@@ -2,6 +2,7 @@ package bean.metier;
 
 import DAO.livre.LivreDAO;
 import bean.produit.Livre;
+import bean.produit.SousTheme;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -20,15 +21,25 @@ public class LivreGestion implements Serializable {
     public LivreGestion() throws NamingException {
         lDao = new LivreDAO();
     }
-
+    
     public List<Livre> findAll(String s) throws SQLException {
         return lDao.findAll(s);
     }
-
     
     public Livre findLivre(int id) throws SQLException, NamingException{
-
         return lDao.find(id);
     }
-
+    
+    public List<Livre> filtrer(List<Livre> lL, int id_soustheme) {
+        List<Livre> lLfiltree=null;
+        SousTheme st=null;
+        for (Livre l:lL){
+            st=l.getSousTheme();
+            if(st.getIdSousTheme()==id_soustheme){
+                lLfiltree.add(l);
+            }
+        }
+        return lLfiltree;
+    }
+    
 }
