@@ -411,7 +411,7 @@ public class Controleur extends HttpServlet {
 //                    } catch (SQLException ex) {
 //                        erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
                     //}
-=======
+
                     if ((session.getAttribute("rechercheResultat")!=null) && (session.getAttribute("rechercheappliquee")!=null)) { // s'il y a déjà eut une recherche de résultats
                         List<Livre> lL = (List<Livre>)session.getAttribute("rechercheResultat");
                         lLfiltree = lg.filtrer(lL,Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage en fonction des resultats préalables des livres
@@ -422,7 +422,7 @@ public class Controleur extends HttpServlet {
                             erreurGrave = true;
                         }
                     }
->>>>>>> origin/Eddy
+
                     session.setAttribute("rechercheResultat", lLfiltree); // place la liste filtrée des livres trouvés dans le scope
                     session.setAttribute("filtrageapplique", id_soustheme); // flag pour se souvenir qu'un filtre a été appliqué
                     request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage"); // signalement
