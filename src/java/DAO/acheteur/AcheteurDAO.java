@@ -78,9 +78,9 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
             test = false;
 
             String pReq = "UPDATE acheteur"
-                    + "SET ach_nom = '?', ach_prenom = '?', ach_pseudo = '?',"
-                    + "ach_mdp = '?', ach_email = '?', ach_tel = '?',"
-                    + "WHERE id_acheteur = '?' AND ach_actif = 1";
+                    + "SET ach_nom = ?, ach_prenom = ?, ach_pseudo = ?,"
+                    + "ach_mdp = ?, ach_email = ?, ach_tel = ?,"
+                    + "WHERE id_acheteur = ? AND ach_actif = 1";
 
             pStmt = cnn.prepareCall(pReq);
             pStmt.setString(1, obj.getNomAcheteur());
