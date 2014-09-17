@@ -102,12 +102,5 @@ public class CommandeGestion {
     }
     
     
-// methode non necessaire, il suffit d'importer le contenu du panier lors de la
-// validation de la commande.
 
-    private LignePanier remplissageCde(HashMap<Integer, Livre> liste) {
-        LignePanier lp = null;
-        
-        return lp;
-    }
 }

@@ -5,6 +5,7 @@ import bean.acheteur.Adresse;
 import bean.commande.Panier;
 import bean.metier.AcheteurGestion;
 import bean.metier.CommandeGestion;
+import bean.metier.LivraisonGestion;
 import bean.metier.LivreGestion;
 import bean.metier.PanierGestion;
 import bean.metier.ThemesGestion;
@@ -36,6 +37,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.naming.NamingException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -65,6 +67,7 @@ public class Controleur extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
+        ServletContext context = getServletContext();
         Boolean erreurGrave = false;
 
         String section = request.getParameter("section");
@@ -79,11 +82,44 @@ public class Controleur extends HttpServlet {
         CommandeGestion cg = null;
         AcheteurGestion ag = null;
         ThemesGestion tg = null;
+        LivraisonGestion livraisong = null;
 
         // declaration du string home
         String pageJsp = "/WEB-INF/main/Main.jsp";
 
-//        System.out.println("-------------------------------------->>>> passage controleur");
+
+// Module de traitement des données en scope application        
+
+// module de traitement des themes Eddy 
+// la liste de theme doit aller dans le contexte de la servlet (scope application et non scope session vu qu'il est le meme pour tous
+         if (session.getAttribute("beanThemesGestion") == null) {
+            try {
+                session.setAttribute("beanThemesGestion", new ThemesGestion()); // instanciation bean métier
+            } catch (NamingException ex) {
+                erreurGrave = true; // flag boolean pour signaler qu'une erreur s'est produite
+            }
+        }
+        tg = (ThemesGestion) session.getAttribute("beanThemesGestion");
+        //String champRecherche = request.getParameter("ChampRecherche"); // récup de la saisie à rechercher
+        List<Theme> lT = null;
+        try {
+            lT = tg.listeThemes(); // appel de la méthode métier de récupération
+        } catch (SQLException ex) {
+            erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
+        } catch (NamingException ex) {
+            erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
+        }
+        
+        context.setAttribute("themesListe", lT); // place la liste des themes trouvés dans le scope application
+        // request.setAttribute("themes", "Controleur?section=themesaffichage&action=affichage"); non necessaire (la liste de theme sera mise en scope appli au demarage de l'appli
+
+        
+// Fin module de traitement Themes (Eddy)
+        
+// creation de la liste de type de livraison
+        context.setAttribute("typelivraison", livraisong.getListeLivraison());
+            
+        
 
 // partie traitement de la servlet
         // redirection pour les bordures/elements de menu...
@@ -276,35 +312,7 @@ public class Controleur extends HttpServlet {
 
 // fin module commande  
 
-// Module de traitement des Themes (Eddy)
 
-        if ("themes".equalsIgnoreCase(section)) { // section themes concernée
-            if (session.getAttribute("beanThemesGestion") == null) {
-                try {
-                    session.setAttribute("beanThemesGestion", new ThemesGestion()); // instanciation bean métier
-                } catch (NamingException ex) {
-                    erreurGrave = true; // flag boolean pour signaler qu'une erreur s'est produite
-                }
-            }
-            if (request.getParameter("action") != null) {
-                if ("traitementthemes".equalsIgnoreCase(action)) {
-                    tg = (ThemesGestion) session.getAttribute("beanThemesGestion");
-                    //String champRecherche = request.getParameter("ChampRecherche"); // récup de la saisie à rechercher
-                    List<Theme> lT = null;
-                    try {
-                        lT = tg.listeThemes(); // appel de la méthode métier de récupération
-                    } catch (SQLException ex) {
-                        erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
-                    } catch (NamingException ex) {
-                        erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
-                    }
-                    session.setAttribute("themesResultat", lT); // place la liste des themes trouvés dans le scope session
-                    request.setAttribute("themes", "Controleur?section=themesaffichage&action=affichage"); // signalement
-                }
-            }
-        }
-        
-// Fin module de traitement Themes (Eddy)
         
         
 // Module Recherche (Eddy)        

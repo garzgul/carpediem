@@ -25,7 +25,9 @@
         <div id="global"><!-- ouverture balise div id="global"  -->
             <c:import url="${entete}" />
             <c:import url="${menu}" />
-            <c:import url="${themes}" />
+           <%// <c:import url="${themesListe}" />
+             // il va falloir faire un forEach avec des elements de menu (incluant les sous themes)  
+           %>
             <c:import url="/WEB-INF/catalogue/recherche.jsp" />
 
 

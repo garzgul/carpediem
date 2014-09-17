@@ -30,6 +30,8 @@
                         <td><fmt:formatNumber maxFractionDigits="2" value="${p.prix}"/></td>
                         
                     </tr>
+                    <!-- inclure le c:if pour le calcul des frais de port (change le type de données et les recupere de commande et non de panier-->
+                    <!-- necessite de mettre en session l'objet commande et de demander le choix de l'adresse et du port-->
                 </c:forEach>
                     <tr>
                         <td colspan="6">Total commande HT </td>
@@ -68,9 +70,9 @@
             </c:forEach>
         </select>
         <input type="submit" name="doit" value="confirmer"/>       
-       
-                <c:url value="Controleur?section=commande&action=confirmer" var="url"/>
-                <a href="${url}">Confirmer la commande</a>
+       <% //
+            //    <c:url value="Controleur?section=commande&action=confirmer" var="url"/>
+             //   <a href="${url}">Confirmer la commande</a> %>
 </form>        
                 <c:if test="${not empty adressecommandechoisie}">
                 ${adressecommande.adresseAcheteur1}
@@ -81,9 +83,23 @@
                     
                 </c:if>
     <p>
-    
+   <!--choix du mode de livraison -->  
+        Choissisez le type de livraison : <br/>
         
-    <!--choix du mode de livraison -->
+    <form action="Controleur" method="POST">
+        <input type="hidden" name="section" value="commande"/>
+        <input type="hidden" name="action" value="confirmertypelivraison"/>
+        <select name="typelivraison">
+            <c:forEach items="${typelivraison}" var = "tl">
+                <option value="ref?${tl}">${tl}</option>
+            </c:forEach>
+        </select>
+        <input type="submit" name="doit" value="confirmerlivraison"/>
+    </form>
+        
+   
+    
+    
     
     <!--calcul du cout de la livraison-->
     
