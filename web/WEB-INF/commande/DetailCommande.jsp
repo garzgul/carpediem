@@ -38,7 +38,7 @@
                     </tr>
                     <tr>
                         <td colspan="6">Total commande HT </td>
-                        <td><fmt:formatNumber maxFractionDigits="2" value="${commande.htCde}"/></td>
+                        <td><fmt:formatNumber maxFractionDigits="2" value="${panier.prixHTTotal}"/></td>
                     </tr>
                     <tr>
                         <td colspan="6">Total tva commande  </td>
@@ -55,7 +55,7 @@
     <p>
         <br/>
     <!--detail acheteur -->
-    Nom : ${Acheteur.prenomAcheteur} ${acheteur.nomAcheteur}<br/>
+    Nom : ${Acheteur.prenomAcheteur} ${Acheteur.nomAcheteur}<br/>
     
     <!--choix de l'adresse -->
     Choix de l'adresse:</p>
@@ -95,7 +95,7 @@
         <input type="hidden" name="action" value="confirmertypelivraison"/>
         <select name="typelivraison">
             <c:forEach items="${typelivraison}" var = "tl">
-                <option value="ref?${tl}">${tl}</option>
+                <option  value="${tl}">${tl}</option>
             </c:forEach>
         </select>
         <input type="submit" name="doit" value="confirmer la livraison"/>

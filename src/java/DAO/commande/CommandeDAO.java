@@ -95,10 +95,12 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
 
             // remplissage des lignes de commandes dans la table detailcommande
             proc = "{call createDetailCDE(?,?,?,?,?)}";
+            
             cstmt = cnn.prepareCall(proc);
             HashMap<Integer, LignePanier> listeCde = cde.getDetailCde();
             for (LignePanier lp : listeCde.values()) {
                 //stockage des valeurs de la ligne dans les parametres
+                System.out.println("dans le for du call commande");
                 cstmt.setLong(1, idCde);
                 cstmt.setInt(2, lp.getL().getId());
                 cstmt.setInt(3, lp.getQte());
@@ -106,6 +108,7 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
                 cstmt.setFloat(5, lp.getTva());
                 //appel de la procedure stockée pour la creation de chaque ligne
                 cstmt.execute();
+                System.out.println("apres le execute dans la DAO commande");
             }
             res = true;
         } finally {
