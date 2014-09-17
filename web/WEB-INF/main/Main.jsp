@@ -25,52 +25,57 @@
         <div id="global"><!-- ouverture balise div id="global"  -->
             <c:import url="${entete}" />
             <c:import url="${menu}" />
-           <%// <c:import url="${themesListe}" />
-             // il va falloir faire un forEach avec des elements de menu (incluant les sous themes)  
-           %>
-            <c:import url="/WEB-INF/catalogue/recherche.jsp" />
-
+            <%// <c:import url="${themesListe}" />
+               // il va falloir faire un forEach avec des elements de menu (incluant les sous themes)  %>
 
             <!-- Contenu titre --> 
             <div id="contenu">
+                <div>
+                    <c:import url="Controleur?section=themesaffichage&action=affichage" />
+                </div>
+                
                 <div id="contentcontenu">
-                    <h1 class="titreh1">>>titre de la page ou fil ariane interactif</h1>
+                    <div>
+                        <h1 class="titreh1">>>titre de la page ou fil ariane interactif</h1>
+                        
+                         <c:import url="/WEB-INF/catalogue/recherche.jsp" />
 
-                    <c:if test="${not empty recherche}">  
-                        <c:import url="${recherche}" />
-                    </c:if>
+                        <c:if test="${not empty recherche}">  
+                            <c:import url="${recherche}" />
+                        </c:if>
 
-                    <c:if test="${not empty affichageLivre}">
-                        <c:import url="${affichageLivre}" />
-                    </c:if>
+                        <c:if test="${not empty affichageLivre}">
+                            <c:import url="${affichageLivre}" />
+                        </c:if>
 
-                    <c:if test ="${not empty affichagecompte}">
-                        <c:import url="${affichagecompte}"/>
-                    </c:if>
+                        <c:if test ="${not empty affichagecompte}">
+                            <c:import url="${affichagecompte}"/>
+                        </c:if>
 
 
-                    <c:if test="${not empty affichagepanier}">
+                        <c:if test="${not empty affichagepanier}">
 
-                        <c:import url="${affichagepanier}"/> 
+                            <c:import url="${affichagepanier}"/> 
 
-                    </c:if>
+                        </c:if>
 
-                    <c:if test="${not empty voircompte}">
-                        <c:import url="${voircompte}"/>
-                    </c:if>
-                    
-                    <c:if test="${not empty commande}">
-                        <c:import url="${commande}"/>
-                    </c:if>
-                    
+                        <c:if test="${not empty voircompte}">
+                            <c:import url="${voircompte}"/>
+                        </c:if>
 
-                    <c:if test="${not empty fragement}">
-                        <c:import url="${fragement}"/>
-                    </c:if>
+                        <c:if test="${not empty commande}">
+                            <c:import url="${commande}"/>
+                        </c:if>
 
-                    
 
-                </div><!-- fin div contentcontenu -->
+                        <c:if test="${not empty fragement}">
+                            <c:import url="${fragement}"/>
+                        </c:if>
+
+
+
+                    </div><!-- fin div contentcontenu -->
+                </div>
             </div><!-- Fin contenu -->
 
 
