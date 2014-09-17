@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import static java.time.Instant.now;
 import static java.time.OffsetTime.now;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.naming.NamingException;
 import utilitaire.MonException;
@@ -152,5 +153,10 @@ public class AcheteurGestion implements Serializable {
             adresse = adrDAO.create(adr);
         }
         return adresse;        
+    }
+    
+    public Adresse getAdressefav(Acheteur ach){
+        
+        return ach.getAdfav();
     }
 }
