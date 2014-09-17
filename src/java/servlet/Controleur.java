@@ -11,6 +11,7 @@ import bean.metier.LivreGestion;
 import bean.metier.PanierGestion;
 import bean.metier.ThemesGestion;
 import bean.produit.Livre;
+import bean.produit.SousTheme;
 import bean.produit.Theme;
 import java.io.IOException;
 import static java.lang.ProcessBuilder.Redirect.to;
@@ -91,8 +92,8 @@ public class Controleur extends HttpServlet {
 
 // Module de traitement des données en scope application        
 
-// module de traitement des themes Eddy 
-// la liste de theme doit aller dans le contexte de la servlet (scope application et non scope session vu qu'il est le meme pour tous
+// Module de traitement des themes/sousthemes (Eddy) 
+// la liste doit aller dans le contexte de la servlet (scope application et non scope session vu qu'il est le meme pour tous
          if (session.getAttribute("beanThemesGestion") == null) {
             try {
                 session.setAttribute("beanThemesGestion", new ThemesGestion()); // instanciation bean métier
@@ -101,17 +102,16 @@ public class Controleur extends HttpServlet {
             }
         }
         tg = (ThemesGestion) session.getAttribute("beanThemesGestion");
-        //String champRecherche = request.getParameter("ChampRecherche"); // récup de la saisie à rechercher
-        List<Theme> lT = null;
+        List<SousTheme> lsT = null;
         try {
-            lT = tg.listeThemes(); // appel de la méthode métier de récupération
+            lsT = tg.listeSousThemes(); // appel de la méthode métier de récupération
         } catch (SQLException ex) {
             erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
         } catch (NamingException ex) {
             erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
         }
         
-        context.setAttribute("themesListe", lT); // place la liste des themes trouvés dans le scope application
+        context.setAttribute("sousthemesListe", lsT); // place la liste des sous themes trouvés dans le scope
         // request.setAttribute("themes", "Controleur?section=themesaffichage&action=affichage"); non necessaire (la liste de theme sera mise en scope appli au demarage de l'appli
 
         
@@ -125,8 +125,8 @@ public class Controleur extends HttpServlet {
             livraisong = (LivraisonGestion) context.getAttribute("livraisongestion");
             context.setAttribute("typelivraison", livraisong.getListeLivraison());
         }
+            
         
-
 // partie traitement de la servlet
         // redirection pour les bordures/elements de menu...
         request.setAttribute("entete", "Controleur?section=fragement&action=entete");
@@ -367,7 +367,21 @@ public class Controleur extends HttpServlet {
                     } catch (SQLException ex) {
                         erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
                     }
-                    request.setAttribute("rechercheResultat", lL); // place la liste des livres trouvés dans le scope request
+                    //request.setAttribute("rechercheResultat", lL); // place la liste des livres trouvés dans le scope
+                    session.setAttribute("rechercheResultat", lL); // place la liste des livres trouvés dans le scope
+                    request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage"); // signalement
+                    // qu'une liste de livres sera à afficher dynamiquement en résultat
+                }
+                if ("filtrer".equalsIgnoreCase(action)) { // action filtrer provoquée par un clic sur un theme particulier
+                    lg = (LivreGestion) session.getAttribute("beanLivreGestion");
+                    String id_soustheme = request.getParameter("ref"); // récup de l'id_soustheme à filtrer
+                    List<Livre> lLfiltree = null;
+                    //try {
+                        lLfiltree = lg.filtrer((List<Livre>)session.getAttribute("rechercheResultat"),Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage
+//                    } catch (SQLException ex) {
+//                        erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
+                    //}
+                    session.setAttribute("rechercheResultat", lLfiltree); // place la liste filtrée des livres trouvés dans le scope
                     request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage"); // signalement
                     // qu'une liste de livres sera à afficher dynamiquement en résultat
                 }

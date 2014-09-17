@@ -1,6 +1,8 @@
 package bean.metier;
 
+import DAO.livre.SousThemeDAO;
 import DAO.livre.ThemeDAO;
+import bean.produit.SousTheme;
 import bean.produit.Theme;
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -13,14 +15,14 @@ import javax.naming.NamingException;
  */
 public class ThemesGestion implements Serializable {
 
-    private ThemeDAO tDao;
+    private SousThemeDAO stDao;
 
     public ThemesGestion() throws NamingException {
-        tDao = new ThemeDAO();
+        stDao = new SousThemeDAO();
     }
 
-    public List<Theme> listeThemes() throws SQLException, NamingException {
-        return tDao.listeThemes();
+    public List<SousTheme> listeSousThemes() throws SQLException, NamingException {
+        return stDao.listeSousThemes();
     }
 
 }
