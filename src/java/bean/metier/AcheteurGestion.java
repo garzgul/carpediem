@@ -77,7 +77,6 @@ public class AcheteurGestion implements Serializable {
         if (erreur) {
             throw new MonException(hm, "Echec à la création du compte");
         }
-
         achDAO.create(ach);
         return ach;
 
