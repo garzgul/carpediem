@@ -36,16 +36,17 @@ public class CommandeGestion {
         Date d = new Date();
         // parametre de commande implicite
         cde.setDateCde(d);
-        // cde.set
+        
         
         // gestion du no de commande
         
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String nouveauNoCde = null;
-        
+        System.out.println("avant le test du no de commande");
         String lastCDE = cDao.getLastNoCde();
-        if (!lastCDE.isEmpty()){
+        System.out.println("apres le test du no de commande");
+        if (lastCDE.isEmpty() || lastCDE == null){
             int longeur = lastCDE.length();
             String cdenb = lastCDE.substring(8, (longeur-1));
             String dateCde = lastCDE.substring(0,7);
@@ -64,6 +65,7 @@ public class CommandeGestion {
                 nouveauNoCde =""+noCommande;
             }
         }
+        System.out.println("apres la creation du no de commande");
         cde.setNumCde(nouveauNoCde);
         
         // gestion du nom d'acheteur
@@ -97,8 +99,9 @@ public class CommandeGestion {
         // fin du remplissage de l'objet commande (envoi a la DAO)
         
         // creation de la commande
+        System.out.println(" creation de la commande en base");
         res =cDao.createCde(cde);
-        
+        System.out.println("apres la creation de la commande en base");
         return res;
     }
     
@@ -119,6 +122,10 @@ public class CommandeGestion {
     public Commande setDate(Commande c){
         c.setDateCde(new Date());
         return c;
+    }
+    public Commande updateCdeFraisDePort(Commande c){
+        
+        return c; 
     }
     
 

@@ -159,4 +159,11 @@ public class Commande implements Serializable{
         this.modePaiement = modePaiement;
     }
 
+    @Override
+    public String toString() {
+        return "numCde= " + numCde ;
+    }
+    
+    
+
 }

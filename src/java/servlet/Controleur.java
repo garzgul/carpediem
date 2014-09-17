@@ -3,6 +3,7 @@ package servlet;
 import bean.acheteur.Acheteur;
 import bean.acheteur.Adresse;
 import bean.commande.Commande;
+import bean.commande.ModeLivraison;
 import bean.commande.Panier;
 import bean.metier.AcheteurGestion;
 import bean.metier.CommandeGestion;
@@ -254,7 +255,7 @@ public class Controleur extends HttpServlet {
 
 // module commande        
         if ("commande".equalsIgnoreCase(section)) {
-            System.out.println(">>>>>>>>>>>>>>>>>>>>> dans commande");
+            
             if (session.getAttribute("maliste") == null) {
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
 
@@ -264,11 +265,20 @@ public class Controleur extends HttpServlet {
 
             }
             p = (Panier) session.getAttribute("panier");
+            
+            if (session.getAttribute("commande")==null){
+                try {
+                    session.setAttribute("commande", new CommandeGestion());
+                } catch (NamingException ex) {
+                    erreurGrave=true;
+                }
+            }
+            cg = (CommandeGestion) session.getAttribute("commande");
 
             request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagedetail");
 
             if ("affichage".equalsIgnoreCase(action)) {
-                System.out.println(">>>>>>>>>>>>>>>dans controleur affichage commande");
+                
                 request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagedetail");
                 Acheteur ach = (Acheteur) session.getAttribute("acheteur");
                 Adresse ad = ach.getAdfav();
@@ -286,8 +296,15 @@ public class Controleur extends HttpServlet {
             }
 
             if ("validercommande".equalsIgnoreCase(action)) {
-                System.out.println(request.getAttribute("affichagecommande"));
-                System.out.println(">>>>>>>>>>>>> dans valider commande");
+                Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
+                try {
+                    System.out.println("avant le crea commande");
+                    session.setAttribute("Commande",cg.createCommande(p.getLignes(), ach));
+                } catch (SQLException ex) {
+                    erreurGrave = true;
+                } catch (ParseException ex) {
+                    erreurGrave = true;
+                }
 
                 request.setAttribute("commande", "Controleur?section=affichagecommande&action=affichage");
 
@@ -306,7 +323,7 @@ public class Controleur extends HttpServlet {
                 // ArrayList<Adresse> listead = ach.getListAdresseAcheteur();
                 try {
                     //creation de l'objet commande et mise en session
-                    session.setAttribute("Commande",cg.createCommande(p.getLignes(), ach));
+                    session.setAttribute("commandeDetail",cg.createCommande(p.getLignes(), ach));
                 } catch (SQLException ex) {
                     erreurGrave=true;
                 } catch (ParseException ex) {
@@ -330,7 +347,7 @@ public class Controleur extends HttpServlet {
                     erreurGrave=true;
                     return;
                 }
-                Commande cde = (Commande) session.getAttribute("commande");
+                Commande cde = (Commande) session.getAttribute("commandeDetail");
                 cde =cg.setDate(cde);
                 Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
                 ArrayList<Adresse> listead = ach.getListAdresseAcheteur();
@@ -339,6 +356,15 @@ public class Controleur extends HttpServlet {
             }
             
             if("confirmertypelivraison".equalsIgnoreCase(action)){
+                Commande cde = (Commande) session.getAttribute("commandeDetail");
+                String typeLivraison = request.getParameter("typelivraison");
+                
+                System.out.println(typeLivraison);
+                
+                // pour le moment cette ligne n'est pas necessaire car un seul type de livraison existe
+                //cde.setModeLivraison(ModeLivraison.valueOf(typeLivraison));
+                cde.setModeLivraison(ModeLivraison.poste);
+                
                 
             }
             
@@ -468,6 +494,8 @@ public class Controleur extends HttpServlet {
                     System.out.println(">>>>>>>>>>>>>>>>>passage par le catch");
                 } catch (SQLException ex) {
                     erreurGrave = true;
+                } catch (NamingException ex) {
+                    erreurGrave=true;
                 }
 
             }
@@ -483,10 +511,12 @@ public class Controleur extends HttpServlet {
                 Acheteur ach = null;
                 try {
                     ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
+                    System.out.println("avant creation acheteur");
                     ach = ag.chercherAcheteur(mail, mdp);
+                    System.out.println("apres crea acheteur");
                     if (ach != null) {
                         session.setAttribute("Acheteur", ach);
-                        request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
+                        // request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
                     } else {
 //                        ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
                         ach = ag.chercherAcheteur(mail);
@@ -511,6 +541,8 @@ public class Controleur extends HttpServlet {
 
                 } catch (SQLException ex) {
                     erreurGrave = true;
+                } catch (NamingException ex) {
+                    erreurGrave=true;
                 }
                 if (mail.isEmpty() || mail == null
                         && mdp.isEmpty() || mdp == null) {
