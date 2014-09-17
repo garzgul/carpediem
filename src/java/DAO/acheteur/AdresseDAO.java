@@ -32,8 +32,8 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable {
         int rs = 0;
         try {
             cnn = fc.fournir();
-            String pReq = "INSERT INTO adresse (id_acheteur, adresse_chp1, adresse_chp2, adresse_cp, adresse_ville, adresse_pays, adresse_actif)"
-                    + "VALUES (?, ?, ?, ?, ?, ?, 1)";
+            String pReq = "INSERT INTO adresse (id_acheteur, adresse_chp1, adresse_chp2, adresse_cp, adresse_ville, adresse_pays, adresse_actif, adresse_fav)"
+                    + "VALUES (?, ?, ?, ?, ?, ?, 1, ?)";
 
             pStmt = cnn.prepareCall(pReq);
             pStmt.setInt(1, obj.getIdAcheteur());
@@ -42,6 +42,11 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable {
             pStmt.setString(4, obj.getCpAcheteur());
             pStmt.setString(5, obj.getVilleAcheteur());
             pStmt.setString(6, obj.getPaysAcheteur());
+            int adrFav = 0;
+            if(true == obj.getAdressefav()){
+                adrFav = 1;
+            }
+            pStmt.setInt(7, adrFav);
             rs = pStmt.executeUpdate();
         } finally {
             if (pStmt != null) {
@@ -162,7 +167,7 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable {
             while (rs.next()) {
                 int idAdresse = rs.getInt("id_adresse");
                 String adresse1 = rs.getString("adresse_chp1");
-                String adresse2 = rs.getString("adresse_chap2");
+                String adresse2 = rs.getString("adresse_chp2");
                 String cp = rs.getString("adresse_cp");
                 String ville = rs.getString("adresse_ville");
                 String pays = rs.getString("adresse_pays");

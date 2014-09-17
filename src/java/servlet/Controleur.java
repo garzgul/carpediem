@@ -66,7 +66,7 @@ public class Controleur extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
@@ -465,7 +465,6 @@ public class Controleur extends HttpServlet {
                     request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageinscription");
                     //request.setAttribute("pagevisee", "/WEB-INF/compte/inscriptionacheteur.jsp");
                     //pageJsp = "/WEB-INF/main/Main.jsp";
-                    System.out.println(">>>>>>>>>>>>>>>>>passage par le catch");
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 }
@@ -481,6 +480,8 @@ public class Controleur extends HttpServlet {
                 String mail = request.getParameter("email");
                 String mdp = request.getParameter("mdp");
                 Acheteur ach = null;
+                request.setAttribute("ajouteradresse", "Controleur?section=affichagecompte&action=ajouteradresse");
+                request.setAttribute("vueadresse", "Controleur?section=affichagecompte&action=vueadresse");
                 try {
                     ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
                     ach = ag.chercherAcheteur(mail, mdp);
@@ -488,7 +489,6 @@ public class Controleur extends HttpServlet {
                         session.setAttribute("Acheteur", ach);
                         request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
                     } else {
-//                        ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
                         ach = ag.chercherAcheteur(mail);
                         if (ach != null) {
                             session.setAttribute("Acheteur", ach);
@@ -531,14 +531,40 @@ public class Controleur extends HttpServlet {
 
             //Ajouter une adresse
             if ("voiradresse".equalsIgnoreCase(action)) {
+                System.out.println("===========Voir adresse");
                 Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
-                if (ach.getListAdresseAcheteur().isEmpty()) {
-                    request.setAttribute("ajouterAdresse", "Controleur?section=affichagecompte&action=ajouteradresse");
-                } else {
-                    request.setAttribute("vueadresse", "Contoleur?section=affichagecompte&action=vueadresse");
+                request.setAttribute("ajouteradresse", "Controleur?section=affichagecompte&action=ajouteradresse");
+                request.setAttribute("vueadresse", "Controleur?section=affichagecompte&action=vueadresse");
+             }
+            
+            if("ajoutAdresse".equalsIgnoreCase(action)){
+                System.out.println("===========ladans ajout adresse");
+                boolean adresseFav = false;
+                Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
+                int idAcheteur = ach.getIdAcheteur();
+                String adr1 = request.getParameter("adresse");
+                String complement = request.getParameter("complement");
+                String cPostal = request.getParameter("cp");
+                String ville = request.getParameter("ville");
+                String pays = request.getParameter("pays");
+                String fav = request.getParameter("selectFav");
+                if("Favori".equalsIgnoreCase(fav)){
+                    adresseFav = true;
                 }
-
+                Adresse adr = new Adresse(adr1, complement, cPostal, ville, pays, true);
+                adr.setIdAcheteur(idAcheteur);
+                adr.setAdressefav(adresseFav);
+                ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
+                try {
+                    System.out.println("=========ici on est dans le try");
+                    ag.addAdresse(ach, adr);
+                } catch (SQLException ex) {
+                    erreurGrave = true;
+                }
+                request.setAttribute("voircompte", "Controleur?section=affichagecompte&action=voircompte");
+//                response.sendRedirect("Controleur?section=connexion&action=voircompte");
             }
+            
         }
 // affichage mentions legales (Emma)
         if ("fragement".equalsIgnoreCase(section)) {
@@ -746,13 +772,22 @@ public class Controleur extends HttpServlet {
                     break;
                 }
                 case ("connection"): {
+                    System.out.println("connexion"+request.getAttribute("connexion"));
+                    System.out.println("connection"+request.getAttribute("vueadresse"));
                     pageJsp = "/WEB-INF/compte/VueCompte.jsp";
+                    break;
                 }
                 case ("affichageconnection"): {
                     pageJsp = "/WEB-INF/compte/connectionacheteur.jsp";
                     break;
                 }
                 case ("voircompte"): {
+                    System.out.println("=============dans le case voircompte");
+                    System.out.println("entete :"+request.getAttribute("entete"));
+                    System.out.println("menu: "+request.getAttribute("menu"));
+                    System.out.println("pied: "+request.getAttribute("pied"));
+                    System.out.println("vueadresse: "+request.getAttribute("vueadresse"));
+                    System.out.println("ajouteradresse: "+request.getAttribute("ajouteradresse"));
                     pageJsp = "/WEB-INF/compte/VueCompte.jsp";
                     break;
                 }
@@ -761,10 +796,11 @@ public class Controleur extends HttpServlet {
                     break;
                 }
                 case ("ajouteradresse"): {
+                    System.out.println("=>>>>>>>>>>>==== Dans le case ajouteradresse");
                     pageJsp = "/WEB-INF/compte/AdresseAcheteur.jsp";
                     break;
                 }
-                case ("afficheradresse"): {
+                case ("vueadresse"): {
                     pageJsp = "/WEB-INF/compte/vueadresse.jsp";
                     break;
                 }
@@ -805,7 +841,11 @@ public class Controleur extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (NamingException ex) {
+            Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -819,7 +859,11 @@ public class Controleur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (NamingException ex) {
+            Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

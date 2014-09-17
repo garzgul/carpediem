@@ -24,7 +24,7 @@ public class AcheteurGestion implements Serializable {
     }
     // Ajout d'un acheteur tout en vérifiant les champs obligatoir
 
-    public Acheteur ajoutAcheteur(Acheteur ach, String confirMDP) throws SQLException, MonException {
+    public Acheteur ajoutAcheteur(Acheteur ach, String confirMDP) throws SQLException, MonException, NamingException {
 
         Boolean erreur = false;
         HashMap<String, String> hm = new HashMap<>();
@@ -77,14 +77,13 @@ public class AcheteurGestion implements Serializable {
         if (erreur) {
             throw new MonException(hm, "Echec à la création du compte");
         }
-
         achDAO.create(ach);
         return ach;
 
     }
 
     //Connection d'un acheteur
-    public Acheteur chercherAcheteur(String mail, String mdp) throws SQLException, MonException {
+    public Acheteur chercherAcheteur(String mail, String mdp) throws SQLException, MonException, NamingException {
         Boolean erreur = false;
         HashMap<String, String> hm = new HashMap<>();
 
@@ -134,7 +133,7 @@ public class AcheteurGestion implements Serializable {
         return null;
     }
 
-    public String supprimerAcheteur(Acheteur ach) throws SQLException {
+    public String supprimerAcheteur(Acheteur ach) throws SQLException, NamingException {
         String reponse = "Votre compte n'a pas été supprimer";
         if (achDAO.find(ach.getEmailAcheteur(), ach.getMdpAcheteur()) != null) {
             boolean test = achDAO.delete(ach);
