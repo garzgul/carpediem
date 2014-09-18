@@ -13,11 +13,11 @@
 a, a:link, a:visited, a :hover, a:active
 {
     cursor: pointer;/*forme de main*/
-    text-decoration: none;/*pas de decoration - soulignement ou autre*/
+    text-decoration: underline;/*pas de decoration - soulignement ou autre*/
     color: black;
 }
 
-#inside-col-follow
+/*#inside-col-follow
 {
     width: 160px;
     margin-left: 20px;
@@ -26,37 +26,41 @@ a, a:link, a:visited, a :hover, a:active
     border: solid 1px grey;
     background-color: #e7e4d6;
     float: left;
-}
+}*/
 
 #block-headdiv
 {
-    background-color: #e7e4d6;
+    background-color: #FFFFFF;
+    //margin-left: 5px;
+    margin-bottom: 10px;
+    /*border: solid 1px orange;*/
 }
 
 #block-headh2
 {
     margin-top: 5px;
     /*line-height: 20px;*/
-    color: #262420;
+    color: #FFFFFF;
     font: bold 22px Arial,Helvetica;
     text-align: center;
     letter-spacing: -0.015em;
     text-transform: uppercase;
     text-shadow: 0 1px 0 #FFFFFF;
-    border: solid 1px orange;
+    /*border: solid 1px orange;*/
 }
 
-#block-menudiv
+#block-themesdiv
 {
-    width: 150px;
-    background-color: #4e4b45;
-    margin: 5px;
-    padding-top: 10px;
+    width: 205px;
+    background-color: #FFFFFF;
+    //margin: 5px;
+    //margin-left: 20px;
+    //padding-top: 10px;
     padding-bottom: 10px;
-    padding-right: 0;
-    padding-left: 0;
+    //padding-right: 0;
+    //padding-left: 0;
     text-align: left;
-    border: solid 1px blue;
+    /*border: solid 1px blue;*/
 }
 
 #block-menudiv ul
@@ -66,7 +70,7 @@ a, a:link, a:visited, a :hover, a:active
     height: auto !important;
     margin-bottom: 0 !important;
     list-style: none inside none;/*pas de puce, outside avec retrait pas de fond image*/
-    border: solid 1px orange;
+    /*border: solid 1px orange;*/
 }
 
 #block-menudiv li
@@ -76,15 +80,15 @@ a, a:link, a:visited, a :hover, a:active
     height: auto !important;
     margin-bottom: 0 !important;
     list-style: none outside none;
-    /*border-style: solid;
+    border-style: solid;
     border-width: 0 0 1px;
-    border-color: #66635C;*/
-    border: solid 1px green;
+    border-color: #66635C;
+    /*border: solid 1px green;*/
 }
 
 #block-menudiv a
 {
-    /*display: block;*/
+    display: block;
     margin: auto;
     padding: 5px;/*haut droite bas gauche*/
     font-size: 16px;
@@ -96,13 +100,32 @@ a, a:link, a:visited, a :hover, a:active
 
 #block-menudiv a:link, a :hover, a:active 
 {
-    color: white;
+    color:purple;
 }
 
-.pad-30-l a
+
+.art-layout-wrapper
 {
-    margin-left: 10px;
+    position: relative;
+    margin: 20px auto 0 auto;
+    z-index: auto !important;
 }
+
+#modulerecherchethemes
+{
+    width: 205px;
+    min-height: 300px;
+    margin-left: auto;
+    margin-bottom: 10px;
+    margin-right: auto;
+    //padding-left: 5px;
+    //border: solid 1px grey;
+    background-color: #FFFFFF;
+    float: left;
+    vertical-align: top;
+    border: solid 1px purple;
+}
+
 
 #monpanierdiv
 {

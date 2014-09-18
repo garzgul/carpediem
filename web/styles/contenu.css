@@ -8,43 +8,92 @@
 
 .clear
 {
-	clear: both;
+    clear: both;
 }
 
 a, a:link, a:visited, a :hover, a:active
 {
     cursor: pointer;/*forme de main*/
     text-decoration: none;/*pas de decoration - soulignement ou autre*/
-	color: black;
+    color: black;
 }
+
+/*.art-sheet
+{
+    background: #FFFFFF;
+    margin:0 auto;
+    position:relative;
+    cursor:auto;
+    width: 960px;
+    z-index: auto !important;
+}*/
+
+
 #contentcontenu
 {
-	min-height: 600px;
-	width: 960px;
-	margin-left: auto;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
-	margin-right: auto;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
-	margin-top: 0;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
-	margin-bottom: 35px;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
-	/*padding: auto;/*marge interieure pour haut et bas à 5 et gauche et droite 0*/
-    /*padding: 20px 10px 0 !important;*/
-	padding-top: auto;
-	padding-left: auto;
-	padding-right: auto;
-	padding-bottom: 30px;
-	border-top: #E7E7E7 6px solid;
-	border-left: #E7E7E7 6px solid;
-	border-right: #E7E7E7 6px solid;
-	border-bottom: #E7E7E7 6px solid;
-	background-color: #c0c0c0;
-  overflow:hidden;
+    min-height: 800px;
+    width: 960px;
+    margin-left: auto;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
+    margin-right: auto;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
+    margin-top: 0;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
+    margin-bottom: 35px;/*haut et bas à 5 et gauche et droite auto marges exterieures*/
+    padding: auto;/*marge interieure pour haut et bas à 5 et gauche et droite 0*/
+    padding: 20px 10px 0 !important;
+    padding-top: auto;
+    padding-left: auto;
+    padding-right: auto;
+    padding-bottom: 30px;
+    border-top: #E7E7E7 6px solid;
+    border-left: #E7E7E7 6px solid;
+    border-right: #E7E7E7 6px solid;
+    border-bottom: #E7E7E7 6px solid;
+    background-color: #c0c0c0;
+    overflow:hidden;
 }
 
 .titreh1
 {
-	font-weight: bold;
-	font-size: 18px;
-	margin-top: 10px;
-	margin-bottom: 40px;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 40px;
 }
-#index-haut,#bloc-infos,#bloc-news,#bloc-dossiers,#bloc-forum{overflow:hidden;}
+/*#index-haut,#bloc-infos,#bloc-news,#bloc-dossiers,#bloc-forum
+{
+overflow:hidden;
+}*/
+
+#colonnegauche
+{
+    float: left;
+    width: 215px;
+    min-height: 800px;
+    background-color: #FFFFFF;
+    //margin-top: 5px;
+    margin-left: 10px;
+     margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    //padding-right: 0;
+    padding-left: 10px;
+    text-align: left;
+    /*border: solid 1px pink;*/
+}
+
+#colonnedroite
+{
+    float: left;
+    width: 650px;
+    min-height: 800px;
+    background-color: #FFFFFF;
+    //margin-top: 5px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    //padding-right: 0;
+    padding-left: 10px;
+    text-align: left;
+}
+
 

@@ -33,26 +33,39 @@ blockquote,q
 
 body
 {
-    min-height: 500px;
-    background: none repeat scroll 0 0 transparent;
+    min-height: 600px;
+    //background: none repeat scroll 0 0 transparent;
     color: #3c3a35;/*gris fonce presque noir*/
     font: 12px 'Lucida Sans','Lucida Grande',sans-serif;/*police de windows et mac par exellence*/
     line-height: 1;
     //width: 960px;
-    border: 1px solid yellow;
+    background : none repeat scroll 0 0 #EFF2F5;
+    margin : 0 auto;
+    //font-size : 13px;
+    //font-family : Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
+    font-weight : normal;
+    font-style : normal;
+    position : relative;
+    width : 100%;
+    left : 0;
+    top : 0;
+    //cursor :default;
+    overflow :hidden;
+    /*border: 1px solid yellow;*/
+
 }
 
 a 
 {
     cursor: pointer;/*forme de main*/
-    //text-decoration: none;/*pas de decoration - soulignement ou autre*/
+    text-decoration: underline;/*pas de decoration - soulignement ou autre*/
     color: black;
 }
 
-a:link, a:visited, a :hover, a:active
+a:link, a:visited, a:hover, a:active
 {
     cursor: pointer;/*forme de main*/
-    //text-decoration: none;/*pas de decoration - soulignement ou autre*/
+    text-decoration: underline;/*pas de decoration - soulignement ou autre*/
     color: black;
 }
 
@@ -86,6 +99,7 @@ blockquote, q
 /*global*/
 #global
 {
+    margin: auto;
     text-align: left;
     min-height: 100%;/*hauteur minimum du container*/
     position: relative;/*relative par rapport au positionnement normal - permet dans un flux de lecture normal haut vers bas de faire se chavaucher des elements, de les deplacer*/
@@ -784,10 +798,12 @@ blockquote, q
 
 #formrechercheg /*formulaire recherche*/
 {
+    float: left;
     width: auto;/*taille max du formulaire*/
     height: auto;
     // margin-left: 70px;
-    margin-top: 10px;
+    //margin-top: 10px;
+    /*border : solid 1px yellow;*/
 }
 
 #formrechercheg p
@@ -797,26 +813,29 @@ blockquote, q
 
 #formrechercheg form
 {
-    margin-bottom: 10px;/*marge du bas*/
+    // margin-bottom: 10px;/*marge du bas*/
     border: #ccc 2px inset;/*gris 3d enfonce*/
 }
 
-//#formrechercheg label
-//{
-//   background-color: #292929;/*couleur de fond pour séparer les labels des champs*/
-//   color: white;/*couleur texte labels*/
-//   display: block;/*si on veut mettre une taille aux labels*/
-//  width: 39%;
-//  float: left;/*pour aligner les champs de texte avec le label input/labels*/
-//  padding-right: 1%;
-//  text-align: right;/*on aligne le texte à droite*/
-//  letter-spacing: 1px;/*pour mieux voir*/
-//}
+#formrechercheg label
+{
+    background-color: none; /*couleur de fond pour séparer les labels des champs*/
+    color: white;/*couleur texte labels*/
+    display: block;/*si on veut mettre une taille aux labels*/
+    width: auto;
+    float: left;/*pour aligner les champs de texte avec le label input/labels*/
+    //padding-right: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding-left: 10px;
+    text-align: right;/*on aligne le texte à droite*/
+    //letter-spacing: 1px;/*pour mieux voir*/
+}
 
-//#formrechercheg label:hover
-//{
-//    font-weight: bold;
-//}
+#formrechercheg label:hover
+{
+    font-weight: bold;
+}
 
 #formrechercheg input:hover, #formrechercheg input:focus/*on met en couleur le fond des champs au survol et on garde ce fond qd on est dans le champs par le focus*/
 {
@@ -826,34 +845,72 @@ blockquote, q
 
 #formrechercheg input[type="submit"]
 {
-    border: #D7ff83 1px solid;/*vert*/
-    width: 60%;
+    float: left;
+    border: purple 1px solid;/**/
+    width: auto;
     height: 35px;
     margin-top: 10px;
-    margin-left: 20%;
-    margin-bottom: 10px;
+    margin-left: 20px;
+    //margin-bottom: 10px;
+    background-color: #cccccc;;/*rouge #D7ff83*/
+    border-radius: 4px 4px 4px 4px;/*bordure arrondie de l angle en haut à gauche, en haut a droite, en bas droite, en bas gauche*/
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
 }
 
 #formrechercheg input[type="submit"]:hover
 {
-    background-color: #D7ff83;/*rouge*/
+    background-color: purple;/*rouge #D7ff83*/
+    color: white;
     cursor: pointer;/*on change le curseur*/
 }
 
 #formrechercheg input, #rech-rapide input
 {
-    width : 800px;
+    float: left;
+    width : 400px;
     line-height: 35px;
-    height: 60px;
+    height: 55px;
     margin: auto;
-    margin-top: 5px;
-    margin-left: 7%;
+    //margin-top: 5px;
+    margin-left: 10px;
     padding-left: 10px;
     font-weight: bold;
-    border: #ccc 1px inset;/*gris clair*/
+    border: purple 1px inset;/*gris clair #ccc*/
 }
 
 #formrecherchegdiv
 {
     /*border: solid 1px red;*/
+    float: left;
+}
+
+.slideshow
+{  
+    width: auto;  
+    height: 200px;  
+    overflow: hidden; 
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-right: 10px;
+    border: 3px solid purple;  
+}  
+
+.slideshow ul
+{  
+    /* 4 images donc 4 x 100% */  
+    width: 400%;  
+    height: 200px;  
+    padding:0; margin:0;  
+    list-style: none;  
+}  
+.slideshow li 
+{  
+    float: left;  
+}  
+
+
+#cartesbancaires
+{
+    border: solid 1px purple;
 }
