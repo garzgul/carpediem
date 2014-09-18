@@ -62,11 +62,8 @@ public class CommandeGestion {
             noCde=noCde+"00000001";
             
         }
-        System.out.println("no de commande avant le set "+noCde);
-        
         cde.setNumCde(noCde);
-        System.out.println("no de commande dans la gestion commande "+cde.getNumCde());
-        
+
         // gestion du nom d'acheteur
         cde.setAcheteurCde(ach);
         // gestion du mode de livraison
@@ -103,9 +100,9 @@ public class CommandeGestion {
         // fin du remplissage de l'objet commande (envoi a la DAO)
         
         // creation de la commande
-        System.out.println(" creation de la commande en base");
+
         res =cDao.createCde(cde);
-        System.out.println("apres la creation de la commande en base");
+
         return res;
     }
     
@@ -128,7 +125,7 @@ public class CommandeGestion {
         return c;
     }
     public Commande updateCdeFraisDePort(Commande c){
-        
+        // non implemente a ce jour
         return c; 
     }
     

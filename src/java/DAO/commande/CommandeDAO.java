@@ -80,7 +80,6 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
         try {
             String proc = "{call createCDE(?,?,?,?,?,?,?,?,?,?,?,?)}";
             cstmt = cnn.prepareCall(proc);
-            System.out.println("no de cde dans commande DAO "+cde.getNumCde());
             cstmt.setString(1, cde.getNumCde());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             cstmt.setString(2, sdf.format(cde.getDateCde()));
@@ -99,9 +98,7 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
             // par defaut on met l'adresse favorite et on la change si besoin
             cstmt.setInt(11, cde.getAcheteurCde().getAdfav().getIdAdresse());
             cstmt.registerOutParameter(12, java.sql.Types.BIGINT);
-            System.out.println("avant le premier execute");
             cstmt.execute();
-            System.out.println("apres le premier execute");
             Long idCde = cstmt.getLong(12);
 
             // remplissage des lignes de commandes dans la table detailcommande
@@ -111,7 +108,6 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
             HashMap<Integer, LignePanier> listeCde = cde.getDetailCde();
             for (LignePanier lp : listeCde.values()) {
                 //stockage des valeurs de la ligne dans les parametres
-                System.out.println("dans le for du call commande");
                 cstmt.setLong(1, idCde);
                 cstmt.setInt(2, lp.getL().getId());
                 cstmt.setInt(3, lp.getQte());
@@ -119,7 +115,6 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
                 cstmt.setFloat(5, lp.getTva());
                 //appel de la procedure stockée pour la creation de chaque ligne
                 cstmt.execute();
-                System.out.println("apres le execute dans la DAO commande");
             }
             res = true;
         } finally {
