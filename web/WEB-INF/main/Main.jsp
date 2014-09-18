@@ -79,7 +79,22 @@
                             </div>
 
                             <div id="slide">
+=======
+                            <div id="slideshow">
+>>>>>>> origin/Emmanuelle
                                 <c:import url="/WEB-INF/bordure/slide.jsp" />
+                            </div>
+                        </div>
+                            
+                        <c:if test="${not empty affichageLivre3Nouveaute}" >
+                        <div id="affichageindex">
+                            <div id="select3prodnouveaute">
+                                <h2 id="toutes_les_mentionsh2">Dernières nouveautés</h2>
+                                <c:import url="${affichageLivre3Nouveaute}" />
+                            </div>
+                            <div id="select3prodpromo">
+                                <h2 id="toutes_les_mentionsh2">Dernières promotions</h2>
+                                <c:import url="${affichageLivre3Promo}" />
                             </div>
                         </div>
 
