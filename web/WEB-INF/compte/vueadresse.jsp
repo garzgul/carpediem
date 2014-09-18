@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div>
@@ -12,8 +13,8 @@
         <input type="hidden" name="action" value="vueadresse"/>
         <select name="adresse" class="adressecompte">   
             <c:forEach items="${Acheteur.listAdresseAcheteur}" var="adresse">
-                <option value="${adresse.idadresse}"
-            <c:if test="${adresse.adressefav}">
+                <option value="${adresse.idAdresse}"
+            <c:if test="${adresse.adresseFav}">
                 selected
             </c:if>
             >
@@ -27,13 +28,16 @@
            //   <a href="${url}">Confirmer la commande</a> %>
 </form>
 <p>
+    <!-- finir le test avec un parametre sinon ca va pas faire ce qui est prevu-->
+    <!-- exemple l'id de l'adresse a afficher a mettre en request -->
 <c:if test="${not empty Acheteur.listAdresseAcheteur}">
-    ${Acheteur.listAdresseAcheteur.adresseAcheteur1}
-    ${Acheteur.listAdresseAcheteur.adresseAcheteur2}
-    ${Acheteur.listAdresseAcheteur.cpAcheteur}
-    ${Acheteur.listAdresseAcheteur.villeAcheteur}
-    ${Acheteur.listAdresseAcheteur.paysAcheteur}
-
+    <c:forEach items ="${listAdresseAcheteur}" var="adresse">
+    ${adresse.adresseAcheteur1}
+    ${adresse.adresseAcheteur2}
+    ${adresse.cpAcheteur}
+    ${adresse.villeAcheteur}
+    ${adresse.paysAcheteur}
+</c:forEach>
 </c:if>
 </p>
 

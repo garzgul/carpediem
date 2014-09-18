@@ -14,20 +14,20 @@ public class Adresse implements Serializable{
     private String cpAcheteur;
     private String villeAcheteur;
     private String paysAcheteur;
-    private boolean actifAcheteur;
+    private boolean actifAdresse;
     private int idAdresse;
     private boolean adresseFav;
 
     public Adresse() {
     }
 
-    public Adresse(String adresseAcheteur1, String adresseAcheteur2, String cpAcheteur, String villeAcheteur, String paysAcheteur, boolean actifAcheteur) {
+    public Adresse(String adresseAcheteur1, String adresseAcheteur2, String cpAcheteur, String villeAcheteur, String paysAcheteur, boolean actifAdresse) {
         this.adresseAcheteur1 = adresseAcheteur1;
         this.adresseAcheteur2 = adresseAcheteur2;
         this.cpAcheteur = cpAcheteur;
         this.villeAcheteur = villeAcheteur;
         this.paysAcheteur = paysAcheteur;
-        this.actifAcheteur = actifAcheteur;
+        this.actifAdresse = actifAdresse;
     }
 
     public int getIdAcheteur() {
@@ -85,12 +85,12 @@ public class Adresse implements Serializable{
         this.paysAcheteur = paysAcheteur;
     }
 
-    public boolean getActifAcheteur() {
-        return actifAcheteur;
+    public boolean getActifAdresse() {
+        return actifAdresse;
     }
 
-    public void setActifAcheteur(boolean actifAcheteur) {
-        this.actifAcheteur = actifAcheteur;
+    public void setActifAdresse (boolean actifAdresse) {
+        this.actifAdresse = actifAdresse;
     }
 
     public boolean getAdressefav() {

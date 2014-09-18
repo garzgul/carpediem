@@ -13,32 +13,16 @@ import bean.metier.PanierGestion;
 import bean.metier.ThemesGestion;
 import bean.produit.Livre;
 import bean.produit.SousTheme;
-import bean.produit.Theme;
 import java.io.IOException;
-import static java.lang.ProcessBuilder.Redirect.to;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import static java.util.Date.from;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -105,17 +89,16 @@ public class Controleur extends HttpServlet {
         try {
             lsT = tg.listeSousThemes(); // appel de la méthode métier de récupération
         } catch (SQLException ex) {
-            erreurGrave = true;
-            //System.out.println("coucou SQL");// flag boolean pour signaler qu'une erreur remontée SQL s'est produite
-        } catch (NamingException ex) {
             erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
+            
+        } catch (NamingException ex) {
+            erreurGrave = true; 
         }
 
         context.setAttribute("sousthemesListe", lsT); // place la liste des sous themes trouvés dans le scope
         // request.setAttribute("themes", "Controleur?section=themesaffichage&action=affichage"); non necessaire (la liste de theme sera mise en scope appli au demarage de l'appli
 
 // Fin module de traitement Themes (Eddy)
-        
 // creation de la liste de type de livraison
         if (context.getAttribute("livraisongestion") == null) {
             context.setAttribute("livraisongestion", new LivraisonGestion());
@@ -254,7 +237,7 @@ public class Controleur extends HttpServlet {
 
 // module commande        
         if ("commande".equalsIgnoreCase(section)) {
-            
+
             if (session.getAttribute("maliste") == null) {
                 request.setAttribute("affichagepanier", "Controleur?section=affichagepanier&action=affichage");
 
@@ -264,25 +247,26 @@ public class Controleur extends HttpServlet {
 
             }
             p = (Panier) session.getAttribute("panier");
-            
-            if (session.getAttribute("commande")==null){
+
+            if (session.getAttribute("commande") == null) {
                 try {
                     session.setAttribute("commande", new CommandeGestion());
                 } catch (NamingException ex) {
-                    erreurGrave=true;
+                    erreurGrave = true;
                 }
             }
             cg = (CommandeGestion) session.getAttribute("commande");
+            Acheteur ach = (Acheteur) session.getAttribute("acheteur");
 
             request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagedetail");
 
             if ("affichage".equalsIgnoreCase(action)) {
-                
+
                 request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagedetail");
-                Acheteur ach = (Acheteur) session.getAttribute("acheteur");
+                
                 Adresse ad = ach.getAdfav();
                 try {
-                    session.setAttribute("Commande", cg.createCommande(p.getLignes(), ach));
+                    session.setAttribute("commandeDetail", cg.createCommande(p.getLignes(), ach));
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 } catch (ParseException ex) {
@@ -291,21 +275,21 @@ public class Controleur extends HttpServlet {
             }
 
             if ("detailcommande".equalsIgnoreCase(action)) {
-                request.setAttribute("commande", "Controleur?section=affichagecommande&action=affichage");
+                request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichage");
             }
 
             if ("validercommande".equalsIgnoreCase(action)) {
-                Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
+                
                 try {
                     System.out.println("avant le crea commande");
-                    session.setAttribute("Commande",cg.createCommande(p.getLignes(), ach));
+                    session.setAttribute("commandeDetail", cg.createCommande(p.getLignes(), ach));
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 } catch (ParseException ex) {
                     erreurGrave = true;
                 }
 
-                request.setAttribute("commande", "Controleur?section=affichagecommande&action=affichage");
+                request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichage");
 
             }
             if ("confirmer".equalsIgnoreCase(action)) {
@@ -318,18 +302,18 @@ public class Controleur extends HttpServlet {
                     }
                 }
                 cg = (CommandeGestion) session.getAttribute("commande");
-                Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
+                
                 // ArrayList<Adresse> listead = ach.getListAdresseAcheteur();
                 try {
                     //creation de l'objet commande et mise en session
-                    session.setAttribute("commandeDetail",cg.createCommande(p.getLignes(), ach));
+                    session.setAttribute("commandeDetail", cg.createCommande(p.getLignes(), ach));
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 } catch (ParseException ex) {
                     erreurGrave = true;
                 }
 
-                request.setAttribute("commande", "Controleur?section=affichagecommande&action=affichage");
+                request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichage");
 
             }
             if ("confirmer".equalsIgnoreCase(action)) {
@@ -347,30 +331,32 @@ public class Controleur extends HttpServlet {
                     return;
                 }
                 Commande cde = (Commande) session.getAttribute("commandeDetail");
-                cde =cg.setDate(cde);
-                Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
+                cde = cg.setDate(cde);
+                
                 ArrayList<Adresse> listead = ach.getListAdresseAcheteur();
                 //creation de l'objet commande
 
             }
-            
-            if("confirmertypelivraison".equalsIgnoreCase(action)){
+
+            if ("confirmertypelivraison".equalsIgnoreCase(action)) {
                 Commande cde = (Commande) session.getAttribute("commandeDetail");
                 String typeLivraison = request.getParameter("typelivraison");
-                
+
                 System.out.println(typeLivraison);
-                
+
                 // pour le moment cette ligne n'est pas necessaire car un seul type de livraison existe
                 //cde.setModeLivraison(ModeLivraison.valueOf(typeLivraison));
                 cde.setModeLivraison(ModeLivraison.poste);
-                
-                
+                request.setAttribute("", l);
+
+            }
+            if("choixlivraison".equalsIgnoreCase(action)){
+                request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagechoixlivraison");
             }
 
         }
 
 // fin module commande  
-        
 // Module Recherche (Eddy)        
         if ("recherche".equalsIgnoreCase(section)) { // section recherche concernée
             if (session.getAttribute("beanLivreGestion") == null) {
@@ -390,9 +376,9 @@ public class Controleur extends HttpServlet {
                     } catch (SQLException ex) {
                         erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
                     }
-                    if (session.getAttribute("filtrageapplique")!=null){ // s'il y a déjà eut un filtre soustheme appliqué
-                        String id_soustheme = (String)session.getAttribute("filtrageapplique");
-                        lL = lg.filtrer(lL,Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage en fonction des livres trouvés
+                    if (session.getAttribute("filtrageapplique") != null) { // s'il y a déjà eut un filtre soustheme appliqué
+                        String id_soustheme = (String) session.getAttribute("filtrageapplique");
+                        lL = lg.filtrer(lL, Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage en fonction des livres trouvés
                     } else { // pas de jeux de résultats précédemment affichés
                         // rien a restreindre
                     }
@@ -412,9 +398,9 @@ public class Controleur extends HttpServlet {
 //                        erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
                     //}
 
-                    if ((session.getAttribute("rechercheResultat")!=null) && (session.getAttribute("rechercheappliquee")!=null)) { // s'il y a déjà eut une recherche de résultats
-                        List<Livre> lL = (List<Livre>)session.getAttribute("rechercheResultat");
-                        lLfiltree = lg.filtrer(lL,Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage en fonction des resultats préalables des livres
+                    if ((session.getAttribute("rechercheResultat") != null) && (session.getAttribute("rechercheappliquee") != null)) { // s'il y a déjà eut une recherche de résultats
+                        List<Livre> lL = (List<Livre>) session.getAttribute("rechercheResultat");
+                        lLfiltree = lg.filtrer(lL, Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage en fonction des resultats préalables des livres
                     } else { // pas de résultats en cours, clic sur sous theme la première fois par exp...
                         try {
                             lLfiltree = lg.findAllByTheme(Integer.valueOf(id_soustheme));
@@ -496,8 +482,8 @@ public class Controleur extends HttpServlet {
                     request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
                     if (ach != null) {
                         session.setAttribute("Acheteur", ach);
-                            ag.ajoutAcheteur(ach, confirmmdp);
-                        }
+                        ag.ajoutAcheteur(ach, confirmmdp);
+                    }
                     request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
                 } catch (MonException ex) {
 
@@ -517,7 +503,7 @@ public class Controleur extends HttpServlet {
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 } catch (NamingException ex) {
-                    erreurGrave=true;
+                    erreurGrave = true;
                 }
 
             }
@@ -535,9 +521,9 @@ public class Controleur extends HttpServlet {
                 request.setAttribute("vueadresse", "Controleur?section=affichagecompte&action=vueadresse");
                 try {
                     ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
-                    System.out.println("avant creation acheteur");
+
                     ach = ag.chercherAcheteur(mail, mdp);
-                    System.out.println("apres crea acheteur");
+
                     if (ach != null) {
                         session.setAttribute("Acheteur", ach);
                         // request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
@@ -565,7 +551,7 @@ public class Controleur extends HttpServlet {
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 } catch (NamingException ex) {
-                    erreurGrave=true;
+                    erreurGrave = true;
                 }
                 if (mail.isEmpty() || mail == null
                         && mdp.isEmpty() || mdp == null) {
@@ -590,9 +576,9 @@ public class Controleur extends HttpServlet {
                 Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
                 request.setAttribute("ajouteradresse", "Controleur?section=affichagecompte&action=ajouteradresse");
                 request.setAttribute("vueadresse", "Controleur?section=affichagecompte&action=vueadresse");
-             }
-            
-            if("ajoutAdresse".equalsIgnoreCase(action)){
+            }
+
+            if ("ajoutAdresse".equalsIgnoreCase(action)) {
                 System.out.println("===========ladans ajout adresse");
                 boolean adresseFav = false;
                 Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
@@ -603,7 +589,7 @@ public class Controleur extends HttpServlet {
                 String ville = request.getParameter("ville");
                 String pays = request.getParameter("pays");
                 String fav = request.getParameter("selectFav");
-                if("Favori".equalsIgnoreCase(fav)){
+                if ("Favori".equalsIgnoreCase(fav)) {
                     adresseFav = true;
                 }
                 Adresse adr = new Adresse(adr1, complement, cPostal, ville, pays, true);
@@ -613,13 +599,14 @@ public class Controleur extends HttpServlet {
                 try {
                     System.out.println("=========ici on est dans le try");
                     ag.addAdresse(ach, adr);
+                    session.setAttribute("Acheteur", ach);
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 }
                 request.setAttribute("voircompte", "Controleur?section=affichagecompte&action=voircompte");
 //                response.sendRedirect("Controleur?section=connexion&action=voircompte");
             }
-            
+
         }
 // affichage mentions legales (Emma)
         if ("fragement".equalsIgnoreCase(section)) {
@@ -665,7 +652,7 @@ public class Controleur extends HttpServlet {
 
             System.out.println("------------------------------------------>>>> fin envoi mail");
         }
-        
+
         // formulaire de contact piece jointe (Emma)
         if ("contactformulairepj".equalsIgnoreCase(section)) {
             System.out.println("------------------------------------------>>>> contact !");
@@ -690,13 +677,6 @@ public class Controleur extends HttpServlet {
             System.out.println("------------------------------------------>>>> fin envoi mail");
         }
 
-        
-        
-        
-        
-        
-        
-        
         // Consultation d'un livre - fiche produit (Emma)
 //        if(action.equalsIgnoreCase("consulter"))
         //    {
@@ -783,7 +763,7 @@ public class Controleur extends HttpServlet {
                 //    pageJsp = "/WEB-INF/bordure/newsletter.jsp";
                 //    break;
                 // }
-                case "afficahgenewsletter": {
+                case "affichagenewsletter": {
                     pageJsp = "/WEB-INF/bordure/newsletter.jsp";
                     break;
                 }
@@ -834,6 +814,10 @@ public class Controleur extends HttpServlet {
                     pageJsp = "/WEB-INF/commande/paiement.jsp";
                     break;
                 }
+                case "affichagechoixlivraison":{
+                    pageJsp= "/WEB-INF/commande/choixmodelivraison.jsp";
+                    break;
+                }
             }
         }
 //        //redirection pour la recherche vide (dans l'entete)
@@ -867,8 +851,8 @@ public class Controleur extends HttpServlet {
                     break;
                 }
                 case ("connection"): {
-                    System.out.println("connexion"+request.getAttribute("connexion"));
-                    System.out.println("connection"+request.getAttribute("vueadresse"));
+                    System.out.println("connexion" + request.getAttribute("connexion"));
+                    System.out.println("connection" + request.getAttribute("vueadresse"));
                     pageJsp = "/WEB-INF/compte/VueCompte.jsp";
                     break;
                 }
@@ -878,11 +862,11 @@ public class Controleur extends HttpServlet {
                 }
                 case ("voircompte"): {
                     System.out.println("=============dans le case voircompte");
-                    System.out.println("entete :"+request.getAttribute("entete"));
-                    System.out.println("menu: "+request.getAttribute("menu"));
-                    System.out.println("pied: "+request.getAttribute("pied"));
-                    System.out.println("vueadresse: "+request.getAttribute("vueadresse"));
-                    System.out.println("ajouteradresse: "+request.getAttribute("ajouteradresse"));
+                    System.out.println("entete :" + request.getAttribute("entete"));
+                    System.out.println("menu: " + request.getAttribute("menu"));
+                    System.out.println("pied: " + request.getAttribute("pied"));
+                    System.out.println("vueadresse: " + request.getAttribute("vueadresse"));
+                    System.out.println("ajouteradresse: " + request.getAttribute("ajouteradresse"));
                     pageJsp = "/WEB-INF/compte/VueCompte.jsp";
                     break;
                 }
