@@ -83,8 +83,8 @@
                             <div id="slideshow">
 
                                 <c:import url="/WEB-INF/bordure/slide.jsp" />
+                                </div>
                             </div>
-                        </div>
                             
                         <c:if test="${not empty affichageLivre3Nouveaute}" >
                         <div id="affichageindex">
