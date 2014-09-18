@@ -78,7 +78,7 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
         Connection cnn = fc.fournir();
         CallableStatement cstmt =null;
         try {
-            String proc = "{call createCDE(?,?,?,?,?,?,?,?)}";
+            String proc = "{call createCDE(?,?,?,?,?,?,?,?,?,?,?,?)}";
             cstmt = cnn.prepareCall(proc);
             System.out.println("no de cde dans commande DAO "+cde.getNumCde());
             cstmt.setString(1, cde.getNumCde());
@@ -90,11 +90,19 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
             cstmt.setInt(5, 1);
             cstmt.setString(6, cde.getModeLivraison().toString());
             cstmt.setString(7, cde.getModePaiement());
-            cstmt.registerOutParameter(8, java.sql.Types.BIGINT);
+            cstmt.setInt(8, cde.getAcheteurCde().getIdAcheteur());
+            cstmt.setInt(9,cde.getFraisCde().getIdfraisdeport());
+            //gestion du suivi
+            // par defaut l'id du suivi est 1 (commande juste passéé)
+            cstmt.setInt(10, 1);
+            // gestion de l'adresse
+            // par defaut on met l'adresse favorite et on la change si besoin
+            cstmt.setInt(11, cde.getAcheteurCde().getAdfav().getIdAdresse());
+            cstmt.registerOutParameter(12, java.sql.Types.BIGINT);
             System.out.println("avant le premier execute");
             cstmt.execute();
             System.out.println("apres le premier execute");
-            Long idCde = cstmt.getLong(8);
+            Long idCde = cstmt.getLong(12);
 
             // remplissage des lignes de commandes dans la table detailcommande
             proc = "{call createDetailCDE(?,?,?,?,?)}";
@@ -120,4 +128,29 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
         }
         return res;
     }
+    public Commande getLastCde() throws SQLException{
+        Commande c = new Commande();
+        String res = null;
+        Connection cnn = fc.fournir();
+        String req = "select * from commande where cde_date=(select max(c.cde_date) from commande c where c.id_commande=commande.id_commande)";
+        PreparedStatement pstmt = cnn.prepareStatement(req);
+        ResultSet rs = pstmt.executeQuery();
+        while(rs.next()){
+            c.setNumCde(rs.getString("cde_numcommande"));
+            c.setDateCde(rs.getDate("cde_date"));
+        }
+        rs.close();
+        pstmt.close();
+        cnn.close();
+        return c;
+    }
+    
+    public boolean updateAdresseCde(Commande cde){
+        boolean res = false;
+        
+        
+        
+        return res;
+    }
+    
 }

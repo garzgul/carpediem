@@ -3,6 +3,7 @@ package servlet;
 import bean.acheteur.Acheteur;
 import bean.acheteur.Adresse;
 import bean.commande.Commande;
+import bean.commande.LignePanier;
 import bean.commande.ModeLivraison;
 import bean.commande.Panier;
 import bean.metier.AcheteurGestion;
@@ -165,6 +166,7 @@ public class Controleur extends HttpServlet {
 
                     p.addlivre(l);
                     session.setAttribute("maliste", p.getLignes().values());
+                    session.setAttribute("panier", p);
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 } catch (NamingException ex) {
@@ -183,6 +185,7 @@ public class Controleur extends HttpServlet {
                     System.out.println(">>>>>>>>>>>>>> livre a enlever" + l);
                     p.enleverLivre(l);
                     session.setAttribute("maliste", p.getLignes().values());
+                    session.setAttribute("panier", p);
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 } catch (NamingException ex) {
@@ -203,6 +206,7 @@ public class Controleur extends HttpServlet {
                     l = lg.findLivre(idLivre);
                     p.update(idLivre, -1);
                     session.setAttribute("maliste", p.getLignes().values());
+                    session.setAttribute("panier", p);
                 } catch (SQLException ex) {
                     erreurGrave = null;
                 } catch (NamingException ex) {
@@ -221,6 +225,7 @@ public class Controleur extends HttpServlet {
                     l = lg.findLivre(idLivre);
                     p.update(idLivre, 1);
                     session.setAttribute("maliste", p.getLignes().values());
+                    session.setAttribute("panier", p);
                 } catch (SQLException ex) {
                     erreurGrave = true;
                 } catch (NamingException ex) {
@@ -285,7 +290,10 @@ public class Controleur extends HttpServlet {
                 
                 try {
                     System.out.println("avant le crea commande");
-                    session.setAttribute("commandeDetail", cg.createCommande(p.getLignes(), ach));
+                    p = (Panier) session.getAttribute("panier");
+                    
+                    HashMap<Integer,LignePanier> maliste = p.getLignes();
+                    session.setAttribute("commandeDetail", cg.createCommande(maliste, ach));
                 } catch (SQLException ex) {
                     System.out.println("erreur SQL =>>>>>> "+ex.getMessage());
                     erreurGrave = true;
@@ -294,7 +302,8 @@ public class Controleur extends HttpServlet {
                     erreurGrave = true;
                 }
 
-                request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichage");
+                request.setAttribute("commande", "Controleur?section=affichagecommande&action=affichage");
+                request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagedetail");
 
             }
             if ("confirmer".equalsIgnoreCase(action)) {
@@ -321,27 +330,27 @@ public class Controleur extends HttpServlet {
                 request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichage");
 
             }
-            if ("confirmer".equalsIgnoreCase(action)) {
-                p = (Panier) session.getAttribute("panier");
-                if (session.getAttribute("commande") == null) {
-                    try {
-                        session.setAttribute("commande", new CommandeGestion());
-                    } catch (NamingException ex) {
-                        erreurGrave = true;
-                    }
-                }
-                cg = (CommandeGestion) session.getAttribute("commande");
-                if (session.getAttribute("commande") == null) {
-                    erreurGrave = true;
-                    return;
-                }
-                Commande cde = (Commande) session.getAttribute("commandeDetail");
-                cde = cg.setDate(cde);
-                
-                ArrayList<Adresse> listead = ach.getListAdresseAcheteur();
-                //creation de l'objet commande
-
-            }
+//            if ("confirmer".equalsIgnoreCase(action)) {
+//                p = (Panier) session.getAttribute("panier");
+//                if (session.getAttribute("commande") == null) {
+//                    try {
+//                        session.setAttribute("commande", new CommandeGestion());
+//                    } catch (NamingException ex) {
+//                        erreurGrave = true;
+//                    }
+//                }
+//                cg = (CommandeGestion) session.getAttribute("commande");
+//                if (session.getAttribute("commande") == null) {
+//                    erreurGrave = true;
+//                    return;
+//                }
+//                Commande cde = (Commande) session.getAttribute("commandeDetail");
+//                cde = cg.setDate(cde);
+//                
+//                ArrayList<Adresse> listead = ach.getListAdresseAcheteur();
+//                //creation de l'objet commande
+//
+//            }
 
             if ("confirmertypelivraison".equalsIgnoreCase(action)) {
                 Commande cde = (Commande) session.getAttribute("commandeDetail");
@@ -357,6 +366,7 @@ public class Controleur extends HttpServlet {
             }
             if("choixlivraison".equalsIgnoreCase(action)){
                 request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagechoixlivraison");
+                
             }
 
         }
