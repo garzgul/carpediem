@@ -11,8 +11,10 @@ import bean.metier.CommandeGestion;
 import bean.metier.LivraisonGestion;
 import bean.metier.LivreGestion;
 import bean.metier.PanierGestion;
+import bean.metier.PromoGestion;
 import bean.metier.ThemesGestion;
 import bean.produit.Livre;
+import bean.produit.Promotion;
 import bean.produit.SousTheme;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -73,12 +75,12 @@ public class Controleur extends HttpServlet {
         AcheteurGestion ag = null;
         ThemesGestion tg = null;
         LivraisonGestion livraisong = null;
+        PromoGestion Pg = null;
 
         // declaration du string home
         String pageJsp = "/WEB-INF/main/Main.jsp";
 
 // Module de traitement des données en scope application  
-        
 // Module de traitement des themes/sousthemes (Eddy) 
 // la liste doit aller dans le contexte de la servlet (scope application et non scope session vu qu'il est le meme pour tous
         if (session.getAttribute("beanThemesGestion") == null) {
@@ -95,7 +97,7 @@ public class Controleur extends HttpServlet {
         } catch (SQLException ex) {
             erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
         } catch (NamingException ex) {
-            erreurGrave = true; 
+            erreurGrave = true;
         }
         context.setAttribute("sousthemesListe", lsT); // place la liste des sous themes trouvés dans le scope
         // request.setAttribute("themes", "Controleur?section=themesaffichage&action=affichage"); non necessaire (la liste de theme sera mise en scope appli au demarage de l'appli
@@ -263,21 +265,21 @@ public class Controleur extends HttpServlet {
             }
             cg = (CommandeGestion) session.getAttribute("commande");
             Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
-            System.out.println("acheteur id = "+ach.getIdAcheteur());
-            System.out.println("acheteur liste d'adresse = "+ach.getListAdresseAcheteur());
+            System.out.println("acheteur id = " + ach.getIdAcheteur());
+            System.out.println("acheteur liste d'adresse = " + ach.getListAdresseAcheteur());
 
             request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagedetail");
 
             if ("affichage".equalsIgnoreCase(action)) {
 
                 request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagedetail");
-                
+
                 Adresse ad = ach.getAdfav();
                 try {
                     session.setAttribute("commandeDetail", cg.createCommande(p.getLignes(), ach));
                 } catch (SQLException ex) {
                     erreurGrave = true;
-                    System.out.println("erreur SQL =>>>>>> "+ex.getMessage());
+                    System.out.println("erreur SQL =>>>>>> " + ex.getMessage());
                 } catch (ParseException ex) {
                     System.out.println("coucou erreur parsing");
                     erreurGrave = true;
@@ -289,7 +291,7 @@ public class Controleur extends HttpServlet {
             }
 
             if ("validercommande".equalsIgnoreCase(action)) {
-                
+
                 try {
                     System.out.println("avant le crea commande");
                     p = (Panier) session.getAttribute("panier");
@@ -297,7 +299,7 @@ public class Controleur extends HttpServlet {
                     HashMap<Integer,LignePanier> maliste = p.getLignes();
                     session.setAttribute("commandeDetail", cg.createCommande(maliste, ach));
                 } catch (SQLException ex) {
-                    System.out.println("erreur SQL =>>>>>> "+ex.getMessage());
+                    System.out.println("erreur SQL =>>>>>> " + ex.getMessage());
                     erreurGrave = true;
                 } catch (ParseException ex) {
                     System.out.println("coucou erreur parsing sur la date");
@@ -318,7 +320,7 @@ public class Controleur extends HttpServlet {
                     }
                 }
                 cg = (CommandeGestion) session.getAttribute("commande");
-                
+
                 // ArrayList<Adresse> listead = ach.getListAdresseAcheteur();
                 try {
                     //creation de l'objet commande et mise en session
@@ -353,6 +355,29 @@ public class Controleur extends HttpServlet {
 //                //creation de l'objet commande
 //
 //            }
+=======
+            if ("confirmer".equalsIgnoreCase(action)) {
+                p = (Panier) session.getAttribute("panier");
+                if (session.getAttribute("commande") == null) {
+                    try {
+                        session.setAttribute("commande", new CommandeGestion());
+                    } catch (NamingException ex) {
+                        erreurGrave = true;
+                    }
+                }
+                cg = (CommandeGestion) session.getAttribute("commande");
+                if (session.getAttribute("commande") == null) {
+                    erreurGrave = true;
+                    return;
+                }
+                Commande cde = (Commande) session.getAttribute("commandeDetail");
+                cde = cg.setDate(cde);
+
+                ArrayList<Adresse> listead = ach.getListAdresseAcheteur();
+                //creation de l'objet commande
+
+            }
+>>>>>>> origin/Emmanuelle
 
             if ("confirmertypelivraison".equalsIgnoreCase(action)) {
                 Commande cde = (Commande) session.getAttribute("commandeDetail");
@@ -366,7 +391,7 @@ public class Controleur extends HttpServlet {
                 request.setAttribute("", l);
 
             }
-            if("choixlivraison".equalsIgnoreCase(action)){
+            if ("choixlivraison".equalsIgnoreCase(action)) {
                 request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagechoixlivraison");
                 
             }
@@ -374,7 +399,6 @@ public class Controleur extends HttpServlet {
         }
 
 // fin module commande  
-        
 // Module Recherche (Eddy)        
         if ("recherche".equalsIgnoreCase(section)) { // section recherche concernée
             if (session.getAttribute("beanLivreGestion") == null) {
@@ -404,7 +428,7 @@ public class Controleur extends HttpServlet {
                     session.setAttribute("rechercheResultat", lL); // place la liste des livres trouvés dans le scope
                     session.setAttribute("rechercheappliquee", "oui"); // flag pour se souvenir qu'un résultat de recherche a été appliqué
                     request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage"); // signalement
-                                                // qu'une liste de livres sera à afficher dynamiquement en résultat
+                    // qu'une liste de livres sera à afficher dynamiquement en résultat
                 }
                 if ("filtrer".equalsIgnoreCase(action)) { // action filtrer provoquée par un clic sur un theme particulier
                     lg = (LivreGestion) session.getAttribute("beanLivreGestion");
@@ -423,7 +447,7 @@ public class Controleur extends HttpServlet {
                     session.setAttribute("rechercheResultat", lLfiltree); // place la liste filtrée des livres trouvés dans le scope
                     session.setAttribute("filtrageapplique", id_soustheme); // flag pour se souvenir qu'un filtre a été appliqué
                     request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage"); // signalement
-                                                // qu'une liste de livres sera à afficher dynamiquement en résultat
+                    // qu'une liste de livres sera à afficher dynamiquement en résultat
                 }
                 if ("annulerfiltre".equalsIgnoreCase(action)) { // clic sur entete des themes pour annuler tout filtre de theme
                     session.removeAttribute("filtrageapplique");
@@ -698,6 +722,28 @@ public class Controleur extends HttpServlet {
             System.out.println("------------------------------------------>>>> fin envoi mail");
         }
 
+   // Module de traitement des promotions Emma 
+        // la liste doit aller dans le contexte de la servlet (scope application et non scope session vu qu'il est le meme pour tous
+        if (session.getAttribute("PromoGestion") == null) {
+            try {
+                session.setAttribute("PromoGestion", new PromoGestion()); // instanciation bean métier
+            } catch (NamingException ex) {
+                erreurGrave = true; // flag boolean pour signaler qu'une erreur s'est produite
+            }
+        }
+        Pg = (PromoGestion) session.getAttribute("PromoGestion");
+        List<Promotion> lPg = null;
+        try {
+            lPg = Pg.listeLivrePromotionActuelle3(); // appel de la méthode métier de récupération
+        } catch (SQLException ex) {
+            erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
+        } catch (NamingException ex) {
+            erreurGrave = true;
+        }
+        context.setAttribute("Liste3dernierslivrespromo", lPg); // place la liste des promo trouvés dans le scope
+
+// Fin module de traitement promotion (Emma) 
+        
         // Consultation d'un livre - fiche produit (Emma)
 //        if(action.equalsIgnoreCase("consulter"))
         //    {
@@ -710,9 +756,9 @@ public class Controleur extends HttpServlet {
         // request.setAttribute("articlelivre", articlelivre);
         // puis on va sur la page du livre passé en requête et la jsp pourra le récupérer avec request.gatAttribute("articlelivre")
 //                getServletContext().getRequestDispatcher("/WEB-INF/affichagelivre/AffichageLivre.jsp").forward(request, response);
-// debut module emma
+
         // }}
-// fin module emma
+
         // renvoi vers la jsp de gestion des erreurs
         if (erreurGrave) {
             pageJsp = "/WEB-INF/erreurs/warning.jsp";
@@ -720,9 +766,16 @@ public class Controleur extends HttpServlet {
 
 // fin traitement        
 // debut affichage via urls dynamiques
-        if ("defaut".equalsIgnoreCase(section)) {
+        if ("defaut".equalsIgnoreCase(section) || section.isEmpty()|| section == null ) {
             pageJsp = "/WEB-INF/main/Main.jsp";
+            request.setAttribute("pagehome", "coucou");
+            
         }
+        
+        if("affichagerubrique".equalsIgnoreCase(section)){
+            pageJsp="/WEB-INF/catalogue/Promo.jsp";
+        }
+        
         //redirection pour les bordures
         if ("fragement".equalsIgnoreCase(section)) {
             switch (action) {
@@ -835,8 +888,8 @@ public class Controleur extends HttpServlet {
                     pageJsp = "/WEB-INF/commande/paiement.jsp";
                     break;
                 }
-                case "affichagechoixlivraison":{
-                    pageJsp= "/WEB-INF/commande/choixmodelivraison.jsp";
+                case "affichagechoixlivraison": {
+                    pageJsp = "/WEB-INF/commande/choixmodelivraison.jsp";
                     break;
                 }
             }
@@ -893,7 +946,7 @@ public class Controleur extends HttpServlet {
                     System.out.println("pied: " + request.getAttribute("pied"));
                     System.out.println("vueadresse: " + request.getAttribute("vueadresse"));
                     System.out.println("ajouteradresse: " + request.getAttribute("ajouteradresse"));
-                    System.out.println("id adresse fav=====>> "+((Acheteur) session.getAttribute("Acheteur")).getAdfav().getIdAdresse());
+                    System.out.println("id adresse fav=====>> " + ((Acheteur) session.getAttribute("Acheteur")).getAdfav().getIdAdresse());
                     pageJsp = "/WEB-INF/compte/VueCompte.jsp";
                     break;
                 }
@@ -917,6 +970,18 @@ public class Controleur extends HttpServlet {
 
             }
         }
+        
+           //redirection pour la page promotion Emma
+        if ("promosaffichage".equalsIgnoreCase(section)) {
+            switch (action) {
+                case ("affichagepromo"): {
+                    pageJsp = "/WEB-INF/catalogue/Promo.jsp";
+                    break;
+                }
+            }
+        }
+        
+        
 
         //redirection pour la fiche livre
         if ("livreaffichage".equalsIgnoreCase(section)) {

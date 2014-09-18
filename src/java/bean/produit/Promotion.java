@@ -1,25 +1,44 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package bean.produit;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  *
  * @author cdi108
  */
 public class Promotion implements Serializable {
-
+    
     private int id;
     private String nom;
     private String descriptif;
+    private LocalDate datedbt;
+    private LocalDate datefin;
 
     public Promotion() {
     }
 
-    public Promotion(int id, String nom, String descriptif) {
+     public Promotion(int id, String nom, String descriptif) {
         this.id = id;
         this.nom = nom;
         this.descriptif = descriptif;
     }
+
+    public Promotion(int id, String nom, String descriptif, LocalDate datedbt, LocalDate datefin) {
+        this.id = id;
+        this.nom = nom;
+        this.descriptif = descriptif;
+        this.datedbt = datedbt;
+        this.datefin = datefin;
+    }
+     
+     
 
     public int getId() {
         return id;
@@ -50,4 +69,5 @@ public class Promotion implements Serializable {
         return "Promotion{" + "id=" + id + ", nom=" + nom + ", descriptif=" + descriptif + '}';
     }
  
+
 }

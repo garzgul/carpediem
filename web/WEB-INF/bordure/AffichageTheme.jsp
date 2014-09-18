@@ -4,7 +4,7 @@
 
 <div id="modulerecherchethemes">
     <div id="block-headdiv">
-        <h2 id="toutes_les_mentionsh2"><a href="Controleur?section=recherche&action=annulerfiltre">Thémes</a></h2>
+        <h2 id="toutes_les_mentionsh2"><a href="Controleur?section=recherche&action=annulerfiltre">Thèmes</a></h2>
     </div>
 
     <div id="block-themesdiv">

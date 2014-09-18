@@ -1,2 +1,2 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:forward page="Controleur" />
+<jsp:forward page="Controleur?section=defaut" />
