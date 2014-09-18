@@ -79,9 +79,7 @@
                             </div>
 
                             <div id="slide">
-=======
                             <div id="slideshow">
->>>>>>> origin/Emmanuelle
                                 <c:import url="/WEB-INF/bordure/slide.jsp" />
                             </div>
                         </div>
@@ -97,6 +95,7 @@
                                 <c:import url="${affichageLivre3Promo}" />
                             </div>
                         </div>
+                        </c:if>
 
                         <div id="affichageresultats">
                             <c:if test="${not empty affichageLivre}">
@@ -113,11 +112,16 @@
 
                             <c:if test="${not empty voircompte}">
                                 <c:import url="${voircompte}" />
+                                
                             </c:if>
 
 
                             <c:if test="${not empty commande}">
                                 <c:import url="${commande}" />
+                            </c:if>
+                            
+                            <c:if test="${not empty deconnexion}">
+                                <c:import url="${deconnexion}"/>
                             </c:if>
 
 

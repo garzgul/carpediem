@@ -239,7 +239,6 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
         if (!adrAcheuteur.isEmpty() || adrAcheuteur != null) {
             ach.setListAdresseAcheteur((ArrayList<Adresse>) adr.findAll(id));
         }
-        System.out.println(ach.getAdfav().getAdresseFav());
         System.out.println("apres creation liste d'adresse DAO");
         return ach;
     }

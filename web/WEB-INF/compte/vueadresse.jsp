@@ -10,7 +10,7 @@
     <br/>
     <form action="Controleur" method="POST">
         <input type="hidden" name="section" value="connexion"/>
-        <input type="hidden" name="action" value="vueadresse"/>
+        <input type="hidden" name="action" value="VoirAdresse"/>
         <select name="adresse" class="adressecompte">   
             <c:forEach items="${Acheteur.listAdresseAcheteur}" var="adresse">
                 <option value="${adresse.idAdresse}" 
@@ -30,13 +30,15 @@
 <p>
     <!-- finir le test avec un parametre sinon ca va pas faire ce qui est prevu-->
     <!-- exemple l'id de l'adresse a afficher a mettre en request -->
-<c:if test="${not empty Acheteur.listAdresseAcheteur}">
+<c:if test="${not empty lesAdresses}">
     <c:forEach items ="${listAdresseAcheteur}" var="adresse">
-    ${adresse.adresseAcheteur1}
-    ${adresse.adresseAcheteur2}
-    ${adresse.cpAcheteur}
-    ${adresse.villeAcheteur}
-    ${adresse.paysAcheteur}
+        <c:if test="${adresse.idAdresse} == ${lesAdresses}">
+    ${adresse.adresseAcheteur1}<br/>
+    ${adresse.adresseAcheteur2}<br/>
+    ${adresse.cpAcheteur}<br/>
+    ${adresse.villeAcheteur}<br/>
+    ${adresse.paysAcheteur}<br/>
+    </c:if>
 </c:forEach>
 </c:if>
 </p>
