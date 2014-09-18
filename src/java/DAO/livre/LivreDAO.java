@@ -120,7 +120,7 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
     }
 
     public List<Livre> findAll(String s) throws SQLException {
-        // recherche par (partie) du titre de livre AUSSI BIEN que le nom de l'auteur
+        // recherche par (partie) du titre de livre AUSSI BIEN que le nom de l'auteur AUSSI BIEN que l'ISBN
         Livre l;
         Auteur a;
         SousTheme st;
@@ -178,7 +178,7 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
             String id_auteur = rs.getString("id_auteur");
             String auteur_nom = rs.getString("auteur_nom");
             a = new Auteur(Integer.valueOf(id_auteur), auteur_nom);
-            a = new Auteur(Integer.valueOf(id_auteur), null);
+            //a = new Auteur(Integer.valueOf(id_auteur), null);
             ArrayList<Auteur> lA = new ArrayList<>();
             lA.add(a);
             l = new Livre(null, lA, livre_titre, 0, 0, true);
@@ -198,19 +198,20 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
         return lL;
     }
 
-    
-    
+
     // récupération du nom du sous-theme du livre
   //  public String getNomSousThemeIdTheme(String id_soustheme)
   //  {
     //    String nomsoustheme = null;
         //int theme = ;
-        
-        
-        
+
    // }
     
-    
+        
+        
+        
+    // NE PAS S'EN SERVIR ?????????????????????    
+        
     // liste totale des livres
     public ArrayList ListeLivre() throws SQLException, NamingException {
         try {
@@ -320,12 +321,6 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
                     //listmc
                     
                     //soustheme
-                    
-                    
-                    
-                    
-                    
-                    
 
                     // on stocke l'objet livre dans la liste des livres
                     listelivre.add((Livre) livre);
@@ -334,14 +329,11 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
                     //request.setAttribute("listelivre", listelivre);// on ne peut pas faire cela?
                 }
             }
-
             rs.close();
             cnn.close();
-
         } catch (SQLException ex) {
             Logger.getLogger(LivreDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return listelivre;
     }
 
