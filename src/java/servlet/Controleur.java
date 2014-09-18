@@ -355,29 +355,7 @@ public class Controleur extends HttpServlet {
 //                //creation de l'objet commande
 //
 //            }
-=======
-            if ("confirmer".equalsIgnoreCase(action)) {
-                p = (Panier) session.getAttribute("panier");
-                if (session.getAttribute("commande") == null) {
-                    try {
-                        session.setAttribute("commande", new CommandeGestion());
-                    } catch (NamingException ex) {
-                        erreurGrave = true;
-                    }
-                }
-                cg = (CommandeGestion) session.getAttribute("commande");
-                if (session.getAttribute("commande") == null) {
-                    erreurGrave = true;
-                    return;
-                }
-                Commande cde = (Commande) session.getAttribute("commandeDetail");
-                cde = cg.setDate(cde);
 
-                ArrayList<Adresse> listead = ach.getListAdresseAcheteur();
-                //creation de l'objet commande
-
-            }
->>>>>>> origin/Emmanuelle
 
             if ("confirmertypelivraison".equalsIgnoreCase(action)) {
                 Commande cde = (Commande) session.getAttribute("commandeDetail");
