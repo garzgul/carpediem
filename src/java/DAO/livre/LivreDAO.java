@@ -210,9 +210,10 @@ public class LivreDAO extends DAO<Livre> implements Serializable {
         
         
         
-    // NE PAS S'EN SERVIR ?????????????????????    
+    // NE PAS S'EN SERVIR ?????????????????????  pas pour le moment
         
-    // liste totale des livres
+        
+    // liste totale des livres Emma, trop lourd
     public ArrayList ListeLivre() throws SQLException, NamingException {
         try {
             PreparedStatement stmtrequete = null;

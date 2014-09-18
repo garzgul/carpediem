@@ -20,7 +20,14 @@ public class PromoGestion implements Serializable{
         PDao = new PromotionDAO();
     }
     
-    public List<Promotion> findAll(String s) throws SQLException {
-        return PDao.findAll(s);
+        public List<Promotion> listeLivrePromotionActuelle3() throws SQLException, NamingException {
+        return PDao.listeLivrePromotionActuelle3();
     }
+    
+    
+    
+    
+    
+    
+    
 }

@@ -56,7 +56,7 @@ public class PromotionDAO extends DAO<Promotion> implements Serializable {
     }
 
     // liste totale des Promo
-    public List<Promotion> listePromotion() throws SQLException, NamingException {
+    public List<Promotion> listeToutesPromotions() throws SQLException, NamingException {
         Promotion st;
         List<Promotion> lsT = new ArrayList<>();
         String req = "{call findAllPromo}";
@@ -67,6 +67,56 @@ public class PromotionDAO extends DAO<Promotion> implements Serializable {
             String id_Promo = rs.getString("id_promotion");
             String Promo_nom = rs.getString("prom_nom");
             String Promo_descriptif = rs.getString("prom_descriptif");
+            st = new Promotion(Integer.valueOf(id_Promo), Promo_nom, Promo_descriptif);
+            lsT.add(st);
+        }
+        rs.close();
+        cs.close();
+        cnn.close();
+        return lsT;
+    }
+
+    // liste des Promo actuelles
+    public List<Promotion> listePromotionActuelle() throws SQLException, NamingException {
+        Promotion st;
+        List<Promotion> lsT = new ArrayList<>();
+        String req = "{call findAllPromoEnCours}";
+        Connection cnn = fc.fournir();
+        CallableStatement cs = cnn.prepareCall(req);
+        ResultSet rs = cs.executeQuery();
+        while (rs.next()) {
+            String id_Promo = rs.getString("id_promotion");
+            String Promo_nom = rs.getString("prom_nom");
+            String Promo_descriptif = rs.getString("prom_descriptif");
+            String datedbt = rs.getString("remise_datedbt");
+            String datefin = rs.getString("remise_datefin");
+            st = new Promotion(Integer.valueOf(id_Promo), Promo_nom, Promo_descriptif);
+            lsT.add(st);
+        }
+        rs.close();
+        cs.close();
+        cnn.close();
+        return lsT;
+    }
+
+    // liste des livres en Promo actuelles limités à 3
+    public List<Promotion> listeLivrePromotionActuelle3() throws SQLException, NamingException {
+        Promotion st;
+        List<Promotion> lsT = new ArrayList<>();
+        String req = "{call findAllLivresPromo3}";
+        Connection cnn = fc.fournir();
+        CallableStatement cs = cnn.prepareCall(req);
+        ResultSet rs = cs.executeQuery();
+        while (rs.next()) {
+            String id_Promo = rs.getString("id_promotion");
+            String Promo_nom = rs.getString("prom_nom");
+            String Promo_descriptif = rs.getString("prom_descriptif");
+            String datedbt = rs.getString("remise_datedbt");
+            String datefin = rs.getString("remise_datefin");
+            String remisetaux = rs.getString("remise_taux");
+            String remisemontant = rs.getString("remise_montant");
+            String idLivre = rs.getString("id_livre");
+            String titreLivre = rs.getString("livre_titre");
             st = new Promotion(Integer.valueOf(id_Promo), Promo_nom, Promo_descriptif);
             lsT.add(st);
         }
