@@ -17,28 +17,32 @@
     margin-top: 10px;
     width: 960px;
     height: auto;
-    border: solid 4px violet;
+    margin-left: auto;
+    margin-right: auto;
+   /* border: solid 4px violet;*/
 }
 
 a, a:link, a:visited, a :hover, a:active
 {
     cursor: pointer;/*forme de main*/
-    text-decoration: none;/*pas de decoration - soulignement ou autre*/
+    text-decoration: underline;/*pas de decoration - soulignement ou autre*/
     color: black;
 }
 
+
+
 #header-options
 {
-    float: left;
+    //float: left;
     color: black;/*couleur texte*/
     font-weight: bold;/*aspect de la police de caracteres gras*/
     height: auto;/*hauteur*/
-    margin-left: 190px;/*marge exterieure pour haut et bas à 0 et gauche et droite auto*/
+    margin-left: 600px;/*marge exterieure pour haut et bas à 0 et gauche et droite auto*/
     padding: auto;/*marge interieure pour haut et bas à 5 et gauche et droite 0*/
     /*position: relative;/*relative par rapport au positionnement normal - permet dans un flux de lecture normal haut vers bas de faire se chavaucher des elements, de les deplacer*/
-    width: 500px;/*largeur*/
+    width: 350px;/*largeur*/
     /*z-index: 99;/*ordre affichage - plus le chiffre est grand et plus l element sera affiché au dessus des autres*/
-    border: solid 4px pink;
+   /* border: solid 4px pink;*/
 }
 
 #not-login
@@ -48,7 +52,7 @@ a, a:link, a:visited, a :hover, a:active
     height: auto;
     //margin-left: 150px;
     //position: relative;
-   border: solid 3px red;
+   /*border: solid 3px red;*/
 }
 
 #not-login-signup
@@ -180,11 +184,12 @@ a, a:link, a:visited, a :hover, a:active
 /*gros logo*/
 #gros-logo-div
 {
-    /*border: solid 3px black;*/
+    border: solid 3px purple;
     height: auto;
     width: auto;	
-    /*position: relative;*/
-    margin-top: 5px;
+    position: relative;
+    z-index : 1000;
+    margin-top: -40px;
     margin-bottom: 5px;
     margin-left: 20px;
     margin-right: auto;
@@ -200,7 +205,7 @@ a, a:link, a:visited, a :hover, a:active
     /*border: solid 4px orange;*/
 }
 
-#panier
+/*#panier
 {
     float: left;
     width: 220px;
@@ -208,15 +213,16 @@ a, a:link, a:visited, a :hover, a:active
     margin-top: 25px;
     margin-left: 450px;
     border: solid 4px red;
-}
+}*/
 
 
 
 #datejour
 {
-    margin: 0;
+    margin-left: 650px;
     //padding-right: 20px;
-    width: 960px;
+    margin-right: 20px;
+    width: 300px;
     height : 20px;
     text-align: right;/*alignement texte droite*/
     /*border: solid 1px purple;*/

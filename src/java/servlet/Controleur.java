@@ -13,32 +13,16 @@ import bean.metier.PanierGestion;
 import bean.metier.ThemesGestion;
 import bean.produit.Livre;
 import bean.produit.SousTheme;
-import bean.produit.Theme;
 import java.io.IOException;
-import static java.lang.ProcessBuilder.Redirect.to;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import static java.util.Date.from;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -93,26 +77,26 @@ public class Controleur extends HttpServlet {
 // Module de traitement des données en scope application        
 // Module de traitement des themes/sousthemes (Eddy) 
 // la liste doit aller dans le contexte de la servlet (scope application et non scope session vu qu'il est le meme pour tous
-        if (session.getAttribute("beanThemesGestion") == null) {
-            try {
-                session.setAttribute("beanThemesGestion", new ThemesGestion()); // instanciation bean métier
-            } catch (NamingException ex) {
-                erreurGrave = true; // flag boolean pour signaler qu'une erreur s'est produite
-            }
-        }
-        tg = (ThemesGestion) session.getAttribute("beanThemesGestion");
-        List<SousTheme> lsT = null;
-        try {
-            lsT = tg.listeSousThemes(); // appel de la méthode métier de récupération
-        } catch (SQLException ex) {
-            erreurGrave = true;
-            //System.out.println("coucou SQL");// flag boolean pour signaler qu'une erreur remontée SQL s'est produite
-        } catch (NamingException ex) {
-            erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
-        }
-
-        context.setAttribute("sousthemesListe", lsT); // place la liste des sous themes trouvés dans le scope
-        // request.setAttribute("themes", "Controleur?section=themesaffichage&action=affichage"); non necessaire (la liste de theme sera mise en scope appli au demarage de l'appli
+//        if (session.getAttribute("beanThemesGestion") == null) {
+//            try {
+//                session.setAttribute("beanThemesGestion", new ThemesGestion()); // instanciation bean métier
+//            } catch (NamingException ex) {
+//                erreurGrave = true; // flag boolean pour signaler qu'une erreur s'est produite
+//            }
+//        }
+//        tg = (ThemesGestion) session.getAttribute("beanThemesGestion");
+//        List<SousTheme> lsT = new ArrayList<>();
+//        try {
+//          lsT = (ArrayList<SousTheme>) tg.listeSousThemes(); // appel de la méthode métier de récupération
+//      } catch (SQLException ex) {
+//           erreurGrave = true;
+//            System.out.println("coucou SQL");// flag boolean pour signaler qu'une erreur remontée SQL s'est produite
+//        } catch (NamingException ex) {
+//            erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
+//        }
+//
+//        context.setAttribute("sousthemesListe", lsT); // place la liste des sous themes trouvés dans le scope
+//         request.setAttribute("themes", "Controleur?section=themesaffichage&action=affichage"); non necessaire (la liste de theme sera mise en scope appli au demarage de l'appli
 
 // Fin module de traitement Themes (Eddy)
         

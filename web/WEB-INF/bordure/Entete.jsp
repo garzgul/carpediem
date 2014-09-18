@@ -5,11 +5,12 @@
 
 <!-- Header -->
 <div id="header">
-    <!-- Gros logo -->		
-    <div id="gros-logo-div">
-        <img id="logocarpediem" src="./images/carpediemlogofinal24.jpg" title="logo du site Carpe Diem" width="200" height="150" />
-    </div><!-- fin de Gros logo -->	
-
+    
+    <div id="datejour">
+        <p>Bienvenue, nous sommes le <fmt:formatDate value="${today}" pattern="EEEE dd MMMM yyyy" /></p>
+    </div>
+    <div class="clear"></div>
+    
     <!-- Header options  -->
     <div id="header-options">
         <!-- login -->		
@@ -17,7 +18,7 @@
         <c:if test="${empty Acheteur}">
             <div id="not-login">
                 <c:url value="Controleur?section=connexion&action=inscriptionacheteur" var="url2"/>
-                <a id="not-login-signup" title="Inscription" href="${url2}">Devenir membre <span class="gras">></span></a>
+                <a id="not-login-signup" title="Inscription" href="${url2}">Devenir membre <span class="gras"></span></a>
                 <c:url value="Controleur?section=connexion&action=seconnecter" var="url3"/>
                 <a id="not-login-login" title="Se connecter" href="${url3}">Se connecter</a>
             </div><!-- fin de not-login -->	
@@ -33,16 +34,17 @@
         </c:if>
     </div><!-- fin de Header options -->
 
-       <div id="panier">
-        <c:url value="Controleur?section=panier&action=affichage" var="url"/>
-        <a href="${url}">votre panier</a>
-    </div>
+   
     <div class="clear"></div>
 </div><!-- fin de Header -->
 
 <div class="clear"></div>
 
-<div id="datejour">
-    <p>Bienvenue, nous sommes le <fmt:formatDate value="${today}" pattern="EEEE dd MMMM yyyy" /></p>
-</div>
+
+
+<!-- Gros logo -->		
+<div id="gros-logo-div">
+    <img id="logocarpediem" src="./images/carpediemlogofinalrogne.png" title="logo du site Carpe Diem" width="200" height="150" />
+</div><!-- fin de Gros logo -->	
+
 

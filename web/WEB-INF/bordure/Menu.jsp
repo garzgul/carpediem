@@ -3,10 +3,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!-- Menu horizontal -->
-<nav id="menuhorizontal">
+<nav id="menuhorizontal" class="art-header">
     <div id="menu">
         <div id="primarylinks">
-            <ul>
+            <ul id="retraitulmenu">
                 <li>
                     <c:url value="Controleur?section=defaut" var ="url"/> 
                     <a title="Accueil" href="${url}">Accueil</a>
