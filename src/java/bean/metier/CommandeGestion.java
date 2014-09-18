@@ -2,6 +2,7 @@
 package bean.metier;
 
 import DAO.commande.CommandeDAO;
+import DAO.commande.FraisDePortDAO;
 import bean.acheteur.Acheteur;
 import bean.acheteur.Adresse;
 import bean.commande.Commande;
@@ -13,6 +14,10 @@ import bean.commande.livraison;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,41 +35,36 @@ public class CommandeGestion {
     }
     
     public boolean createCommande(HashMap<Integer,LignePanier> maliste, Acheteur ach
-     ) throws SQLException, ParseException{
+     ) throws SQLException, ParseException, NamingException{
         boolean res = false;
         Commande cde = new Commande();
+        LocalDate ld = LocalDate.now();
         Date d = new Date();
         // parametre de commande implicite
         cde.setDateCde(d);
+        String noCde = null;
         
         
         // gestion du no de commande
-        
-        
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        String nouveauNoCde = null;
-        System.out.println("avant le test du no de commande");
-        String lastCDE = cDao.getLastNoCde();
-        System.out.println(lastCDE);
-        System.out.println("apres le test du no de commande");
-        if (lastCDE.isEmpty() || lastCDE == null){
+        Commande lastcde = cDao.getLastCde();
+        Instant instant = Instant.ofEpochMilli(lastcde.getDateCde().getTime());
+        LocalDate dateLastCde = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+        
+        
+        
+        if (ld.equals(dateLastCde)){
+            long noCommande = Long.valueOf(lastcde.getNumCde());
+            noCommande+=1;
+            noCde =""+noCommande;
+        }else{
+            noCde=sdf.format(d);
+            noCde=noCde+"00000001";
             
-            Date datelast = new Date();
-            String dCDE = null;
-            String no = "0";
-            // construction du no de commande            
-            if (datelast!=d){
-                nouveauNoCde=sdf.format(d);
-                nouveauNoCde= nouveauNoCde+"00000001";
-            }else{
-                long noCommande = Long.valueOf(lastCDE);
-                noCommande += 1;
-                nouveauNoCde =""+noCommande;
-            }
         }
-        System.out.println("no de commande avant le set "+nouveauNoCde);
-        System.out.println("apres la creation du no de commande");
-        cde.setNumCde(nouveauNoCde);
+        System.out.println("no de commande avant le set "+noCde);
+        
+        cde.setNumCde(noCde);
         System.out.println("no de commande dans la gestion commande "+cde.getNumCde());
         
         // gestion du nom d'acheteur
@@ -80,7 +80,8 @@ public class CommandeGestion {
 
         cde.setAdresseCde(ach.getAdfav());
         //gestion des frais de port
-        FraisDePort fdp = new FraisDePort(10.0f);
+        FraisDePortDAO fraisDAO = new FraisDePortDAO();
+        FraisDePort fdp = fraisDAO.find();
         cde.setFraisCde(fdp);
         // calcul du prix HT et de la tva de la commande
         float prixHTTotal =0.0f;
@@ -96,6 +97,9 @@ public class CommandeGestion {
         cde.setPayementCde(true);
         // mise en place du mode de paiement (defini par defaut a CB
         cde.setModePaiement("CB");
+        //remplissage de la commande
+        cde.setDetailCde(maliste);
+        
         // fin du remplissage de l'objet commande (envoi a la DAO)
         
         // creation de la commande

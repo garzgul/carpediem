@@ -159,6 +159,12 @@ public class Commande implements Serializable{
         this.modePaiement = modePaiement;
     }
 
+    public void setDetailCde(HashMap<Integer, LignePanier> detailCde) {
+        this.detailCde = detailCde;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "numCde= " + numCde ;

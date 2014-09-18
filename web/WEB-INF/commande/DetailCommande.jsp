@@ -65,17 +65,15 @@
         <input type="hidden" name="action" value="confirmeradresse"/>
         <select name="adresse" class="adressecommande">   
             <c:forEach items="${Acheteur.listAdresseAcheteur}" var="adresse">
-                <option value="${adresse.idadresse}" <c:if test="${adresse.adressefav}">
+                <option value="${adresse.idAdresse}" <c:if test="${adresse.adresseFav}">
                     selected
-                </c:if>/> >
+                </c:if> >
                     ${adresse.adresseAcheteur1} ${adresse.adresseAcheteur2} ${adresse.cpAcheteur} ${adresse.villeAcheteur} ${adresse.paysAcheteur}
                 </option> 
             </c:forEach>
         </select>
         <input type="submit" name="doit" value="confirmer l'adresse de livraison"/>       
-       <% //
-            //    <c:url value="Controleur?section=commande&action=confirmer" var="url"/>
-             //   <a href="${url}">Confirmer la commande</a> %>
+
 </form>        
              <c:if test="${not empty Acheteur.listAdresseAcheteur}">
                  <c:forEach items ="${listAdresseAcheteur}" var="adresse">
