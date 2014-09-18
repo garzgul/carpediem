@@ -60,6 +60,8 @@ public class Controleur extends HttpServlet {
 
         String section = request.getParameter("section");
         String action = request.getParameter("action");
+        
+        String pageNumber = request.getParameter("pageNumber"); // ej
 
         // declaration des variables de gestion
         Panier p = null;
@@ -398,11 +400,6 @@ public class Controleur extends HttpServlet {
                     lg = (LivreGestion) session.getAttribute("beanLivreGestion");
                     String id_soustheme = request.getParameter("ref"); // récup de l'id_soustheme à filtrer
                     List<Livre> lLfiltree = null;
-                    //try {
-//                    lLfiltree = lg.filtrer((List<Livre>) session.getAttribute("rechercheResultat"), Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage
-//                    } catch (SQLException ex) {
-//                        erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
-                    //}
                     if ((session.getAttribute("rechercheResultat") != null) && (session.getAttribute("rechercheappliquee") != null)) { // s'il y a déjà eut une recherche de résultats
                         List<Livre> lL = (List<Livre>) session.getAttribute("rechercheResultat");
                         lLfiltree = lg.filtrer(lL, Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage en fonction des resultats préalables des livres
@@ -420,6 +417,14 @@ public class Controleur extends HttpServlet {
                 }
                 if ("annulerfiltre".equalsIgnoreCase(action)) { // clic sur entete des themes pour annuler tout filtre de theme
                     session.removeAttribute("filtrageapplique");
+                    //A TESTER la ligne suivante !!!!!!!!!!!!!!!!!!!!!!
+                    request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage&pageNumber=1"); // signalement
+                                                // qu'une liste de livres sera à afficher en résultat à une page donnée
+                }
+                if("pagination".equalsIgnoreCase(action)) {
+                    //System.out.println(pageNumber);
+                    request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage&pageNumber="+pageNumber); // signalement
+                                                // qu'une liste de livres sera à afficher en résultat à une page donnée
                 }
             }
         }
@@ -843,7 +848,12 @@ public class Controleur extends HttpServlet {
         //redirection pour la recherche
         if ("rechercheaffichage".equalsIgnoreCase(section)) {
             if ("affichage".equalsIgnoreCase(action)) {
-                pageJsp = "/WEB-INF/catalogue/resultat.jsp";
+                if(request.getParameter("pageNumber")!=null){ // un num de page transmis
+                    pageJsp = "/WEB-INF/catalogue/resultat.jsp?pageNumber="+request.getParameter("pageNumber");
+                }else{
+                    //pageJsp = "/WEB-INF/catalogue/resultat.jsp";
+                    pageJsp = "/WEB-INF/catalogue/resultat.jsp?pageNumber=1";
+                }
             }
             if ("affichageboite".equalsIgnoreCase(action)) {
                 pageJsp = "/WEB-INF/catalogue/recherche.jsp";
