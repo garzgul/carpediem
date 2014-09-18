@@ -2,20 +2,20 @@
 <%--@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<div>
-    <h2><a href="Controleur?section=recherche&action=annulerfiltre">THEMES</a></h2>
-    <div>
+<div id="modulerecherchethemes">
+    <div id="block-headdiv">
+        <h2 id="toutes_les_mentionsh2"><a href="Controleur?section=recherche&action=annulerfiltre">Thémes</a></h2>
+    </div>
+
+    <div id="block-themesdiv">
         <ul>
-           <c:forEach var="st" items="${sousthemesListe}">
-            <li>
-                <a href="Controleur?section=recherche&action=filtrer&ref=${st.idSousTheme}">
-                    ${st.sousTheme}
-                </a>
-            </li>
-           </c:forEach>
+            <c:forEach var="st" items="${sousthemesListe}">
+                <li>
+                    <a href="Controleur?section=recherche&action=filtrer&ref=${st.idSousTheme}">${st.sousTheme}</a>
+                </li>
+            </c:forEach>
         </ul>
     </div>
-    <div>
 </div>
 
 <%--
