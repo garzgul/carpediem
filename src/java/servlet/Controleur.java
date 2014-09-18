@@ -74,7 +74,8 @@ public class Controleur extends HttpServlet {
         // declaration du string home
         String pageJsp = "/WEB-INF/main/Main.jsp";
 
-// Module de traitement des données en scope application        
+// Module de traitement des données en scope application  
+        
 // Module de traitement des themes/sousthemes (Eddy) 
 // la liste doit aller dans le contexte de la servlet (scope application et non scope session vu qu'il est le meme pour tous
         if (session.getAttribute("beanThemesGestion") == null) {
@@ -90,15 +91,13 @@ public class Controleur extends HttpServlet {
             lsT = tg.listeSousThemes(); // appel de la méthode métier de récupération
         } catch (SQLException ex) {
             erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
-            
         } catch (NamingException ex) {
             erreurGrave = true; 
         }
-
         context.setAttribute("sousthemesListe", lsT); // place la liste des sous themes trouvés dans le scope
         // request.setAttribute("themes", "Controleur?section=themesaffichage&action=affichage"); non necessaire (la liste de theme sera mise en scope appli au demarage de l'appli
-
 // Fin module de traitement Themes (Eddy)
+
 // creation de la liste de type de livraison
         if (context.getAttribute("livraisongestion") == null) {
             context.setAttribute("livraisongestion", new LivraisonGestion());
@@ -363,6 +362,7 @@ public class Controleur extends HttpServlet {
         }
 
 // fin module commande  
+        
 // Module Recherche (Eddy)        
         if ("recherche".equalsIgnoreCase(section)) { // section recherche concernée
             if (session.getAttribute("beanLivreGestion") == null) {
@@ -392,18 +392,17 @@ public class Controleur extends HttpServlet {
                     session.setAttribute("rechercheResultat", lL); // place la liste des livres trouvés dans le scope
                     session.setAttribute("rechercheappliquee", "oui"); // flag pour se souvenir qu'un résultat de recherche a été appliqué
                     request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage"); // signalement
-                    // qu'une liste de livres sera à afficher dynamiquement en résultat
+                                                // qu'une liste de livres sera à afficher dynamiquement en résultat
                 }
                 if ("filtrer".equalsIgnoreCase(action)) { // action filtrer provoquée par un clic sur un theme particulier
                     lg = (LivreGestion) session.getAttribute("beanLivreGestion");
                     String id_soustheme = request.getParameter("ref"); // récup de l'id_soustheme à filtrer
                     List<Livre> lLfiltree = null;
                     //try {
-                    lLfiltree = lg.filtrer((List<Livre>) session.getAttribute("rechercheResultat"), Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage
+//                    lLfiltree = lg.filtrer((List<Livre>) session.getAttribute("rechercheResultat"), Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage
 //                    } catch (SQLException ex) {
 //                        erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
                     //}
-
                     if ((session.getAttribute("rechercheResultat") != null) && (session.getAttribute("rechercheappliquee") != null)) { // s'il y a déjà eut une recherche de résultats
                         List<Livre> lL = (List<Livre>) session.getAttribute("rechercheResultat");
                         lLfiltree = lg.filtrer(lL, Integer.valueOf(id_soustheme)); // appel de la méthode métier de filtrage en fonction des resultats préalables des livres
@@ -414,11 +413,10 @@ public class Controleur extends HttpServlet {
                             erreurGrave = true;
                         }
                     }
-
                     session.setAttribute("rechercheResultat", lLfiltree); // place la liste filtrée des livres trouvés dans le scope
                     session.setAttribute("filtrageapplique", id_soustheme); // flag pour se souvenir qu'un filtre a été appliqué
                     request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage"); // signalement
-                    // qu'une liste de livres sera à afficher dynamiquement en résultat
+                                                // qu'une liste de livres sera à afficher dynamiquement en résultat
                 }
                 if ("annulerfiltre".equalsIgnoreCase(action)) { // clic sur entete des themes pour annuler tout filtre de theme
                     session.removeAttribute("filtrageapplique");
