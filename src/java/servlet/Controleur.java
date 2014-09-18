@@ -528,6 +528,12 @@ public class Controleur extends HttpServlet {
                 }
 
             }
+            
+            if("deconnexion".equalsIgnoreCase(action)){
+                session.removeAttribute("Acheteur");
+                request.setAttribute("sedeconnecter", "Controleur?section=affichagecompte&action=deconnexion");
+                request.setAttribute("deconnexion", "deconnection");
+            }
 
             if ("seconnecter".equalsIgnoreCase(action)) {
                 request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageconnection");
@@ -547,7 +553,7 @@ public class Controleur extends HttpServlet {
 
                     if (ach != null) {
                         session.setAttribute("Acheteur", ach);
-                        // request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
+//                        request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
                     } else {
                         ach = ag.chercherAcheteur(mail);
                         if (ach != null) {
@@ -594,7 +600,7 @@ public class Controleur extends HttpServlet {
             }
 
             //Ajouter une adresse
-            if ("voiradresse".equalsIgnoreCase(action)) {
+            if ("vueadresse".equalsIgnoreCase(action)) {
                 System.out.println("===========Voir adresse");
                 Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
                 request.setAttribute("ajouteradresse", "Controleur?section=affichagecompte&action=ajouteradresse");
@@ -628,6 +634,20 @@ public class Controleur extends HttpServlet {
                 }
                 request.setAttribute("voircompte", "Controleur?section=affichagecompte&action=voircompte");
 //                response.sendRedirect("Controleur?section=connexion&action=voircompte");
+            }
+            if("VoirAdresse".equalsIgnoreCase(action)){
+                System.out.println("=======>>> Dans VoirAdresse");
+                request.setAttribute("ajouteradresse","Controleur?section=affichagecompte&action=ajouteradresse");
+                request.setAttribute("vueadresse", "Controleur?section=affichagecompte&action=vueadresse");
+                System.out.println(request.getParameter("adresse"));
+                request.setAttribute("lesAdresses", request.getParameter("adresse"));
+                System.out.println(request.getAttribute("lesAdresses"));
+                request.setAttribute("voircompte", "Controleur?section=affichagecompte&action=voircompte");
+            }
+            if("modifiercompte".equalsIgnoreCase(action)){
+                Acheteur acheteurModif = (Acheteur) session.getAttribute("Acheteur");
+                session.setAttribute("acheteurModif", acheteurModif);
+                request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
             }
 
         }
@@ -930,6 +950,10 @@ public class Controleur extends HttpServlet {
                 }
                 case ("erreurConnection"): {
                     pageJsp = "/WEB-INF/compte/connectionacheteur.jsp";
+                    break;
+                }
+                case("deconnexion"):{
+                    pageJsp = "/WEB-INF/main/Main.jsp";
                     break;
                 }
                 case ("ajouteradresse"): {

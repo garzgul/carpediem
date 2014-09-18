@@ -21,6 +21,9 @@
                 <a id="not-login-signup" title="Inscription" href="${url2}">Devenir membre <span class="gras"></span></a>
                 <c:url value="Controleur?section=connexion&action=seconnecter" var="url3"/>
                 <a id="not-login-login" title="Se connecter" href="${url3}">Se connecter</a>
+                <c:if test="${not empty deconnexion}" >
+                    <p>Vous êtes bien déconnecté</p>
+                </c:if>
             </div><!-- fin de not-login -->	
             <div class="clear"></div>
         </c:if>
