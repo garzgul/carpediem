@@ -122,7 +122,7 @@ public class Acheteur implements Serializable{
     public Adresse getAdfav(){
         
         for(Adresse a:listAdresseAcheteur){
-            if (a.getAdressefav()){
+            if (a.getAdresseFav()){
                 return a;
             }
         }

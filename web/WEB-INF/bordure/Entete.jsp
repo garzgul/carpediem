@@ -27,8 +27,8 @@
 
         <c:if test="${not empty Acheteur}">
             <div id="login">
-                <a id="login-signup" title="Mon compte" href="Controleur?section=moncompte">Mon compte <span class="gras">></span></a>
-                <a id="login-login" title="Se déconnecter" href="Controleur?section=deconnexion" onclick="return(confirm(\'Etes-vous sûr de vouloir vous déconnecter?\'))">Se déconnecter</a>
+                <a id="login-signup" title="Mon compte" href="Controleur?section=connexion&action=voircompte">Mon compte <span class="gras">></span></a>
+                <a id="login-login" title="Se déconnecter" href="Controleur?section=connexion&action=deconnexion" onclick="return(confirm(\'Etes-vous sûr de vouloir vous déconnecter?\'))">Se déconnecter</a>
             </div><!-- fin de login -->	
             <div class="clear"></div>			
         </c:if>

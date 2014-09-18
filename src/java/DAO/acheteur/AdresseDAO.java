@@ -43,7 +43,7 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable {
             pStmt.setString(5, obj.getVilleAcheteur());
             pStmt.setString(6, obj.getPaysAcheteur());
             int adrFav = 0;
-            if(true == obj.getAdressefav()){
+            if(true == obj.getAdresseFav()){
                 adrFav = 1;
             }
             pStmt.setInt(7, adrFav);
@@ -184,8 +184,8 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable {
                 System.out.println("dans DAO adresse apres selection fav");
                 Adresse adresse = new Adresse(adresse1, adresse2, cp, ville, pays, adresseFav);
                 adresse.setIdAcheteur(id);
-                adresse.setIdadresse(idAdresse);
-                adresse.setAdressefav(adresseFav);
+                adresse.setIdAdresse(idAdresse);
+                adresse.setAdresseFav(adresseFav);
                 toutAdresse.add(adresse);
             }
 

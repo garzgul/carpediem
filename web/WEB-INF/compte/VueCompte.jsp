@@ -35,7 +35,7 @@
        <br/>  
     </p>
     <c:url value="Controleur?section=connexion&action=voiradresse" var="url"/>
-    <a href="${url}">Voir dresse</a>
+    <a href="${url}">Voir adresse</a>
             <c:if test="${not empty Acheteur.listAdresseAcheteur}">
                 <c:import url="${vueadresse}"/>
                 
