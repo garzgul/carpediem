@@ -78,7 +78,7 @@
                                 </c:if>
                             </div>
 
-                            <div id="">
+                            <div id="slide">
                                 <c:import url="/WEB-INF/bordure/slide.jsp" />
                             </div>
                         </div>

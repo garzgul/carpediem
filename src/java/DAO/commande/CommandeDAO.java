@@ -80,6 +80,7 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
         try {
             String proc = "{call createCDE(?,?,?,?,?,?,?,?)}";
             cstmt = cnn.prepareCall(proc);
+            System.out.println("no de cde dans commande DAO "+cde.getNumCde());
             cstmt.setString(1, cde.getNumCde());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             cstmt.setString(2, sdf.format(cde.getDateCde()));
@@ -90,7 +91,9 @@ public class CommandeDAO extends DAO<Commande> implements Serializable{
             cstmt.setString(6, cde.getModeLivraison().toString());
             cstmt.setString(7, cde.getModePaiement());
             cstmt.registerOutParameter(8, java.sql.Types.BIGINT);
+            System.out.println("avant le premier execute");
             cstmt.execute();
+            System.out.println("apres le premier execute");
             Long idCde = cstmt.getLong(8);
 
             // remplissage des lignes de commandes dans la table detailcommande

@@ -13,7 +13,7 @@
         <input type="hidden" name="action" value="vueadresse"/>
         <select name="adresse" class="adressecompte">   
             <c:forEach items="${Acheteur.listAdresseAcheteur}" var="adresse">
-                <option value="${adresse.idAdresse}"
+                <option value="${adresse.idAdresse}" 
             <c:if test="${adresse.adresseFav}">
                 selected
             </c:if>

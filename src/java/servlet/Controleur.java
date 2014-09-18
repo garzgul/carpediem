@@ -256,7 +256,9 @@ public class Controleur extends HttpServlet {
                 }
             }
             cg = (CommandeGestion) session.getAttribute("commande");
-            Acheteur ach = (Acheteur) session.getAttribute("acheteur");
+            Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
+            System.out.println("acheteur id = "+ach.getIdAcheteur());
+            System.out.println("acheteur liste d'adresse = "+ach.getListAdresseAcheteur());
 
             request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagedetail");
 
@@ -269,7 +271,9 @@ public class Controleur extends HttpServlet {
                     session.setAttribute("commandeDetail", cg.createCommande(p.getLignes(), ach));
                 } catch (SQLException ex) {
                     erreurGrave = true;
+                    System.out.println("erreur SQL =>>>>>> "+ex.getMessage());
                 } catch (ParseException ex) {
+                    System.out.println("coucou erreur parsing");
                     erreurGrave = true;
                 }
             }
@@ -284,8 +288,10 @@ public class Controleur extends HttpServlet {
                     System.out.println("avant le crea commande");
                     session.setAttribute("commandeDetail", cg.createCommande(p.getLignes(), ach));
                 } catch (SQLException ex) {
+                    System.out.println("erreur SQL =>>>>>> "+ex.getMessage());
                     erreurGrave = true;
                 } catch (ParseException ex) {
+                    System.out.println("coucou erreur parsing sur la date");
                     erreurGrave = true;
                 }
 
@@ -567,6 +573,8 @@ public class Controleur extends HttpServlet {
                 }
 
                 request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=voircompte");
+                request.setAttribute("ajouteradresse", "Controleur?section=affichagecompte&action=ajouteradresse");
+                request.setAttribute("vueadresse", "Controleur?section=affichagecompte&action=vueadresse");
 
             }
 
@@ -594,7 +602,7 @@ public class Controleur extends HttpServlet {
                 }
                 Adresse adr = new Adresse(adr1, complement, cPostal, ville, pays, true);
                 adr.setIdAcheteur(idAcheteur);
-                adr.setAdressefav(adresseFav);
+                adr.setAdresseFav(adresseFav);
                 ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
                 try {
                     System.out.println("=========ici on est dans le try");
@@ -867,6 +875,7 @@ public class Controleur extends HttpServlet {
                     System.out.println("pied: " + request.getAttribute("pied"));
                     System.out.println("vueadresse: " + request.getAttribute("vueadresse"));
                     System.out.println("ajouteradresse: " + request.getAttribute("ajouteradresse"));
+                    System.out.println("id adresse fav=====>> "+((Acheteur) session.getAttribute("Acheteur")).getAdfav().getIdAdresse());
                     pageJsp = "/WEB-INF/compte/VueCompte.jsp";
                     break;
                 }

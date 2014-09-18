@@ -45,14 +45,11 @@ public class CommandeGestion {
         String nouveauNoCde = null;
         System.out.println("avant le test du no de commande");
         String lastCDE = cDao.getLastNoCde();
+        System.out.println(lastCDE);
         System.out.println("apres le test du no de commande");
         if (lastCDE.isEmpty() || lastCDE == null){
-            int longeur = lastCDE.length();
-            String cdenb = lastCDE.substring(8, (longeur-1));
-            String dateCde = lastCDE.substring(0,7);
-            int longueurNoCommande = cdenb.length();
-            long numeroCDE = Long.valueOf(cdenb);
-            Date datelast = sdf.parse(dateCde);
+            
+            Date datelast = new Date();
             String dCDE = null;
             String no = "0";
             // construction du no de commande            
@@ -65,8 +62,10 @@ public class CommandeGestion {
                 nouveauNoCde =""+noCommande;
             }
         }
+        System.out.println("no de commande avant le set "+nouveauNoCde);
         System.out.println("apres la creation du no de commande");
         cde.setNumCde(nouveauNoCde);
+        System.out.println("no de commande dans la gestion commande "+cde.getNumCde());
         
         // gestion du nom d'acheteur
         cde.setAcheteurCde(ach);
@@ -78,6 +77,7 @@ public class CommandeGestion {
         cde.setSuiviCde(sl);
         //gestion de l'adresse 
         // l'adresse incluse par defaut est l'adresse de livraison par defaut
+
         cde.setAdresseCde(ach.getAdfav());
         //gestion des frais de port
         FraisDePort fdp = new FraisDePort(10.0f);
@@ -110,7 +110,7 @@ public class CommandeGestion {
         ArrayList<Adresse> listeAd = ach.getListAdresseAcheteur();
         Adresse adchoisi= new Adresse();
         for (Adresse a:listeAd){
-            if(a.getIdadresse()==idAdresse){
+            if(a.getIdAdresse()==idAdresse){
                 adchoisi=a;
             }
         }
