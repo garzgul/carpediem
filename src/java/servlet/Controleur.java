@@ -663,23 +663,23 @@ public class Controleur extends HttpServlet {
 
         // Module de traitement des promotions Emma 
         // la liste doit aller dans le contexte de la servlet (scope application et non scope session vu qu'il est le meme pour tous
-        if (session.getAttribute("PromoGestion") == null) {
-            try {
-                session.setAttribute("PromoGestion", new PromoGestion()); // instanciation bean métier
-            } catch (NamingException ex) {
-                erreurGrave = true; // flag boolean pour signaler qu'une erreur s'est produite
-            }
-        }
-        Pg = (PromoGestion) session.getAttribute("PromoGestion");
-        List<Promotion> lPg = null;
-        try {
-            lPg = Pg.listeLivrePromotionActuelle3(); // appel de la méthode métier de récupération
-        } catch (SQLException ex) {
-            erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
-        } catch (NamingException ex) {
-            erreurGrave = true;
-        }
-        context.setAttribute("Liste3dernierslivrespromo", lPg); // place la liste des promo trouvés dans le scope
+//        if (session.getAttribute("PromoGestion") == null) {
+//            try {
+//                session.setAttribute("PromoGestion", new PromoGestion()); // instanciation bean métier
+//            } catch (NamingException ex) {
+//                erreurGrave = true; // flag boolean pour signaler qu'une erreur s'est produite
+//            }
+//        }
+//        Pg = (PromoGestion) session.getAttribute("PromoGestion");
+//        List<Promotion> lPg = null;
+//        try {
+//             lPg = Pg.listeLivrePromotionActuelle3(); // appel de la méthode métier de récupération
+//        } catch (SQLException ex) {
+//            erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
+//        } catch (NamingException ex) {
+//            erreurGrave = true;
+//        }
+//        context.setAttribute("Liste3dernierslivrespromo", lPg); // place la liste des promo trouvés dans le scope
 
 // Fin module de traitement promotion (Emma) 
         // Consultation d'un livre - fiche produit (Emma)
