@@ -76,7 +76,9 @@
                                 <c:import url="${recherche}" />
                             </c:if>
                         </div>
-
+                            <div id="slideshow">
+                                <c:import url="/WEB-INF/bordure/slide.jsp" />
+                            </div>
 
 <%//                        <c:if test="${not empty pagehome}">
 //                          <div id="elementpageaccueil">

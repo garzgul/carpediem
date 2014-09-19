@@ -156,7 +156,7 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable {
         List<Adresse> toutAdresse = new ArrayList<Adresse>();
         boolean adresseActif = false;
         boolean adresseFav = false;
-        System.out.println("coucou DAO adresse 1");
+
 
         try {
             cnn = fc.fournir();
@@ -166,7 +166,7 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable {
             pStmt.setInt(1, id);
             rs = pStmt.executeQuery();
             while (rs.next()) {
-                System.out.println("coucou DAO adresse 2");
+
                 int idAdresse = rs.getInt("id_adresse");
                 String adresse1 = rs.getString("adresse_chp1");
                 String adresse2 = rs.getString("adresse_chp2");
@@ -181,7 +181,6 @@ public class AdresseDAO extends DAO<Adresse> implements Serializable {
                 if (1 == fav) {
                     adresseFav = true;
                 }
-                System.out.println("dans DAO adresse apres selection fav");
                 Adresse adresse = new Adresse(adresse1, adresse2, cp, ville, pays, adresseFav);
                 adresse.setIdAcheteur(id);
                 adresse.setIdAdresse(idAdresse);

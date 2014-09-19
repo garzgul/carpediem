@@ -95,7 +95,6 @@ public class Controleur extends HttpServlet {
         try {
             lsT = tg.listeSousThemes(); // appel de la méthode métier de récupération
         } catch (SQLException ex) {
-            System.out.println("coucou sql theme");
             erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
         } catch (NamingException ex) {
             erreurGrave = true;
@@ -391,7 +390,6 @@ public class Controleur extends HttpServlet {
                     // qu'une liste de livres sera à afficher en résultat à une page donnée
                 }
                 if ("pagination".equalsIgnoreCase(action)) {
-                    //System.out.println(pageNumber);
                     request.setAttribute("recherche", "Controleur?section=rechercheaffichage&action=affichage&pageNumber=" + pageNumber); // signalement
                     // qu'une liste de livres sera à afficher en résultat à une page donnée
                 }
@@ -493,7 +491,6 @@ public class Controleur extends HttpServlet {
             }
 
             if ("seconnecter".equalsIgnoreCase(action)) {
-                System.out.println("dans se connecter");
                 request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageconnection");
             }
 
@@ -535,7 +532,6 @@ public class Controleur extends HttpServlet {
 
                 } catch (SQLException ex) {
                     erreurGrave = true;
-                    System.out.println("erreur SQL "+ex.getMessage());
                 } catch (NamingException ex) {
                     erreurGrave = true;
                 }
@@ -560,14 +556,12 @@ public class Controleur extends HttpServlet {
 
             //Ajouter une adresse
             if ("vueadresse".equalsIgnoreCase(action)) {
-                System.out.println("===========Voir adresse");
                 Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
                 request.setAttribute("ajouteradresse", "Controleur?section=affichagecompte&action=ajouteradresse");
                 request.setAttribute("vueadresse", "Controleur?section=affichagecompte&action=vueadresse");
             }
 
             if ("ajoutAdresse".equalsIgnoreCase(action)) {
-                System.out.println("===========ladans ajout adresse");
                 boolean adresseFav = false;
                 Acheteur ach = (Acheteur) session.getAttribute("Acheteur");
                 int idAcheteur = ach.getIdAcheteur();
@@ -585,7 +579,6 @@ public class Controleur extends HttpServlet {
                 adr.setAdresseFav(adresseFav);
                 ag = (AcheteurGestion) session.getAttribute("acheteurgestion");
                 try {
-                    System.out.println("=========ici on est dans le try");
                     ag.addAdresse(ach, adr);
                     session.setAttribute("Acheteur", ach);
                 } catch (SQLException ex) {
@@ -595,12 +588,9 @@ public class Controleur extends HttpServlet {
 //                response.sendRedirect("Controleur?section=connexion&action=voircompte");
             }
             if ("VoirAdresse".equalsIgnoreCase(action)) {
-                System.out.println("=======>>> Dans VoirAdresse");
                 request.setAttribute("ajouteradresse", "Controleur?section=affichagecompte&action=ajouteradresse");
                 request.setAttribute("vueadresse", "Controleur?section=affichagecompte&action=vueadresse");
-                System.out.println(request.getParameter("adresse"));
                 request.setAttribute("lesAdresses", request.getParameter("adresse"));
-                System.out.println(request.getAttribute("lesAdresses"));
                 request.setAttribute("voircompte", "Controleur?section=affichagecompte&action=voircompte");
             }
             if ("modifiercompte".equalsIgnoreCase(action)) {
@@ -634,7 +624,6 @@ public class Controleur extends HttpServlet {
 
 // formulaire de contact (Emma)
         if ("contactformulaire".equalsIgnoreCase(section)) {
-            System.out.println("------------------------------------------>>>> contact !");
             try {
 
                 String adrMail = request.getParameter("votremail");
@@ -648,16 +637,12 @@ public class Controleur extends HttpServlet {
                 //SendMail.sendMail("phamduca@gmail.com", "test", "message du mail", request);
                 SendMail.sendMail(adrMail, subject, texte, request);
             } catch (MessagingException ex) {
-                System.out.println("erreur mail : " + ex.getLocalizedMessage());
                 erreurGrave = true;
             }
-
-            System.out.println("------------------------------------------>>>> fin envoi mail");
         }
 
         // formulaire de contact piece jointe (Emma)
         if ("contactformulairepj".equalsIgnoreCase(section)) {
-            System.out.println("------------------------------------------>>>> contact !");
             try {
 
                 String adrMailpj = request.getParameter("votremailpj");
@@ -672,11 +657,8 @@ public class Controleur extends HttpServlet {
                 //SendMail.sendMail("phamduca@gmail.com", "test", "message du mail", request);
                 SendMail.sendMailPJ(adrMailpj, subjectpj, textepj, fichierpj, request);
             } catch (MessagingException ex) {
-                System.out.println("erreur mail : " + ex.getLocalizedMessage());
                 erreurGrave = true;
             }
-
-            System.out.println("------------------------------------------>>>> fin envoi mail");
         }
 
         // Module de traitement des promotions Emma 
@@ -887,24 +869,14 @@ public class Controleur extends HttpServlet {
                     break;
                 }
                 case ("connection"): {
-                    System.out.println("connexion" + request.getAttribute("connexion"));
-                    System.out.println("connection" + request.getAttribute("vueadresse"));
                     pageJsp = "/WEB-INF/compte/VueCompte.jsp";
                     break;
                 }
                 case ("affichageconnection"): {
-                    System.out.println("dans affichage connexion");
                     pageJsp = "/WEB-INF/compte/connectionacheteur.jsp";
                     break;
                 }
                 case ("voircompte"): {
-                    System.out.println("=============dans le case voircompte");
-                    System.out.println("entete :" + request.getAttribute("entete"));
-                    System.out.println("menu: " + request.getAttribute("menu"));
-                    System.out.println("pied: " + request.getAttribute("pied"));
-                    System.out.println("vueadresse: " + request.getAttribute("vueadresse"));
-                    System.out.println("ajouteradresse: " + request.getAttribute("ajouteradresse"));
-                    System.out.println("id adresse fav=====>> " + ((Acheteur) session.getAttribute("Acheteur")).getAdfav().getIdAdresse());
                     pageJsp = "/WEB-INF/compte/VueCompte.jsp";
                     break;
                 }
@@ -917,7 +889,6 @@ public class Controleur extends HttpServlet {
                     break;
                 }
                 case ("ajouteradresse"): {
-                    System.out.println("=>>>>>>>>>>>==== Dans le case ajouteradresse");
                     pageJsp = "/WEB-INF/compte/AdresseAcheteur.jsp";
                     break;
                 }
@@ -954,7 +925,7 @@ public class Controleur extends HttpServlet {
         }
 
 // fin affichage via urls dynamiques        
-        System.out.println("00-------------------------------0>>>" + pageJsp);
+
         pageJsp = response.encodeURL(pageJsp);
         getServletContext().getRequestDispatcher(pageJsp).include(request, response);
 
