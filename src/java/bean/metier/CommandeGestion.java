@@ -34,7 +34,7 @@ public class CommandeGestion {
         cDao=new CommandeDAO();
     }
     
-    public boolean createCommande(HashMap<Integer,LignePanier> maliste, Acheteur ach
+    public Commande createCommande(HashMap<Integer,LignePanier> maliste, Acheteur ach
      ) throws SQLException, ParseException, NamingException{
         boolean res = false;
         Commande cde = new Commande();
@@ -103,7 +103,7 @@ public class CommandeGestion {
 
         res =cDao.createCde(cde);
 
-        return res;
+        return cde;
     }
     
     public Commande setAdresse(Commande c, int idAdresse){

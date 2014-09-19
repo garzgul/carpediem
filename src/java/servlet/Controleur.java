@@ -95,6 +95,7 @@ public class Controleur extends HttpServlet {
         try {
             lsT = tg.listeSousThemes(); // appel de la méthode métier de récupération
         } catch (SQLException ex) {
+            System.out.println("coucou sql theme");
             erreurGrave = true; // flag boolean pour signaler qu'une erreur remontée SQL s'est produite
         } catch (NamingException ex) {
             erreurGrave = true;
@@ -303,12 +304,14 @@ public class Controleur extends HttpServlet {
             }
             if ("confirmer".equalsIgnoreCase(action)) {
                 request.setAttribute("paiement", "paiement ok");
+                request.setAttribute("commandeconfirmer", "commande confirme");
                 request.setAttribute("commande", "Controleur?section=affichagecommande&action=confirmation");
                 request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagedetail");
 
             }
 
             if ("confirmertypelivraison".equalsIgnoreCase(action)) {
+                session.setAttribute("modelivraison", request.getParameter("typelivraison"));
                 Commande cde = (Commande) session.getAttribute("commandeDetail");
                 String typeLivraison = request.getParameter("typelivraison");
 
@@ -324,7 +327,7 @@ public class Controleur extends HttpServlet {
             }
             if ("choixlivraison".equalsIgnoreCase(action)) {
                 request.setAttribute("commande", "Controleur?section=affichagecommande&action=affichage");
-                request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagedetail");
+                request.setAttribute("affichagecommande", "Controleur?section=affichagecommande&action=affichagechoixlivraison");
 
             }
 
@@ -490,6 +493,7 @@ public class Controleur extends HttpServlet {
             }
 
             if ("seconnecter".equalsIgnoreCase(action)) {
+                System.out.println("dans se connecter");
                 request.setAttribute("affichagecompte", "Controleur?section=affichagecompte&action=affichageconnection");
             }
 
@@ -531,6 +535,7 @@ public class Controleur extends HttpServlet {
 
                 } catch (SQLException ex) {
                     erreurGrave = true;
+                    System.out.println("erreur SQL "+ex.getMessage());
                 } catch (NamingException ex) {
                     erreurGrave = true;
                 }
@@ -888,6 +893,7 @@ public class Controleur extends HttpServlet {
                     break;
                 }
                 case ("affichageconnection"): {
+                    System.out.println("dans affichage connexion");
                     pageJsp = "/WEB-INF/compte/connectionacheteur.jsp";
                     break;
                 }
