@@ -76,58 +76,60 @@
                                 <c:import url="${recherche}" />
                             </c:if>
                         </div>
-
-
-                        <c:if test="${not empty pagehome}">
-                            <div id="elementpageaccueil">
-
-                                <c:if test="${not empty rubrique}">
-                                    <c:import url="${rubrique}"/>
-                                </c:if>
-
-                            
-
                             <div id="slideshow">
-
                                 <c:import url="/WEB-INF/bordure/slide.jsp" />
-                                </div>
                             </div>
-                            
-                        <c:if test="${not empty affichageLivre3Nouveaute}" >
-                        <div id="affichageindex">
-                            <div id="select3prodnouveaute">
-                                <h2 id="toutes_les_mentionsh2">Dernières nouveautés</h2>
-                                <c:import url="${affichageLivre3Nouveaute}" />
-                            </div>
-                            <div id="select3prodpromo">
-                                <h2 id="toutes_les_mentionsh2">Dernières promotions</h2>
-                                <c:import url="${affichageLivre3Promo}" />
-                            </div>
-                        </div>
-                        </c:if>
 
-
-                                <div id="affichageindex">
-
-                                    <c:if test="${not empty listeLivrePromotionActuelle3}" >
-                                        <div id="select3prodpromo">
-                                            <h2 id="toutes_les_mentionsh2">Dernières promotions</h2>
-                                            <c:import url="Controleur?section=promosaffichage&action=affichagepromo" />
-                                        </div>
-                                    </c:if>
-
-                                    <c:if test="${not empty listeLivrenouveaute3}" >
-                                        <div id="select3prodnouveaute">
-                                            <h2 id="toutes_les_mentionsh2">Dernières nouveautés</h2>
-                                            <c:import url="${affichageLivre3Nouveaute}" />
-                                        </div>
-                                    </c:if>
-
-                                </div>
-
-
-                            </div> <!-- fin div elementpageaccueil -->
-                        </c:if>
+<%//                        <c:if test="${not empty pagehome}">
+//                          <div id="elementpageaccueil">
+//
+//                                <c:if test="${not empty rubrique}">
+//                                    <c:import url="${rubrique}"/>
+//                                </c:if>
+//
+//                            
+//
+//                            <div id="slideshow">
+//
+//                                <c:import url="/WEB-INF/bordure/slide.jsp" />
+//                                </div>
+//                            
+//                            
+//                        <c:if test="${not empty affichageLivre3Nouveaute}" >
+//                        <div id="affichageindex">
+//                            <div id="select3prodnouveaute">
+//                                <h2 id="toutes_les_mentionsh2">Dernières nouveautés</h2>
+//                                <c:import url="${affichageLivre3Nouveaute}" />
+//                            </div>
+//                            <div id="select3prodpromo">
+//                                <h2 id="toutes_les_mentionsh2">Dernières promotions</h2>
+//                                <c:import url="${affichageLivre3Promo}" />
+//                            </div>
+//                        </div>
+//                        </c:if>
+//
+//
+//                                <div id="affichageindex">
+//
+//                                    <c:if test="${not empty listeLivrePromotionActuelle3}" >
+//                                        <div id="select3prodpromo">
+//                                            <h2 id="toutes_les_mentionsh2">Dernières promotions</h2>
+//                                            <c:import url="Controleur?section=promosaffichage&action=affichagepromo" />
+//                                        </div>
+//                                    </c:if>
+//
+//                                    <c:if test="${not empty listeLivrenouveaute3}" >
+//                                        <div id="select3prodnouveaute">
+//                                            <h2 id="toutes_les_mentionsh2">Dernières nouveautés</h2>
+//                                            <c:import url="${affichageLivre3Nouveaute}" />
+//                                        </div>
+//                                    </c:if>
+//
+//                                </div>
+//
+//
+//                            </div> <!-- fin div elementpageaccueil -->
+//                        </c:if> %>
                         <div id="affichageresultats">
                             <c:if test="${not empty affichageLivre}">
                                 <c:import url="${affichageLivre}" />

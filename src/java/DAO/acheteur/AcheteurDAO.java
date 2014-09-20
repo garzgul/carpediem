@@ -221,7 +221,15 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
                 ach.setMdpAcheteur(mdp);
                 ach.setIdAcheteur(id);
             }
-            
+            if (ach != null) {
+                List<Adresse> adrAcheuteur = adr.findAll(id);
+                if (!adrAcheuteur.isEmpty() || adrAcheuteur != null) {
+                    ach.setListAdresseAcheteur((ArrayList<Adresse>) adr.findAll(id));
+                }
+                return ach;
+            }
+            return null;
+
         } finally {
             if(rs != null){
             rs.close();
@@ -233,14 +241,6 @@ public class AcheteurDAO extends DAO<Acheteur> implements Serializable {
             cnn.close();
             }
         }
-        System.out.println("apres creation acheteur DAO");
-        System.out.println("id acheteur DAO ===>"+id);
-        List<Adresse> adrAcheuteur = adr.findAll(id);
-        if (!adrAcheuteur.isEmpty() || adrAcheuteur != null) {
-            ach.setListAdresseAcheteur((ArrayList<Adresse>) adr.findAll(id));
-        }
-        System.out.println("apres creation liste d'adresse DAO");
-        return ach;
     }
 
     @Override

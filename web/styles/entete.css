@@ -219,10 +219,10 @@ a, a:link, a:visited, a :hover, a:active
 
 #datejour
 {
-    margin-left: 650px;
+    margin-left: 500px;
     //padding-right: 20px;
     margin-right: 20px;
-    width: 300px;
+    width: 400px;
     height : 20px;
     text-align: right;/*alignement texte droite*/
     /*border: solid 1px purple;*/

@@ -88,14 +88,17 @@
 <p>
     <br/>
     <br/>
+    <c:if test="${empty modelivraison}">
     <c:url value="Controleur?section=commande&action=choixlivraison" var="urllivraison"/>
     <a href="${urllivraison}">Choisir le mode de livraison</a>
-    
+    </c:if>
     <br/>
     <br/>
     <br/>
+    <%// <c:if test="${not empty commandeconfirmer}"> %>
     <c:url value="Controleur?section=commande&action=confirmer" var="url"/>
         <a href="${url}"> Confirmer la commande</a>
+        <%// </c:if> %>
 </p>
              
 </div>
